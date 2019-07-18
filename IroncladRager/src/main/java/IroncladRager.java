@@ -19,6 +19,7 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
     @Override
     public void receiveEditCards() {
         BaseMod.addCard(new RageStrike());
+        BaseMod.addCard(new ShieldBash());
     }
 
     @Override

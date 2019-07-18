@@ -3,5 +3,9 @@
     "NAME": "Rage Strike",
     "DESCRIPTION": "Deal !D! Damage. Gain !M! Strength until end of turn.",
     "UPGRADE_DESCRIPTION" : "Deal !D! Damage. Gain !M! Strength."
+  },
+  "IroncladRager:ShieldBash": {
+    "NAME": "Shield Bash",
+    "DESCRIPTION": "Gain !B! Block. Deal !D! Damage."
   }
 }
