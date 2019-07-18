@@ -1,0 +1,10 @@
+{
+  "modid": "IroncladRager",
+  "name": "Ironclad Rager",
+  "author_list": ["hkoehler"],
+  "description": "Change base cards of Ironclad to a more aggressive style.",
+  "version": "0.1",
+  "sts_version": "07-17-2019",
+  "mts_version": "3.6.3",
+  "dependencies": ["basemod"]
+}
