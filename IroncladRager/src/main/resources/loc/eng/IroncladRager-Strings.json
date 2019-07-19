@@ -1,11 +1,14 @@
 {
   "IroncladRager:RageStrike": {
     "NAME": "Rage Strike",
-    "DESCRIPTION": "Deal !D! Damage. Gain !M! Strength until end of turn.",
-    "UPGRADE_DESCRIPTION" : "Deal !D! Damage. Gain !M! Strength."
+    "DESCRIPTION": "Deal !D! Damage. NL Lose !M! HP."
   },
   "IroncladRager:ShieldBash": {
     "NAME": "Shield Bash",
-    "DESCRIPTION": "Gain !B! Block. Deal !D! Damage."
+    "DESCRIPTION": "Gain !B! Block. NL Deal !D! Damage."
+  },
+  "IroncladRager:VenomStrike": {
+    "NAME": "Venom Strike",
+    "DESCRIPTION": "Deal !D! Damage and !M! Poison."
   }
 }

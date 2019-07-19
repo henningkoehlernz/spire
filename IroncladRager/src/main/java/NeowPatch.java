@@ -1,3 +1,5 @@
+package ironclad_rager;
+
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.core.Settings;
@@ -15,7 +17,8 @@ public class NeowPatch {
 
     @SpirePatch(
             clz = NeowReward.class,
-            method = "getRewardOptions"
+            method = "getRewardOptions",
+            paramtypez = {int.class}
     )
     public static class RagerReward {
         public static ArrayList<NeowRewardDef> Postfix(ArrayList<NeowRewardDef> __result, NeowReward __instance, final int category) {
@@ -27,7 +30,8 @@ public class NeowPatch {
 
     @SpirePatch(
             clz = NeowReward.class,
-            method = "activate"
+            method = "activate",
+            paramtypez = {}
     )
     public static class ActivatePatch {
         public static void Prefix(NeowReward __instance) {

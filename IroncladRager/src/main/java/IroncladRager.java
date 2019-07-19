@@ -1,3 +1,5 @@
+package ironclad_rager;
+
 import com.megacrit.cardcrawl.localization.CardStrings;
 
 import basemod.interfaces.EditCardsSubscriber;
@@ -20,6 +22,7 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
     public void receiveEditCards() {
         BaseMod.addCard(new RageStrike());
         BaseMod.addCard(new ShieldBash());
+        BaseMod.addCard(new VenomStrike());
     }
 
     @Override
