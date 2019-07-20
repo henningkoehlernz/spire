@@ -9,6 +9,6 @@
   },
   "IroncladRager:VenomStrike": {
     "NAME": "Venom Strike",
-    "DESCRIPTION": "Deal !D! Damage and !M! Poison."
+    "DESCRIPTION": "Deal !D! Damage. NL Apply !M! Poison."
   }
 }

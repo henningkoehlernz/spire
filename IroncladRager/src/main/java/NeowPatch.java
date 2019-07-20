@@ -19,6 +19,8 @@ import java.util.*;
 public class NeowPatch {
     @SpireEnum
     public static NeowReward.NeowRewardType IRONCLAD_RAGER;
+    @SpireEnum
+    public static NeowReward.NeowRewardType SILENT_POISONER;
 
     @SpirePatch(
             clz = NeowEvent.class,
@@ -34,6 +36,10 @@ public class NeowPatch {
                 case IRONCLAD:
                     newReward.type = IRONCLAD_RAGER;
                     newReward.optionLabel = optionStrings[0];
+                    break;
+                case THE_SILENT:
+                    newReward.type = SILENT_POISONER;
+                    newReward.optionLabel = optionStrings[1];
                     break;
                 default:
                     return;
@@ -58,20 +64,30 @@ public class NeowPatch {
     )
     public static class ActivatePatch {
         public static void Prefix(NeowReward __instance) {
-            if (__instance.type == IRONCLAD_RAGER) {
+            if ( __instance.type == IRONCLAD_RAGER ) {
                 // replace old strikes
                 Iterator<AbstractCard> it = AbstractDungeon.player.masterDeck.group.iterator();
-                while ( it.hasNext() ) {
-                    AbstractCard e = (AbstractCard)it.next();
-                    if ( e instanceof com.megacrit.cardcrawl.cards.red.Strike_Red ) {
+                while (it.hasNext()) {
+                    AbstractCard e = (AbstractCard) it.next();
+                    if (e instanceof com.megacrit.cardcrawl.cards.red.Strike_Red) {
                         it.remove();
                         RageStrike newStrike = new RageStrike();
                         AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(newStrike, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
-                    }
-                    else if ( e instanceof com.megacrit.cardcrawl.cards.red.Defend_Red ) {
+                    } else if (e instanceof com.megacrit.cardcrawl.cards.red.Defend_Red) {
                         it.remove();
                         ShieldBash newDefend = new ShieldBash();
                         AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(newDefend, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
+                    }
+                }
+            } else if ( __instance.type == SILENT_POISONER ) {
+                // replace old strikes
+                Iterator<AbstractCard> it = AbstractDungeon.player.masterDeck.group.iterator();
+                while ( it.hasNext() ) {
+                    AbstractCard e = (AbstractCard) it.next();
+                    if (e instanceof com.megacrit.cardcrawl.cards.green.Strike_Green) {
+                        it.remove();
+                        VenomStrike newStrike = new VenomStrike();
+                        AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(newStrike, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
                     }
                 }
             }
