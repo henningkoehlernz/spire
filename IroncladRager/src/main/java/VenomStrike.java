@@ -16,7 +16,7 @@ import basemod.helpers.CardTags;
 import basemod.helpers.BaseModCardTags;
 
 public class VenomStrike extends CustomCard {
-    public static final String ID = "IroncladRager:VenomStrike";
+    public static final String ID = "ICR:VenomStrike";
     private static CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     // Get object containing the strings that are displayed in the game.
     public static final String NAME = cardStrings.NAME;
@@ -39,7 +39,7 @@ public class VenomStrike extends CustomCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new com.megacrit.cardcrawl.actions.common.DamageAction(m,
                 new DamageInfo(p, this.damage, this.damageTypeForTurn),
-                AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
+                AbstractGameAction.AttackEffect.SLASH_HORIZONTAL));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new PoisonPower(m, p, this.magicNumber), this.magicNumber));
     }
 

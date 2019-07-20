@@ -1,0 +1,22 @@
+{
+  "ICR:RageStrike": {
+    "NAME": "Rage Strike",
+    "DESCRIPTION": "Deal !D! Damage. NL Lose !M! HP."
+  },
+  "ICR:ShieldBash": {
+    "NAME": "Shield Bash",
+    "DESCRIPTION": "Gain !B! Block. NL Deal !D! Damage."
+  },
+  "ICR:VenomStrike": {
+    "NAME": "Venom Strike",
+    "DESCRIPTION": "Deal !D! Damage. NL Apply !M! Poison."
+  },
+  "ICR:ProbingStrike": {
+    "NAME": "Probing Strike",
+    "DESCRIPTION": "Deal !D! Damage. NL Gain !B! Block."
+  },
+  "ICR:AutoDefend": {
+    "NAME": "Auto Defend",
+    "DESCRIPTION": "Gain !B! Block. NL Triggers twice when bloodied."
+  }
+}

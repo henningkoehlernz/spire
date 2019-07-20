@@ -15,7 +15,7 @@ import basemod.helpers.CardTags;
 import basemod.helpers.BaseModCardTags;
 
 public class RageStrike extends CustomCard {
-    public static final String ID = "IroncladRager:RageStrike";
+    public static final String ID = "ICR:RageStrike";
     private static CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     // Get object containing the strings that are displayed in the game.
     public static final String NAME = cardStrings.NAME;
