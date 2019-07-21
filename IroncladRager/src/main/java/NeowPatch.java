@@ -1,5 +1,3 @@
-package ironclad_rager;
-
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.core.Settings;
@@ -11,6 +9,8 @@ import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
 import java.lang.reflect.Field;
 import java.util.*;
+
+import icr.*;
 
 public class NeowPatch {
     @SpireEnum
@@ -70,7 +70,7 @@ public class NeowPatch {
             if ( __instance.type == IRONCLAD_RAGER ) {
                 Iterator<AbstractCard> it = AbstractDungeon.player.masterDeck.group.iterator();
                 while (it.hasNext()) {
-                    AbstractCard e = (AbstractCard) it.next();
+                    AbstractCard e = it.next();
                     if ( e instanceof com.megacrit.cardcrawl.cards.red.Strike_Red ) {
                         it.remove();
                         RageStrike newStrike = new RageStrike();
@@ -84,17 +84,21 @@ public class NeowPatch {
             } else if ( __instance.type == SILENT_POISONER ) {
                 Iterator<AbstractCard> it = AbstractDungeon.player.masterDeck.group.iterator();
                 while ( it.hasNext() ) {
-                    AbstractCard e = (AbstractCard) it.next();
+                    AbstractCard e = it.next();
                     if ( e instanceof com.megacrit.cardcrawl.cards.green.Strike_Green ) {
                         it.remove();
                         VenomStrike newStrike = new VenomStrike();
                         AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(newStrike, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
+                    } else if ( e instanceof com.megacrit.cardcrawl.cards.green.Defend_Green ) {
+                        it.remove();
+                        Dodge newDefend = new Dodge();
+                        AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(newDefend, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
                     }
                 }
             } else if ( __instance.type == DEFECT_WARDEN ) {
                 Iterator<AbstractCard> it = AbstractDungeon.player.masterDeck.group.iterator();
                 while ( it.hasNext() ) {
-                    AbstractCard e = (AbstractCard) it.next();
+                    AbstractCard e = it.next();
                     if ( e instanceof com.megacrit.cardcrawl.cards.blue.Strike_Blue ) {
                         it.remove();
                         ProbingStrike newStrike = new ProbingStrike();

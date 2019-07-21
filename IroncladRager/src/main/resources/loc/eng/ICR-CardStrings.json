@@ -11,6 +11,10 @@
     "NAME": "Venom Strike",
     "DESCRIPTION": "Deal !D! Damage. NL Apply !M! Poison."
   },
+  "ICR:Dodge": {
+    "NAME": "Dodge",
+    "DESCRIPTION": "Gain !B! Block. NL Increases by !M! per additional enemy."
+  },
   "ICR:ProbingStrike": {
     "NAME": "Probing Strike",
     "DESCRIPTION": "Deal !D! Damage. NL Gain !B! Block."

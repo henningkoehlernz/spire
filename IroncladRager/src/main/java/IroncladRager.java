@@ -1,13 +1,12 @@
-package ironclad_rager;
-
 import basemod.interfaces.EditKeywordsSubscriber;
 import com.megacrit.cardcrawl.localization.CardStrings;
-import com.megacrit.cardcrawl.localization.KeywordStrings;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 
 import basemod.interfaces.EditCardsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
 import basemod.BaseMod;
+
+import icr.*;
 
 @SpireInitializer
 public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber, EditKeywordsSubscriber {
@@ -25,13 +24,14 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
         BaseMod.addCard(new RageStrike());
         BaseMod.addCard(new ShieldBash());
         BaseMod.addCard(new VenomStrike());
+        BaseMod.addCard(new Dodge());
         BaseMod.addCard(new ProbingStrike());
         BaseMod.addCard(new AutoDefend());
     }
 
     @Override
     public void receiveEditStrings() {
-        BaseMod.loadCustomStringsFile(CardStrings.class, "loc/eng/IroncladRager-CardStrings.json");
+        BaseMod.loadCustomStringsFile(CardStrings.class, "loc/eng/ICR-CardStrings.json");
     }
 
     @Override
