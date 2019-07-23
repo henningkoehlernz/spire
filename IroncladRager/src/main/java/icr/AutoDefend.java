@@ -32,7 +32,7 @@ public class AutoDefend extends CustomCard {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
-        if ( p.currentHealth <= p.maxHealth / 2 )
+        if ( Util.isBloodied(p) )
             AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
     }
 

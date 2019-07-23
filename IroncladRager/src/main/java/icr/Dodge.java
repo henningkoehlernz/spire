@@ -20,7 +20,7 @@ public class Dodge extends CustomCard {
     public static final String IMG_PATH = "img/dodge.png";
     private static final int COST = 1;
     private static final int BLOCK = 4;
-    private static final int MASS_BLOCK = 2;
+    private static final int MASS_BLOCK = 3;
 
     public Dodge() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,

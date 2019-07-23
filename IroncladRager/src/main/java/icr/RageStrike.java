@@ -1,7 +1,6 @@
 package icr;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -11,7 +10,6 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 
 import basemod.abstracts.CustomCard;
-import basemod.helpers.CardTags;
 import basemod.helpers.BaseModCardTags;
 
 public class RageStrike extends CustomCard {
@@ -22,14 +20,15 @@ public class RageStrike extends CustomCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = "img/rage_strike.png";
     private static final int COST = 1;
-    private static final int ATTACK_DMG = 9;
+    private static final int ATTACK_DMG = 5;
+    private static final int RAGE_DMG = 4;
 
     public RageStrike() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 AbstractCard.CardType.ATTACK, AbstractCard.CardColor.RED,
                 AbstractCard.CardRarity.BASIC, AbstractCard.CardTarget.ENEMY);
         this.damage = this.baseDamage = ATTACK_DMG;
-        this.magicNumber = this.baseMagicNumber = 1;
+        this.magicNumber = this.baseMagicNumber = RAGE_DMG;
         tags.add(CardTags.STRIKE);
         tags.add(BaseModCardTags.BASIC_STRIKE);
     }
@@ -39,7 +38,6 @@ public class RageStrike extends CustomCard {
         AbstractDungeon.actionManager.addToBottom(new com.megacrit.cardcrawl.actions.common.DamageAction(m,
                 new DamageInfo(p, this.damage, this.damageTypeForTurn),
                 AbstractGameAction.AttackEffect.SLASH_DIAGONAL));
-        AbstractDungeon.actionManager.addToBottom(new LoseHPAction(p, p, this.magicNumber));
     }
 
     @Override
@@ -49,4 +47,29 @@ public class RageStrike extends CustomCard {
             this.upgradeDamage(3);
         }
     }
+
+    @Override
+    public void calculateCardDamage(AbstractMonster mo) {
+        if ( Util.isBloodied(AbstractDungeon.player) ) {
+            int realBaseDamage = this.baseDamage;
+            this.baseDamage += this.magicNumber;
+            super.calculateCardDamage(mo);
+            this.baseDamage = realBaseDamage;
+            this.isDamageModified = (this.damage != this.baseDamage);
+        } else
+            super.calculateCardDamage(mo);
+    }
+
+    @Override
+    public void applyPowers() {
+        if ( Util.isBloodied(AbstractDungeon.player) ) {
+            int realBaseDamage = this.baseDamage;
+            this.baseDamage += this.magicNumber;
+            super.applyPowers();
+            this.baseDamage = realBaseDamage;
+            this.isDamageModified = (this.damage != this.baseDamage);
+        } else
+            super.applyPowers();
+    }
+
 }

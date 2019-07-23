@@ -1,7 +1,7 @@
 {
   "ICR:RageStrike": {
     "NAME": "Rage Strike",
-    "DESCRIPTION": "Deal !D! Damage. NL Lose !M! HP."
+    "DESCRIPTION": "Deal !D! Damage. NL Increases by !M! when Bloodied."
   },
   "ICR:ShieldBash": {
     "NAME": "Shield Bash",
@@ -21,6 +21,6 @@
   },
   "ICR:AutoDefend": {
     "NAME": "Auto Defend",
-    "DESCRIPTION": "Gain !B! Block. NL Triggers twice when bloodied."
+    "DESCRIPTION": "Gain !B! Block. NL Triggers twice when Bloodied."
   }
 }
