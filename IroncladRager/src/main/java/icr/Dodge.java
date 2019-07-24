@@ -1,5 +1,7 @@
 package icr;
 
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -20,20 +22,22 @@ public class Dodge extends CustomCard {
     public static final String IMG_PATH = "img/dodge.png";
     private static final int COST = 1;
     private static final int BLOCK = 4;
-    private static final int MASS_BLOCK = 3;
+    private static final int CONCEAL = 1;
 
     public Dodge() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 AbstractCard.CardType.SKILL, AbstractCard.CardColor.GREEN,
                 AbstractCard.CardRarity.BASIC, AbstractCard.CardTarget.SELF);
         this.block = this.baseBlock = BLOCK;
-        this.magicNumber = this.baseMagicNumber = MASS_BLOCK;
+        this.magicNumber = this.baseMagicNumber = CONCEAL;
         tags.add(BaseModCardTags.BASIC_DEFEND);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new GainBlockAction(p, p, this.block));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(
+                p, p, new ConcealmentPower(p, this.magicNumber), this.magicNumber, true, AbstractGameAction.AttackEffect.NONE));
     }
 
     @Override
@@ -45,6 +49,7 @@ public class Dodge extends CustomCard {
         }
     }
 
+    /*
     private int countExtraEnemies() {
         int activeEnemies = 0;
         for ( AbstractMonster monster : AbstractDungeon.getCurrRoom().monsters.monsters ) {
@@ -71,4 +76,5 @@ public class Dodge extends CustomCard {
         this.baseBlock = realBaseBlock;
         this.isBlockModified = (this.block != this.baseBlock);
     }
+    */
 }

@@ -1,7 +1,8 @@
-import basemod.interfaces.EditKeywordsSubscriber;
 import com.megacrit.cardcrawl.localization.CardStrings;
+import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 
+import basemod.interfaces.EditKeywordsSubscriber;
 import basemod.interfaces.EditCardsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
 import basemod.BaseMod;
@@ -32,12 +33,15 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
     @Override
     public void receiveEditStrings() {
         BaseMod.loadCustomStringsFile(CardStrings.class, "loc/eng/ICR-CardStrings.json");
+        BaseMod.loadCustomStringsFile(PowerStrings.class, "loc/eng/ICR-PowerStrings.json");
     }
 
     @Override
     public void receiveEditKeywords() {
         String[] bloodied = { "bloodied" };
         BaseMod.addKeyword("Bloodied", bloodied, "At or below 50% health.");
+        String[] concealment = { "concealment" };
+        BaseMod.addKeyword("Concealment", concealment, "Reduces all damage taken for one turn.");
     }
 
 }

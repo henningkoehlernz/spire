@@ -13,7 +13,7 @@
   },
   "ICR:Dodge": {
     "NAME": "Dodge",
-    "DESCRIPTION": "Gain !B! Block. NL Increases by !M! per additional enemy."
+    "DESCRIPTION": "Gain !B! Block. NL Gain !M! Concealment."
   },
   "ICR:ProbingStrike": {
     "NAME": "Probing Strike",
