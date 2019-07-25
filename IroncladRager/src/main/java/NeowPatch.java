@@ -103,6 +103,7 @@ public class NeowPatch {
 
     // helper functions
     public static void giveCard(AbstractCard card) {
+        card.rarity = AbstractCard.CardRarity.BASIC;
         AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(
                 card, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
     }
