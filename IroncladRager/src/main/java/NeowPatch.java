@@ -177,8 +177,9 @@ public class NeowPatch {
                         giveBasicDefend(new com.megacrit.cardcrawl.cards.blue.Leap());
                     }
                 }
-                // lose gold and health as penalty
+                // apply ALL penalties
                 AbstractPlayer p = AbstractDungeon.player;
+                __instance.drawback = NeowReward.NeowRewardDrawback.CURSE; // cursed
                 p.loseGold(p.gold);
                 p.decreaseMaxHealth(p.maxHealth / 10);
                 p.damage(new DamageInfo(null, p.currentHealth / 10 * 3, DamageInfo.DamageType.HP_LOSS));
