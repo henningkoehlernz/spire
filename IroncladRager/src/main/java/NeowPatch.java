@@ -59,6 +59,12 @@ public class NeowPatch {
         }
     }
 
+    // helper function
+    public static void giveCard(AbstractCard card) {
+        AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(
+                card, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
+    }
+
     @SpirePatch(
             clz = NeowReward.class,
             method = "activate",
@@ -67,46 +73,30 @@ public class NeowPatch {
     public static class ActivatePatch {
         public static void Prefix(NeowReward __instance) {
             // replace old strikes & defends
-            if ( __instance.type == IRONCLAD_RAGER ) {
+            if ( __instance.type == IRONCLAD_RAGER
+                || __instance.type == SILENT_POISONER
+                || __instance.type == DEFECT_WARDEN ) {
                 Iterator<AbstractCard> it = AbstractDungeon.player.masterDeck.group.iterator();
                 while (it.hasNext()) {
                     AbstractCard e = it.next();
                     if ( e instanceof com.megacrit.cardcrawl.cards.red.Strike_Red ) {
                         it.remove();
-                        RageStrike newStrike = new RageStrike();
-                        AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(newStrike, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
+                        giveCard(new RageStrike());
                     } else if ( e instanceof com.megacrit.cardcrawl.cards.red.Defend_Red ) {
                         it.remove();
-                        ShieldBash newDefend = new ShieldBash();
-                        AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(newDefend, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
-                    }
-                }
-            } else if ( __instance.type == SILENT_POISONER ) {
-                Iterator<AbstractCard> it = AbstractDungeon.player.masterDeck.group.iterator();
-                while ( it.hasNext() ) {
-                    AbstractCard e = it.next();
-                    if ( e instanceof com.megacrit.cardcrawl.cards.green.Strike_Green ) {
+                        giveCard(new ShieldBash());
+                    } else if ( e instanceof com.megacrit.cardcrawl.cards.green.Strike_Green ) {
                         it.remove();
-                        VenomStrike newStrike = new VenomStrike();
-                        AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(newStrike, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
+                        giveCard(new VenomStrike());
                     } else if ( e instanceof com.megacrit.cardcrawl.cards.green.Defend_Green ) {
                         it.remove();
-                        Dodge newDefend = new Dodge();
-                        AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(newDefend, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
-                    }
-                }
-            } else if ( __instance.type == DEFECT_WARDEN ) {
-                Iterator<AbstractCard> it = AbstractDungeon.player.masterDeck.group.iterator();
-                while ( it.hasNext() ) {
-                    AbstractCard e = it.next();
-                    if ( e instanceof com.megacrit.cardcrawl.cards.blue.Strike_Blue ) {
+                        giveCard(new Dodge());
+                    } else if ( e instanceof com.megacrit.cardcrawl.cards.blue.Strike_Blue ) {
                         it.remove();
-                        ProbingStrike newStrike = new ProbingStrike();
-                        AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(newStrike, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
+                        giveCard(new ProbingStrike());
                     } else if ( e instanceof com.megacrit.cardcrawl.cards.blue.Defend_Blue ) {
                         it.remove();
-                        AutoDefend newDefend = new AutoDefend();
-                        AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(newDefend, Settings.WIDTH / 2.0F, Settings.HEIGHT / 2.0F));
+                        giveCard(new AutoDefend());
                     }
                 }
             }

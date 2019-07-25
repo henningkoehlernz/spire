@@ -44,7 +44,7 @@ public class Dodge extends CustomCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeBlock(2);
+            this.upgradeBlock(1);
             this.upgradeMagicNumber(1);
         }
     }
