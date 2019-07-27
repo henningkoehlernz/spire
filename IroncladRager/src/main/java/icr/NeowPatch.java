@@ -1,7 +1,10 @@
+package icr;
+
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -13,10 +16,14 @@ import basemod.helpers.BaseModCardTags;
 
 import java.lang.reflect.Field;
 import java.util.*;
-
-import icr.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class NeowPatch {
+    private static final Logger logger = LogManager.getLogger(NeowPatch.class.getName());
+    // for flagging cards as basic in a persistent way (flags won't save)
+    private static final int BASIC_STRIKE = 123456;
+    private static final int BASIC_DEFEND = 123457;
 
     @SpireEnum
     public static NeowReward.NeowRewardType IRONCLAD_RAGER;
@@ -68,6 +75,7 @@ public class NeowPatch {
                 System.out.println(e);
             }
             __instance.roomEventText.addDialogOption("[ #gPlay #gas #g" + newReward.optionLabel + " ]");
+            logger.info("added " + newReward.optionLabel + " mini blessing");
         }
     }
 
@@ -94,6 +102,7 @@ public class NeowPatch {
                     default:
                         return __result;
                 }
+                logger.info("added " + newReward.desc + " blessing");
                 newReward.desc = "[ #gPlay #gas #g" + newReward.desc + " ]";
                 __result.add(newReward);
             }
@@ -109,10 +118,12 @@ public class NeowPatch {
     }
     public static void giveBasicStrike(AbstractCard card) {
         card.tags.add(BaseModCardTags.BASIC_STRIKE);
+        card.misc = BASIC_STRIKE;
         giveCard(card);
     }
     public static void giveBasicDefend(AbstractCard card) {
         card.tags.add(BaseModCardTags.BASIC_DEFEND);
+        card.misc = BASIC_DEFEND;
         giveCard(card);
     }
 
@@ -150,6 +161,7 @@ public class NeowPatch {
                         giveCard(new AutoDefend());
                     }
                 }
+                logger.debug("replaced basic strike & defend cards");
             }
             // dito for "advanced" classes
             if ( __instance.type == IRONCLAD_BERSERKER
@@ -178,13 +190,42 @@ public class NeowPatch {
                         giveBasicDefend(new com.megacrit.cardcrawl.cards.blue.Leap());
                     }
                 }
-                // apply ALL penalties
+                logger.debug("replaced basic strike & defend cards (advanced)");
+                // apply ALL drawbacks
                 AbstractPlayer p = AbstractDungeon.player;
                 __instance.drawback = NeowReward.NeowRewardDrawback.CURSE; // cursed
                 p.loseGold(p.gold);
                 p.decreaseMaxHealth(p.maxHealth / 10);
                 p.damage(new DamageInfo(null, p.currentHealth / 10 * 3, DamageInfo.DamageType.HP_LOSS));
+                logger.debug("applied drawbacks");
             }
         }
     }
+
+    @SpirePatch(
+            clz = CardCrawlGame.class,
+            method = "loadPlayerSave",
+            paramtypez = {AbstractPlayer.class}
+    )
+    public static class LoadPlayerSave {
+        public static void Postfix(CardCrawlGame __instance, AbstractPlayer p) {
+            logger.info("restoring card tags");
+            // fix BASIC_STRIKE and BASIC_DEFEND tags
+            for ( AbstractCard c : p.masterDeck.group ) {
+                switch (c.misc) {
+                    case BASIC_STRIKE:
+                        c.tags.add(BaseModCardTags.BASIC_STRIKE);
+                        c.rarity = AbstractCard.CardRarity.BASIC;
+                        logger.debug("tagged " + c.name + " as BASIC_STRIKE");
+                        break;
+                    case BASIC_DEFEND:
+                        c.tags.add(BaseModCardTags.BASIC_DEFEND);
+                        c.rarity = AbstractCard.CardRarity.BASIC;
+                        logger.debug("tagged " + c.name + " as BASIC_DEFEND");
+                        break;
+                }
+            }
+        }
+    }
+
 }
