@@ -20,8 +20,8 @@ public class RageStrike extends CustomCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = "img/rage_strike.png";
     private static final int COST = 1;
-    private static final int ATTACK_DMG = 5;
-    private static final int RAGE_DMG = 4;
+    private static final int ATTACK_DMG = 6;
+    private static final int RAGE_DMG = 2;
 
     public RageStrike() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -44,7 +44,8 @@ public class RageStrike extends CustomCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeDamage(3);
+            this.upgradeDamage(2);
+            this.upgradeMagicNumber(2);
         }
     }
 
