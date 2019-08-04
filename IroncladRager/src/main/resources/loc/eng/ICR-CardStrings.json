@@ -21,6 +21,6 @@
   },
   "ICR:AutoDefend": {
     "NAME": "Auto Defend",
-    "DESCRIPTION": "Gain !B! Block. NL Triggers twice when Bloodied."
+    "DESCRIPTION": "Gain !B! Block. NL Increases by !M! per channeled orb."
   }
 }
