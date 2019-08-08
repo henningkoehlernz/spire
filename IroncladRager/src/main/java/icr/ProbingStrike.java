@@ -22,7 +22,7 @@ public class ProbingStrike extends CustomCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = "img/probing_strike.png";
     private static final int COST = 1;
-    private static final int ATTACK_DMG = 4;
+    private static final int ATTACK_DMG = 5;
     private static final int ATTACK_BLOCK = 2;
 
     public ProbingStrike() {
@@ -47,8 +47,7 @@ public class ProbingStrike extends CustomCard {
     public void upgrade() {
         if (!this.upgraded) {
             this.upgradeName();
-            this.upgradeBlock(1);
-            this.upgradeDamage(2);
+            this.upgradeDamage(3);
         }
     }
 }
