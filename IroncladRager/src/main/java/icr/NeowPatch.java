@@ -106,7 +106,7 @@ public class NeowPatch {
                         return __result;
                 }
                 logger.info("added " + newReward.desc + " blessing");
-                newReward.desc = "[ #gPlay #gas #g" + newReward.desc + " ]";
+                newReward.desc = "[ #rGain #rmultiple #rdrawbacks #gPlay #gas #g" + newReward.desc + " ]";
                 __result.add(newReward);
             }
             return __result;
