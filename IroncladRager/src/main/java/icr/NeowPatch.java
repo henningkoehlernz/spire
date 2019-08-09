@@ -7,6 +7,9 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.characters.Ironclad;
+import com.megacrit.cardcrawl.characters.TheSilent;
+import com.megacrit.cardcrawl.characters.Defect;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.neow.NeowEvent;
 import com.megacrit.cardcrawl.neow.NeowReward;
@@ -127,6 +130,14 @@ public class NeowPatch {
         giveCard(card);
     }
 
+    // player title is set in constructor and not updated automatically
+    public static void fixPlayerTitle() {
+        AbstractPlayer p = AbstractDungeon.player;
+        p.title = p.getTitle(p.chosenClass);
+        AbstractDungeon.topPanel.setPlayerName();
+        logger.info("fixed title: '" + CardCrawlGame.metricData.neowBonus + "' -> '" + p.title + "'");
+    }
+
     @SpirePatch(
             clz = NeowReward.class,
             method = "activate",
@@ -200,6 +211,9 @@ public class NeowPatch {
                 logger.debug("applied drawbacks");
             }
         }
+        public static void Postfix(NeowReward __instance) {
+            fixPlayerTitle();
+        }
     }
 
     @SpirePatch(
@@ -225,6 +239,54 @@ public class NeowPatch {
                         break;
                 }
             }
+            fixPlayerTitle();
+        }
+    }
+
+    // change class names to subclass names
+
+    @SpirePatch(
+            clz = Ironclad.class,
+            method = "getTitle",
+            paramtypez = {AbstractPlayer.PlayerClass.class}
+    )
+    public static class IroncladTitle {
+        public static String Postfix(String __result, Ironclad __instance, AbstractPlayer.PlayerClass pc) {
+            if ( CardCrawlGame.metricData.neowBonus.equals(IRONCLAD_RAGER.name()) )
+                return "the Rager";
+            if ( CardCrawlGame.metricData.neowBonus.equals(IRONCLAD_BERSERKER.name()) )
+                return "the Berserker";
+            return __result;
+        }
+    }
+
+    @SpirePatch(
+            clz = TheSilent.class,
+            method = "getTitle",
+            paramtypez = {AbstractPlayer.PlayerClass.class}
+    )
+    public static class TheSilentTitle {
+        public static String Postfix(String __result, TheSilent __instance, AbstractPlayer.PlayerClass pc) {
+            if ( CardCrawlGame.metricData.neowBonus.equals(SILENT_POISONER.name()) )
+                return "the Poisoner";
+            if ( CardCrawlGame.metricData.neowBonus.equals(SILENT_ASSASSIN.name()) )
+                return "the Assassin";
+            return __result;
+        }
+    }
+
+    @SpirePatch(
+            clz = Defect.class,
+            method = "getTitle",
+            paramtypez = {AbstractPlayer.PlayerClass.class}
+    )
+    public static class DefectTitle {
+        public static String Postfix(String __result, Defect __instance, AbstractPlayer.PlayerClass pc) {
+            if ( CardCrawlGame.metricData.neowBonus.equals(DEFECT_WARDEN.name()) )
+                return "the Warden";
+            if ( CardCrawlGame.metricData.neowBonus.equals(DEFECT_STORMLORD.name()) )
+                return "the Stormlord";
+            return __result;
         }
     }
 
