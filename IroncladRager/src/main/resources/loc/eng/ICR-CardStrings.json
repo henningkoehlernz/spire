@@ -22,5 +22,10 @@
   "ICR:AutoDefend": {
     "NAME": "Auto Defend",
     "DESCRIPTION": "Gain !B! Block. NL Increases by !M! per channeled orb."
+  },
+
+  "ICR:Frenzy": {
+    "NAME": "Frenzy",
+    "DESCRIPTION": "Deal !D! Damage twice, or thrice when Bloodied."
   }
 }

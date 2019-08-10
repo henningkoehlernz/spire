@@ -1,3 +1,4 @@
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
@@ -20,6 +21,12 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
         new IroncladRager();
     }
 
+    private static void addRedCard(AbstractCard card) {
+        BaseMod.addCard(card);
+        UnlockPatch.unlockCardWithReward(NeowPatch.IRONCLAD_RAGER.name(), card.cardID);
+        UnlockPatch.unlockCardWithReward(NeowPatch.IRONCLAD_BERSERKER.name(), card.cardID);
+    }
+
     @Override
     public void receiveEditCards() {
         BaseMod.addCard(new RageStrike());
@@ -28,6 +35,8 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
         BaseMod.addCard(new Dodge());
         BaseMod.addCard(new ProbingStrike());
         BaseMod.addCard(new AutoDefend());
+
+        addRedCard(new Frenzy());
     }
 
     @Override
