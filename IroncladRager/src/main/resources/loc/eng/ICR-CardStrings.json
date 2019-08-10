@@ -31,5 +31,9 @@
   "ICR:PowerAttack": {
     "NAME": "Power Attack",
     "DESCRIPTION": "Deal !D! Damage. NL Add Strength !M! times when Bloodied."
+  },
+  "ICR:VitalStrike": {
+    "NAME": "Vital Strike",
+    "DESCRIPTION": "Deal !D! Damage. NL Gain !M! Strength."
   }
 }
