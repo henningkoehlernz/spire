@@ -37,6 +37,7 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
         BaseMod.addCard(new AutoDefend());
 
         addRedCard(new Frenzy());
+        addRedCard(new PowerAttack());
     }
 
     @Override

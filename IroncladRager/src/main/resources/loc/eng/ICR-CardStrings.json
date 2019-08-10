@@ -27,5 +27,9 @@
   "ICR:Frenzy": {
     "NAME": "Frenzy",
     "DESCRIPTION": "Deal !D! Damage twice, or thrice when Bloodied."
+  },
+  "ICR:PowerAttack": {
+    "NAME": "Power Attack",
+    "DESCRIPTION": "Deal !D! Damage. NL Add Strength !M! times when Bloodied."
   }
 }
