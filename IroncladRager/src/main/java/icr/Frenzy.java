@@ -32,7 +32,7 @@ public class Frenzy extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        final int strikes = Util.isBloodied(p) ? 3 : 2;
+        final int strikes = p.isBloodied ? 3 : 2;
         for ( int i = 0; i < strikes; i++ )
             AbstractDungeon.actionManager.addToBottom(new DamageAction(m,
                     new DamageInfo(p, this.damage, this.damageTypeForTurn),

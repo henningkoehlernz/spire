@@ -51,7 +51,7 @@ public class PowerAttack extends CustomCard {
 
     public void applyPowers() {
         AbstractPlayer p = AbstractDungeon.player;
-        AbstractPower strength = Util.isBloodied(p) ? p.getPower("Strength") : null;
+        AbstractPower strength = p.isBloodied ? p.getPower("Strength") : null;
         if (strength != null)
             strength.amount *= this.magicNumber;
         super.applyPowers();
@@ -61,7 +61,7 @@ public class PowerAttack extends CustomCard {
 
     public void calculateCardDamage(AbstractMonster mo) {
         AbstractPlayer p = AbstractDungeon.player;
-        AbstractPower strength = Util.isBloodied(p) ? p.getPower("Strength") : null;
+        AbstractPower strength = p.isBloodied ? p.getPower("Strength") : null;
         if (strength != null)
             strength.amount *= this.magicNumber;
         super.calculateCardDamage(mo);

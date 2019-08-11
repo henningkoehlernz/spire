@@ -51,7 +51,7 @@ public class RageStrike extends CustomCard {
 
     @Override
     public void calculateCardDamage(AbstractMonster mo) {
-        if ( Util.isBloodied(AbstractDungeon.player) ) {
+        if ( AbstractDungeon.player.isBloodied ) {
             int realBaseDamage = this.baseDamage;
             this.baseDamage += this.magicNumber;
             super.calculateCardDamage(mo);
@@ -63,7 +63,7 @@ public class RageStrike extends CustomCard {
 
     @Override
     public void applyPowers() {
-        if ( Util.isBloodied(AbstractDungeon.player) ) {
+        if ( AbstractDungeon.player.isBloodied ) {
             int realBaseDamage = this.baseDamage;
             this.baseDamage += this.magicNumber;
             super.applyPowers();
