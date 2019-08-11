@@ -27,6 +27,13 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
         UnlockPatch.unlockCardWithReward(NeowPatch.IRONCLAD_BERSERKER.name(), card.cardID);
     }
 
+    private static void addGreenCard(AbstractCard card) {
+        BaseMod.addCard(card);
+        UnlockPatch.unlockCardWithReward(NeowPatch.SILENT_POISONER.name(), card.cardID);
+        UnlockPatch.unlockCardWithReward(NeowPatch.SILENT_ASSASSIN.name(), card.cardID);
+    }
+
+
     @Override
     public void receiveEditCards() {
         BaseMod.addCard(new RageStrike());
@@ -39,6 +46,8 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
         addRedCard(new Frenzy());
         addRedCard(new PowerAttack());
         addRedCard(new VitalStrike());
+
+        addGreenCard(new Paralyse());
     }
 
     @Override
