@@ -2,7 +2,7 @@
   "ICR:Concealment" : {
     "NAME" : "Concealment",
     "DESCRIPTIONS": [
-      "Reduces ALL damage taken and hp loss by ",
+      "Reduces all damage taken by ",
       " (minimum 1)."
     ]
   }
