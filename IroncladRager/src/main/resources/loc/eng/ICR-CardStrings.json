@@ -41,5 +41,9 @@
     "NAME": "Paralyse",
     "DESCRIPTION": "Enemy loses Strength equal to their Poison. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Enemy loses Strength equal to their Poison."
+  },
+  "ICR:Vanish": {
+    "NAME": "Vanish",
+    "DESCRIPTION": "Gain !M! Concealment."
   }
 }
