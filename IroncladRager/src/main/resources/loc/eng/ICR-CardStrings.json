@@ -37,6 +37,10 @@
     "DESCRIPTION": "Deal !D! Damage. NL Gain !M! Strength."
   },
 
+  "ICR:Cloudkill": {
+    "NAME": "Cloudkill",
+    "DESCRIPTION": "Apply !M! Poison to all enemies."
+  },
   "ICR:Paralyse": {
     "NAME": "Paralyse",
     "DESCRIPTION": "Enemy loses Strength equal to their Poison. NL Exhaust.",

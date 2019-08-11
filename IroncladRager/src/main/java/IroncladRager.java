@@ -47,6 +47,7 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
         addRedCard(new PowerAttack());
         addRedCard(new VitalStrike());
 
+        addGreenCard(new Cloudkill());
         addGreenCard(new Paralyse());
         addGreenCard(new Vanish());
     }
