@@ -56,6 +56,10 @@
     "DESCRIPTION": "At the start of your turn, Channel 1 Lightning.",
     "UPGRADE_DESCRIPTION": "At the start of your turn, Channel X Lightning."
   },
+  "ICR:Cyclone": {
+    "NAME": "Cyclone",
+    "DESCRIPTION": "At the start of your turn, Channel 1 Frost and 1 Lightning."
+  },
   "ICR:FrostFall": {
     "NAME": "Frost Fall",
     "DESCRIPTION": "At the start of your turn, Channel 1 Frost.",

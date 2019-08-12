@@ -57,6 +57,7 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
         addGreenCard(new Vanish());
 
         addBlueCard(new ChainLightning());
+        addBlueCard(new Cyclone());
         addBlueCard(new FrostFall());
     }
 

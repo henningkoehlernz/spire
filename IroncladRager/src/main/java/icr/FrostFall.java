@@ -53,7 +53,7 @@ public class FrostFall extends CustomCard {
             this.upgradeName();
             this.rawDescription = UPGRADE_DESCRIPTION;
             initializeDescription();
-            this.cost = -1; // cost X
+            upgradeBaseCost(-1); // cost X
         }
     }
 

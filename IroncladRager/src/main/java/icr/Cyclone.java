@@ -9,51 +9,36 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
-import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.BaseModCardTags;
 
-public class ChainLightning extends CustomCard {
-    public static final String ID = "ICR:ChainLightning";
+public class Cyclone extends CustomCard {
+    public static final String ID = "ICR:Cyclone";
     private static CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     // Get object containing the strings that are displayed in the game.
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "img/chain_lightning.png";
-    private static final int COST = 1;
+    public static final String IMG_PATH = "img/cyclone.png";
+    private static final int COST = 2;
 
-    public ChainLightning() {
+    public Cyclone() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
                 AbstractCard.CardType.POWER, AbstractCard.CardColor.BLUE,
-                AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.SELF);
+                AbstractCard.CardRarity.RARE, AbstractCard.CardTarget.SELF);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        int effect = 1;
-        if ( this.cost == -1 ) {
-            effect = EnergyPanel.totalCount;
-            if ( !this.freeToPlayOnce ) {
-                p.energy.use(EnergyPanel.totalCount);
-            }
-            if ( p.hasRelic("Chemical X") ) {
-                effect += 2;
-                p.getRelic("Chemical X").flash();
-            }
-        }
-        if ( effect > 0 )
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new AutoLightningPower(p, effect)));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new AutoFrostPower(p, 1)));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new AutoLightningPower(p, 1)));
     }
 
     @Override
     public void upgrade() {
         if ( !this.upgraded ) {
             this.upgradeName();
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            initializeDescription();
-            upgradeBaseCost(-1); // cost X
+            upgradeBaseCost(1);
         }
     }
 
