@@ -1,8 +1,15 @@
 {
+  "ICR:AutoLightning" : {
+    "NAME" : "Lightning Storm",
+    "DESCRIPTIONS": [
+      "At the start of your turn, #yChannel #b",
+      " #yLightning."
+    ]
+  },
   "ICR:Concealment" : {
     "NAME" : "Concealment",
     "DESCRIPTIONS": [
-      "Reduces all damage taken by ",
+      "Reduces all damage taken by #b",
       " (minimum 1)."
     ]
   }

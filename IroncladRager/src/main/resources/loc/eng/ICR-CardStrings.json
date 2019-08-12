@@ -49,5 +49,11 @@
   "ICR:Vanish": {
     "NAME": "Vanish",
     "DESCRIPTION": "Gain !M! Concealment."
+  },
+
+  "ICR:ChainLightning": {
+    "NAME": "Chain Lightning",
+    "DESCRIPTION": "At the start of your turn, Channel one Lightning.",
+    "UPGRADE_DESCRIPTION": "At the start of your turn, Channel X Lightning."
   }
 }
