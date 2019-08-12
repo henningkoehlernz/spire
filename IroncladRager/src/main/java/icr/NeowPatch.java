@@ -179,6 +179,7 @@ public class NeowPatch {
                     || __instance.type == SILENT_ASSASSIN
                     || __instance.type == DEFECT_STORMLORD ) {
                 Iterator<AbstractCard> it = AbstractDungeon.player.masterDeck.group.iterator();
+                boolean frost = false; // alternate Cold Snap & Ball Lightning for Stormlord
                 while (it.hasNext()) {
                     AbstractCard e = it.next();
                     if ( e instanceof com.megacrit.cardcrawl.cards.red.Strike_Red ) {
@@ -195,7 +196,11 @@ public class NeowPatch {
                         giveBasicDefend(new com.megacrit.cardcrawl.cards.green.DodgeAndRoll());
                     } else if ( e instanceof com.megacrit.cardcrawl.cards.blue.Strike_Blue ) {
                         it.remove();
-                        giveBasicStrike(new com.megacrit.cardcrawl.cards.blue.BallLightning());
+                        if ( frost )
+                            giveBasicStrike(new com.megacrit.cardcrawl.cards.blue.ColdSnap());
+                        else
+                            giveBasicStrike(new com.megacrit.cardcrawl.cards.blue.BallLightning());
+                        frost = !frost;
                     } else if ( e instanceof com.megacrit.cardcrawl.cards.blue.Defend_Blue ) {
                         it.remove();
                         giveBasicDefend(new com.megacrit.cardcrawl.cards.blue.Leap());
