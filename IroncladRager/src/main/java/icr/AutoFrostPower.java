@@ -5,14 +5,14 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.orbs.Lightning;
+import com.megacrit.cardcrawl.orbs.Frost;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public class AutoLightningPower extends AbstractPower {
-    public static final String POWER_ID = "ICR:AutoLightning";
+public class AutoFrostPower extends AbstractPower {
+    public static final String POWER_ID = "ICR:AutoFrost";
     public static String[] DESCRIPTIONS = null;
 
-    public AutoLightningPower(AbstractCreature owner, int amount) {
+    public AutoFrostPower(AbstractCreature owner, int amount) {
         this.ID = POWER_ID;
         this.amount = amount;
         this.owner = owner;
@@ -35,7 +35,7 @@ public class AutoLightningPower extends AbstractPower {
     public void atStartOfTurn() {
         flash();
         for ( int i = 0; i < this.amount; i++ )
-            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new Lightning()));
+            AbstractDungeon.actionManager.addToBottom(new ChannelAction(new Frost()));
     }
 
 }
