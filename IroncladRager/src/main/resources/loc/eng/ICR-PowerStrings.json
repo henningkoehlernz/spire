@@ -1,13 +1,13 @@
 {
   "ICR:AutoFrost" : {
-    "NAME" : "Snow Storm",
+    "NAME" : "Channel Frost",
     "DESCRIPTIONS": [
       "At the start of your turn, #yChannel #b",
       " #yFrost."
     ]
   },
   "ICR:AutoLightning" : {
-    "NAME" : "Lightning Storm",
+    "NAME" : "Channel Lightning",
     "DESCRIPTIONS": [
       "At the start of your turn, #yChannel #b",
       " #yLightning."

@@ -32,19 +32,11 @@ public class ChainLightning extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        int effect = 1;
-        if ( this.cost == -1 ) {
-            effect = EnergyPanel.totalCount;
-            if ( !this.freeToPlayOnce ) {
-                p.energy.use(EnergyPanel.totalCount);
-            }
-            if ( p.hasRelic("Chemical X") ) {
-                effect += 2;
-                p.getRelic("Chemical X").flash();
-            }
-        }
-        if ( effect > 0 )
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new AutoLightningPower(p, effect)));
+        if ( this.cost == -1 )
+            AbstractDungeon.actionManager.addToBottom(new MultiAutoChannelAction(
+                    MultiAutoChannelAction.OrbType.LIGHTNING, energyOnUse, freeToPlayOnce));
+        else
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new AutoLightningPower(p, 1)));
     }
 
     @Override
