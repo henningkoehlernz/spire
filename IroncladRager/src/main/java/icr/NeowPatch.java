@@ -105,6 +105,10 @@ public class NeowPatch {
                     default:
                         return __result;
                 }
+                if ( IroncladRager.guaranteeSubclass ) {
+                    __result.clear();
+                    logger.info("removed existing blessings");
+                }
                 logger.info("added " + newReward.desc + " blessing");
                 newReward.desc = "[ #rGain #rmultiple #rdrawbacks #gPlay #gas #g" + newReward.desc + " ]";
                 __result.add(newReward);
