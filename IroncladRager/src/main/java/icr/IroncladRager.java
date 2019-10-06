@@ -7,6 +7,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
+import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
 import basemod.BaseMod;
@@ -81,10 +82,18 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
         addBlueCard(new FrostFall());
     }
 
+    private static String languagePath() {
+        //if ( language == Settings.GameLanguage.ZHS )
+        //    return "zhs";
+        return "eng";
+    }
+
     @Override
     public void receiveEditStrings() {
-        BaseMod.loadCustomStringsFile(CardStrings.class, "loc/eng/ICR-CardStrings.json");
-        BaseMod.loadCustomStringsFile(PowerStrings.class, "loc/eng/ICR-PowerStrings.json");
+        String basePath = "loc/" + languagePath() + "/";
+        BaseMod.loadCustomStringsFile(CardStrings.class, basePath + "ICR-CardStrings.json");
+        BaseMod.loadCustomStringsFile(PowerStrings.class, basePath + "ICR-PowerStrings.json");
+        BaseMod.loadCustomStringsFile(CharacterStrings.class, basePath + "ICR-CharacterStrings.json");
     }
 
     @Override

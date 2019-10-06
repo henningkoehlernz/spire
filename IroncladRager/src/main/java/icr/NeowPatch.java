@@ -48,22 +48,21 @@ public class NeowPatch {
             paramtypez = {}
     )
     public static class MiniBlessing {
-        private static final String[] optionStrings = { "Rager", "Poisoner", "Warden" };
         public static void Postfix(NeowEvent __instance) {
             NeowReward newReward = new NeowReward(false);
             switch ( AbstractDungeon.player.chosenClass )
             {
                 case IRONCLAD:
                     newReward.type = IRONCLAD_RAGER;
-                    newReward.optionLabel = optionStrings[0];
+                    newReward.optionLabel = CardCrawlGame.languagePack.getCharacterString("ICR:Ironclad").TEXT[0];
                     break;
                 case THE_SILENT:
                     newReward.type = SILENT_POISONER;
-                    newReward.optionLabel = optionStrings[1];
+                    newReward.optionLabel = CardCrawlGame.languagePack.getCharacterString("ICR:Silent").TEXT[0];
                     break;
                 case DEFECT:
                     newReward.type = DEFECT_WARDEN;
-                    newReward.optionLabel = optionStrings[2];
+                    newReward.optionLabel = CardCrawlGame.languagePack.getCharacterString("ICR:Defect").TEXT[0];
                     break;
                 default:
                     return;
@@ -77,7 +76,8 @@ public class NeowPatch {
             } catch (Exception e) {
                 System.out.println(e);
             }
-            __instance.roomEventText.addDialogOption("[ #gPlay #gas #g" + newReward.optionLabel + " ]");
+            String prefix = CardCrawlGame.languagePack.getCharacterString("ICR:NeowReward").TEXT[0];
+            __instance.roomEventText.addDialogOption("[ " + prefix + newReward.optionLabel + " ]");
             logger.info("added " + newReward.optionLabel + " mini blessing");
         }
     }
@@ -88,19 +88,18 @@ public class NeowPatch {
             paramtypez = {int.class}
     )
     public static class Blessing {
-        private static final String[] optionStrings = { "Berserker", "Assassin", "Stormlord" };
         public static ArrayList<NeowReward.NeowRewardDef> Postfix(ArrayList<NeowReward.NeowRewardDef> __result, NeowReward __instance, int category) {
             if ( category == 3 ) {
                 NeowReward.NeowRewardDef newReward = null;
                 switch (AbstractDungeon.player.chosenClass) {
                     case IRONCLAD:
-                        newReward = new NeowReward.NeowRewardDef(IRONCLAD_BERSERKER, optionStrings[0]);
+                        newReward = new NeowReward.NeowRewardDef(IRONCLAD_BERSERKER, CardCrawlGame.languagePack.getCharacterString("ICR:Ironclad").TEXT[1]);
                         break;
                     case THE_SILENT:
-                        newReward = new NeowReward.NeowRewardDef(SILENT_ASSASSIN, optionStrings[1]);
+                        newReward = new NeowReward.NeowRewardDef(SILENT_ASSASSIN, CardCrawlGame.languagePack.getCharacterString("ICR:Silent").TEXT[1]);
                         break;
                     case DEFECT:
-                        newReward = new NeowReward.NeowRewardDef(DEFECT_STORMLORD, optionStrings[2]);
+                        newReward = new NeowReward.NeowRewardDef(DEFECT_STORMLORD, CardCrawlGame.languagePack.getCharacterString("ICR:Defect").TEXT[1]);
                         break;
                     default:
                         return __result;
@@ -110,7 +109,8 @@ public class NeowPatch {
                     logger.info("removed existing blessings");
                 }
                 logger.info("added " + newReward.desc + " blessing");
-                newReward.desc = "[ #rGain #rmultiple #rdrawbacks #gPlay #gas #g" + newReward.desc + " ]";
+                String prefix = CardCrawlGame.languagePack.getCharacterString("ICR:NeowReward").TEXT[1];
+                newReward.desc = "[ " + prefix + newReward.desc + " ]";
                 __result.add(newReward);
             }
             return __result;
@@ -262,9 +262,9 @@ public class NeowPatch {
     public static class IroncladTitle {
         public static String Postfix(String __result, Ironclad __instance, AbstractPlayer.PlayerClass pc) {
             if ( CardCrawlGame.metricData.neowBonus.equals(IRONCLAD_RAGER.name()) )
-                return "the Rager";
+                return CardCrawlGame.languagePack.getCharacterString("ICR:Ironclad").NAMES[0];
             if ( CardCrawlGame.metricData.neowBonus.equals(IRONCLAD_BERSERKER.name()) )
-                return "the Berserker";
+                return CardCrawlGame.languagePack.getCharacterString("ICR:Ironclad").NAMES[1];
             return __result;
         }
     }
@@ -277,9 +277,9 @@ public class NeowPatch {
     public static class TheSilentTitle {
         public static String Postfix(String __result, TheSilent __instance, AbstractPlayer.PlayerClass pc) {
             if ( CardCrawlGame.metricData.neowBonus.equals(SILENT_POISONER.name()) )
-                return "the Poisoner";
+                return CardCrawlGame.languagePack.getCharacterString("ICR:Silent").NAMES[0];
             if ( CardCrawlGame.metricData.neowBonus.equals(SILENT_ASSASSIN.name()) )
-                return "the Assassin";
+                return CardCrawlGame.languagePack.getCharacterString("ICR:Silent").NAMES[1];
             return __result;
         }
     }
@@ -292,9 +292,9 @@ public class NeowPatch {
     public static class DefectTitle {
         public static String Postfix(String __result, Defect __instance, AbstractPlayer.PlayerClass pc) {
             if ( CardCrawlGame.metricData.neowBonus.equals(DEFECT_WARDEN.name()) )
-                return "the Warden";
+                return CardCrawlGame.languagePack.getCharacterString("ICR:Defect").NAMES[0];
             if ( CardCrawlGame.metricData.neowBonus.equals(DEFECT_STORMLORD.name()) )
-                return "the Stormlord";
+                return CardCrawlGame.languagePack.getCharacterString("ICR:Defect").NAMES[1];
             return __result;
         }
     }
