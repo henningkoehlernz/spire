@@ -3,7 +3,7 @@
       "NAMES": [
         "半血"
       ],
-      "DESCRIPTION": "生命低于 50% 时。"
+      "DESCRIPTION": "生命低于 #y50% 时。"
     },
     {
       "NAMES": [

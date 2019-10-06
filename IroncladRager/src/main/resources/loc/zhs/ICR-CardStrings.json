@@ -1,7 +1,7 @@
 {
   "ICR:RageStrike": {
     "NAME": "狂怒打击",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL Bloodied 时提高 !M! 点。"
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 半血 时提高 !M! 点。"
   },
   "ICR:ShieldBash": {
     "NAME": "盾击",
@@ -26,11 +26,11 @@
 
   "ICR:Frenzy": {
     "NAME": "狂乱",
-    "DESCRIPTION": "造成 !D! 点伤害两次。 Bloodied 时变为三次"
+    "DESCRIPTION": "造成 !D! 点伤害两次。 半血 时变为三次"
   },
   "ICR:PowerAttack": {
     "NAME": "猛力攻击",
-    "DESCRIPTION": "造成 !D! 点伤害。 NL Bloodied 时获得 [R] 。"
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 半血 时获得 [R] 。"
   },
   "ICR:VitalStrike": {
     "NAME": "致命打击",
