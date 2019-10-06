@@ -87,8 +87,8 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
     }
 
     private static String languagePath() {
-        //if ( language == Settings.GameLanguage.ZHS )
-        //    return "zhs";
+        if ( Settings.language == Settings.GameLanguage.ZHS )
+            return "zhs";
         return "eng";
     }
 

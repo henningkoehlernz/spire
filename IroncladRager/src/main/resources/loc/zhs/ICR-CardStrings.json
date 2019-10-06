@@ -1,0 +1,68 @@
+{
+  "ICR:RageStrike": {
+    "NAME": "狂怒打击",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL Bloodied 时提高 !M! 点。"
+  },
+  "ICR:ShieldBash": {
+    "NAME": "盾击",
+    "DESCRIPTION": "获得 !B! 点 格挡 。 NL 造成 !D! 点伤害。"
+  },
+  "ICR:VenomStrike": {
+    "NAME": "毒素打击",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 给予 !M! 层 中毒 。"
+  },
+  "ICR:Dodge": {
+    "NAME": "闪避",
+    "DESCRIPTION": "获得 !B! 点 格挡 。NL 获得 !M! 层 藏匿 。"
+  },
+  "ICR:ProbingStrike": {
+    "NAME": "试探打击",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 获得 !B! 点 格挡 。"
+  },
+  "ICR:AutoDefend": {
+    "NAME": "自动防御",
+    "DESCRIPTION": "获得 !B! 点 格挡 。 NL 你每有一个充能球，提高 !M! 点。"
+  },
+
+  "ICR:Frenzy": {
+    "NAME": "狂乱",
+    "DESCRIPTION": "造成 !D! 点伤害两次。 Bloodied 时变为三次"
+  },
+  "ICR:PowerAttack": {
+    "NAME": "猛力攻击",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL Bloodied 时获得 [R] 。"
+  },
+  "ICR:VitalStrike": {
+    "NAME": "致命打击",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 获得 !M! 点 力量 。"
+  },
+
+  "ICR:Cloudkill": {
+    "NAME": "死云术",
+    "DESCRIPTION": "给予所有敌人 !M! 层 中毒 。"
+  },
+  "ICR:Paralyse": {
+    "NAME": "麻痹",
+    "DESCRIPTION": "敌人失去等于 中毒 层数的 力量 。 NL 消耗 。",
+    "UPGRADE_DESCRIPTION": "敌人失去等于 中毒 层数的 力量 。"
+  },
+  "ICR:Vanish": {
+    "NAME": "消失",
+    "DESCRIPTION": "获得 !M! 层 藏匿 。"
+  },
+
+  "ICR:ChainLightning": {
+    "NAME": "连锁闪电",
+    "DESCRIPTION": "在你的回合开始时，生成 1 个 闪电 充能球。",
+    "UPGRADE_DESCRIPTION": "在你的回合开始时，生成 X 个 闪电 充能球。"
+  },
+  "ICR:Cyclone": {
+    "NAME": "风暴",
+    "DESCRIPTION": "在你的回合开始时，生成 1 个 冰霜 充能球和 1 个 闪电 充能球。"
+  },
+  "ICR:FrostFall": {
+    "NAME": "冰瀑",
+    "DESCRIPTION": "在你的回合开始时，生成 1 个 冰霜 充能球。",
+    "UPGRADE_DESCRIPTION": "在你的回合开始时，生成 X 个 冰霜 充能球"
+  }
+}

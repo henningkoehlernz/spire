@@ -1,0 +1,23 @@
+{
+  "ICR:AutoFrost" : {
+    "NAME" : "生成冰霜",
+    "DESCRIPTIONS": [
+      "在你的回合开始时， #y生成 #b",
+      " 个 #y冰霜 充能球。"
+    ]
+  },
+  "ICR:AutoLightning" : {
+    "NAME" : "生成闪电",
+    "DESCRIPTIONS": [
+      "在你的回合开始时， #y生成 #b",
+      " 个 #y闪电 充能球。"
+    ]
+  },
+  "ICR:Concealment" : {
+    "NAME" : "藏匿",
+    "DESCRIPTIONS": [
+      "将所有受到的伤害降低 #b",
+      " 点（最少1点）。"
+    ]
+  }
+}
