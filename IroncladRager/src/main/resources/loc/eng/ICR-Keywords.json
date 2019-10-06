@@ -1,0 +1,14 @@
+[
+    {
+      "NAMES": [
+        "bloodied"
+      ],
+      "DESCRIPTION": "At or below 50% health."
+    },
+    {
+      "NAMES": [
+        "concealment"
+      ],
+      "DESCRIPTION": "Reduces all damage taken for one turn."
+    }
+]

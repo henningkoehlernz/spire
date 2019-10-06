@@ -1,13 +1,16 @@
 package icr;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
+import com.megacrit.cardcrawl.localization.Keyword;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 
 import basemod.BaseMod;
@@ -16,6 +19,7 @@ import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
 
 import java.util.Properties;
+import java.nio.charset.StandardCharsets;
 
 @SpireInitializer
 public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber, EditKeywordsSubscriber, PostInitializeSubscriber {
@@ -98,10 +102,13 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
 
     @Override
     public void receiveEditKeywords() {
-        String[] bloodied = { "bloodied" };
-        BaseMod.addKeyword("Bloodied", bloodied, "At or below 50% health.");
-        String[] concealment = { "concealment" };
-        BaseMod.addKeyword("Concealment", concealment, "Reduces all damage taken for one turn.");
+        // read keywords from json
+        String keywordPath = "loc/" + languagePath() + "/ICR-Keywords.json";
+        String jsonString = Gdx.files.internal(keywordPath).readString(String.valueOf(StandardCharsets.UTF_8));
+        Keyword[] keywords = (Keyword[])(new Gson()).fromJson(jsonString, Keyword[].class);
+        // register with the game
+        for ( Keyword k : keywords )
+            BaseMod.addKeyword(k.NAMES, k.DESCRIPTION);
     }
 
     @Override
