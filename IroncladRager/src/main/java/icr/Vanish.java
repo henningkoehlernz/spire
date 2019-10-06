@@ -21,7 +21,7 @@ public class Vanish extends CustomCard {
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = "img/vanish.png";
     private static final int COST = 1;
-    private static final int CONCEAL = 5;
+    private static final int CONCEAL = 6;
 
     public Vanish() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
