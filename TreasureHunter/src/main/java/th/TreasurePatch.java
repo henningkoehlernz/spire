@@ -48,7 +48,7 @@ public class TreasurePatch {
     }
 
     // gain access to private methods
-    private static void invoke(Object obj, String methodName, Object... args) {
+    private static void invoke(AbstractCard obj, String methodName, Object... args) {
         Class<?>[] classArray = new Class<?>[args.length];
         for (int i = 0; i < args.length; i++) {
             Class c = args[i].getClass();
@@ -58,11 +58,23 @@ public class TreasurePatch {
                     (c == Float.class) ? float.class : c;
         }
         try {
-            Method m = obj.getClass().getDeclaredMethod(methodName, classArray);
+            Method m = AbstractCard.class.getDeclaredMethod(methodName, classArray);
             m.setAccessible(true);
             m.invoke(obj, args);
         } catch (Exception e) {
             logger.error(e);
+        }
+    }
+
+    @SpirePatch(
+            clz = AbstractCard.class,
+            method = "renderCardBg",
+            paramtypez = {SpriteBatch.class, float.class, float.class}
+    )
+    public static class RenderCardBg {
+        public static void Prefix(AbstractCard __instance, SpriteBatch sb, float x, float y) {
+            if ( __instance.type == TREASURE )
+                invoke(__instance, "renderSkillBg", sb, x, y);
         }
     }
 

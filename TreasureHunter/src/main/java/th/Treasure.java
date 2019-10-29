@@ -38,7 +38,7 @@ public class Treasure extends CustomCard {
     @Override
     public void upgrade() {
         this.upgradeName();
-        this.baseMagicNumber = this.magicNumber = this.timesUpgraded + 1;
+        this.upgradeMagicNumber(1);
     }
 
 }
