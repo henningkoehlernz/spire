@@ -6,12 +6,14 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.screens.SingleCardViewPopup;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class TreasurePatch {
@@ -111,6 +113,31 @@ public class TreasurePatch {
         public static void Insert(AbstractCard __instance, SpriteBatch sb, @ByRef(type="String") Object[] text) {
             if ( __instance.type == TREASURE )
                 text[0] = "Treasure";
+        }
+    }
+
+    @SpirePatch(
+            clz = SingleCardViewPopup.class,
+            method = "renderCardTypeText",
+            paramtypez = {SpriteBatch.class}
+    )
+    public static class RenderCardTypeText {
+        @SpireInsertPatch(
+                rloc=1,
+                localvars={"label"}
+        )
+        public static void Insert(SingleCardViewPopup __instance, SpriteBatch sb, @ByRef(type="String") Object[] label) {
+            try {
+                // access __instance.card via reflection
+                Field cardField = SingleCardViewPopup.class.getDeclaredField("card");
+                cardField.setAccessible(true);
+                AbstractCard card = (AbstractCard) cardField.get(__instance);
+                // now the actual code
+                if (card.type == TREASURE)
+                    label[0] = "Treasure";
+            } catch (Exception e) {
+                logger.error(e);
+            }
         }
     }
 

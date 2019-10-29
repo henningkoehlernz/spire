@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.vfx.GainPennyEffect;
+import com.megacrit.cardcrawl.vfx.GainGoldTextEffect;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.BaseModCardTags;
@@ -34,8 +34,8 @@ public class CopperCoins extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        p.gainGold(1);
-        AbstractDungeon.effectList.add(new GainPennyEffect(p.hb.cX, p.hb.cY));
+        p.gainGold(this.magicNumber);
+        AbstractDungeon.effectList.add(new GainGoldTextEffect(this.magicNumber));
     }
 
     @Override
