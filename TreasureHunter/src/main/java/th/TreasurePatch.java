@@ -29,7 +29,7 @@ public class TreasurePatch {
     public static class CanUpgrade {
         public static boolean Postfix(boolean __result, AbstractCard __instance) {
             if ( __instance.type == TREASURE )
-                return true;
+                return false;
             return __result;
         }
     }
@@ -110,12 +110,8 @@ public class TreasurePatch {
         )
         public static void Insert(AbstractCard __instance, SpriteBatch sb, @ByRef(type="String") Object[] text) {
             if ( __instance.type == TREASURE )
-                text[0] = "Loot";
+                text[0] = "Treasure";
         }
-    }
-
-    private void renderType(SpriteBatch sb) {
-
     }
 
 }

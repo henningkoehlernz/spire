@@ -1,6 +1,6 @@
 {
-  "TH:Treasure": {
-    "NAME": "Treasure",
-    "DESCRIPTION": "Exhaust. NL On death gain !M! extra gold on future runs."
+  "TH:CopperCoins": {
+    "NAME": "Copper Coins",
+    "DESCRIPTION": "Gain !M! gold. NL Exhaust."
   }
 }

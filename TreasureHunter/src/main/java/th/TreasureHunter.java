@@ -15,7 +15,6 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import basemod.BaseMod;
 import basemod.interfaces.*;
 
-import java.util.Properties;
 import java.nio.charset.StandardCharsets;
 
 @SpireInitializer
@@ -34,7 +33,7 @@ public class TreasureHunter implements EditCardsSubscriber, EditStringsSubscribe
 
     @Override
     public void receiveEditCards() {
-        BaseMod.addCard(new Treasure());
+        BaseMod.addCard(new CopperCoins());
     }
 
     private static String languagePath() {
