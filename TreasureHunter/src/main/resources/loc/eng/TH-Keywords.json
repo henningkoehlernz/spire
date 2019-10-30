@@ -1,14 +1,8 @@
 [
     {
       "NAMES": [
-        "bloodied"
+        "treasure"
       ],
-      "DESCRIPTION": "At or below 50% health."
-    },
-    {
-      "NAMES": [
-        "concealment"
-      ],
-      "DESCRIPTION": "Reduces all damage taken for one turn."
+      "DESCRIPTION": "Increases starting gold for all future runs."
     }
 ]

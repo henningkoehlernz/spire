@@ -9,9 +9,8 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
-import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.localization.Keyword;
-import com.megacrit.cardcrawl.localization.PowerStrings;
+import com.megacrit.cardcrawl.localization.UIStrings;
 
 import basemod.BaseMod;
 import basemod.interfaces.*;
@@ -77,8 +76,7 @@ public class TreasureHunter implements EditCardsSubscriber, EditStringsSubscribe
     public void receiveEditStrings() {
         String basePath = "loc/" + languagePath() + "/";
         BaseMod.loadCustomStringsFile(CardStrings.class, basePath + "TH-CardStrings.json");
-        BaseMod.loadCustomStringsFile(PowerStrings.class, basePath + "TH-PowerStrings.json");
-        BaseMod.loadCustomStringsFile(CharacterStrings.class, basePath + "TH-CharacterStrings.json");
+        BaseMod.loadCustomStringsFile(UIStrings.class, basePath + "TH-UIStrings.json");
     }
 
     @Override

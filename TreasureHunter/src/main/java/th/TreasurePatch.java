@@ -6,6 +6,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.neow.NeowReward;
@@ -146,7 +147,7 @@ public class TreasurePatch {
         )
         public static void Insert(AbstractCard __instance, SpriteBatch sb, @ByRef(type="String") Object[] text) {
             if ( __instance.type == TREASURE )
-                text[0] = "Treasure";
+                text[0] = CardCrawlGame.languagePack.getUIString("TH:Treasure").TEXT[0];
         }
     }
 
@@ -168,7 +169,7 @@ public class TreasurePatch {
                 AbstractCard card = (AbstractCard) cardField.get(__instance);
                 // now the actual code
                 if (card.type == TREASURE)
-                    label[0] = "Treasure";
+                    label[0] = CardCrawlGame.languagePack.getUIString("TH:Treasure").TEXT[0];
             } catch (Exception e) {
                 logger.error(e);
             }
