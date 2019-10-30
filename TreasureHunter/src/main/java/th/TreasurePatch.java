@@ -12,7 +12,11 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.neow.NeowReward;
 import com.megacrit.cardcrawl.rewards.chests.AbstractChest;
 import com.megacrit.cardcrawl.rewards.RewardItem;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
+import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 import com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue;
+import com.megacrit.cardcrawl.screens.CombatRewardScreen;
 import com.megacrit.cardcrawl.screens.DeathScreen;
 import com.megacrit.cardcrawl.screens.GameOverStat;
 import com.megacrit.cardcrawl.screens.SingleCardViewPopup;
@@ -84,6 +88,13 @@ public class TreasurePatch {
         }
     }
 
+    private static RewardItem getTreasureReward() {
+        RewardItem treasureReward = new RewardItem();
+        treasureReward.cards.clear();
+        treasureReward.cards.add(TreasureHunter.getRandomTreasure().makeCopy());
+        return treasureReward;
+    }
+
     // chests contain treasures
     @SpirePatch(
             clz = AbstractChest.class,
@@ -92,10 +103,21 @@ public class TreasurePatch {
     )
     public static class OpenChest {
         public static void Prefix(AbstractChest __instance, boolean bossChest) {
-            RewardItem treasureReward = new RewardItem();
-            treasureReward.cards.clear();
-            treasureReward.cards.add(TreasureHunter.randomTreasure());
-            AbstractDungeon.getCurrRoom().addCardReward(treasureReward);
+            AbstractDungeon.getCurrRoom().addCardReward(getTreasureReward());
+        }
+    }
+
+    // boss & elite rooms contain treasures
+    @SpirePatch(
+            clz = CombatRewardScreen.class,
+            method = "setupItemReward",
+            paramtypez = {}
+    )
+    public static class SetupItemReward {
+        public static void Postfix(CombatRewardScreen __instance) {
+            AbstractRoom room = AbstractDungeon.getCurrRoom();
+            if ( room instanceof MonsterRoomBoss || room instanceof MonsterRoomElite )
+                __instance.rewards.add(getTreasureReward());
         }
     }
 

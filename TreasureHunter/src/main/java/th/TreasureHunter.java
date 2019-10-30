@@ -74,7 +74,7 @@ public class TreasureHunter implements EditCardsSubscriber, EditStringsSubscribe
             BaseMod.addCard(card);
     }
 
-    static AbstractCard randomTreasure() {
+    static AbstractCard getRandomTreasure() {
         return treasures.get(AbstractDungeon.cardRng.random(treasures.size() - 1));
     }
 
