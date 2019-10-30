@@ -13,8 +13,12 @@ import com.megacrit.cardcrawl.neow.NeowReward;
 import com.megacrit.cardcrawl.rewards.chests.AbstractChest;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue;
+import com.megacrit.cardcrawl.screens.DeathScreen;
+import com.megacrit.cardcrawl.screens.GameOverStat;
 import com.megacrit.cardcrawl.screens.SingleCardViewPopup;
+import com.megacrit.cardcrawl.screens.VictoryScreen;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
+import com.megacrit.cardcrawl.vfx.GainGoldTextEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -31,6 +35,17 @@ public class TreasurePatch {
     @SpireEnum
     public static AbstractCard.CardType TREASURE;
 
+    //----------------------- mechanics -----------------------------
+
+    private static int getTreasureCount() {
+        int treasureCount = 0;
+        for ( AbstractCard card : AbstractDungeon.player.masterDeck.group ) {
+            if ( card.type == TREASURE )
+                treasureCount++;
+        }
+        return treasureCount;
+    }
+
     @SpirePatch(
             clz = AbstractCard.class,
             method = "canUpgrade",
@@ -44,6 +59,7 @@ public class TreasurePatch {
         }
     }
 
+    // update total treasures collected
     @SpirePatch(
             clz = SaveAndContinue.class,
             method = "deleteSave",
@@ -51,15 +67,11 @@ public class TreasurePatch {
     )
     public static class DeleteSave {
         public static void Prefix(AbstractPlayer p) {
-            int treasureCount = 0;
-            for ( AbstractCard card : p.masterDeck.group ) {
-                if ( card.type == TREASURE )
-                    treasureCount++;
-            }
-            TreasureHunter.addTreasure(treasureCount);
+            TreasureHunter.addTreasure(getTreasureCount());
         }
     }
 
+    // grant bonus gold for new games
     @SpirePatch(
             clz = NeowReward.class,
             method = "activate",
@@ -68,9 +80,11 @@ public class TreasurePatch {
     public static class NeowRewardActivate {
         public static void Postfix(NeowReward __instance) {
             AbstractDungeon.player.gainGold(TreasureHunter.treasure);
+            AbstractDungeon.effectList.add(new GainGoldTextEffect(TreasureHunter.treasure));
         }
     }
 
+    // chests contain treasures
     @SpirePatch(
             clz = AbstractChest.class,
             method = "open",
@@ -85,12 +99,36 @@ public class TreasurePatch {
         }
     }
 
-    //----------------------- Visuals -------------------------------
+    //----------------------- feedback ------------------------------
 
-    private static String getTreasureText() {
-        return CardCrawlGame.languagePack.getUIString("TH:Treasure").TEXT[0];
+    private static String[] getTreasureText() {
+        return CardCrawlGame.languagePack.getUIString("TH:Treasure").TEXT;
     }
 
+    // show number of treasures collected as part of score
+    @SpirePatch(
+            clz = DeathScreen.class,
+            method = "createGameOverStats",
+            paramtypez = {}
+    )
+    public static class Death_CreateGameOverStats {
+        public static void Postfix(DeathScreen __instance) {
+            __instance.stats.add(new GameOverStat(getTreasureText()[1], null, Integer.toString(getTreasureCount())));
+        }
+    }
+
+    @SpirePatch(
+            clz = VictoryScreen.class,
+            method = "createGameOverStats",
+            paramtypez = {}
+    )
+    public static class Victory_CreateGameOverStats {
+        public static void Postfix(VictoryScreen __instance) {
+            __instance.stats.add(new GameOverStat(getTreasureText()[1], null, Integer.toString(getTreasureCount())));
+        }
+    }
+
+    // add treasure keyword to treasures
     @SpirePatch(
             clz = AbstractCard.class,
             method = "initializeDescription",
@@ -102,9 +140,11 @@ public class TreasurePatch {
         )
         public static void Insert(AbstractCard __instance) {
             if ( __instance.type == TREASURE )
-                __instance.keywords.add(getTreasureText().toLowerCase());
+                __instance.keywords.add(getTreasureText()[0].toLowerCase());
         }
     }
+
+    //----------------------- card rendering fixes ------------------
 
     @SpirePatch(
             clz = AbstractCard.class,
@@ -182,7 +222,7 @@ public class TreasurePatch {
         )
         public static void Insert(AbstractCard __instance, SpriteBatch sb, @ByRef(type="String") Object[] text) {
             if ( __instance.type == TREASURE )
-                text[0] = getTreasureText();
+                text[0] = getTreasureText()[0];
         }
     }
 
@@ -204,7 +244,7 @@ public class TreasurePatch {
                 AbstractCard card = (AbstractCard) cardField.get(__instance);
                 // now the actual code
                 if (card.type == TREASURE)
-                    label[0] = getTreasureText();
+                    label[0] = getTreasureText()[0];
             } catch (Exception e) {
                 logger.error(e);
             }
