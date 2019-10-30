@@ -6,5 +6,9 @@
   "TH:BikiniMail": {
     "NAME": "Bikini Mail",
     "DESCRIPTION": "At the end of your turn, gain !M! block. NL Exhaust."
+  },
+  "TH:CursedSword": {
+    "NAME": "Cursed Sword",
+    "DESCRIPTION": "Gain !M! Strength. NL Lose 1 Dexterity. NL Exhaust."
   }
 }

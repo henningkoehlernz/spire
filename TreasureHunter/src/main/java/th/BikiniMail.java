@@ -11,7 +11,6 @@ import com.megacrit.cardcrawl.powers.MetallicizePower;
 import com.megacrit.cardcrawl.vfx.GainGoldTextEffect;
 
 import basemod.abstracts.CustomCard;
-import basemod.helpers.BaseModCardTags;
 
 import static th.TreasurePatch.TREASURE;
 
