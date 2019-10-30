@@ -31,7 +31,7 @@ public class TreasureHunter implements EditCardsSubscriber, EditStringsSubscribe
     private static final String MODNAME = "TreasureHunter";
     private static final String CONFIG_TREASURE = "treasure";
     private static Properties defaultConfig = new Properties();
-    private static int treasure = 0;
+    public static int treasure = 0;
 
     public TreasureHunter() {
         BaseMod.subscribe(this);

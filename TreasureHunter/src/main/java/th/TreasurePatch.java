@@ -6,7 +6,9 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.neow.NeowReward;
 import com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue;
 import com.megacrit.cardcrawl.screens.SingleCardViewPopup;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
@@ -52,6 +54,17 @@ public class TreasurePatch {
                     treasureCount++;
             }
             TreasureHunter.addTreasure(treasureCount);
+        }
+    }
+
+    @SpirePatch(
+            clz = NeowReward.class,
+            method = "activate",
+            paramtypez = {}
+    )
+    public static class NeowRewardActivate {
+        public static void Postfix(NeowReward __instance) {
+            AbstractDungeon.player.gainGold(TreasureHunter.treasure);
         }
     }
 
