@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.neow.NeowReward;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rewards.chests.AbstractChest;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
@@ -89,10 +90,20 @@ public class TreasurePatch {
     }
 
     private static RewardItem getTreasureReward() {
-        RewardItem treasureReward = new RewardItem();
-        treasureReward.cards.clear();
-        treasureReward.cards.add(TreasureHunter.getRandomTreasure().makeCopy());
-        return treasureReward;
+        int numCards = 2;
+        for ( AbstractRelic r : AbstractDungeon.player.relics ) {
+            numCards = r.changeNumberOfCardsInReward(numCards);
+        }
+        RewardItem reward = new RewardItem();
+        reward.cards.clear();
+        // pick cards
+        int attempts = 0;
+        while ( reward.cards.size() < numCards && attempts++ < 100 ) {
+            AbstractCard treasure = TreasureHunter.getRandomTreasure();
+            if ( !reward.cards.contains(treasure) )
+                reward.cards.add(treasure.makeCopy());
+        }
+        return reward;
     }
 
     // chests contain treasures
