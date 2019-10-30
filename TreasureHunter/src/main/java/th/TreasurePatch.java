@@ -5,8 +5,11 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue;
 import com.megacrit.cardcrawl.screens.SingleCardViewPopup;
+import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -35,6 +38,24 @@ public class TreasurePatch {
             return __result;
         }
     }
+
+    @SpirePatch(
+            clz = SaveAndContinue.class,
+            method = "deleteSave",
+            paramtypez = {AbstractPlayer.class}
+    )
+    public static class DeleteSave {
+        public static void Prefix(AbstractPlayer p) {
+            int treasureCount = 0;
+            for ( AbstractCard card : p.masterDeck.group ) {
+                if ( card.type == TREASURE )
+                    treasureCount++;
+            }
+            TreasureHunter.addTreasure(treasureCount);
+        }
+    }
+
+    //----------------------- Visuals -------------------------------
 
     @SpirePatch(
             clz = AbstractCard.class,
