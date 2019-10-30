@@ -7,6 +7,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.Keyword;
@@ -19,6 +20,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Properties;
+import java.util.ArrayList;
 import java.nio.charset.StandardCharsets;
 
 @SpireInitializer
@@ -31,6 +33,8 @@ public class TreasureHunter implements EditCardsSubscriber, EditStringsSubscribe
     private static final String CONFIG_TREASURE = "treasure";
     private static Properties defaultConfig = new Properties();
     public static int treasure = 0;
+    // treasure cards
+    public static ArrayList<AbstractCard> treasures = new ArrayList<AbstractCard>();
 
     public TreasureHunter() {
         BaseMod.subscribe(this);
@@ -63,7 +67,13 @@ public class TreasureHunter implements EditCardsSubscriber, EditStringsSubscribe
 
     @Override
     public void receiveEditCards() {
-        BaseMod.addCard(new CopperCoins());
+        treasures.add(new CopperCoins());
+        for ( AbstractCard card : treasures )
+            BaseMod.addCard(card);
+    }
+
+    static AbstractCard randomTreasure() {
+        return treasures.get(AbstractDungeon.cardRng.random(treasures.size() - 1));
     }
 
     private static String languagePath() {

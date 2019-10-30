@@ -10,6 +10,8 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.neow.NeowReward;
+import com.megacrit.cardcrawl.rewards.chests.AbstractChest;
+import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue;
 import com.megacrit.cardcrawl.screens.SingleCardViewPopup;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
@@ -66,6 +68,20 @@ public class TreasurePatch {
     public static class NeowRewardActivate {
         public static void Postfix(NeowReward __instance) {
             AbstractDungeon.player.gainGold(TreasureHunter.treasure);
+        }
+    }
+
+    @SpirePatch(
+            clz = AbstractChest.class,
+            method = "open",
+            paramtypez = {boolean.class}
+    )
+    public static class OpenChest {
+        public static void Prefix(AbstractChest __instance, boolean bossChest) {
+            RewardItem treasureReward = new RewardItem();
+            treasureReward.cards.clear();
+            treasureReward.cards.add(TreasureHunter.randomTreasure());
+            AbstractDungeon.getCurrRoom().addCardReward(treasureReward);
         }
     }
 
