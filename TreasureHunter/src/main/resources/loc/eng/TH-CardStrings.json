@@ -2,5 +2,9 @@
   "TH:CopperCoins": {
     "NAME": "Copper Coins",
     "DESCRIPTION": "Gain !M! gold. NL Exhaust."
+  },
+  "TH:BikiniMail": {
+    "NAME": "Bikini Mail",
+    "DESCRIPTION": "At the end of your turn, gain !M! block. NL Exhaust."
   }
 }
