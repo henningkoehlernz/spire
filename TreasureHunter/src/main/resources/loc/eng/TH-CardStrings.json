@@ -10,5 +10,9 @@
   "TH:CursedSword": {
     "NAME": "Cursed Sword",
     "DESCRIPTION": "Gain !M! Strength. NL Lose 1 Dexterity. NL Exhaust."
+  },
+  "TH:EnergyPotion": {
+    "NAME": "Energy Potion",
+    "DESCRIPTION": "Gain [E]. NL Exhaust."
   }
 }
