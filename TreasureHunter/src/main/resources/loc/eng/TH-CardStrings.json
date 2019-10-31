@@ -1,7 +1,7 @@
 {
   "TH:CopperCoins": {
     "NAME": "Copper Coins",
-    "DESCRIPTION": "Gain !M! gold. NL Exhaust."
+    "DESCRIPTION": "Gain 1d4 gold. NL Exhaust."
   },
   "TH:BikiniMail": {
     "NAME": "Bikini Mail",
@@ -9,7 +9,7 @@
   },
   "TH:CursedSword": {
     "NAME": "Cursed Sword",
-    "DESCRIPTION": "Gain !M! Strength. NL Lose 1 Dexterity. NL Exhaust."
+    "DESCRIPTION": "Gain !M! Strength. NL Exhaust. NL NL That's all, honest!"
   },
   "TH:EnergyPotion": {
     "NAME": "Energy Potion",

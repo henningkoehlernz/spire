@@ -23,13 +23,13 @@ public class CopperCoins extends AbstractTreasure {
 
     public CopperCoins() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, CardTarget.NONE);
-        this.baseMagicNumber = this.magicNumber = 1;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        p.gainGold(this.magicNumber);
-        AbstractDungeon.effectList.add(new GainGoldTextEffect(this.magicNumber));
+        int gold = AbstractDungeon.miscRng.random(1,4);
+        p.gainGold(gold);
+        AbstractDungeon.effectList.add(new GainGoldTextEffect(gold));
     }
 
 }
