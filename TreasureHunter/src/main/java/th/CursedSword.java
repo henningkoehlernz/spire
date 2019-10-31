@@ -9,13 +9,10 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.powers.DexterityPower;
-import com.megacrit.cardcrawl.vfx.GainGoldTextEffect;
-
-import basemod.abstracts.CustomCard;
 
 import static th.TreasurePatch.TREASURE;
 
-public class CursedSword extends CustomCard {
+public class CursedSword extends AbstractTreasure {
     public static final String ID = "TH:CursedSword";
     private static CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     // Get object containing the strings that are displayed in the game.
@@ -25,10 +22,7 @@ public class CursedSword extends CustomCard {
     private static final int COST = 2;
 
     public CursedSword() {
-        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                TreasurePatch.TREASURE, AbstractCard.CardColor.COLORLESS,
-                AbstractCard.CardRarity.RARE, AbstractCard.CardTarget.NONE);
-        this.exhaust = true;
+        super(ID, NAME, IMG_PATH, COST, DESCRIPTION, CardTarget.NONE);
         this.baseMagicNumber = this.magicNumber = 2;
     }
 
@@ -36,10 +30,6 @@ public class CursedSword extends CustomCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new StrengthPower(p, this.magicNumber), this.magicNumber));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DexterityPower(p, -1), -1));
-    }
-
-    @Override
-    public void upgrade() {
     }
 
 }

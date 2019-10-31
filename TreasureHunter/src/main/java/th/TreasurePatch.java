@@ -99,9 +99,15 @@ public class TreasurePatch {
         reward.cards.clear();
         // pick cards
         int attempts = 0;
-        while ( reward.cards.size() < numCards && attempts++ < 100 ) {
+        while ( reward.cards.size() < numCards && attempts++ < 1000 ) {
             AbstractCard treasure = TreasureHunter.getRandomTreasure();
-            if ( !reward.cards.contains(treasure) )
+            boolean duplicate = false;
+            for ( AbstractCard c : reward.cards )
+                if ( c.getClass() == treasure.getClass() ) {
+                    duplicate = true;
+                    break;
+                }
+            if ( !duplicate )
                 reward.cards.add(treasure.makeCopy());
         }
         return reward;

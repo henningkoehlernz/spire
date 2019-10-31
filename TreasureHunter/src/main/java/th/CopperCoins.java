@@ -12,7 +12,7 @@ import basemod.abstracts.CustomCard;
 
 import static th.TreasurePatch.TREASURE;
 
-public class CopperCoins extends CustomCard {
+public class CopperCoins extends AbstractTreasure {
     public static final String ID = "TH:CopperCoins";
     private static CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     // Get object containing the strings that are displayed in the game.
@@ -22,10 +22,7 @@ public class CopperCoins extends CustomCard {
     private static final int COST = 2;
 
     public CopperCoins() {
-        super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                TreasurePatch.TREASURE, AbstractCard.CardColor.COLORLESS,
-                AbstractCard.CardRarity.RARE, AbstractCard.CardTarget.NONE);
-        this.exhaust = true;
+        super(ID, NAME, IMG_PATH, COST, DESCRIPTION, CardTarget.NONE);
         this.baseMagicNumber = this.magicNumber = 1;
     }
 
@@ -33,10 +30,6 @@ public class CopperCoins extends CustomCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         p.gainGold(this.magicNumber);
         AbstractDungeon.effectList.add(new GainGoldTextEffect(this.magicNumber));
-    }
-
-    @Override
-    public void upgrade() {
     }
 
 }
