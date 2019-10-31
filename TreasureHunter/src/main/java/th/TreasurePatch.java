@@ -51,6 +51,10 @@ public class TreasurePatch {
         return treasureCount;
     }
 
+    private static int getTreasureScore(int treasures) {
+        return treasures * treasures;
+    }
+
     @SpirePatch(
             clz = AbstractCard.class,
             method = "canUpgrade",
@@ -72,7 +76,7 @@ public class TreasurePatch {
     )
     public static class DeleteSave {
         public static void Prefix(AbstractPlayer p) {
-            TreasureHunter.addTreasure(AbstractDungeon.ascensionLevel, getTreasureCount());
+            TreasureHunter.addTreasure(AbstractDungeon.ascensionLevel, getTreasureScore(getTreasureCount()));
         }
     }
 
@@ -145,6 +149,12 @@ public class TreasurePatch {
         return CardCrawlGame.languagePack.getUIString("TH:Treasure").TEXT;
     }
 
+    private static GameOverStat getTreasureStat() {
+        int treasures = getTreasureCount();
+        int score = getTreasureScore(treasures);
+        return new GameOverStat(getTreasureText()[1] + " (" + treasures + ")", null, Integer.toString(score));
+    }
+
     // show number of treasures collected as part of score
     @SpirePatch(
             clz = DeathScreen.class,
@@ -153,7 +163,7 @@ public class TreasurePatch {
     )
     public static class Death_CreateGameOverStats {
         public static void Postfix(DeathScreen __instance) {
-            __instance.stats.add(new GameOverStat(getTreasureText()[1], null, Integer.toString(getTreasureCount())));
+            __instance.stats.add(getTreasureStat());
         }
     }
 
@@ -164,7 +174,7 @@ public class TreasurePatch {
     )
     public static class Victory_CreateGameOverStats {
         public static void Postfix(VictoryScreen __instance) {
-            __instance.stats.add(new GameOverStat(getTreasureText()[1], null, Integer.toString(getTreasureCount())));
+            __instance.stats.add(getTreasureStat());
         }
     }
 
