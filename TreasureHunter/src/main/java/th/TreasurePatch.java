@@ -72,7 +72,7 @@ public class TreasurePatch {
     )
     public static class DeleteSave {
         public static void Prefix(AbstractPlayer p) {
-            TreasureHunter.addTreasure(getTreasureCount());
+            TreasureHunter.addTreasure(AbstractDungeon.ascensionLevel, getTreasureCount());
         }
     }
 
@@ -84,8 +84,9 @@ public class TreasurePatch {
     )
     public static class NeowRewardActivate {
         public static void Postfix(NeowReward __instance) {
-            AbstractDungeon.player.gainGold(TreasureHunter.treasure);
-            AbstractDungeon.effectList.add(new GainGoldTextEffect(TreasureHunter.treasure));
+            int bonusGold = TreasureHunter.getTreasureTotal(AbstractDungeon.ascensionLevel);
+            AbstractDungeon.player.gainGold(bonusGold);
+            AbstractDungeon.effectList.add(new GainGoldTextEffect(bonusGold));
         }
     }
 
