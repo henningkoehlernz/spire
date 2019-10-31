@@ -155,7 +155,7 @@ public class TreasurePatch {
     private static GameOverStat getTreasureStat() {
         int treasures = getTreasureCount();
         int score = getTreasureScore(treasures);
-        return new GameOverStat(getTreasureText()[1] + " (" + treasures + ")", null, Integer.toString(score));
+        return new GameOverStat(getTreasureText()[1] + " (" + treasures + ")", null, "+" + score + " gold");
     }
 
     // show number of treasures collected as part of score
@@ -166,7 +166,7 @@ public class TreasurePatch {
     )
     public static class Death_CreateGameOverStats {
         public static void Postfix(DeathScreen __instance) {
-            __instance.stats.add(getTreasureStat());
+            __instance.stats.add(__instance.stats.size() - 2, getTreasureStat());
         }
     }
 
@@ -177,7 +177,7 @@ public class TreasurePatch {
     )
     public static class Victory_CreateGameOverStats {
         public static void Postfix(VictoryScreen __instance) {
-            __instance.stats.add(getTreasureStat());
+            __instance.stats.add(__instance.stats.size() - 2, getTreasureStat());
         }
     }
 
