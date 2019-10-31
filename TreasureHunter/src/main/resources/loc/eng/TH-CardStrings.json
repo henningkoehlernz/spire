@@ -14,5 +14,9 @@
   "TH:EnergyPotion": {
     "NAME": "Energy Potion",
     "DESCRIPTION": "Gain [E]. NL Exhaust."
+  },
+  "TH:TreasureMap": {
+    "NAME": "Treasure Map",
+    "DESCRIPTION": "Add a random rare card to your hand. NL Exhaust."
   }
 }
