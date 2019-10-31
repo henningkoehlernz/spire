@@ -136,7 +136,10 @@ public class TreasurePatch {
             paramtypez = {}
     )
     public static class SetupItemReward {
-        public static void Postfix(CombatRewardScreen __instance) {
+        @SpireInsertPatch(
+                rloc=3
+        )
+        public static void Insert(CombatRewardScreen __instance) {
             AbstractRoom room = AbstractDungeon.getCurrRoom();
             if ( room instanceof MonsterRoomBoss || room instanceof MonsterRoomElite )
                 __instance.rewards.add(getTreasureReward());
