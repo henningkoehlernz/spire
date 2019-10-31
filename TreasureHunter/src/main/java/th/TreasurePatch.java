@@ -7,7 +7,9 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.neow.NeowReward;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
@@ -17,6 +19,7 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 import com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue;
+import com.megacrit.cardcrawl.screens.charSelect.CharacterOption;
 import com.megacrit.cardcrawl.screens.CombatRewardScreen;
 import com.megacrit.cardcrawl.screens.DeathScreen;
 import com.megacrit.cardcrawl.screens.GameOverStat;
@@ -197,6 +200,31 @@ public class TreasurePatch {
         }
     }
 
+    // show bonus gold in character select screen
+    @SpirePatch(
+            clz = CharacterOption.class,
+            method = "renderInfo",
+            paramtypez = {SpriteBatch.class}
+    )
+    public static class RenderInfo {
+        @SpireInsertPatch(
+                rloc = 1
+        )
+        public static void Insert(CharacterOption __instance, SpriteBatch sb) {
+            int ascension = CardCrawlGame.mainMenuScreen.charSelectScreen.isAscensionMode ?
+                    CardCrawlGame.mainMenuScreen.charSelectScreen.ascensionLevel : 0;
+            int bonusGold = TreasureHunter.getTreasureTotal(ascension);
+            // access private variables
+            float infoX = (Float) Reflection.get(__instance, null,"infoX");
+            float infoY = (Float) Reflection.get(__instance, null, "infoY");
+            int gold = (Integer) Reflection.get(__instance, null, "gold");
+            // paint over original rendering
+            String goldText = CharacterOption.TEXT[5] + gold + "+" + bonusGold;
+            FontHelper.renderSmartText(sb, FontHelper.tipHeaderFont, goldText,
+                    infoX + 220.0F * Settings.scale, infoY + 102.0F * Settings.scale, 10000.0F, 10000.0F, Settings.GOLD_COLOR);
+        }
+    }
+
     //----------------------- card rendering fixes ------------------
 
     @SpirePatch(
@@ -212,25 +240,6 @@ public class TreasurePatch {
         }
     }
 
-    // gain access to private methods
-    private static void invoke(AbstractCard obj, String methodName, Object... args) {
-        Class<?>[] classArray = new Class<?>[args.length];
-        for (int i = 0; i < args.length; i++) {
-            Class c = args[i].getClass();
-            // we'll make a guess here that the method uses int/float rather than Integer/Float
-            classArray[i] =
-                    (c == Integer.class) ? int.class :
-                    (c == Float.class) ? float.class : c;
-        }
-        try {
-            Method m = AbstractCard.class.getDeclaredMethod(methodName, classArray);
-            m.setAccessible(true);
-            m.invoke(obj, args);
-        } catch (Exception e) {
-            logger.error(e);
-        }
-    }
-
     @SpirePatch(
             clz = AbstractCard.class,
             method = "renderCardBg",
@@ -239,7 +248,7 @@ public class TreasurePatch {
     public static class RenderCardBg {
         public static void Prefix(AbstractCard __instance, SpriteBatch sb, float x, float y) {
             if ( __instance.type == TREASURE )
-                invoke(__instance, "renderSkillBg", sb, x, y);
+                Reflection.invoke(__instance, AbstractCard.class, "renderSkillBg", sb, x, y);
         }
     }
 
@@ -256,7 +265,7 @@ public class TreasurePatch {
         public static void Insert(AbstractCard __instance, SpriteBatch sb, float x, float y,
                                   @ByRef float[] tWidth, @ByRef float[] tOffset) {
             if ( __instance.type == TREASURE ) {
-                invoke(__instance,"renderSkillPortrait", sb, x, y);
+                Reflection.invoke(__instance, AbstractCard.class, "renderSkillPortrait", sb, x, y);
                 tWidth[0] = AbstractCard.typeWidthSkill;
                 tOffset[0] = AbstractCard.typeOffsetSkill;
             }
@@ -290,17 +299,10 @@ public class TreasurePatch {
                 localvars={"label"}
         )
         public static void Insert(SingleCardViewPopup __instance, SpriteBatch sb, @ByRef(type="String") Object[] label) {
-            try {
-                // access __instance.card via reflection
-                Field cardField = SingleCardViewPopup.class.getDeclaredField("card");
-                cardField.setAccessible(true);
-                AbstractCard card = (AbstractCard) cardField.get(__instance);
-                // now the actual code
-                if (card.type == TREASURE)
-                    label[0] = getTreasureText()[0];
-            } catch (Exception e) {
-                logger.error(e);
-            }
+            AbstractCard card = (AbstractCard) Reflection.get(__instance, null, "card");
+            // now the actual code
+            if ( card.type == TREASURE )
+                label[0] = getTreasureText()[0];
         }
     }
 
