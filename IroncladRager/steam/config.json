@@ -1,0 +1,15 @@
+{
+  "steamPublishedID": "1822473361",
+  "title": "Ironclad Rager",
+  "description": "[h1]Adds subclasses with alternative starting decks.[/h1]
+
+Stronger subclasses have 50% chance to appear as major blessings (reach first boss on previous run), and trigger all standard drawbacks.
+
+[b]Adds subclasses for Silent and Defect[/b] as well, and all subclasses unlock additional cards.",
+  "visibility": "public",
+  "changeNote": "",
+  "tags": [
+    "Cards",
+    "Neow"
+  ]
+}
