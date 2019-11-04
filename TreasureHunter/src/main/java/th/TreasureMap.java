@@ -16,7 +16,7 @@ public class TreasureMap extends AbstractTreasure {
     // Get object containing the strings that are displayed in the game.
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    public static final String IMG_PATH = "img/map.png";
+    public static final String IMG_PATH = TreasureHunter.IMG_PATH + "map.png";
     private static final int COST = 2;
 
     public TreasureMap() {

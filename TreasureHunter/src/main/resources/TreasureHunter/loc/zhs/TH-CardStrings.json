@@ -1,0 +1,22 @@
+{
+  "TH:CopperCoins": {
+    "NAME": "Copper Coins",
+    "DESCRIPTION": "Gain 1d4 gold. NL Exhaust."
+  },
+  "TH:BikiniMail": {
+    "NAME": "Bikini Mail",
+    "DESCRIPTION": "At the end of your turn, gain !M! block. NL Exhaust."
+  },
+  "TH:CursedSword": {
+    "NAME": "Cursed Sword",
+    "DESCRIPTION": "Gain !M! Strength. NL Exhaust. NL NL That's all, honest!"
+  },
+  "TH:EnergyPotion": {
+    "NAME": "Energy Potion",
+    "DESCRIPTION": "Gain [E]. NL Exhaust."
+  },
+  "TH:TreasureMap": {
+    "NAME": "Treasure Map",
+    "DESCRIPTION": "Add a random rare card to your hand. NL Exhaust."
+  }
+}

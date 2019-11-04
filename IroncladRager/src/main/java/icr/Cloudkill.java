@@ -19,7 +19,7 @@ public class Cloudkill extends CustomCard {
     // Get object containing the strings that are displayed in the game.
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    public static final String IMG_PATH = "img/cloudkill.png";
+    public static final String IMG_PATH = IroncladRager.IMG_PATH + "cloudkill.png";
     private static final int COST = 1;
     private static final int POISON = 4;
 

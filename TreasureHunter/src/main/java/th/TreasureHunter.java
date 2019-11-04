@@ -25,12 +25,13 @@ import java.util.Arrays;
 import java.nio.charset.StandardCharsets;
 
 @SpireInitializer
-public class TreasureHunter implements EditCardsSubscriber, EditStringsSubscriber, EditKeywordsSubscriber {
+public class TreasureHunter implements EditCardsSubscriber, EditStringsSubscriber, EditKeywordsSubscriber, PostInitializeSubscriber {
 
     private static final Logger logger = LogManager.getLogger(TreasureHunter.class.getName());
 
     // mod config variables
-    private static final String MODNAME = "TreasureHunter";
+    public static final String MODNAME = "TreasureHunter";
+    public static final String IMG_PATH = MODNAME + "/img/";
     private static final String CONFIG_TREASURE = "treasure";
     private static Properties defaultConfig = new Properties();
     private static int[] treasure = {};
@@ -94,13 +95,13 @@ public class TreasureHunter implements EditCardsSubscriber, EditStringsSubscribe
 
     private static String languagePath() {
         if ( Settings.language == Settings.GameLanguage.ZHS )
-            return "zhs";
-        return "eng";
+            return MODNAME + "/loc/zhs/";
+        return MODNAME + "/loc/eng/";
     }
 
     @Override
     public void receiveEditStrings() {
-        String basePath = "loc/" + languagePath() + "/";
+        String basePath = languagePath();
         BaseMod.loadCustomStringsFile(CardStrings.class, basePath + "TH-CardStrings.json");
         BaseMod.loadCustomStringsFile(UIStrings.class, basePath + "TH-UIStrings.json");
     }
@@ -108,7 +109,7 @@ public class TreasureHunter implements EditCardsSubscriber, EditStringsSubscribe
     @Override
     public void receiveEditKeywords() {
         // read keywords from json
-        String keywordPath = "loc/" + languagePath() + "/TH-Keywords.json";
+        String keywordPath = languagePath() + "TH-Keywords.json";
         String jsonString = Gdx.files.internal(keywordPath).readString(String.valueOf(StandardCharsets.UTF_8));
         Keyword[] keywords = (Keyword[])(new Gson()).fromJson(jsonString, Keyword[].class);
         // register with the game
@@ -116,4 +117,10 @@ public class TreasureHunter implements EditCardsSubscriber, EditStringsSubscribe
             BaseMod.addKeyword(k.NAMES, k.DESCRIPTION);
     }
 
+    @Override
+    public void receivePostInitialize() {
+        Texture badgeTexture = new Texture(MODNAME + "/badge.png");
+        BaseMod.registerModBadge(badgeTexture, "Treasure Hunter", "Henning Koehler",
+                "Enables treasure mechanic for persistent improvements.", null);
+    }
 }

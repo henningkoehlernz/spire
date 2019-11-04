@@ -18,7 +18,7 @@ public class AutoDefend extends CustomCard {
     // Get object containing the strings that are displayed in the game.
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    public static final String IMG_PATH = "img/auto_defend.png";
+    public static final String IMG_PATH = IroncladRager.IMG_PATH + "auto_defend.png";
     private static final int COST = 1;
     private static final int BLOCK = 4;
     private static final int BLOCK_PER_ORB = 1;

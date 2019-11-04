@@ -23,7 +23,7 @@ public class Paralyse extends CustomCard {
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
-    public static final String IMG_PATH = "img/paralyse.png";
+    public static final String IMG_PATH = IroncladRager.IMG_PATH + "paralyse.png";
     private static final int COST = 1;
 
     public Paralyse() {

@@ -25,7 +25,8 @@ import java.nio.charset.StandardCharsets;
 public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber, EditKeywordsSubscriber, PostInitializeSubscriber {
 
     // mod config variables
-    private static final String MODNAME = "ICR";
+    public static final String MODNAME = "IroncladRager";
+    public static final String IMG_PATH = MODNAME + "/img/";
     private static final String CONFIG_GUARANTEE_SUBCLASS = "guaranteeSubclass";
     private static Properties defaultConfig = new Properties();
     public static boolean guaranteeSubclass = false;
@@ -88,13 +89,13 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
 
     private static String languagePath() {
         if ( Settings.language == Settings.GameLanguage.ZHS )
-            return "zhs";
-        return "eng";
+            return MODNAME + "/loc/zhs/";
+        return MODNAME + "/loc/eng/";
     }
 
     @Override
     public void receiveEditStrings() {
-        String basePath = "loc/" + languagePath() + "/";
+        String basePath = languagePath();
         BaseMod.loadCustomStringsFile(CardStrings.class, basePath + "ICR-CardStrings.json");
         BaseMod.loadCustomStringsFile(PowerStrings.class, basePath + "ICR-PowerStrings.json");
         BaseMod.loadCustomStringsFile(CharacterStrings.class, basePath + "ICR-CharacterStrings.json");
@@ -103,7 +104,7 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
     @Override
     public void receiveEditKeywords() {
         // read keywords from json
-        String keywordPath = "loc/" + languagePath() + "/ICR-Keywords.json";
+        String keywordPath = languagePath() + "ICR-Keywords.json";
         String jsonString = Gdx.files.internal(keywordPath).readString(String.valueOf(StandardCharsets.UTF_8));
         Keyword[] keywords = (Keyword[])(new Gson()).fromJson(jsonString, Keyword[].class);
         // register with the game
@@ -113,7 +114,7 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
 
     @Override
     public void receivePostInitialize() {
-        Texture badgeTexture = new Texture("badge.png");
+        Texture badgeTexture = new Texture(MODNAME + "/badge.png");
         ModPanel configPanel = new ModPanel();
         ModLabeledToggleButton guaranteeSubclassButton = new ModLabeledToggleButton(
                 "Guarantee advanced subclass blessing.", 350.0f, 700.0f, Settings.CREAM_COLOR, FontHelper.charDescFont,
@@ -128,7 +129,7 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
                     }
                 });
         configPanel.addUIElement(guaranteeSubclassButton);
-        BaseMod.registerModBadge(badgeTexture, "Ironclad Rager", "Henning Koehler",
+        BaseMod.registerModBadge(badgeTexture, "IroncladRager", "Henning Koehler",
                 "Adds subclasses with alternative starting decks.", configPanel);
     }
 

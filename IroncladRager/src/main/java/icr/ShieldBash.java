@@ -19,7 +19,7 @@ public class ShieldBash extends CustomCard {
     // Get object containing the strings that are displayed in the game.
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    public static final String IMG_PATH = "img/shield_bash.png";
+    public static final String IMG_PATH = IroncladRager.IMG_PATH + "shield_bash.png";
     private static final int COST = 1;
     private static final int ATTACK_DMG = 2;
     private static final int ATTACK_BLOCK = 4;
