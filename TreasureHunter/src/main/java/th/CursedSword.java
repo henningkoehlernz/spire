@@ -25,14 +25,14 @@ public class CursedSword extends AbstractTreasure {
 
     public CursedSword() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, CardTarget.NONE);
-        this.baseMagicNumber = this.magicNumber = 2;
+        this.baseMagicNumber = this.magicNumber = 1;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new StrengthPower(p, this.magicNumber), this.magicNumber));
         AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction(new Clumsy(), 1, true, false, false));
-        AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDiscardAction(new Clumsy(), 1));
+        //AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDiscardAction(new Clumsy(), 1));
     }
 
 }
