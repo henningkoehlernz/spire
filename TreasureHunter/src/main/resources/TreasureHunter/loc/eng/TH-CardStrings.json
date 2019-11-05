@@ -13,7 +13,7 @@
   },
   "TH:EnergyPotion": {
     "NAME": "Energy Potion",
-    "DESCRIPTION": "Gain [E]. NL Exhaust."
+    "DESCRIPTION": "Gain [E] and !M! poison. NL Exhaust."
   },
   "TH:TreasureMap": {
     "NAME": "Treasure Map",

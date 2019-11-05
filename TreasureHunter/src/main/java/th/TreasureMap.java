@@ -18,7 +18,7 @@ public class TreasureMap extends AbstractTreasure {
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = TreasureHunter.IMG_PATH + "map.png";
-    private static final int COST = 3;
+    private static final int COST = 2;
 
     public TreasureMap() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, CardTarget.NONE);
