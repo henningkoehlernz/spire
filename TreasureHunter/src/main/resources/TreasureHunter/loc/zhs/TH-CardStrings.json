@@ -34,5 +34,9 @@
   "TH:PixieDust": {
     "NAME": "Pixie Dust",
     "DESCRIPTION": "Discard a card. NL Exhaust."
+  },
+  "TH:ElvenBoots": {
+    "NAME": "Elven Boots",
+    "DESCRIPTION": "Gain !M! Dexterity. NL Gain !B! Block. NL Exhaust."
   }
 }
