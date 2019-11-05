@@ -17,6 +17,10 @@
   },
   "TH:TreasureMap": {
     "NAME": "Treasure Map",
+    "DESCRIPTION": "Gain 1 Artifact. NL Exhaust."
+  },
+  "TH:DeckOfManyThings": {
+    "NAME": "Deck of Many Things",
     "DESCRIPTION": "Add a random rare card to your hand. NL Exhaust."
   }
 }
