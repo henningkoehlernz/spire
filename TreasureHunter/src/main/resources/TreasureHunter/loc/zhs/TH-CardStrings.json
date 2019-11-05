@@ -26,5 +26,9 @@
   "TH:ArmorSpikes": {
     "NAME": "Armor Spikes",
     "DESCRIPTION": "Gain !M! Thorns. NL Exhaust."
+  },
+  "TH:Mimic": {
+    "NAME": "Treasure Chest",
+    "DESCRIPTION": "Take !D! damage. NL Draw !M! cards. NL Exhaust."
   }
 }
