@@ -86,6 +86,7 @@ public class TreasureHunter implements EditCardsSubscriber, EditStringsSubscribe
         treasures.add(new EnergyPotion());
         treasures.add(new TreasureMap());
         treasures.add(new DeckOfManyThings());
+        treasures.add(new ArmorSpikes());
         for ( AbstractCard card : treasures )
             BaseMod.addCard(card);
     }

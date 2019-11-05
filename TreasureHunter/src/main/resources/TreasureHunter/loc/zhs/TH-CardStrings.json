@@ -22,5 +22,9 @@
   "TH:DeckOfManyThings": {
     "NAME": "Deck of Many Things",
     "DESCRIPTION": "Add a random rare card to your hand. NL Exhaust."
+  },
+  "TH:ArmorSpikes": {
+    "NAME": "Armor Spikes",
+    "DESCRIPTION": "Gain !M! Thorns. NL Exhaust."
   }
 }
