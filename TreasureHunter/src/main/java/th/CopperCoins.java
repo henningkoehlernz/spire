@@ -19,17 +19,17 @@ public class CopperCoins extends AbstractTreasure {
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String IMG_PATH = TreasureHunter.IMG_PATH + "treasure.png";
-    private static final int COST = 2;
+    private static final int COST = 1;
 
     public CopperCoins() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, CardTarget.NONE);
+        this.baseMagicNumber = this.magicNumber = 1;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        int gold = AbstractDungeon.miscRng.random(1,4);
-        p.gainGold(gold);
-        AbstractDungeon.effectList.add(new GainGoldTextEffect(gold));
+        p.gainGold(this.magicNumber);
+        AbstractDungeon.effectList.add(new GainGoldTextEffect(this.magicNumber));
     }
 
 }

@@ -1,7 +1,7 @@
 {
   "TH:CopperCoins": {
     "NAME": "Copper Coins",
-    "DESCRIPTION": "Gain 1d4 gold. NL Exhaust."
+    "DESCRIPTION": "Gain !M! gold. NL Exhaust."
   },
   "TH:BikiniMail": {
     "NAME": "Bikini Mail",
@@ -29,7 +29,7 @@
   },
   "TH:Mimic": {
     "NAME": "Treasure Chest",
-    "DESCRIPTION": "Take !D! damage. NL Draw !M! cards. NL Exhaust."
+    "DESCRIPTION": "Lose !M! HP. NL Draw a card. NL Exhaust."
   },
   "TH:PixieDust": {
     "NAME": "Pixie Dust",
@@ -37,6 +37,6 @@
   },
   "TH:ElvenBoots": {
     "NAME": "Elven Boots",
-    "DESCRIPTION": "Gain !M! Dexterity. NL Gain !B! Block. NL Exhaust."
+    "DESCRIPTION": "Gain !M! Dexterity. NL Exhaust. NL NL One size too small."
   }
 }
