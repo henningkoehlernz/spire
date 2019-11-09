@@ -1,0 +1,9 @@
+{
+  "TH:Strongbox": {
+    "NAME": "Strongbox",
+    "FLAVOR": "Keeps your treasures safe and sound.",
+    "DESCRIPTIONS": [
+      "Gain [E] whenever you play a treasure."
+    ]
+  }
+}

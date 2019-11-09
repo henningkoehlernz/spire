@@ -8,12 +8,13 @@ import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.Keyword;
+import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
 
 import basemod.BaseMod;
+import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 
 import org.apache.logging.log4j.LogManager;
@@ -25,7 +26,12 @@ import java.util.Arrays;
 import java.nio.charset.StandardCharsets;
 
 @SpireInitializer
-public class TreasureHunter implements EditCardsSubscriber, EditStringsSubscriber, EditKeywordsSubscriber, PostInitializeSubscriber {
+public class TreasureHunter implements
+        EditCardsSubscriber,
+        EditKeywordsSubscriber,
+        EditRelicsSubscriber,
+        EditStringsSubscriber,
+        PostInitializeSubscriber {
 
     private static final Logger logger = LogManager.getLogger(TreasureHunter.class.getName());
 
@@ -94,6 +100,11 @@ public class TreasureHunter implements EditCardsSubscriber, EditStringsSubscribe
             BaseMod.addCard(card);
     }
 
+    @Override
+    public void receiveEditRelics() {
+        BaseMod.addRelic(new Strongbox(), RelicType.SHARED);
+    }
+
     static AbstractCard getRandomTreasure() {
         return treasures.get(AbstractDungeon.cardRng.random(treasures.size() - 1));
     }
@@ -108,6 +119,7 @@ public class TreasureHunter implements EditCardsSubscriber, EditStringsSubscribe
     public void receiveEditStrings() {
         String basePath = languagePath();
         BaseMod.loadCustomStringsFile(CardStrings.class, basePath + "TH-CardStrings.json");
+        BaseMod.loadCustomStringsFile(RelicStrings.class, basePath + "TH-RelicStrings.json");
         BaseMod.loadCustomStringsFile(UIStrings.class, basePath + "TH-UIStrings.json");
     }
 
