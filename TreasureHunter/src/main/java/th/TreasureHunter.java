@@ -103,9 +103,10 @@ public class TreasureHunter implements
     @Override
     public void receiveEditRelics() {
         BaseMod.addRelic(new Strongbox(), RelicType.SHARED);
+        BaseMod.addRelic(new HealthInsurance(), RelicType.SHARED);
     }
 
-    static AbstractCard getRandomTreasure() {
+    public static AbstractCard getRandomTreasure() {
         return treasures.get(AbstractDungeon.cardRng.random(treasures.size() - 1));
     }
 

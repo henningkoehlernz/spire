@@ -5,5 +5,12 @@
     "DESCRIPTIONS": [
       "Gain [E] whenever you play a treasure."
     ]
+  },
+  "TH:HealthInsurance": {
+    "NAME": "Health Insurance",
+    "FLAVOR": "We care for your coin.",
+    "DESCRIPTIONS": [
+      "When you start your turn bloodied, heal 1 HP and lose 1 gold per treasure."
+    ]
   }
 }

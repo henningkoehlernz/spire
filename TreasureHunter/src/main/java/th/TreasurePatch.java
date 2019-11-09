@@ -45,7 +45,7 @@ public class TreasurePatch {
 
     //----------------------- mechanics -----------------------------
 
-    private static int getTreasureCount() {
+    public static int getTreasureCount() {
         int treasureCount = 0;
         for ( AbstractCard card : AbstractDungeon.player.masterDeck.group ) {
             if ( card.type == TREASURE )
