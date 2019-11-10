@@ -12,5 +12,12 @@
     "DESCRIPTIONS": [
       "When you start your turn bloodied, heal 1 HP and lose 1 gold per treasure."
     ]
+  },
+  "TH:Anvil": {
+    "NAME": "Anvil",
+    "FLAVOR": "Makes your precious things even more precious.",
+    "DESCRIPTIONS": [
+      "Whenever you add a treasure card to your deck, it is upgraded."
+    ]
   }
 }

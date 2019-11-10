@@ -32,4 +32,12 @@ public class CopperCoins extends AbstractTreasure {
         AbstractDungeon.effectList.add(new GainGoldTextEffect(this.magicNumber));
     }
 
+    @Override
+    public void upgrade() {
+        if ( !this.upgraded ) {
+            this.upgradeName();
+            this.upgradeMagicNumber(1);
+        }
+    }
+
 }

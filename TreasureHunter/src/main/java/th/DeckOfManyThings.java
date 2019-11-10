@@ -16,6 +16,7 @@ public class DeckOfManyThings extends AbstractTreasure {
     // Get object containing the strings that are displayed in the game.
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
+    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = TreasureHunter.IMG_PATH + "deck.png";
     private static final int COST = 1;
 
@@ -30,7 +31,20 @@ public class DeckOfManyThings extends AbstractTreasure {
             card = TreasureHunter.getRandomTreasure();
         else
             card = AbstractDungeon.rareCardPool.getRandomCard(true);
+        if ( upgraded ) {
+            card = card.makeStatEquivalentCopy();
+            card.upgrade();
+        }
         AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(card));
+    }
+
+    @Override
+    public void upgrade() {
+        if ( !this.upgraded ) {
+            this.upgradeName();
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            initializeDescription();
+        }
     }
 
 }

@@ -58,6 +58,7 @@ public class TreasurePatch {
         return treasures * treasures;
     }
 
+    /*
     @SpirePatch(
             clz = AbstractCard.class,
             method = "canUpgrade",
@@ -70,6 +71,7 @@ public class TreasurePatch {
             return __result;
         }
     }
+    */
 
     // update total treasures collected
     @SpirePatch(

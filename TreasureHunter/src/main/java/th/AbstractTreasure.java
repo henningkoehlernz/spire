@@ -10,8 +10,4 @@ public abstract class AbstractTreasure extends CustomCard {
         this.exhaust = true;
     }
 
-    @Override
-    public void upgrade() {
-    }
-
 }

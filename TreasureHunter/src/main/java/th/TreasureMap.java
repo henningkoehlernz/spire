@@ -29,4 +29,12 @@ public class TreasureMap extends AbstractTreasure {
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new ArtifactPower(p, 1), 1));
     }
 
+    @Override
+    public void upgrade() {
+        if ( !this.upgraded ) {
+            this.upgradeName();
+            this.upgradeBaseCost(1);
+        }
+    }
+
 }

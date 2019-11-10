@@ -32,4 +32,12 @@ public class EnergyPotion extends AbstractTreasure {
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new PoisonPower(p, p, this.magicNumber), this.magicNumber));
     }
 
+    @Override
+    public void upgrade() {
+        if ( !this.upgraded ) {
+            this.upgradeName();
+            this.upgradeMagicNumber(-2);
+        }
+    }
+
 }

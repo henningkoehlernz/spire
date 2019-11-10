@@ -1,10 +1,7 @@
 package th;
 
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.LoseHPAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -19,6 +16,7 @@ public class Mimic extends AbstractTreasure {
     // Get object containing the strings that are displayed in the game.
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
+    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = TreasureHunter.IMG_PATH + "mimic.png";
     private static final int COST = 1;
 
@@ -30,7 +28,17 @@ public class Mimic extends AbstractTreasure {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         AbstractDungeon.actionManager.addToTop(new LoseHPAction(p, p, this.magicNumber));
-        AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, 1));
+        AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, this.magicNumber));
+    }
+
+    @Override
+    public void upgrade() {
+        if ( !this.upgraded ) {
+            this.upgradeName();
+            this.upgradeMagicNumber(1);
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            initializeDescription();
+        }
     }
 
 }

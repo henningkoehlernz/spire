@@ -35,4 +35,12 @@ public class CursedSword extends AbstractTreasure {
         AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDiscardAction(new Clumsy(), 2));
     }
 
+    @Override
+    public void upgrade() {
+        if ( !this.upgraded ) {
+            this.upgradeName();
+            this.upgradeMagicNumber(1);
+        }
+    }
+
 }

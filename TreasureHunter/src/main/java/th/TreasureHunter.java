@@ -104,6 +104,7 @@ public class TreasureHunter implements
     public void receiveEditRelics() {
         BaseMod.addRelic(new Strongbox(), RelicType.SHARED);
         BaseMod.addRelic(new HealthInsurance(), RelicType.SHARED);
+        BaseMod.addRelic(new Anvil(), RelicType.SHARED);
     }
 
     public static AbstractCard getRandomTreasure() {
