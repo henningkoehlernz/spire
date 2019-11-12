@@ -36,7 +36,7 @@ public class CopperCoins extends AbstractTreasure {
     public void upgrade() {
         if ( !this.upgraded ) {
             this.upgradeName();
-            this.upgradeMagicNumber(1);
+            this.upgradeMagicNumber(4);
         }
     }
 

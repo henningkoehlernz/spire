@@ -104,6 +104,9 @@ public class TreasurePatch {
         for ( AbstractRelic r : AbstractDungeon.player.relics ) {
             numCards = r.changeNumberOfCardsInReward(numCards);
         }
+        // ensure busted crown doesn't reduce to zero
+        if ( numCards < 1 )
+            numCards = 1;
         RewardItem reward = new RewardItem();
         reward.cards.clear();
         // pick cards
