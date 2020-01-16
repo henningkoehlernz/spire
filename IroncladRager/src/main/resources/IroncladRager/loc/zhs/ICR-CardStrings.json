@@ -23,6 +23,10 @@
     "NAME": "自动防御",
     "DESCRIPTION": "获得 !B! 点 格挡 。 NL 你每有一个充能球，提高 !M! 点。"
   },
+  "ICR:DragonStrike": {
+    "NAME": "Dragon Strike",
+    "DESCRIPTION": "Deal !D! Damage. NL Increases by !M! in Wrath or Divinity."
+  },
 
   "ICR:Frenzy": {
     "NAME": "狂乱",

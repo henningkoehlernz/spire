@@ -23,6 +23,10 @@
     "NAME": "Auto Defend",
     "DESCRIPTION": "Gain !B! Block. NL Increases by !M! per channeled orb."
   },
+  "ICR:DragonStrike": {
+    "NAME": "Dragon Strike",
+    "DESCRIPTION": "Deal !D! Damage. NL Increases by !M! in Wrath or Divinity."
+  },
 
   "ICR:Frenzy": {
     "NAME": "Frenzy",

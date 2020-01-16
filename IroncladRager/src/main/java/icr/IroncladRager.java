@@ -79,6 +79,7 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
         BaseMod.addCard(new Dodge());
         BaseMod.addCard(new ProbingStrike());
         BaseMod.addCard(new AutoDefend());
+        BaseMod.addCard(new DragonStrike());
 
         addRedCard(new Frenzy());
         addRedCard(new PowerAttack());

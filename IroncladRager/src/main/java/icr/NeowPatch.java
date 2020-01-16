@@ -190,7 +190,7 @@ public class NeowPatch {
                         giveCard(new AutoDefend());
                     } else if ( e instanceof com.megacrit.cardcrawl.cards.purple.Strike_Purple ) {
                         it.remove();
-                        giveCard(new VenomStrike());
+                        giveCard(new DragonStrike());
                     } else if ( e instanceof com.megacrit.cardcrawl.cards.purple.Defend_Watcher ) {
                         it.remove();
                         giveCard(new Dodge());
