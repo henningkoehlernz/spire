@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.characters.Ironclad;
 import com.megacrit.cardcrawl.characters.TheSilent;
 import com.megacrit.cardcrawl.characters.Defect;
+import com.megacrit.cardcrawl.characters.Watcher;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.neow.NeowEvent;
 import com.megacrit.cardcrawl.neow.NeowReward;
@@ -34,6 +35,9 @@ public class NeowPatch {
     public static NeowReward.NeowRewardType SILENT_POISONER;
     @SpireEnum
     public static NeowReward.NeowRewardType DEFECT_WARDEN;
+    @SpireEnum
+    public static NeowReward.NeowRewardType WATCHER_MONK;
+
 
     @SpireEnum
     public static NeowReward.NeowRewardType IRONCLAD_BERSERKER;
@@ -41,6 +45,8 @@ public class NeowPatch {
     public static NeowReward.NeowRewardType SILENT_ASSASSIN;
     @SpireEnum
     public static NeowReward.NeowRewardType DEFECT_STORMLORD;
+    @SpireEnum
+    public static NeowReward.NeowRewardType WATCHER_SHAOLIN;
 
     @SpirePatch(
             clz = NeowEvent.class,
@@ -63,6 +69,10 @@ public class NeowPatch {
                 case DEFECT:
                     newReward.type = DEFECT_WARDEN;
                     newReward.optionLabel = CardCrawlGame.languagePack.getCharacterString("ICR:Defect").TEXT[0];
+                    break;
+                case WATCHER:
+                    newReward.type = WATCHER_MONK;
+                    newReward.optionLabel = CardCrawlGame.languagePack.getCharacterString("ICR:Watcher").TEXT[0];
                     break;
                 default:
                     return;
@@ -100,6 +110,9 @@ public class NeowPatch {
                         break;
                     case DEFECT:
                         newReward = new NeowReward.NeowRewardDef(DEFECT_STORMLORD, CardCrawlGame.languagePack.getCharacterString("ICR:Defect").TEXT[1]);
+                        break;
+                    case WATCHER:
+                        newReward = new NeowReward.NeowRewardDef(WATCHER_SHAOLIN, CardCrawlGame.languagePack.getCharacterString("ICR:Watcher").TEXT[1]);
                         break;
                     default:
                         return __result;
@@ -152,7 +165,8 @@ public class NeowPatch {
             // replace old strikes & defends
             if ( __instance.type == IRONCLAD_RAGER
                 || __instance.type == SILENT_POISONER
-                || __instance.type == DEFECT_WARDEN ) {
+                || __instance.type == DEFECT_WARDEN
+                || __instance.type == WATCHER_MONK ) {
                 Iterator<AbstractCard> it = AbstractDungeon.player.masterDeck.group.iterator();
                 while (it.hasNext()) {
                     AbstractCard e = it.next();
@@ -174,6 +188,12 @@ public class NeowPatch {
                     } else if ( e instanceof com.megacrit.cardcrawl.cards.blue.Defend_Blue ) {
                         it.remove();
                         giveCard(new AutoDefend());
+                    } else if ( e instanceof com.megacrit.cardcrawl.cards.purple.Strike_Purple ) {
+                        it.remove();
+                        giveCard(new VenomStrike());
+                    } else if ( e instanceof com.megacrit.cardcrawl.cards.purple.Defend_Watcher ) {
+                        it.remove();
+                        giveCard(new Dodge());
                     }
                 }
                 logger.debug("replaced basic strike & defend cards");
@@ -181,7 +201,8 @@ public class NeowPatch {
             // dito for "advanced" classes
             if ( __instance.type == IRONCLAD_BERSERKER
                     || __instance.type == SILENT_ASSASSIN
-                    || __instance.type == DEFECT_STORMLORD ) {
+                    || __instance.type == DEFECT_STORMLORD
+                    || __instance.type == WATCHER_SHAOLIN ) {
                 Iterator<AbstractCard> it = AbstractDungeon.player.masterDeck.group.iterator();
                 boolean frost = false; // alternate Cold Snap & Ball Lightning for Stormlord
                 while (it.hasNext()) {
@@ -208,6 +229,12 @@ public class NeowPatch {
                     } else if ( e instanceof com.megacrit.cardcrawl.cards.blue.Defend_Blue ) {
                         it.remove();
                         giveBasicDefend(new com.megacrit.cardcrawl.cards.blue.Leap());
+                    } else if ( e instanceof com.megacrit.cardcrawl.cards.purple.Strike_Purple ) {
+                        it.remove();
+                        giveBasicStrike(new com.megacrit.cardcrawl.cards.purple.FollowUp());
+                    } else if ( e instanceof com.megacrit.cardcrawl.cards.purple.Defend_Watcher ) {
+                        it.remove();
+                        giveBasicDefend(new com.megacrit.cardcrawl.cards.purple.ThirdEye());
                     }
                 }
                 logger.debug("replaced basic strike & defend cards (advanced)");
@@ -295,6 +322,21 @@ public class NeowPatch {
                 return CardCrawlGame.languagePack.getCharacterString("ICR:Defect").NAMES[0];
             if ( CardCrawlGame.metricData.neowBonus.equals(DEFECT_STORMLORD.name()) )
                 return CardCrawlGame.languagePack.getCharacterString("ICR:Defect").NAMES[1];
+            return __result;
+        }
+    }
+
+    @SpirePatch(
+            clz = Watcher.class,
+            method = "getTitle",
+            paramtypez = {AbstractPlayer.PlayerClass.class}
+    )
+    public static class WatcherTitle {
+        public static String Postfix(String __result, Watcher __instance, AbstractPlayer.PlayerClass pc) {
+            if ( CardCrawlGame.metricData.neowBonus.equals(WATCHER_MONK.name()) )
+                return CardCrawlGame.languagePack.getCharacterString("ICR:Watcher").NAMES[0];
+            if ( CardCrawlGame.metricData.neowBonus.equals(WATCHER_SHAOLIN.name()) )
+                return CardCrawlGame.languagePack.getCharacterString("ICR:Watcher").NAMES[1];
             return __result;
         }
     }

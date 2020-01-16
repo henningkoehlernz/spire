@@ -65,6 +65,12 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
         UnlockPatch.unlockCardWithReward(NeowPatch.DEFECT_STORMLORD.name(), card.cardID);
     }
 
+    private static void addPurpleCard(AbstractCard card) {
+        BaseMod.addCard(card);
+        UnlockPatch.unlockCardWithReward(NeowPatch.WATCHER_MONK.name(), card.cardID);
+        UnlockPatch.unlockCardWithReward(NeowPatch.WATCHER_SHAOLIN.name(), card.cardID);
+    }
+
     @Override
     public void receiveEditCards() {
         BaseMod.addCard(new RageStrike());

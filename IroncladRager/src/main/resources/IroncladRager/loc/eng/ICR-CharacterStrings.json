@@ -29,6 +29,16 @@
       "#gStormlord"
     ]
   },
+  "ICR:Watcher": {
+    "NAMES": [
+      "the Monk",
+      "the Shaolin"
+    ],
+    "TEXT": [
+      "#gMonk",
+      "#gShaolin"
+    ]
+  },
   "ICR:NeowReward": {
     "TEXT": [
       "#gPlay #gas ",

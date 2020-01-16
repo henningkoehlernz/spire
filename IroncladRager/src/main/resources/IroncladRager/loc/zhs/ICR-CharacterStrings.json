@@ -29,6 +29,16 @@
       "#g风暴领主"
     ]
   },
+  "ICR:Watcher": {
+    "NAMES": [
+      "the Monk",
+      "the Shaolin"
+    ],
+    "TEXT": [
+      "#gMonk",
+      "#gShaolin"
+    ]
+  },
   "ICR:NeowReward": {
     "TEXT": [
       "#g成为 ",
