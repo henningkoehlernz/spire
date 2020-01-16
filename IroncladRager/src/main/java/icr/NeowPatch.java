@@ -193,7 +193,7 @@ public class NeowPatch {
                         giveCard(new DragonStrike());
                     } else if ( e instanceof com.megacrit.cardcrawl.cards.purple.Defend_Watcher ) {
                         it.remove();
-                        giveCard(new Dodge());
+                        giveCard(new CraneWing());
                     }
                 }
                 logger.debug("replaced basic strike & defend cards");

@@ -27,6 +27,10 @@
     "NAME": "Dragon Strike",
     "DESCRIPTION": "Deal !D! Damage. NL Increases by !M! in Wrath or Divinity."
   },
+  "ICR:CraneWing": {
+    "NAME": "Crane Wing",
+    "DESCRIPTION": "Gain !B! Block. NL Increases by !M! in Calm."
+  },
 
   "ICR:Frenzy": {
     "NAME": "Frenzy",
