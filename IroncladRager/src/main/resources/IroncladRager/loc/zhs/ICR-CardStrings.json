@@ -81,5 +81,9 @@
   "ICR:YinYang": {
     "NAME": "Yin & Yang",
     "DESCRIPTION": "When entering Calm, gain !M! Dexterity. NL When entering Wrath, gain !M! Strength."
+  },
+  "ICR:Serenity": {
+    "NAME": "Serenity",
+    "DESCRIPTION": "Requires Calm. NL Gain 1 Intangible. NL End your turn."
   }
 }
