@@ -72,5 +72,10 @@
     "NAME": "Frost Fall",
     "DESCRIPTION": "At the start of your turn, Channel 1 Frost.",
     "UPGRADE_DESCRIPTION": "At the start of your turn, Channel X Frost."
+  },
+
+  "ICR:HungryGhost": {
+    "NAME": "Hungry Ghost",
+    "DESCRIPTION": "Deal !D! Damage. NL Heal HP equal to unblocked damage. Exhaust."
   }
 }

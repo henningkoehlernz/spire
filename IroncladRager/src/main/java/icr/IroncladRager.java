@@ -93,6 +93,8 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
         addBlueCard(new ChainLightning());
         addBlueCard(new Cyclone());
         addBlueCard(new FrostFall());
+
+        addPurpleCard(new HungryGhost());
     }
 
     private static String languagePath() {

@@ -72,5 +72,10 @@
     "NAME": "冰瀑",
     "DESCRIPTION": "在你的回合开始时，生成 1 个 冰霜 充能球。",
     "UPGRADE_DESCRIPTION": "在你的回合开始时，生成 X 个 冰霜 充能球"
+  },
+
+  "ICR:HungryGhost": {
+    "NAME": "Hungry Ghost",
+    "DESCRIPTION": "Deal !D! Damage. NL Heal HP equal to unblocked damage. Exhaust."
   }
 }
