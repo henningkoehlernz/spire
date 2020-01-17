@@ -77,5 +77,9 @@
   "ICR:HungryGhost": {
     "NAME": "Hungry Ghost",
     "DESCRIPTION": "Deal !D! Damage. NL Heal HP equal to unblocked damage. Exhaust."
+  },
+  "ICR:YinYang": {
+    "NAME": "Yin & Yang",
+    "DESCRIPTION": "When entering Calm, gain !M! Dexterity. NL When entering Wrath, gain !M! Strength."
   }
 }

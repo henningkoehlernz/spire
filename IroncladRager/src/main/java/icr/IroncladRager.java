@@ -95,6 +95,7 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
         addBlueCard(new FrostFall());
 
         addPurpleCard(new HungryGhost());
+        addPurpleCard(new YinYang());
     }
 
     private static String languagePath() {

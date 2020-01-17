@@ -19,5 +19,13 @@
       "Reduces all damage taken by #b",
       " (minimum 1)."
     ]
+  },
+  "ICR:YinYang" : {
+    "NAME" : "Yin & Yang",
+    "DESCRIPTIONS": [
+      "When entering Calm, gain #b",
+      " Dexterity. When entering Wrath, gain #b",
+      " Strength."
+    ]
   }
 }

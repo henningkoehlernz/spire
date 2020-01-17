@@ -25,7 +25,7 @@ public class CraneWing extends CustomCard {
 
     public CraneWing() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
-                AbstractCard.CardType.SKILL, AbstractCard.CardColor.BLUE,
+                AbstractCard.CardType.SKILL, AbstractCard.CardColor.PURPLE,
                 AbstractCard.CardRarity.BASIC, AbstractCard.CardTarget.SELF);
         this.block = this.baseBlock = BLOCK;
         this.magicNumber = this.baseMagicNumber = CALM_BONUS;
