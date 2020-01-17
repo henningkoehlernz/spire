@@ -2,6 +2,7 @@ package icr;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.watcher.ChangeStanceAction;
 import com.megacrit.cardcrawl.actions.watcher.PressEndTurnButtonAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -20,8 +21,9 @@ public class Serenity extends CustomCard {
     // Get object containing the strings that are displayed in the game.
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
+    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = IroncladRager.IMG_PATH + "serenity.png";
-    private static final int COST = 2;
+    private static final int COST = 1;
 
     public Serenity() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION,
@@ -31,14 +33,17 @@ public class Serenity extends CustomCard {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        addToBot(new ApplyPowerAction(p, p, new IntangiblePlayerPower(p, 1), 1));
+        if ( p.stance.ID.equals("Calm") )
+            addToBot(new ApplyPowerAction(p, p, new IntangiblePlayerPower(p, 1), 1));
+        else
+            addToBot(new ChangeStanceAction("Calm"));
         addToBot(new PressEndTurnButtonAction());
     }
 
     @Override
     public boolean canUse(AbstractPlayer p, AbstractMonster m) {
         boolean canUse = super.canUse(p, m);
-        if ( canUse && !p.stance.ID.equals("Calm") ) {
+        if ( canUse && !this.upgraded && !p.stance.ID.equals("Calm") ) {
             this.cantUseMessage = CardCrawlGame.languagePack.getUIString(ID).TEXT[0];
             return false;
         }
@@ -56,9 +61,10 @@ public class Serenity extends CustomCard {
 
     @Override
     public void upgrade() {
-        if (!this.upgraded) {
+        if ( !this.upgraded ) {
             this.upgradeName();
-            upgradeBaseCost(1);
+            this.rawDescription = UPGRADE_DESCRIPTION;
+            initializeDescription();
         }
     }
 
