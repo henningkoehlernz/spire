@@ -37,7 +37,12 @@ public class Serenity extends CustomCard {
 
     @Override
     public boolean canUse(AbstractPlayer p, AbstractMonster m) {
-        return super.canUse(p, m) && p.stance.ID.equals("Calm");
+        boolean canUse = super.canUse(p, m);
+        if ( canUse && !p.stance.ID.equals("Calm") ) {
+            this.cantUseMessage = CardCrawlGame.languagePack.getUIString(ID).TEXT[0];
+            return false;
+        }
+        return canUse;
     }
 
     @Override

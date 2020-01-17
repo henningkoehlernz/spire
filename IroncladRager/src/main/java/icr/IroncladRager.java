@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.localization.Keyword;
 import com.megacrit.cardcrawl.localization.PowerStrings;
+import com.megacrit.cardcrawl.localization.UIStrings;
 
 import basemod.BaseMod;
 import basemod.interfaces.*;
@@ -111,6 +112,7 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
         BaseMod.loadCustomStringsFile(CardStrings.class, basePath + "ICR-CardStrings.json");
         BaseMod.loadCustomStringsFile(PowerStrings.class, basePath + "ICR-PowerStrings.json");
         BaseMod.loadCustomStringsFile(CharacterStrings.class, basePath + "ICR-CharacterStrings.json");
+        BaseMod.loadCustomStringsFile(UIStrings.class, basePath + "ICR-UIStrings.json");
     }
 
     @Override
