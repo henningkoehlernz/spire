@@ -84,7 +84,6 @@
   },
   "ICR:Serenity": {
     "NAME": "Serenity",
-    "DESCRIPTION": "Requires Calm. NL Gain 1 Intangible. NL End your turn.",
-    "UPGRADE_DESCRIPTION": "Enter Calm if not or gain 1 Intangible. NL End your turn."
+    "DESCRIPTION": "Requires Calm. NL Gain 1 Intangible. NL End your turn."
   }
 }

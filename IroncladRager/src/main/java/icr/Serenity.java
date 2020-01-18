@@ -43,7 +43,7 @@ public class Serenity extends CustomCard {
     @Override
     public boolean canUse(AbstractPlayer p, AbstractMonster m) {
         boolean canUse = super.canUse(p, m);
-        if ( canUse && !this.upgraded && !p.stance.ID.equals("Calm") ) {
+        if ( canUse && !p.stance.ID.equals("Calm") ) {
             this.cantUseMessage = CardCrawlGame.languagePack.getUIString(ID).TEXT[0];
             return false;
         }
@@ -62,9 +62,8 @@ public class Serenity extends CustomCard {
     @Override
     public void upgrade() {
         if ( !this.upgraded ) {
-            this.upgradeName();
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            initializeDescription();
+            upgradeName();
+            upgradeBaseCost(0);
         }
     }
 
