@@ -5,9 +5,13 @@ import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.Prefs;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.Keyword;
 import com.megacrit.cardcrawl.localization.RelicStrings;
@@ -20,10 +24,12 @@ import basemod.interfaces.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Properties;
+import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.nio.charset.StandardCharsets;
+import java.util.Properties;
+import java.util.TreeMap;
 
 @SpireInitializer
 public class TreasureHunter implements
@@ -40,28 +46,16 @@ public class TreasureHunter implements
     public static final String IMG_PATH = MODNAME + "/img/";
     private static final String CONFIG_TREASURE = "treasure";
     private static Properties defaultConfig = new Properties();
-    private static int[] treasure = {};
+    private static TreeMap<String, int[]> treasure = new TreeMap<String, int[]>();
     // treasure cards
     public static ArrayList<AbstractCard> treasures = new ArrayList<AbstractCard>();
 
-    public TreasureHunter() {
-        BaseMod.subscribe(this);
-        defaultConfig.setProperty(CONFIG_TREASURE, "[]");
-        try {
-            SpireConfig config = new SpireConfig(MODNAME, "config", defaultConfig);
-            config.load();
-            String sTreasure = config.getString(CONFIG_TREASURE);
-            treasure = (new Gson()).fromJson(sTreasure, int[].class);
-            logger.info("loaded treasure=" + sTreasure);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private static int getMaxAscensionLevel(AbstractPlayer p) {
+        Prefs pref = p.getPrefs();
+        return pref == null ? 0 : pref.getInteger("ASCENSION_LEVEL", 1);
     }
 
-    public static void addTreasure(int ascension, int amount) {
-        if ( ascension >= treasure.length )
-            treasure = Arrays.copyOf(treasure, ascension + 1);
-        treasure[ascension] += amount;
+    private static void saveConfig() {
         String sTreasure = (new Gson()).toJson(treasure);
         try {
             SpireConfig config = new SpireConfig(MODNAME, "config", defaultConfig);
@@ -73,10 +67,60 @@ public class TreasureHunter implements
         }
     }
 
-    public static int getTreasureTotal(int ascension) {
+    private static void loadConfig() {
+        try {
+            SpireConfig config = new SpireConfig(MODNAME, "config", defaultConfig);
+            config.load();
+            String sTreasure = config.getString(CONFIG_TREASURE);
+            logger.info("loaded treasure=" + sTreasure);
+            if ( sTreasure.charAt(0) == '[' ) {
+                int[] legacyTreasure =  (new Gson()).fromJson(sTreasure, int[].class);
+                // divide evenly between qualifying characters
+                int[] charactersByLevel = new int[legacyTreasure.length];
+                ArrayList<AbstractPlayer> players = CardCrawlGame.characterManager.getAllCharacters();
+                for ( AbstractPlayer p : players ) {
+                    int maxAscensionLevel = Math.min(getMaxAscensionLevel(p), legacyTreasure.length - 1);
+                    for ( int level = 0; level <= maxAscensionLevel; level++ )
+                        charactersByLevel[level]++;
+                }
+                for ( AbstractPlayer p : players ) {
+                    int maxAscensionLevel = Math.min(getMaxAscensionLevel(p), legacyTreasure.length - 1);
+                    int[] pTreasure = new int[maxAscensionLevel + 1];
+                    for ( int level = 0; level <= maxAscensionLevel; level++ )
+                        pTreasure[level] = legacyTreasure[level] / charactersByLevel[level];
+                    treasure.put(p.chosenClass.name(), pTreasure);
+                }
+                saveConfig();
+            } else {
+                // parsing maps requires Type object to get around type erasure
+                Type mapType = new TypeToken<TreeMap<String, int[]>>(){}.getType();
+                treasure = (new Gson()).fromJson(sTreasure, mapType);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public TreasureHunter() {
+        BaseMod.subscribe(this);
+        defaultConfig.setProperty(CONFIG_TREASURE, "{}");
+    }
+
+    public static void addTreasure(AbstractPlayer.PlayerClass pc, int ascension, int amount) {
+        int[] pTreasure = treasure.getOrDefault(pc.name(), new int[0]);
+        if ( ascension >= pTreasure.length ) {
+            pTreasure = Arrays.copyOf(pTreasure, ascension + 1);
+            treasure.put(pc.name(), pTreasure);
+        }
+        pTreasure[ascension] += amount;
+        saveConfig();
+    }
+
+    public static int getTreasureTotal(AbstractPlayer.PlayerClass pc, int ascension) {
+        int[] pTreasure = treasure.getOrDefault(pc.name(), new int[0]);
         int total = 0;
-        for ( int a = ascension; a < treasure.length; a++ )
-            total += treasure[a];
+        for ( int a = ascension; a < pTreasure.length; a++ )
+            total += pTreasure[a];
         return total;
     }
 
@@ -141,5 +185,6 @@ public class TreasureHunter implements
         Texture badgeTexture = new Texture(MODNAME + "/badge.png");
         BaseMod.registerModBadge(badgeTexture, "Treasure Hunter", "Henning Koehler",
                 "Enables treasure mechanic for persistent improvements.", null);
+        loadConfig();
     }
 }

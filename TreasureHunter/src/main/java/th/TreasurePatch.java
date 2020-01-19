@@ -81,7 +81,7 @@ public class TreasurePatch {
     )
     public static class DeleteSave {
         public static void Prefix(AbstractPlayer p) {
-            TreasureHunter.addTreasure(AbstractDungeon.ascensionLevel, getTreasureScore(getTreasureCount()));
+            TreasureHunter.addTreasure(p.chosenClass, AbstractDungeon.ascensionLevel, getTreasureScore(getTreasureCount()));
         }
     }
 
@@ -93,7 +93,7 @@ public class TreasurePatch {
     )
     public static class NeowRewardActivate {
         public static void Postfix(NeowReward __instance) {
-            int bonusGold = TreasureHunter.getTreasureTotal(AbstractDungeon.ascensionLevel);
+            int bonusGold = TreasureHunter.getTreasureTotal(AbstractDungeon.player.chosenClass, AbstractDungeon.ascensionLevel);
             AbstractDungeon.player.gainGold(bonusGold);
             AbstractDungeon.effectList.add(new GainGoldTextEffect(bonusGold));
         }
@@ -218,7 +218,7 @@ public class TreasurePatch {
         public static void Insert(CharacterOption __instance, SpriteBatch sb) {
             int ascension = CardCrawlGame.mainMenuScreen.charSelectScreen.isAscensionMode ?
                     CardCrawlGame.mainMenuScreen.charSelectScreen.ascensionLevel : 0;
-            int bonusGold = TreasureHunter.getTreasureTotal(ascension);
+            int bonusGold = TreasureHunter.getTreasureTotal(__instance.c.chosenClass, ascension);
             // access private variables
             float infoX = (Float) Reflection.get(__instance, null,"infoX");
             float infoY = (Float) Reflection.get(__instance, null, "infoY");
