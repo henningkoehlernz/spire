@@ -55,6 +55,8 @@ public class TreasurePatch {
     }
 
     private static int getTreasureScore(int treasures) {
+        // cap effective treasures (e.g. infinite spire)
+        treasures = Math.min(treasures, 20);
         return treasures * treasures;
     }
 
