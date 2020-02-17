@@ -19,13 +19,13 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 import com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue;
+import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import com.megacrit.cardcrawl.screens.charSelect.CharacterOption;
 import com.megacrit.cardcrawl.screens.CombatRewardScreen;
 import com.megacrit.cardcrawl.screens.DeathScreen;
 import com.megacrit.cardcrawl.screens.GameOverStat;
 import com.megacrit.cardcrawl.screens.SingleCardViewPopup;
 import com.megacrit.cardcrawl.screens.VictoryScreen;
-import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import com.megacrit.cardcrawl.vfx.GainGoldTextEffect;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -88,6 +88,7 @@ public class TreasurePatch {
     }
 
     // grant bonus gold for new games
+    /*
     @SpirePatch(
             clz = NeowReward.class,
             method = "activate",
@@ -98,6 +99,22 @@ public class TreasurePatch {
             int bonusGold = TreasureHunter.getTreasureTotal(AbstractDungeon.player.chosenClass, AbstractDungeon.ascensionLevel);
             AbstractDungeon.player.gainGold(bonusGold);
             AbstractDungeon.effectList.add(new GainGoldTextEffect(bonusGold));
+        }
+    }
+    */
+    @SpirePatch(
+            clz = AbstractDungeon.class,
+            method = "nextRoomTransition",
+            paramtypez = {SaveFile.class}
+    )
+    public static class NextRoomTransition {
+        public static void Postfix(AbstractDungeon __instance, SaveFile saveFile) {
+            if ( AbstractDungeon.floorNum <= 1 ) {
+                int bonusGold = TreasureHunter.getTreasureTotal(AbstractDungeon.player.chosenClass, AbstractDungeon.ascensionLevel);
+                AbstractDungeon.player.gainGold(bonusGold);
+                AbstractDungeon.effectList.add(new GainGoldTextEffect(bonusGold));
+                logger.info("added " + bonusGold + " gold");
+            }
         }
     }
 
