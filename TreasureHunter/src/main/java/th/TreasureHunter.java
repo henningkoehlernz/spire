@@ -112,14 +112,14 @@ public class TreasureHunter implements
             pTreasure = Arrays.copyOf(pTreasure, ascension + 1);
             treasure.put(pc.name(), pTreasure);
         }
-        pTreasure[ascension] += amount;
+        pTreasure[Math.max(ascension, 0)] += amount;
         saveConfig();
     }
 
     public static int getTreasureTotal(AbstractPlayer.PlayerClass pc, int ascension) {
         int[] pTreasure = treasure.getOrDefault(pc.name(), new int[0]);
         int total = 0;
-        for ( int a = ascension; a < pTreasure.length; a++ )
+        for ( int a = Math.max(ascension, 0); a < pTreasure.length; a++ )
             total += pTreasure[a];
         return total;
     }
