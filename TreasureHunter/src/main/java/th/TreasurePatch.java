@@ -23,6 +23,7 @@ import com.megacrit.cardcrawl.saveAndContinue.SaveFile;
 import com.megacrit.cardcrawl.screens.charSelect.CharacterOption;
 import com.megacrit.cardcrawl.screens.CombatRewardScreen;
 import com.megacrit.cardcrawl.screens.DeathScreen;
+import com.megacrit.cardcrawl.screens.GameOverScreen;
 import com.megacrit.cardcrawl.screens.GameOverStat;
 import com.megacrit.cardcrawl.screens.SingleCardViewPopup;
 import com.megacrit.cardcrawl.screens.VictoryScreen;
@@ -185,6 +186,11 @@ public class TreasurePatch {
         return new GameOverStat(getTreasureText()[1] + " (" + treasures + ")", null, "+" + score + " gold");
     }
 
+    private static java.util.ArrayList<GameOverStat> getGameOverStats(GameOverScreen __instance) {
+        return (java.util.ArrayList<GameOverStat>) Reflection.get(__instance, GameOverScreen.class, "stats");
+    }
+
+
     // show number of treasures collected as part of score
     @SpirePatch(
             clz = DeathScreen.class,
@@ -193,7 +199,8 @@ public class TreasurePatch {
     )
     public static class Death_CreateGameOverStats {
         public static void Postfix(DeathScreen __instance) {
-            __instance.stats.add(__instance.stats.size() - 2, getTreasureStat());
+            java.util.ArrayList<GameOverStat> stats = getGameOverStats(__instance);
+            stats.add(stats.size() - 2, getTreasureStat());
         }
     }
 
@@ -204,7 +211,8 @@ public class TreasurePatch {
     )
     public static class Victory_CreateGameOverStats {
         public static void Postfix(VictoryScreen __instance) {
-            __instance.stats.add(__instance.stats.size() - 2, getTreasureStat());
+            java.util.ArrayList<GameOverStat> stats = getGameOverStats(__instance);
+            stats.add(stats.size() - 2, getTreasureStat());
         }
     }
 
