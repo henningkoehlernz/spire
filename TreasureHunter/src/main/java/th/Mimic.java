@@ -16,18 +16,17 @@ public class Mimic extends AbstractTreasure {
     // Get object containing the strings that are displayed in the game.
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
     public static final String IMG_PATH = TreasureHunter.IMG_PATH + "mimic.png";
     private static final int COST = 1;
 
     public Mimic() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, CardTarget.NONE);
-        this.baseMagicNumber = this.magicNumber = 1;
+        this.baseMagicNumber = this.magicNumber = 2;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        AbstractDungeon.actionManager.addToTop(new LoseHPAction(p, p, this.magicNumber));
+        AbstractDungeon.actionManager.addToTop(new LoseHPAction(p, p, 1));
         AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, this.magicNumber));
     }
 
@@ -36,8 +35,6 @@ public class Mimic extends AbstractTreasure {
         if ( !this.upgraded ) {
             this.upgradeName();
             this.upgradeMagicNumber(1);
-            this.rawDescription = UPGRADE_DESCRIPTION;
-            initializeDescription();
         }
     }
 

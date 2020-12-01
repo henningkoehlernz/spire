@@ -30,8 +30,7 @@
   },
   "TH:Mimic": {
     "NAME": "Treasure Chest",
-    "DESCRIPTION": "Lose !M! HP. NL Draw a card. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Lose !M! HP. NL Draw !M! cards. NL Exhaust."
+    "DESCRIPTION": "Lose 1 HP. NL Draw !M! cards. NL Exhaust."
   },
   "TH:PixieDust": {
     "NAME": "Pixie Dust",
