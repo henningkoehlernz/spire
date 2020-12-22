@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.characters.Watcher;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.neow.NeowEvent;
 import com.megacrit.cardcrawl.neow.NeowReward;
+import com.megacrit.cardcrawl.vfx.InfiniteSpeechBubble;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
 import basemod.helpers.BaseModCardTags;
@@ -50,83 +51,71 @@ public class NeowPatch {
 
     @SpirePatch(
             clz = NeowEvent.class,
+            method = "buttonEffect",
+            paramtypez = {int.class}
+    )
+    public static class ExtraButtons {
+        public static void Prefix(NeowEvent __instance, int buttonPressed) {
+            int screenNum = (int)Reflection.get(__instance, NeowEvent.class, "screenNum");
+            ArrayList<NeowReward> rewards = (ArrayList<NeowReward>)Reflection.get(__instance, NeowEvent.class, "rewards");
+            if ( screenNum == 3 && buttonPressed > 3 ) {
+                ((NeowReward)rewards.get(buttonPressed)).activate();
+                Reflection.invoke(__instance, NeowEvent.class, "talk", NeowEvent.TEXT[9]);
+            }
+        }
+    }
+
+    // add reward for mini or regular blessing
+    public static void addReward(NeowEvent __instance, boolean mini) {
+        NeowReward newReward = new NeowReward(false);
+        int sid = mini ? 0 : 1; // localization string ID
+        switch ( AbstractDungeon.player.chosenClass )
+        {
+            case IRONCLAD:
+                newReward.type = mini ? IRONCLAD_RAGER : IRONCLAD_BERSERKER;
+                newReward.optionLabel = CardCrawlGame.languagePack.getCharacterString("ICR:Ironclad").TEXT[sid];
+                break;
+            case THE_SILENT:
+                newReward.type = mini ? SILENT_POISONER : SILENT_ASSASSIN;
+                newReward.optionLabel = CardCrawlGame.languagePack.getCharacterString("ICR:Silent").TEXT[sid];
+                break;
+            case DEFECT:
+                newReward.type = mini ? DEFECT_WARDEN : DEFECT_STORMLORD;
+                newReward.optionLabel = CardCrawlGame.languagePack.getCharacterString("ICR:Defect").TEXT[sid];
+                break;
+            case WATCHER:
+                newReward.type = mini ? WATCHER_MONK : WATCHER_SHAOLIN;
+                newReward.optionLabel = CardCrawlGame.languagePack.getCharacterString("ICR:Watcher").TEXT[sid];
+                break;
+            default:
+                return;
+        }
+        ArrayList<NeowReward> rewards = (ArrayList<NeowReward>)Reflection.get(__instance, NeowEvent.class, "rewards");
+        rewards.add(newReward);
+        String prefix = CardCrawlGame.languagePack.getCharacterString("ICR:NeowReward").TEXT[sid];
+        __instance.roomEventText.addDialogOption("[ " + prefix + newReward.optionLabel + " ]");
+        logger.info("added " + newReward.optionLabel + (mini ? " mini blessing" : " blessing"));
+    }
+
+    @SpirePatch(
+            clz = NeowEvent.class,
             method = "miniBlessing",
             paramtypez = {}
     )
     public static class MiniBlessing {
         public static void Postfix(NeowEvent __instance) {
-            NeowReward newReward = new NeowReward(false);
-            switch ( AbstractDungeon.player.chosenClass )
-            {
-                case IRONCLAD:
-                    newReward.type = IRONCLAD_RAGER;
-                    newReward.optionLabel = CardCrawlGame.languagePack.getCharacterString("ICR:Ironclad").TEXT[0];
-                    break;
-                case THE_SILENT:
-                    newReward.type = SILENT_POISONER;
-                    newReward.optionLabel = CardCrawlGame.languagePack.getCharacterString("ICR:Silent").TEXT[0];
-                    break;
-                case DEFECT:
-                    newReward.type = DEFECT_WARDEN;
-                    newReward.optionLabel = CardCrawlGame.languagePack.getCharacterString("ICR:Defect").TEXT[0];
-                    break;
-                case WATCHER:
-                    newReward.type = WATCHER_MONK;
-                    newReward.optionLabel = CardCrawlGame.languagePack.getCharacterString("ICR:Watcher").TEXT[0];
-                    break;
-                default:
-                    return;
-            }
-            // NeowEvent.reward is private - circumvent via reflection
-            try {
-                Field rewardField = NeowEvent.class.getDeclaredField("rewards");
-                rewardField.setAccessible(true);
-                ArrayList<NeowReward> rewards = (ArrayList<NeowReward>)rewardField.get(__instance);
-                rewards.add(newReward);
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-            String prefix = CardCrawlGame.languagePack.getCharacterString("ICR:NeowReward").TEXT[0];
-            __instance.roomEventText.addDialogOption("[ " + prefix + newReward.optionLabel + " ]");
-            logger.info("added " + newReward.optionLabel + " mini blessing");
+            addReward(__instance, true);
         }
     }
 
     @SpirePatch(
-            clz = NeowReward.class,
-            method = "getRewardOptions",
-            paramtypez = {int.class}
+            clz = NeowEvent.class,
+            method = "blessing",
+            paramtypez = {}
     )
     public static class Blessing {
-        public static ArrayList<NeowReward.NeowRewardDef> Postfix(ArrayList<NeowReward.NeowRewardDef> __result, NeowReward __instance, int category) {
-            if ( category == 3 ) {
-                NeowReward.NeowRewardDef newReward = null;
-                switch (AbstractDungeon.player.chosenClass) {
-                    case IRONCLAD:
-                        newReward = new NeowReward.NeowRewardDef(IRONCLAD_BERSERKER, CardCrawlGame.languagePack.getCharacterString("ICR:Ironclad").TEXT[1]);
-                        break;
-                    case THE_SILENT:
-                        newReward = new NeowReward.NeowRewardDef(SILENT_ASSASSIN, CardCrawlGame.languagePack.getCharacterString("ICR:Silent").TEXT[1]);
-                        break;
-                    case DEFECT:
-                        newReward = new NeowReward.NeowRewardDef(DEFECT_STORMLORD, CardCrawlGame.languagePack.getCharacterString("ICR:Defect").TEXT[1]);
-                        break;
-                    case WATCHER:
-                        newReward = new NeowReward.NeowRewardDef(WATCHER_SHAOLIN, CardCrawlGame.languagePack.getCharacterString("ICR:Watcher").TEXT[1]);
-                        break;
-                    default:
-                        return __result;
-                }
-                if ( IroncladRager.guaranteeSubclass ) {
-                    __result.clear();
-                    logger.info("removed existing blessings");
-                }
-                logger.info("added " + newReward.desc + " blessing");
-                String prefix = CardCrawlGame.languagePack.getCharacterString("ICR:NeowReward").TEXT[1];
-                newReward.desc = "[ " + prefix + newReward.desc + " ]";
-                __result.add(newReward);
-            }
-            return __result;
+        public static void Postfix(NeowEvent __instance) {
+            addReward(__instance, false);
         }
     }
 

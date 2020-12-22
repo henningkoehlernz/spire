@@ -3,7 +3,7 @@
   "title": "Ironclad Rager",
   "description": "[h1]Adds subclasses with alternative starting decks.[/h1]
 
-Stronger subclasses have 50% chance to appear as major blessings (reach first boss on previous run), and trigger all standard drawbacks.
+Stronger subclasses appear as major blessings (reach first boss on previous run), and trigger all standard drawbacks.
 
 [b]Adds subclasses for Silent, Defect and Watcher[/b] as well, and all subclasses unlock additional cards.",
   "visibility": "public",

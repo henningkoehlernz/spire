@@ -129,6 +129,7 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
     @Override
     public void receivePostInitialize() {
         Texture badgeTexture = new Texture(MODNAME + "/badge.png");
+        /*
         ModPanel configPanel = new ModPanel();
         ModLabeledToggleButton guaranteeSubclassButton = new ModLabeledToggleButton(
                 "Guarantee advanced subclass blessing.", 350.0f, 700.0f, Settings.CREAM_COLOR, FontHelper.charDescFont,
@@ -145,6 +146,9 @@ public class IroncladRager implements EditCardsSubscriber, EditStringsSubscriber
         configPanel.addUIElement(guaranteeSubclassButton);
         BaseMod.registerModBadge(badgeTexture, "IroncladRager", "Henning Koehler",
                 "Adds subclasses with alternative starting decks.", configPanel);
+        */
+        BaseMod.registerModBadge(badgeTexture, "IroncladRager", "Henning Koehler",
+                "Adds subclasses with alternative starting decks.", null);
     }
 
 }

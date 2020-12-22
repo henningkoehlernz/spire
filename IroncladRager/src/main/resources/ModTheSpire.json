@@ -3,8 +3,8 @@
   "name": "Ironclad Rager",
   "author_list": ["hkoehler"],
   "description": "Enables alternative starting decks as subclass blessings. Subclasses also unlock new cards.",
-  "version": "2.0.0",
-  "sts_version": "01-14-2020",
+  "version": "2.0.1",
+  "sts_version": "12-13-2020",
   "mts_version": "3.15.0",
   "dependencies": ["basemod"]
 }
