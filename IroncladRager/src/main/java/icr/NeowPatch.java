@@ -2,6 +2,7 @@ package icr;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -55,13 +56,21 @@ public class NeowPatch {
             paramtypez = {int.class}
     )
     public static class ExtraButtons {
-        public static void Prefix(NeowEvent __instance, int buttonPressed) {
+        public static SpireReturn Prefix(NeowEvent __instance, int buttonPressed) {
             int screenNum = (int)Reflection.get(__instance, NeowEvent.class, "screenNum");
             ArrayList<NeowReward> rewards = (ArrayList<NeowReward>)Reflection.get(__instance, NeowEvent.class, "rewards");
             if ( screenNum == 3 && buttonPressed > 3 ) {
+                Reflection.invoke(__instance, NeowEvent.class, "dismissBubble");
+                __instance.roomEventText.clearRemainingOptions();
                 ((NeowReward)rewards.get(buttonPressed)).activate();
                 Reflection.invoke(__instance, NeowEvent.class, "talk", NeowEvent.TEXT[9]);
+                Reflection.setInt(__instance, NeowEvent.class, "screenNum", 99);
+                __instance.roomEventText.updateDialogOption(0, NeowEvent.OPTIONS[3]);
+                __instance.roomEventText.clearRemainingOptions();
+                __instance.waitingToSave = true;
+                return SpireReturn.Return(null);
             }
+            return SpireReturn.Continue();
         }
     }
 
