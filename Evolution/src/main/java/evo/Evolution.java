@@ -5,32 +5,31 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Prefs;
 import com.megacrit.cardcrawl.localization.RelicStrings;
-import com.megacrit.cardcrawl.localization.UIStrings;
 
 import basemod.BaseMod;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 
+import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Properties;
-import java.util.TreeMap;
+import java.util.*;
 
 @SpireInitializer
 public class Evolution implements
         EditRelicsSubscriber,
         EditStringsSubscriber,
+        PostCreateStartingDeckSubscriber,
         PostInitializeSubscriber {
 
     private static final Logger logger = LogManager.getLogger(Evolution.class.getName());
@@ -144,4 +143,16 @@ public class Evolution implements
                 "Defeat bosses for persistent improvements.", null);
         loadConfig();
     }
+
+    @Override
+    public void receivePostCreateStartingDeck(AbstractPlayer.PlayerClass pc, CardGroup cg) {
+        AbstractPlayer p = AbstractDungeon.player;
+        int ep = Evolution.getEvolutionTotal(p.chosenClass, AbstractDungeon.ascensionLevel);
+        AbstractRelic relic = new Axolotl();
+        relic.counter = ep;
+        relic.instantObtain();
+        CardReplacer.replaceBasicCards(ep);
+        logger.info("added evolution relic");
+    }
+
 }
