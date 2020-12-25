@@ -64,7 +64,7 @@ public class Evolution implements
             SpireConfig config = new SpireConfig(MODNAME, "evolution", defaultConfig);
             config.load();
             String sEvolution = config.getString(CONFIG_EP);
-            logger.info("loaded treasure=" + sEvolution);
+            logger.info("loaded evolution=" + sEvolution);
             if ( sEvolution.charAt(0) == '[' ) {
                 int[] legacyEvolution =  (new Gson()).fromJson(sEvolution, int[].class);
                 // divide evenly between qualifying characters

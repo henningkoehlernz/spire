@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 
 public class Axolotl extends CustomRelic {
 
-    public static final String ID = "EVO:EvolutionPool";
+    public static final String ID = "EVO:Axolotl";
     private static final String IMG_PATH = Evolution.IMG_PATH + "axolotl.png";
 
     public Axolotl() {
