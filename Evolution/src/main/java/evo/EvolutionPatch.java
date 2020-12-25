@@ -58,7 +58,7 @@ public class EvolutionPatch {
             if ( strike ? isStrikeLike(card) : isDefendLike(card) )
                 candidates.add(card);
         }
-        return candidates.isEmpty() ? null : candidates.get(AbstractDungeon.cardRng.random(candidates.size()));
+        return candidates.isEmpty() ? null : candidates.get(AbstractDungeon.cardRng.random(candidates.size() - 1));
     }
 
     // replace strikes & defends
