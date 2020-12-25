@@ -151,7 +151,9 @@ public class Evolution implements
         AbstractRelic relic = new Axolotl();
         relic.counter = ep;
         relic.instantObtain();
-        CardReplacer.replaceBasicCards(ep);
+        int leftover = ep - CardReplacer.replaceBasicCards(ep);
+        if ( leftover > 0 )
+            p.increaseMaxHp(leftover, true);
         logger.info("added evolution relic");
     }
 

@@ -34,7 +34,8 @@ public class CardReplacer {
     }
 
     // replace strikes & defends
-    public static void replaceBasicCards(int maxReplace) {
+    // returns number of cards replaced
+    public static int replaceBasicCards(int maxReplace) {
         AbstractCard strikeReplacement = getReplacement(true);
         AbstractCard defendReplacement = getReplacement(false);
         ArrayList<AbstractCard> cards = AbstractDungeon.player.masterDeck.group;
@@ -51,6 +52,7 @@ public class CardReplacer {
             next++;
         }
         logger.debug("replaced basic strike & defend cards");
+        return replaced;
     }
 
 }

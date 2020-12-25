@@ -3,7 +3,7 @@
     "NAME": "Axolotl",
     "FLAVOR": "Evolution at its finest.",
     "DESCRIPTIONS": [
-      "Grants a persistent evolution when you defeat a boss. At the start of a new run, one strike or defend is replaced for each evolution."
+      "Grants a persistent evolution when you defeat a boss. At the start of a new run, one strike or defend is replaced for each evolution. Remaining evolutions increase max HP."
     ]
   }
 }
