@@ -1,0 +1,9 @@
+{
+  "EVO:Axolotl": {
+    "NAME": "Axolotl",
+    "FLAVOR": "Evolution at its finest.",
+    "DESCRIPTIONS": [
+      "Grants one persistent evolution whenever you defeat a boss. At the start of a new run, each evolution causes one strike or defend to be replaced."
+    ]
+  }
+}
