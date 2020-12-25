@@ -1,4 +1,4 @@
-package evolution;
+package evo;
 
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;

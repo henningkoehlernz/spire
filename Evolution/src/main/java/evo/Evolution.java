@@ -1,4 +1,4 @@
-package evolution;
+package evo;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
@@ -117,7 +117,7 @@ public class Evolution implements
     }
 
     public static void initialize() {
-        new evolution.Evolution();
+        new Evolution();
     }
 
     @Override

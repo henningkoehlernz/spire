@@ -1,4 +1,4 @@
-package evolution;
+package evo;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
