@@ -1,7 +1,7 @@
 {
   "steamPublishedID": "2339471027",
   "title": "Evolution",
-  "description": "[h1]Collect evolutions over multiple runs, replacing strike/defend cards.[/h1]\n\nGrants a persistent evolution when you defeat a boss. At the start of a new run, one strike or defend is replaced for each evolution. Remaining evolutions increase max HP.\n\nEvolution points collected are specific to each class, and only affect the ascension level at which they were collected (or lower).",
+  "description": "[h1]Collect evolutions over multiple runs, replacing strike/defend cards.[/h1]\n\nGrants a persistent evolution when you defeat a boss. At the start of a new run, one strike or defend is replaced for each evolution. Remaining evolutions increase max HP.\n\nEvolution points collected are specific to each class, and only affect the ascension level at which they were collected (or lower). Evolutions collected are specific to each class, and only affect the ascension level at which they were collected (or lower). Replacement cards will be random each run, picked amongst common attacks/skills that deal damage/grant block, cost 1, and don't exhaust. Works for all characters (though characters without strike/defend cards or suitable replacements will only receive bonus HP).\n\nThe idea is to allow failed runs to still provide some degree of progress towards the next ascension.",
   "visibility": "public",
   "changeNote": "",
   "tags": [
