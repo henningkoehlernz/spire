@@ -1,5 +1,5 @@
 {
-  "steamPublishedID": "",
+  "steamPublishedID": "2339471027",
   "title": "Evolution",
   "description": "[h1]Collect evolutions over multiple runs, replacing strike/defend cards.[/h1]\n\nGrants a persistent evolution when you defeat a boss. At the start of a new run, one strike or defend is replaced for each evolution. Remaining evolutions increase max HP.\n\nEvolution points collected are specific to each class, and only affect the ascension level at which they were collected (or lower).",
   "visibility": "public",
