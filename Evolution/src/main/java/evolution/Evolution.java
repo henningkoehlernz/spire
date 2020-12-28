@@ -1,13 +1,12 @@
 package evolution;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
-import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Prefs;
@@ -22,6 +21,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @SpireInitializer
@@ -36,7 +36,8 @@ public class Evolution implements
     // mod config variables
     public static final String MODNAME = "evolution";
     public static final String IMG_PATH = MODNAME + "/img/";
-    private static final String CONFIG_EP = "evolution";
+    // files in preferences directory are synced automatically
+    private static final String CONFIG_PATH = "preferences/evolution";
     private static Properties defaultConfig = new Properties();
     private static TreeMap<String, int[]> evolution = new TreeMap<String, int[]>();
 
@@ -47,53 +48,23 @@ public class Evolution implements
 
     private static void saveConfig() {
         String sEvolution = (new Gson()).toJson(evolution);
-        try {
-            SpireConfig config = new SpireConfig(MODNAME, "evolution", defaultConfig);
-            config.setString(CONFIG_EP, sEvolution);
-            config.save();
-            logger.info("saved evolution=" + sEvolution);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Gdx.files.local(CONFIG_PATH).writeString(sEvolution, false, String.valueOf(StandardCharsets.UTF_8));
+        logger.info("saved evolution=" + sEvolution);
     }
 
     private static void loadConfig() {
-        try {
-            SpireConfig config = new SpireConfig(MODNAME, "evolution", defaultConfig);
-            config.load();
-            String sEvolution = config.getString(CONFIG_EP);
+        String sEvolution = "{}";
+        if (Gdx.files.local(CONFIG_PATH).exists()) {
+            sEvolution = Gdx.files.local(CONFIG_PATH).readString(String.valueOf(StandardCharsets.UTF_8));
             logger.info("loaded evolution=" + sEvolution);
-            if ( sEvolution.charAt(0) == '[' ) {
-                int[] legacyEvolution =  (new Gson()).fromJson(sEvolution, int[].class);
-                // divide evenly between qualifying characters
-                int[] charactersByLevel = new int[legacyEvolution.length];
-                ArrayList<AbstractPlayer> players = CardCrawlGame.characterManager.getAllCharacters();
-                for ( AbstractPlayer p : players ) {
-                    int maxAscensionLevel = Math.min(getMaxAscensionLevel(p), legacyEvolution.length - 1);
-                    for ( int level = 0; level <= maxAscensionLevel; level++ )
-                        charactersByLevel[level]++;
-                }
-                for ( AbstractPlayer p : players ) {
-                    int maxAscensionLevel = Math.min(getMaxAscensionLevel(p), legacyEvolution.length - 1);
-                    int[] pEvolution = new int[maxAscensionLevel + 1];
-                    for ( int level = 0; level <= maxAscensionLevel; level++ )
-                        pEvolution[level] = legacyEvolution[level] / charactersByLevel[level];
-                    evolution.put(p.chosenClass.name(), pEvolution);
-                }
-                saveConfig();
-            } else {
-                // parsing maps requires Type object to get around type erasure
-                Type mapType = new TypeToken<TreeMap<String, int[]>>(){}.getType();
-                evolution = (new Gson()).fromJson(sEvolution, mapType);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+        // parsing maps requires Type object to get around type erasure
+        Type mapType = new TypeToken<TreeMap<String, int[]>>(){}.getType();
+        evolution = (new Gson()).fromJson(sEvolution, mapType);
     }
 
     public Evolution() {
         BaseMod.subscribe(this);
-        defaultConfig.setProperty(CONFIG_EP, "{}");
     }
 
     public static void addEvolution(AbstractPlayer.PlayerClass pc, int ascension, int amount) {
