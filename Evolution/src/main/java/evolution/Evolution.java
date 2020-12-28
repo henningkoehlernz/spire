@@ -49,14 +49,14 @@ public class Evolution implements
     private static void saveConfig() {
         String sEvolution = (new Gson()).toJson(evolution);
         Gdx.files.local(CONFIG_PATH).writeString(sEvolution, false, String.valueOf(StandardCharsets.UTF_8));
-        logger.info("saved evolution=" + sEvolution);
+        logger.info("saved=" + sEvolution);
     }
 
     private static void loadConfig() {
         String sEvolution = "{}";
         if (Gdx.files.local(CONFIG_PATH).exists()) {
             sEvolution = Gdx.files.local(CONFIG_PATH).readString(String.valueOf(StandardCharsets.UTF_8));
-            logger.info("loaded evolution=" + sEvolution);
+            logger.info("loaded=" + sEvolution);
         }
         // parsing maps requires Type object to get around type erasure
         Type mapType = new TypeToken<TreeMap<String, int[]>>(){}.getType();
