@@ -1,4 +1,4 @@
-package evo;
+package evolution;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
@@ -18,7 +18,6 @@ import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -35,7 +34,7 @@ public class Evolution implements
     private static final Logger logger = LogManager.getLogger(Evolution.class.getName());
 
     // mod config variables
-    public static final String MODNAME = "Evolution";
+    public static final String MODNAME = "evolution";
     public static final String IMG_PATH = MODNAME + "/img/";
     private static final String CONFIG_EP = "evolution";
     private static Properties defaultConfig = new Properties();

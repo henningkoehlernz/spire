@@ -1,8 +1,8 @@
 {
-  "modid": "Evolution",
+  "modid": "evolution",
   "name": "Evolution",
   "author_list": ["hkoehler"],
-  "description": "Collect evolution points over multiple runs, replacing strike/defend cards.",
+  "description": "Collect evolutions over multiple runs, replacing strike/defend cards.",
   "version": "1.0.0",
   "sts_version": "12-13-2020",
   "mts_version": "3.15.0",
