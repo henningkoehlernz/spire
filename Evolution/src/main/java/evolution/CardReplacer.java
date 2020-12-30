@@ -1,5 +1,6 @@
 package evolution;
 
+import com.evacipated.cardcrawl.modthespire.Loader;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
@@ -36,20 +37,25 @@ public class CardReplacer {
     public static int replaceBasicCards(int maxReplace) {
         AbstractCard strikeReplacement = getReplacement(true);
         AbstractCard defendReplacement = getReplacement(false);
+        if ( Loader.DEBUG ) {
+            logger.info("strike replacement=" + (strikeReplacement == null ? "null" : strikeReplacement.cardID));
+            logger.info("defend replacement=" + (defendReplacement == null ? "null" : defendReplacement.cardID));
+        }
         ArrayList<AbstractCard> cards = AbstractDungeon.player.masterDeck.group;
         int next = 0, replaced = 0;
         while ( next < cards.size() && replaced < maxReplace ) {
             AbstractCard card = cards.get(next);
-            if ( card.isStarterStrike() && strikeReplacement != null ) {
+            // isStarterStrike checks for STRIKE, not STARTER_STRIKE
+            if ( (card.isStarterStrike() || card.hasTag(AbstractCard.CardTags.STARTER_STRIKE)) && strikeReplacement != null ) {
                 cards.set(next, strikeReplacement.makeCopy());
                 replaced++;
             } else if ( card.isStarterDefend() && defendReplacement != null ) {
                 cards.set(next, defendReplacement.makeCopy());
                 replaced++;
-            }
+            } else if ( Loader.DEBUG )
+                logger.info("skipping " + card.cardID);
             next++;
         }
-        logger.debug("replaced basic strike & defend cards");
         return replaced;
     }
 
