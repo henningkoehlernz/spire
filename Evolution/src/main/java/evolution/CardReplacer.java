@@ -21,7 +21,7 @@ public class CardReplacer {
                 && card.cost == 1 && !card.exhaust;
     }
 
-    private static AbstractCard getReplacement(boolean strike) {
+    private static ArrayList<AbstractCard> getReplacements(boolean strike, int max) {
         ArrayList<AbstractCard> candidates = new ArrayList<AbstractCard>();
         Iterator<AbstractCard> it = AbstractDungeon.commonCardPool.group.iterator();
         while ( it.hasNext() ) {
@@ -29,34 +29,35 @@ public class CardReplacer {
             if ( strike ? isStrikeLike(card) : isDefendLike(card) )
                 candidates.add(card);
         }
-        return candidates.isEmpty() ? null : candidates.get(AbstractDungeon.cardRng.random(candidates.size() - 1));
+        Collections.shuffle(candidates);
+        while ( candidates.size() > max )
+            candidates.remove(candidates.size() - 1);
+        return candidates;
     }
 
     // replace strikes & defends
     // returns number of cards replaced
     public static int replaceBasicCards(int maxReplace) {
-        AbstractCard strikeReplacement = getReplacement(true);
-        AbstractCard defendReplacement = getReplacement(false);
-        if ( Loader.DEBUG ) {
-            logger.info("strike replacement=" + (strikeReplacement == null ? "null" : strikeReplacement.cardID));
-            logger.info("defend replacement=" + (defendReplacement == null ? "null" : defendReplacement.cardID));
-        }
+        int variety = Evolution.getVariety() > 2 ? 99 : Evolution.getVariety();
+        ArrayList<AbstractCard> strikeReplacements = getReplacements(true, variety);
+        ArrayList<AbstractCard> defendReplacements = getReplacements(false, variety);
         ArrayList<AbstractCard> cards = AbstractDungeon.player.masterDeck.group;
-        int next = 0, replaced = 0;
-        while ( next < cards.size() && replaced < maxReplace ) {
+        int next = 0, strikeReplaced = 0, defendReplaced = 0;
+        while ( next < cards.size() && strikeReplaced + defendReplaced < maxReplace ) {
             AbstractCard card = cards.get(next);
             // isStarterStrike checks for STRIKE, not STARTER_STRIKE
-            if ( (card.isStarterStrike() || card.hasTag(AbstractCard.CardTags.STARTER_STRIKE)) && strikeReplacement != null ) {
-                cards.set(next, strikeReplacement.makeCopy());
-                replaced++;
-            } else if ( card.isStarterDefend() && defendReplacement != null ) {
-                cards.set(next, defendReplacement.makeCopy());
-                replaced++;
+            if ( (card.isStarterStrike() || card.hasTag(AbstractCard.CardTags.STARTER_STRIKE))
+                    && !strikeReplacements.isEmpty() ) {
+                cards.set(next, strikeReplacements.get(strikeReplaced % strikeReplacements.size()).makeCopy());
+                strikeReplaced++;
+            } else if ( card.isStarterDefend() && !defendReplacements.isEmpty()  ) {
+                cards.set(next, defendReplacements.get(defendReplaced % defendReplacements.size()).makeCopy());
+                defendReplaced++;
             } else if ( Loader.DEBUG )
                 logger.info("skipping " + card.cardID);
             next++;
         }
-        return replaced;
+        return strikeReplaced + defendReplaced;
     }
 
 }

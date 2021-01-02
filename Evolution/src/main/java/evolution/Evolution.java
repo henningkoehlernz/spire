@@ -1,5 +1,6 @@
 package evolution;
 
+import basemod.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
@@ -13,7 +14,6 @@ import com.megacrit.cardcrawl.helpers.Prefs;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-import basemod.BaseMod;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 
@@ -37,30 +37,49 @@ public class Evolution implements
     public static final String MODNAME = "evolution";
     public static final String IMG_PATH = MODNAME + "/img/";
     // files in preferences directory are synced automatically
-    private static final String CONFIG_PATH = "preferences/evolution";
-    private static Properties defaultConfig = new Properties();
+    private static final String EVOLUTION_PATH = "preferences/evolution";
+    private static final String CONFIG_PATH = "preferences/evolution.cfg";
+    private static final String CONFIG_VARIETY = "variety";
     private static TreeMap<String, int[]> evolution = new TreeMap<String, int[]>();
+    private static TreeMap<String, String> config = new TreeMap<String, String>();
 
     private static int getMaxAscensionLevel(AbstractPlayer p) {
         Prefs pref = p.getPrefs();
         return pref == null ? 0 : pref.getInteger("ASCENSION_LEVEL", 1);
     }
 
-    private static void saveConfig() {
+    private static void saveEvolution() {
         String sEvolution = (new Gson()).toJson(evolution);
-        Gdx.files.local(CONFIG_PATH).writeString(sEvolution, false, String.valueOf(StandardCharsets.UTF_8));
-        logger.info("saved=" + sEvolution);
+        Gdx.files.local(EVOLUTION_PATH).writeString(sEvolution, false, String.valueOf(StandardCharsets.UTF_8));
+        logger.info("saved evolution=" + sEvolution);
     }
 
-    private static void loadConfig() {
+    private static void saveConfig() {
+        String sConfig = (new Gson()).toJson(config);
+        Gdx.files.local(CONFIG_PATH).writeString(sConfig, false, String.valueOf(StandardCharsets.UTF_8));
+        logger.info("saved config=" + sConfig);
+    }
+
+    private static void loadEvolution() {
         String sEvolution = "{}";
-        if (Gdx.files.local(CONFIG_PATH).exists()) {
-            sEvolution = Gdx.files.local(CONFIG_PATH).readString(String.valueOf(StandardCharsets.UTF_8));
-            logger.info("loaded=" + sEvolution);
+        if (Gdx.files.local(EVOLUTION_PATH).exists()) {
+            sEvolution = Gdx.files.local(EVOLUTION_PATH).readString(String.valueOf(StandardCharsets.UTF_8));
+            logger.info("loaded evolution=" + sEvolution);
         }
         // parsing maps requires Type object to get around type erasure
         Type mapType = new TypeToken<TreeMap<String, int[]>>(){}.getType();
         evolution = (new Gson()).fromJson(sEvolution, mapType);
+    }
+
+    private static void loadConfig() {
+        String sConfig = "{}";
+        if (Gdx.files.local(CONFIG_PATH).exists()) {
+            sConfig = Gdx.files.local(CONFIG_PATH).readString(String.valueOf(StandardCharsets.UTF_8));
+            logger.info("loaded config=" + sConfig);
+        }
+        // parsing maps requires Type object to get around type erasure
+        Type mapType = new TypeToken<TreeMap<String, String>>(){}.getType();
+        config = (new Gson()).fromJson(sConfig, mapType);
     }
 
     public Evolution() {
@@ -74,7 +93,7 @@ public class Evolution implements
             evolution.put(pc.name(), pEvolution);
         }
         pEvolution[Math.max(ascension, 0)] += amount;
-        saveConfig();
+        saveEvolution();
     }
 
     public static int getEvolutionTotal(AbstractPlayer.PlayerClass pc, int ascension) {
@@ -83,6 +102,10 @@ public class Evolution implements
         for ( int a = Math.max(ascension, 0); a < pEvolution.length; a++ )
             total += pEvolution[a];
         return total;
+    }
+
+    public static int getVariety() {
+        return Integer.valueOf(config.getOrDefault(CONFIG_VARIETY, "1"));
     }
 
     public static void initialize() {
@@ -108,10 +131,28 @@ public class Evolution implements
 
     @Override
     public void receivePostInitialize() {
-        Texture badgeTexture = new Texture(MODNAME + "/badge.png");
-        BaseMod.registerModBadge(badgeTexture, "Evolution", "Henning Koehler",
-                "Defeat bosses for persistent improvements.", null);
+        loadEvolution();
         loadConfig();
+        // setup config panel
+        Texture badgeTexture = new Texture(MODNAME + "/badge.png");
+        ModPanel configPanel = new ModPanel();
+        // configure replacement card variety
+        ModLabel varietyLabel = new ModLabel("Replacement Variety",
+                400.0f, 700.0f, configPanel, (label) -> {});
+        ModMinMaxSlider varietySlider = new ModMinMaxSlider(
+                "", 450.0f, 650.0f, 1, 3, getVariety(), "%.0f",
+                configPanel, (slider) -> {
+                    int newVariety = Math.round(slider.getValue());
+                    if ( newVariety != getVariety() ) {
+                        config.put(CONFIG_VARIETY, String.valueOf(newVariety));
+                        saveConfig();
+                    }
+                }
+        );
+        configPanel.addUIElement(varietyLabel);
+        configPanel.addUIElement(varietySlider);
+        BaseMod.registerModBadge(badgeTexture, "Evolution", "Henning Koehler",
+                "Defeat bosses for persistent improvements.", configPanel);
     }
 
     @Override
