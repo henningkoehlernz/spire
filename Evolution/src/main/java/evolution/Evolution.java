@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.Prefs;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
@@ -40,6 +41,7 @@ public class Evolution implements
     private static final String EVOLUTION_PATH = "preferences/evolution";
     private static final String CONFIG_PATH = "preferences/evolution.cfg";
     private static final String CONFIG_VARIETY = "variety";
+    private static final String CONFIG_STRICT = "strict";
     private static TreeMap<String, int[]> evolution = new TreeMap<String, int[]>();
     private static TreeMap<String, String> config = new TreeMap<String, String>();
 
@@ -108,6 +110,10 @@ public class Evolution implements
         return Integer.valueOf(config.getOrDefault(CONFIG_VARIETY, "1"));
     }
 
+    public static boolean strictTags() {
+        return Boolean.valueOf(config.getOrDefault(CONFIG_STRICT, "true"));
+    }
+
     public static void initialize() {
         new Evolution();
     }
@@ -151,6 +157,16 @@ public class Evolution implements
         );
         configPanel.addUIElement(varietyLabel);
         configPanel.addUIElement(varietySlider);
+        // configure basic strike/defend matching
+        ModLabeledToggleButton strictButton = new ModLabeledToggleButton(
+                "Require tags for basic strike/defend.", 400.0f, 550.0f,
+                Settings.CREAM_COLOR, FontHelper.charDescFont, strictTags(),
+                configPanel, (label) -> {}, (button) -> {
+                    config.put(CONFIG_STRICT, String.valueOf(button.enabled));
+                    saveConfig();
+                }
+        );
+        configPanel.addUIElement(strictButton);
         BaseMod.registerModBadge(badgeTexture, "Evolution", "Henning Koehler",
                 "Defeat bosses for persistent improvements.", configPanel);
     }
@@ -162,7 +178,7 @@ public class Evolution implements
         AbstractRelic relic = new Axolotl();
         relic.counter = ep;
         relic.instantObtain();
-        int leftover = ep - CardReplacer.replaceBasicCards(ep);
+        int leftover = ep - CardReplacer.replaceBasicCards(ep, strictTags());
         if ( leftover > 0 )
             p.increaseMaxHp(leftover, true);
         logger.info("added evolution relic");
