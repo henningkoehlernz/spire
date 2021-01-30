@@ -1,0 +1,10 @@
+{
+  "modid": "bossed-relics",
+  "name": "Bossed Relics",
+  "author_list": ["hkoehler"],
+  "description": "Improves or reworks some of the weaker boss relics.",
+  "version": "1.0.0",
+  "sts_version": "12-13-2020",
+  "mts_version": "3.15.0",
+  "dependencies": ["basemod"]
+}

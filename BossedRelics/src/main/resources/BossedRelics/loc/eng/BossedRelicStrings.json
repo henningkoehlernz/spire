@@ -1,0 +1,10 @@
+{
+  "Ring of the Serpent": {
+    "NAME": "Ring of the Serpent",
+    "FLAVOR": "Your ring has morphed and changed forms.",
+    "DESCRIPTIONS": [
+      "Replaces #gRing #gof #gthe #gSnake. ",
+      "At the start of your turn, draw #b2 additional card."
+    ]
+  }
+}
