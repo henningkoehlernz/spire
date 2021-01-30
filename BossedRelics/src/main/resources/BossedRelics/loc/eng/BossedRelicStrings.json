@@ -28,5 +28,13 @@
       "Upon pickup, remove #b2 cards from your deck. The first time you shuffle your deck each turn gain [E] .",
       "Choose 2 Cards to Remove."
     ]
+  },
+  "Pandora's Box": {
+    "NAME": "Pandora's Box",
+    "FLAVOR": "You have a bad feeling about opening this.",
+    "DESCRIPTIONS": [
+      "At the start of your turn, play the top card of your draw pile.",
+      "Pandora's Box has been opened..."
+    ]
   }
 }
