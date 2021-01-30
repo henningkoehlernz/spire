@@ -12,8 +12,8 @@ public class BossedRingOfTheSerpent {
             paramtypez = {}
     )
     public static class OnEquip {
-        public static void Prefix(RingOfTheSerpent __instance) {
-            ++AbstractDungeon.player.masterHandSize;
+        public static void Replace(RingOfTheSerpent __instance) {
+            AbstractDungeon.player.masterHandSize += 2;
         }
     }
 
@@ -23,8 +23,8 @@ public class BossedRingOfTheSerpent {
             paramtypez = {}
     )
     public static class OnUnequip {
-        public static void Prefix(RingOfTheSerpent __instance) {
-            --AbstractDungeon.player.masterHandSize;
+        public static void Replace(RingOfTheSerpent __instance) {
+            AbstractDungeon.player.masterHandSize -= 2;
         }
     }
 

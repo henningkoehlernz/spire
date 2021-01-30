@@ -6,5 +6,12 @@
       "Replaces #gRing #gof #gthe #gSnake. ",
       "At the start of your turn, draw #b2 additional card."
     ]
+  },
+  "FrozenCore": {
+    "NAME": "Frozen Core",
+    "FLAVOR": "The crack in your core has been filled with a pulsating cold energy.",
+    "DESCRIPTIONS": [
+      "Replaces #bCracked #bCore. At the end of your turn, #yChannel #b1 #yFrost."
+    ]
   }
 }
