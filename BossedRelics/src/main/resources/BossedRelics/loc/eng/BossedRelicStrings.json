@@ -20,5 +20,13 @@
     "DESCRIPTIONS": [
       "Replaces #pPure #pWater. At the start of each combat, add #b3 #yMiracles into your hand. Whenever you play a #yMiracle, draw a card."
     ]
+  },
+  "Empty Cage": {
+    "NAME": "Empty Cage",
+    "FLAVOR": "\"How unusual to cage that which you worship.\" - Ranwid",
+    "DESCRIPTIONS": [
+      "Upon pickup, remove #b2 cards from your deck. The first time you shuffle your deck each turn gain [E] .",
+      "Choose 2 Cards to Remove."
+    ]
   }
 }
