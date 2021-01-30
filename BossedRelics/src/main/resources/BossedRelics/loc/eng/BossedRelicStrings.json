@@ -36,5 +36,13 @@
       "At the start of your turn, play the top card of your draw pile.",
       "Pandora's Box has been opened..."
     ]
+  },
+  "Astrolabe": {
+    "NAME": "Astrolabe",
+    "FLAVOR": "A tool to glean invaluable knowledge from the stars.",
+    "DESCRIPTIONS": [
+      "At the start of each combat, reduce the cost of #b3 random cards by #b1 and upgrade them.",
+      "Choose 3 cards for "
+    ]
   }
 }
