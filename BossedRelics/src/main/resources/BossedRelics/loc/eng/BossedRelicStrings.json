@@ -44,5 +44,13 @@
       "At the start of each combat, reduce the cost of #b3 random cards by #b1 and upgrade them.",
       "Choose 3 cards for "
     ]
+  },
+  "Tiny House": {
+    "NAME": "Tiny House",
+    "FLAVOR": "\"A near perfect implementation of miniaturization. My finest work to date, but still not adequate.\" - The Architect",
+    "DESCRIPTIONS": [
+      "Whenever you lose HP, gain #b",
+      " #yMetallicize."
+    ]
   }
 }
