@@ -52,5 +52,14 @@
       "Whenever you lose HP, gain #b",
       " #yMetallicize."
     ]
+  },
+  "Runic Cube": {
+    "NAME": "Runic Cube",
+    "FLAVOR": "The runes are indecipherable.",
+    "DESCRIPTIONS": [
+      "Whenever you lose HP, draw #b",
+      " card. Cards drawn this way cost #b0 until played.",
+      ""
+    ]
   }
 }
