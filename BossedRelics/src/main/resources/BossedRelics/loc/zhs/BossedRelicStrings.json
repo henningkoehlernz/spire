@@ -1,0 +1,65 @@
+{
+  "Ring of the Serpent": {
+    "NAME": "Ring of the Serpent",
+    "FLAVOR": "Your ring has morphed and changed forms.",
+    "DESCRIPTIONS": [
+      "Replaces #gRing #gof #gthe #gSnake. ",
+      "At the start of your turn, draw #b2 additional card."
+    ]
+  },
+  "FrozenCore": {
+    "NAME": "Frozen Core",
+    "FLAVOR": "The crack in your core has been filled with a pulsating cold energy.",
+    "DESCRIPTIONS": [
+      "Replaces #bCracked #bCore. At the end of your turn, #yChannel #b1 #yFrost."
+    ]
+  },
+  "HolyWater": {
+    "NAME": "Holy Water",
+    "FLAVOR": "Collected from a time before the Spire.",
+    "DESCRIPTIONS": [
+      "Replaces #pPure #pWater. At the start of each combat, add #b3 #yMiracles into your hand. Whenever you play a #yMiracle, draw a card."
+    ]
+  },
+  "Empty Cage": {
+    "NAME": "Empty Cage",
+    "FLAVOR": "\"How unusual to cage that which you worship.\" - Ranwid",
+    "DESCRIPTIONS": [
+      "Upon pickup, remove #b2 cards from your deck. The first time you shuffle your deck each turn gain [E] .",
+      "Choose 2 Cards to Remove."
+    ]
+  },
+  "Pandora's Box": {
+    "NAME": "Pandora's Box",
+    "FLAVOR": "You have a bad feeling about opening this.",
+    "DESCRIPTIONS": [
+      "At the start of your turn, play the top card of your draw pile.",
+      "Pandora's Box has been opened..."
+    ]
+  },
+  "Astrolabe": {
+    "NAME": "Astrolabe",
+    "FLAVOR": "A tool to glean invaluable knowledge from the stars.",
+    "DESCRIPTIONS": [
+      "At the start of each combat, reduce the cost of #b3 random cards by #b1 and upgrade them.",
+      "Choose 3 cards for "
+    ]
+  },
+  "Tiny House": {
+    "NAME": "Tiny House",
+    "FLAVOR": "\"A near perfect implementation of miniaturization. My finest work to date, but still not adequate.\" - The Architect",
+    "DESCRIPTIONS": [
+      "Whenever you lose HP, gain #b",
+      " #yMetallicize."
+    ]
+  },
+  "Runic Cube": {
+    "NAME": "Runic Cube",
+    "FLAVOR": "The runes are indecipherable.",
+    "DESCRIPTIONS": [
+      "Whenever you lose HP, draw #b",
+      " card. Cards drawn this way cost #b0 until played.",
+      ""
+    ]
+  }
+}

@@ -1,6 +1,7 @@
 package bossed;
 
 import basemod.*;
+import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
@@ -11,7 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @SpireInitializer
-public class BossedRelics implements EditStringsSubscriber {
+public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscriber {
 
     private static final Logger logger = LogManager.getLogger(bossed.BossedRelics.class.getName());
 
@@ -37,4 +38,10 @@ public class BossedRelics implements EditStringsSubscriber {
         BaseMod.loadCustomStringsFile(RelicStrings.class, languagePath() + "BossedRelicStrings.json");
     }
 
+    @Override
+    public void receivePostInitialize() {
+        Texture badgeTexture = new Texture(MODNAME + "/badge.png");
+        BaseMod.registerModBadge(badgeTexture, "Bossed Relics", "Henning Koehler",
+                "Improves or reworks some of the weaker boss relics.", null);
+    }
 }
