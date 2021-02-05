@@ -32,7 +32,7 @@ public class BossedAstrolabe {
             if ( relic != null ) {
                 relic.flash();
                 // find candidates
-                ArrayList<AbstractCard> candidates = new ArrayList();
+                ArrayList<AbstractCard> candidates = new ArrayList<AbstractCard>();
                 for ( AbstractCard card : __instance.drawPile.group )
                     if ( card.cost > 0 || card.canUpgrade() ) {
                         candidates.add(card);
