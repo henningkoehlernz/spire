@@ -1,64 +1,64 @@
 {
   "Ring of the Serpent": {
-    "NAME": "Ring of the Serpent",
-    "FLAVOR": "Your ring has morphed and changed forms.",
+    "NAME": "长蛇戒指",
+    "FLAVOR": "你的戒指改变了形态，焕然一新。",
     "DESCRIPTIONS": [
-      "Replaces #gRing #gof #gthe #gSnake. ",
-      "At the start of your turn, draw #b2 additional card."
+      "替换 #g蛇之戒指 。",
+      "在你的每个回合开始时，额外抽 #b2 张牌。"
     ]
   },
   "FrozenCore": {
-    "NAME": "Frozen Core",
-    "FLAVOR": "The crack in your core has been filled with a pulsating cold energy.",
+    "NAME": "冻结核心",
+    "FLAVOR": "某种脉动的冰冷能量充满了你核心中的破损处。",
     "DESCRIPTIONS": [
-      "Replaces #bCracked #bCore. At the end of your turn, #yChannel #b1 #yFrost."
+      "替换 #b破损核心 。在你的回合结束时， #y生成 #b1 个 #y冰霜 充能球。"
     ]
   },
   "HolyWater": {
-    "NAME": "Holy Water",
-    "FLAVOR": "Collected from a time before the Spire.",
+    "NAME": "圣水",
+    "FLAVOR": "从高塔出现的时代前收集来的水。",
     "DESCRIPTIONS": [
-      "Replaces #pPure #pWater. At the start of each combat, add #b3 #yMiracles into your hand. Whenever you play a #yMiracle, draw a card."
+      "替换 #p至纯之水 。在每场战斗开始时，将 #b3 张 #y奇迹 放入你的手牌。每当你打出一张 #y奇迹 ，抽一张牌。"
     ]
   },
   "Empty Cage": {
-    "NAME": "Empty Cage",
-    "FLAVOR": "\"How unusual to cage that which you worship.\" - Ranwid",
+    "NAME": "空鸟笼",
+    "FLAVOR": "“将崇拜之物关进笼子，这是多么奇异的行为啊。”——兰伟德",
     "DESCRIPTIONS": [
-      "Upon pickup, remove #b2 cards from your deck. The first time you shuffle your deck each turn gain [E] .",
-      "Choose 2 Cards to Remove."
+      "拾起时，选择移除牌组中的 #b2 张牌。每回合你第一次洗牌时，获得 [E] 。",
+      "选择2张要移除的牌。"
     ]
   },
   "Pandora's Box": {
-    "NAME": "Pandora's Box",
-    "FLAVOR": "You have a bad feeling about opening this.",
+    "NAME": "潘多拉的魔盒",
+    "FLAVOR": "你觉得打开这个盒子会很不吉利。",
     "DESCRIPTIONS": [
-      "At the start of your turn, play the top card of your draw pile.",
-      "Pandora's Box has been opened..."
+      "在你的回合开始时，打出你抽牌堆顶部的牌。",
+      "潘多拉的魔盒已经打开了......"
     ]
   },
   "Astrolabe": {
-    "NAME": "Astrolabe",
-    "FLAVOR": "A tool to glean invaluable knowledge from the stars.",
+    "NAME": "星盘",
+    "FLAVOR": "可以从星星中探知宝贵知识的工具。",
     "DESCRIPTIONS": [
-      "At the start of each combat, reduce the cost of #b3 random cards by #b1 and upgrade them.",
-      "Choose 3 cards for "
+      "每场战斗开始时，随机将你牌组中 #b3 张牌的耗能减少 #b1 点并将它们 #y升级 （仅在当场战斗中有效）。",
+      "选择3张牌"
     ]
   },
   "Tiny House": {
-    "NAME": "Tiny House",
-    "FLAVOR": "\"A near perfect implementation of miniaturization. My finest work to date, but still not adequate.\" - The Architect",
+    "NAME": "小屋子",
+    "FLAVOR": "“一项近乎完美的微缩化工程。这是我至今最优秀的作品，但仍然远远不够。”——建筑师",
     "DESCRIPTIONS": [
-      "Whenever you lose HP, gain #b",
-      " #yMetallicize."
+      "每当你失去生命时，获得 #b",
+      " 层 #y金属化。"
     ]
   },
   "Runic Cube": {
-    "NAME": "Runic Cube",
-    "FLAVOR": "The runes are indecipherable.",
+    "NAME": "符文立方体",
+    "FLAVOR": "上面的符文无法辨识。",
     "DESCRIPTIONS": [
-      "Whenever you lose HP, draw #b",
-      " card. Cards drawn this way cost #b0 until played.",
+      "每当你失去生命时，抽 #b",
+      " 张牌。以此方式抽到的牌在被打出之前耗能变为 #b0 。",
       ""
     ]
   }
