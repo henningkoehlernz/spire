@@ -21,8 +21,8 @@
   },
   "TH:DeckOfManyThings": {
     "NAME": "Deck of Many Things",
-    "DESCRIPTION": "Add a random rare card to your hand. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Add a random upgraded rare card to your hand. NL Exhaust."
+    "DESCRIPTION": "Add a random rare or treasure card to your hand. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Add a random upgraded rare or treasure card to your hand. NL Exhaust."
   },
   "TH:ArmorSpikes": {
     "NAME": "Armor Spikes",
