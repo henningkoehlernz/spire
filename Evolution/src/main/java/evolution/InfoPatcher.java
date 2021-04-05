@@ -36,7 +36,7 @@ public class InfoPatcher {
         public static void Postfix(CharacterOption __instance, SpriteBatch sb) {
             if ( !__instance.name.equals("") && !Settings.isMobile ) {
                 Texture TP_EVO = new Texture(Evolution.IMG_PATH + "evolution.png");
-                int ascension = CardCrawlGame.mainMenuScreen.charSelectScreen.isAscensionMode ? __instance.c.getPrefs().getInteger("LAST_ASCENSION_LEVEL") : 0;
+                int ascension = CardCrawlGame.mainMenuScreen.charSelectScreen.isAscensionMode ? __instance.c.getPrefs().getInteger("LAST_ASCENSION_LEVEL", 1) : 0;
                 int ep = Evolution.getEvolutionTotal(__instance.c.chosenClass, ascension);
                 float infoX = (float) Reflection.get(__instance, CharacterOption.class, "infoX");
                 float infoY = (float) Reflection.get(__instance, CharacterOption.class, "infoY");
