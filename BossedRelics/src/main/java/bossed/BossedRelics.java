@@ -30,6 +30,8 @@ public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscr
     private static String languagePath() {
         if ( Settings.language == Settings.GameLanguage.ZHS )
             return MODNAME + "/loc/zhs/";
+        else if ( Settings.language == Settings.GameLanguage.FRA )
+            return MODNAME + "/loc/fra/";
         return MODNAME + "/loc/eng/";
     }
 

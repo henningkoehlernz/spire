@@ -27,22 +27,32 @@ public class BossedAstrolabe {
             paramtypez = {}
     )
     public static class ApplyStartOfCombatPreDrawLogic {
+        static final int COUNT = 3;
         public static void Postfix(AbstractPlayer __instance) {
             AbstractRelic relic = __instance.getRelic(Astrolabe.ID);
             if ( relic != null ) {
                 relic.flash();
-                // find candidates
+                // find candidates - preferably ones that can both be upgraded and cost-reduced
                 ArrayList<AbstractCard> candidates = new ArrayList<AbstractCard>();
                 for ( AbstractCard card : __instance.drawPile.group )
-                    if ( card.cost > 0 || card.canUpgrade() ) {
+                    if ( card.cost > 0 && card.canUpgrade() )
                         candidates.add(card);
-                    }
+                if ( candidates.size() < COUNT ) {
+                    for ( AbstractCard card : __instance.drawPile.group )
+                        if ( card.cost > 0 && !card.canUpgrade() )
+                            candidates.add(card);
+                }
+                if ( candidates.size() < COUNT ) {
+                    for ( AbstractCard card : __instance.drawPile.group )
+                        if ( card.cost <= 0 && card.canUpgrade() )
+                            candidates.add(card);
+                }
                 // reduce cost of up to 3 cards to 0
-                for ( int i = 0; i < 3 && candidates.size() > 0; i++ ) {
+                for ( int i = 0; i < COUNT && candidates.size() > 0; i++ ) {
                     int pick = AbstractDungeon.cardRandomRng.random(0, candidates.size() - 1);
                     AbstractCard card = candidates.remove(pick);
-                    card.modifyCostForCombat(-1);
                     card.upgrade();
+                    card.modifyCostForCombat(-1);
                 }
             }
         }

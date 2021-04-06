@@ -1,0 +1,65 @@
+{
+  "Ring of the Serpent": {
+    "NAME": "Anneau du grand serpent",
+    "FLAVOR": "Votre anneau à mué et à changé de forme.",
+    "DESCRIPTIONS": [
+      "Remplace l'artefact #gAnneau #gdu #gSerpent. ",
+      "Au debut de votre tour, piochez #b2 cartes supplémentaires."
+    ]
+  },
+  "FrozenCore": {
+    "NAME": "Noyau congelé",
+    "FLAVOR": "La fissure dans votre noyau a été remplie par une puissante énergie froide.",
+    "DESCRIPTIONS": [
+      "Remplace #bNoyau #bfissuré. A la fin de votre tour, #yCanalisez #b1 #yOrbe #yGlaciaire."
+    ]
+  },
+  "HolyWater": {
+    "NAME": "Eau miraculeuse",
+    "FLAVOR": "Collectée bien avant l'apparition de la tour.",
+    "DESCRIPTIONS": [
+      "Remplace #pEau #pPure. Au début de chaque combat, ajoute #b3 #yMiracles dans votre main. Quand vous jouez un #yMiracle, Piochez une carte."
+    ]
+  },
+  "Empty Cage": {
+    "NAME": "Cage vide",
+    "FLAVOR": "\"Comme il est inhabituel de mettre en cage ce que vous adorez.\" - Ranwid",
+    "DESCRIPTIONS": [
+      "A l'obtention, retirez #b2 cartes de votre deck. La première fois que vous mélangez votre deck chaque tour, gagnez [E] .",
+      "Choisissez 2 cartes à retirer."
+    ]
+  },
+  "Pandora's Box": {
+    "NAME": "Boîte de Pandore",
+    "FLAVOR": "Vous avez un mauvais préssentiment.",
+    "DESCRIPTIONS": [
+      "Au début de votre tour, jouez gratuitement la carte du dessus de votre pioche.",
+      "La boîte de Pandore a été ouverte..."
+    ]
+  },
+  "Astrolabe": {
+    "NAME": "Astrolabe",
+    "FLAVOR": "Un outil pour glaner des connaissances inestimables des étoiles.",
+    "DESCRIPTIONS": [
+      "Au début de chaque combat, réduisez le coût de #b3 cartes aléatoires de #b1 améliorez les.",
+      "Choose 3 cards for "
+    ]
+  },
+  "Tiny House": {
+    "NAME": "Petite maison",
+    "FLAVOR": "\"Une mise en œuvre quasi parfaite de la miniaturisation. Mon meilleur travail à ce jour, mais toujours insuffisant.\" - L'architect",
+    "DESCRIPTIONS": [
+      "Lorsque vou perdez des PV, gagnez #b",
+      " #yMétalisation."
+    ]
+  },
+  "Runic Cube": {
+    "NAME": "Cube runique",
+    "FLAVOR": "Les runes sont indéchiffrables.",
+    "DESCRIPTIONS": [
+      "Lorsque vous perdez des PV, piochez #b",
+      " carte(s). Les cartes piochées de cette façon coûtent #b0 jusqu'à ce qu'elles soient jouées.",
+      ""
+    ]
+  }
+}
