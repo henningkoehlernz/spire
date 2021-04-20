@@ -61,5 +61,12 @@
       " card. Cards drawn this way cost #b0 until played.",
       ""
     ]
+  },
+  "WristBlade": {
+    "NAME": "Wrist Blade",
+    "FLAVOR": "Handy for assassinations.",
+    "DESCRIPTIONS": [
+      "#yAttacks that cost #b0 deal #b4 additional damage. The first time you play a such an #yattack each turn, draw a card."
+    ]
   }
 }
