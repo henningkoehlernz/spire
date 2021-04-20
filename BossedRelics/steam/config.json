@@ -1,5 +1,5 @@
 {
-  "steamPublishedID": "",
+  "steamPublishedID": "2382014418",
   "title": "Bossed Relics",
   "description": "[h1]Improves or reworks some of the weaker boss relics.[/h1]\n\n[h3]Improved:[/h3]\n* Empty Cage: Upon pickup, remove 2 cards from your deck. The first time you shuffle your deck each turn gain [E].\n* Frozen Core: Replaces Cracked Core. At the end of your turn, Channel 1 Frost.\n* Holy Water: Replaces Pure Water. At the start of each combat, add 3 Miracles into your hand. Whenever you play a Miracle, draw a card.\n* Ring of the Serpent: Replaces Ring of the Snake. At the start of your turn, draw 2 additional cards.\n* Runic Cube: Whenever you lose HP, draw 1 card. Cards drawn this way cost 0 until played.\n\n[h3]Reworked:[/h3]\n* Astrolabe: At the start of each combat, reduce the cost of 3 random cards by 1 and upgrade them.\n* Pandora's Box: At the start of your turn, play the top card of your draw pile.\n* Tiny House: The first 5 times you lose HP each combat, gain 3 Metallicize.",
   "visibility": "public",
