@@ -11,10 +11,10 @@ import com.megacrit.cardcrawl.relics.SacredBark;
 
 public class BossedSacredBark {
 
-    public static int emptyPotionSlots(AbstractPlayer p) {
+    public static int potionCount(AbstractPlayer p) {
         int count = 0;
         for ( AbstractPotion potion : p.potions ) {
-            if ( potion instanceof PotionSlot )
+            if ( !(potion instanceof PotionSlot) )
                 count++;
         }
         return count;
@@ -28,7 +28,7 @@ public class BossedSacredBark {
     public static class ApplyStartOfTurnRelics {
         public static void Postfix(AbstractPlayer __instance) {
             AbstractRelic relic = __instance.getRelic(SacredBark.ID);
-            if ( relic != null && emptyPotionSlots(__instance) > 1 ) {
+            if ( relic != null && potionCount(__instance) == 0 ) {
                 relic.flash();
                 AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(1));
             }
