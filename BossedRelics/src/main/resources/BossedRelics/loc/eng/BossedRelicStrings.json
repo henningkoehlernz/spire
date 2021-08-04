@@ -65,7 +65,7 @@
     "NAME": "Wrist Blade",
     "FLAVOR": "Handy for assassinations.",
     "DESCRIPTIONS": [
-      "#yAttacks that cost #b0 deal #b4 additional damage. The first time you play a such an #yattack each turn, draw a card."
+      "#yAttacks that cost #b0 deal #b4 additional damage. The first time you play such an #yattack each turn, draw a card."
     ]
   },
   "SacredBark": {
