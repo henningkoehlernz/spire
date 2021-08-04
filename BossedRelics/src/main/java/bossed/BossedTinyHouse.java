@@ -3,7 +3,7 @@ package bossed;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.powers.MetallicizePower;
+import com.megacrit.cardcrawl.powers.PlatedArmorPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.TinyHouse;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 public class BossedTinyHouse {
 
     static final int BLOCK = 3;
-    static final int REPEATS = 5;
+    static final int REPEATS = -1; // -1 means infinite repeats
 
     @SpirePatch(
             clz = TinyHouse.class,
@@ -30,10 +30,10 @@ public class BossedTinyHouse {
     )
     public static class GetUpdatedDescription {
         public static String Replace(TinyHouse __instance) {
-            if ( __instance.DESCRIPTIONS.length > 2 )
-                return __instance.DESCRIPTIONS[0] + REPEATS + __instance.DESCRIPTIONS[1] + BLOCK + __instance.DESCRIPTIONS[2];
-            else // legacy localization
-                return __instance.DESCRIPTIONS[0] + BLOCK + __instance.DESCRIPTIONS[1] + " (x" + REPEATS + ")";
+            String description = __instance.DESCRIPTIONS[0] + BLOCK + __instance.DESCRIPTIONS[1];
+            if ( REPEATS > 0 )
+                description += " (x" + REPEATS + ")";
+            return description;
         }
     }
 
@@ -57,10 +57,11 @@ public class BossedTinyHouse {
     public static class WasHPLost {
         public static void Postfix(AbstractRelic __instance, int damageAmount) {
             if ( __instance instanceof TinyHouse ) {
-                if ( AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && damageAmount > 0 && __instance.counter > 0 ) {
-                    __instance.counter--;
+                if ( AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && damageAmount > 0 && (__instance.counter > 0 || REPEATS < 0) ) {
+                    if ( __instance.counter > 0 )
+                        __instance.counter--;
                     __instance.flash();
-                    AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new MetallicizePower(AbstractDungeon.player, BLOCK), BLOCK));
+                    AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new PlatedArmorPower(AbstractDungeon.player, BLOCK), BLOCK));
                 }
             }
         }

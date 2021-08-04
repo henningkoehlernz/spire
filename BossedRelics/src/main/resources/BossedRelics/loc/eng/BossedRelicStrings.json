@@ -48,9 +48,8 @@
     "NAME": "Tiny House",
     "FLAVOR": "\"A near perfect implementation of miniaturization. My finest work to date, but still not adequate.\" - The Architect",
     "DESCRIPTIONS": [
-      "The first #b",
-      " times you lose HP each combat, gain #b",
-      " #yMetallicize."
+      "Whenever you lose HP, gain #b",
+      " #yPlated #yArmor."
     ]
   },
   "Runic Cube": {
