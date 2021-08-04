@@ -67,5 +67,12 @@
     "DESCRIPTIONS": [
       "#yAttacks that cost #b0 deal #b4 additional damage. The first time you play a such an #yattack each turn, draw a card."
     ]
+  },
+  "SacredBark": {
+    "NAME": "Sacred Bark",
+    "FLAVOR": "A bark rumored to originate from the World tree.",
+    "DESCRIPTIONS": [
+      "Double the effectiveness of potions. When you start your turn with at least two empty potion slots, gain [E] ."
+    ]
   }
 }
