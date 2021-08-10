@@ -23,7 +23,7 @@ public class EnergyPotion extends AbstractTreasure {
 
     public EnergyPotion() {
         super(ID, NAME, IMG_PATH, COST, DESCRIPTION, CardTarget.NONE);
-        this.baseMagicNumber = this.magicNumber = 4;
+        this.baseMagicNumber = this.magicNumber = 3;
     }
 
     @Override
