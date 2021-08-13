@@ -72,7 +72,7 @@
     "NAME": "Sacred Bark",
     "FLAVOR": "A bark rumored to originate from the World tree.",
     "DESCRIPTIONS": [
-      "Double the effectiveness of potions. When you start your turn without potions, gain [E] ."
+      "Double the effectiveness of potions. Reduce all HP loss by the number of empty potion slots (max 2)."
     ]
   }
 }
