@@ -41,7 +41,7 @@
     "NAME": "Astrolabe",
     "FLAVOR": "A tool to glean invaluable knowledge from the stars.",
     "DESCRIPTIONS": [
-      "At the start of each combat, reduce the cost of #b3 random cards by #b1 and upgrade them."
+      "At the start of combat, upgrade #b3 random cards and reduce their cost by #b1."
     ]
   },
   "Tiny House": {
@@ -73,6 +73,147 @@
     "FLAVOR": "A bark rumored to originate from the World tree.",
     "DESCRIPTIONS": [
       "Double the effectiveness of potions. Reduce all HP loss by the number of empty potion slots (max 2)."
+    ]
+  },
+  "MawBank": {
+    "NAME": "Maw Bank",
+    "FLAVOR": "Surprisingly popular, despite maw attacks being a regular occurrence.",
+    "DESCRIPTIONS": [
+      "Whenever you climb a floor, gain #b",
+      " #yGold. Disabled for #b3 floors after you spend any #yGold at a shop.",
+      "This relic has been used up."
+    ]
+  },
+  "Omamori": {
+    "NAME": "Omamori",
+    "FLAVOR": "A common charm for staving off vile spirits. This one seems to possess a spark of divine energy.",
+    "DESCRIPTIONS": [
+      "Negate the next #b2 #rCurses you obtain. Resets after obtaining a #rCurse.",
+      "Negate the next #rCurse you obtain.",
+      "This relic has been used up."
+    ]
+  },
+  "Strawberry": {
+    "NAME": "Strawberry",
+    "FLAVOR": "\"Delicious! Haven't seen any of these since the blight.\" - Ranwid",
+    "DESCRIPTIONS": [
+      "Upon pickup, raise your Max HP by #b",
+      "At the end of combat, heal #b1 HP."
+    ]
+  },
+  "Pear": {
+    "NAME": "Pear",
+    "FLAVOR": "A common fruit before the Spireblight.",
+    "DESCRIPTIONS": [
+      "Upon pickup, raise your Max HP by #b",
+      "At the end of combat, heal #b1 HP."
+    ]
+  },
+  "Mango": {
+    "NAME": "Mango",
+    "FLAVOR": "The most coveted forgotten fruit. Impeccably preserved with no signs of Spireblight.",
+    "DESCRIPTIONS": [
+      "Upon pickup, raise your Max HP by #b",
+      "At the end of combat, heal #b1 HP."
+    ]
+  },
+  "War Paint": {
+    "NAME": "War Paint",
+    "FLAVOR": "In the past, Ironclads would create wards using enchanted war paint before charging into battle.",
+    "DESCRIPTIONS": [
+      "At the start of combat, #yUpgrade #b",
+      " random #ySkills."
+    ]
+  },
+  "Whetstone": {
+    "NAME": "Whetstone",
+    "FLAVOR": "\"Flesh never beats steel.\" - Kublai the Great",
+    "DESCRIPTIONS": [
+      "At the start of combat, #yUpgrade #b",
+      " random #yAttacks."
+    ]
+  },
+  "Bottled Flame": {
+    "NAME": "Bottled Flame",
+    "FLAVOR": "Inside the bottle resides a flame that eternally burns.",
+    "DESCRIPTIONS": [
+      "Upon pickup, choose an #yAttack. Start each combat with this card in your hand. It costs #b1 less that turn.",
+      "Choose a card for ",
+      "Start each combat with ",
+      " in your hand."
+    ]
+  },
+  "Bottled Lightning": {
+    "NAME": "Bottled Lightning",
+    "FLAVOR": "Peering into the swirling maelstrom, you see a part of yourself staring back.",
+    "DESCRIPTIONS": [
+      "Upon pickup, choose a #ySkill. Start each combat with this card in your hand. It costs #b1 less that turn.",
+      "Choose a card for ",
+      "Start each combat with ",
+      " in your hand."
+    ]
+  },
+  "Bottled Tornado": {
+    "NAME": "Bottled Tornado",
+    "FLAVOR": "The bottle gently hums and whirs.",
+    "DESCRIPTIONS": [
+      "Upon pickup, choose a #yPower card. Start each combat with this card in your hand. It costs #b1 less that turn.",
+      "Choose a card for ",
+      "Start each combat with ",
+      " in your hand."
+    ]
+  },
+  "Lizard Tail": {
+    "NAME": "Lizard Tail",
+    "FLAVOR": "A fake tail to trick enemies during combat.",
+    "DESCRIPTIONS": [
+      "When you would die, heal to #b50% of your Max HP instead (works once per combat). Each use reduces healing by #b20%."
+    ]
+  },
+  "Old Coin": {
+    "NAME": "Old Coin",
+    "FLAVOR": "Unique coins are highly valued by merchants for their historical value and rare metallic composition.",
+    "DESCRIPTIONS": [
+      "Upon pickup, gain #b300 #yGold. Whenever you gain gold, gain #b1 more."
+    ]
+  },
+  "WingedGreaves": {
+    "NAME": "Wing Boots",
+    "FLAVOR": "Stylish.",
+    "DESCRIPTIONS": [
+      "You may ignore paths when choosing the next room to travel to. Cannot be used on consecutive floors."
+    ]
+  },
+  "Cauldron": {
+    "NAME": "Cauldron",
+    "FLAVOR": "The Merchant is actually a rather skilled potion brewer. Buy 4 get 1 free.",
+    "DESCRIPTIONS": [
+      "Upon pickup, brews #b5 random potions. Gain [E] whenever you use a potion.",
+      "Blup blip bloop...!"
+    ]
+  },
+  "DollysMirror": {
+    "NAME": "Dolly's Mirror",
+    "FLAVOR": "\"I look funny in this.\"",
+    "DESCRIPTIONS": [
+      "At the start of combat, obtain an additional copy of a card in your deck.",
+      "Choose 1 Card to Copy."
+    ]
+  },
+  "Lee's Waffle": {
+    "NAME": "Lee's Waffle",
+    "FLAVOR": "\"Tastiest treat you will find in all the Spire! Baked today just for you.\"",
+    "DESCRIPTIONS": [
+      "Upon pickup, raise your Max HP by #b",
+      " and heal all of your HP. Whenever your Max HP increase by #bX, heal #bX."
+    ]
+  },
+  "Orrery": {
+    "NAME": "Orrery",
+    "FLAVOR": "\"Once you understand the universe...\" - Zoroth",
+    "DESCRIPTIONS": [
+      "Upon pickup, choose and add #b5 cards to your deck. Whenever you add #b5 cards to your deck, upgrade a random card.",
+      "Knowledge!"
     ]
   }
 }

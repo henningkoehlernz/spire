@@ -44,6 +44,6 @@ public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscr
     public void receivePostInitialize() {
         Texture badgeTexture = new Texture(MODNAME + "/badge.png");
         BaseMod.registerModBadge(badgeTexture, "Bossed Relics", "Henning Koehler",
-                "Improves or reworks some of the weaker boss relics.", null);
+                "Improves or reworks some of the weaker boss relics, as well as non-boss relics with one time effects.", null);
     }
 }
