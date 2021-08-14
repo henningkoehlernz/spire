@@ -10,9 +10,6 @@ import com.megacrit.cardcrawl.relics.DollysMirror;
 
 public class BossedDollysMirror {
 
-    static final int BLOCK = 3;
-    static final int REPEATS = -1; // -1 means infinite repeats
-
     @SpirePatch(
             clz = DollysMirror.class,
             method = "onEquip",
