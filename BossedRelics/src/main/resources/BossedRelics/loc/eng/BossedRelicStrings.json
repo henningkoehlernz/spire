@@ -196,7 +196,7 @@
     "NAME": "Dolly's Mirror",
     "FLAVOR": "\"I look funny in this.\"",
     "DESCRIPTIONS": [
-      "At the start of combat, obtain an additional copy of a card in your deck.",
+      "Create a copy of the first card played each combat.",
       "Choose 1 Card to Copy."
     ]
   },
