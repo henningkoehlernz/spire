@@ -167,7 +167,7 @@
     "NAME": "Lizard Tail",
     "FLAVOR": "A fake tail to trick enemies during combat.",
     "DESCRIPTIONS": [
-      "When you would die, heal to #b50% of your Max HP instead (works once per combat). Each use reduces healing by #b20%."
+      "When you would die, heal to #b30% of your Max HP instead. Takes #b5 floors to grow back."
     ]
   },
   "Old Coin": {

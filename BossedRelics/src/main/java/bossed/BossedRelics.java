@@ -14,8 +14,6 @@ import org.apache.logging.log4j.Logger;
 @SpireInitializer
 public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscriber {
 
-    private static final Logger logger = LogManager.getLogger(bossed.BossedRelics.class.getName());
-
     // mod config variables
     public static final String MODNAME = "BossedRelics";
 
