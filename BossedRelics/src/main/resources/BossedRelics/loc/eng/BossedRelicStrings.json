@@ -131,7 +131,7 @@
       "Upon pickup, choose an #yAttack. Start each combat with this card in your hand. It costs #b1 less that turn.",
       "Choose a card for ",
       "Start each combat with ",
-      " in your hand."
+      " in your hand. It costs #b1 less that turn."
     ]
   },
   "Bottled Lightning": {
@@ -141,7 +141,7 @@
       "Upon pickup, choose a #ySkill. Start each combat with this card in your hand. It costs #b1 less that turn.",
       "Choose a card for ",
       "Start each combat with ",
-      " in your hand."
+      " in your hand. It costs #b1 less that turn."
     ]
   },
   "Bottled Tornado": {
@@ -151,7 +151,7 @@
       "Upon pickup, choose a #yPower card. Start each combat with this card in your hand. It costs #b1 less that turn.",
       "Choose a card for ",
       "Start each combat with ",
-      " in your hand."
+      " in your hand. It costs #b1 less that turn."
     ]
   },
   "Lizard Tail": {
@@ -172,7 +172,7 @@
     "NAME": "Wing Boots",
     "FLAVOR": "Stylish.",
     "DESCRIPTIONS": [
-      "You may ignore paths when choosing the next room to travel to. Cannot be used on consecutive floors."
+      "You may ignore paths when choosing the next room to travel to #b3 times. Recharges when resting."
     ]
   },
   "Cauldron": {
