@@ -203,7 +203,7 @@
     "NAME": "Orrery",
     "FLAVOR": "\"Once you understand the universe...\" - Zoroth",
     "DESCRIPTIONS": [
-      "Upon pickup, choose and add #b5 cards to your deck. Whenever you add #b5 cards to your deck, upgrade a random card.",
+      "Upon pickup, choose and add #b5 cards to your deck. For every #b5 cards you add to your deck, upgrade a random card.",
       "Knowledge!"
     ]
   }
