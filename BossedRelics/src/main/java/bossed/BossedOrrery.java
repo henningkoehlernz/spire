@@ -10,9 +10,6 @@ import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Random;
 
 public class BossedOrrery {
 
@@ -26,8 +23,9 @@ public class BossedOrrery {
             AbstractCard card = upgradableCards.get(AbstractDungeon.miscRng.random(upgradableCards.size() - 1));
             card.upgrade();
             AbstractDungeon.player.bottledCardUpgradeCheck(card);
-            AbstractDungeon.topLevelEffects.add(new ShowCardBrieflyEffect(card.makeStatEquivalentCopy()));
-            AbstractDungeon.topLevelEffects.add(new UpgradeShineEffect((float) Settings.WIDTH / 2.0F, (float)Settings.HEIGHT / 2.0F));
+            // must add to queue as card upgrade might trigger while iterating over topLevelEffects
+            AbstractDungeon.topLevelEffectsQueue.add(new ShowCardBrieflyEffect(card.makeStatEquivalentCopy()));
+            AbstractDungeon.topLevelEffectsQueue.add(new UpgradeShineEffect((float) Settings.WIDTH / 2.0F, (float)Settings.HEIGHT / 2.0F));
         }
     }
 
@@ -52,9 +50,9 @@ public class BossedOrrery {
             if ( __instance instanceof Orrery ) {
                 __instance.counter += 1;
                 if ( __instance.counter >= 5 ) {
+                    __instance.counter = 0;
                     __instance.flash();
                     upgradeRandomCard();
-                    __instance.counter = 0;
                 }
             }
         }
