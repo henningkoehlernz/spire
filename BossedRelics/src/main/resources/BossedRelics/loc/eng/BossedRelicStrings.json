@@ -165,7 +165,7 @@
     "NAME": "Old Coin",
     "FLAVOR": "Unique coins are highly valued by merchants for their historical value and rare metallic composition.",
     "DESCRIPTIONS": [
-      "Upon pickup, gain #b300 #yGold. Whenever you gain gold, gain #b3 more."
+      "Upon pickup, gain #b250 #yGold. Whenever you gain gold, gain #b5 more."
     ]
   },
   "WingedGreaves": {
