@@ -172,7 +172,7 @@
     "NAME": "Omamori",
     "FLAVOR": "A common charm for staving off vile spirits. This one seems to possess a spark of divine energy.",
     "DESCRIPTIONS": [
-      "Exhaust the first #rCurse you draw each combat. When you exhaust a curse, draw a card.",
+      "Exhaust the first #rCurse you draw each combat. When you exhaust a #rCurse, draw a card.",
       "When you exhaust a curse, draw a card.",
       "When you exhaust a curse, draw a card."
     ]

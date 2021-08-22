@@ -61,5 +61,160 @@
       " carte(s). Les cartes piochées de cette façon coûtent #b0 jusqu'à ce qu'elles soient jouées.",
       ""
     ]
+  },
+  "WristBlade": {
+    "NAME": "Poignard",
+    "FLAVOR": "Pratique pour les assassinats.",
+    "DESCRIPTIONS": [
+      "Les #yAttaques qui coûtent #b0 infligent #b4 dégâts supplémentaires. La première fois que vous jouez une telle #yattaque à chaque tour, piochez une carte."
+    ]
+  },
+  "SacredBark": {
+    "NAME": "Écorce sacrée",
+    "FLAVOR": "Une écorce originaire de l'arbre Monde selon les rumeurs.",
+    "DESCRIPTIONS": [
+      "Double l'efficacité des potions. Réduisez toutes les pertes de HP du nombre d'emplacements de potions vides (max 2)."
+    ]
+  },
+  "MawBank": {
+    "NAME": "Tirelire Gueule",
+    "FLAVOR": "Étonnamment populaire, malgré que les attaques de Gueules soient fréquentes.",
+    "DESCRIPTIONS": [
+      "Quand vous montez d'un étage, gagnez #b",
+      " #yd'Or. Désactivé pour les étages #b3 après avoir dépensé #yd'Or dans une boutique.",
+      "Cette relique a été épuisée."
+    ]
+  },
+  "Strawberry": {
+    "NAME": "Fraise",
+    "FLAVOR": "\"Délicieuse ! Je n'en avais pas vue depuis l'épidémie de rouille.\" - Ranwid",
+    "DESCRIPTIONS": [
+      "Quand vous l'obtenez, augmentez vos PV max de #b",
+      "À la fin du combat, récupérez #b1 PV."
+    ]
+  },
+  "Pear": {
+    "NAME": "Poire",
+    "FLAVOR": "Un fruit ordinaire avant les ravages de la tourouille.",
+    "DESCRIPTIONS": [
+      "Quand vous l'obtenez, augmentez vos PV max de #b",
+      "À la fin du combat, récupérez #b1 PV."
+    ]
+  },
+  "Mango": {
+    "NAME": "Mangue",
+    "FLAVOR": "Le plus convoité des fruits oubliés. Parfaitement conservé sans aucun signe de tourouille.",
+    "DESCRIPTIONS": [
+      "Quand vous l'obtenez, augmentez vos PV max de #b",
+      "À la fin du combat, récupérez #b1 PV."
+    ]
+  },
+  "War Paint": {
+    "NAME": "Peinture de guerre",
+    "FLAVOR": "Jadis, les Soldats de fer utilisaient de la peinture de guerre enchantée pour se protéger avant de charger au combat.",
+    "DESCRIPTIONS": [
+      "Au début du combat, #yAméliorez #b",
+      " #yCompétences aléatoires."
+    ]
+  },
+  "Whetstone": {
+    "NAME": "Pierre à aiguiser",
+    "FLAVOR": "\"La chair ne bat jamais le fer.\" - Le grand Kublai",
+    "DESCRIPTIONS": [
+      "Au début du combat, #yAméliorez #b",
+      " #yAttaques aléatoires."
+    ]
+  },
+  "Bottled Flame": {
+    "NAME": "Flamme embouteillée",
+    "FLAVOR": "Dans cette bouteille brûle une flamme éternelle.",
+    "DESCRIPTIONS": [
+      "Lorsque vous la ramassez, choisissez une carte #yAttaque. Commencez chaque combat avec cette carte dans votre main. Cela coûte #b1 de moins ce tour.",
+      "Choisissez une carte pour ",
+      "Commencez chaque combat avec ",
+      " dans votre main. Cela coûte #b1 de moins ce tour."
+    ]
+  },
+  "Bottled Lightning": {
+    "NAME": "Foudre embouteillée",
+    "FLAVOR": "En observant ce maelström tourbillonnant, vous apercevez une partie de vous-même qui vous fixe.",
+    "DESCRIPTIONS": [
+      "Lorsque vous la ramassez, choisissez une carte #yCompétence. Commencez chaque combat avec cette carte dans votre main. Cela coûte #b1 de moins ce tour.",
+      "Choisissez une carte pour ",
+      "Commencez chaque combat avec ",
+      " dans votre main. Cela coûte #b1 de moins ce tour."
+    ]
+  },
+  "Bottled Tornado": {
+    "NAME": "Tornade embouteillée",
+    "FLAVOR": "La bouteille bourdonne et siffle doucement.",
+    "DESCRIPTIONS": [
+      "Lorsque vous la ramassez, choisissez une carte #yPouvoir. Commencez chaque combat avec cette carte dans votre main. Cela coûte #b1 de moins ce tour.",
+      "Choisissez une carte pour ",
+      "Commencez chaque combat avec ",
+      " dans votre main. Cela coûte #b1 de moins ce tour."
+    ]
+  },
+  "Lizard Tail": {
+    "NAME": "Queue de lézard",
+    "FLAVOR": "Une fausse queue permettant de leurrer les ennemis pendant le combat.",
+    "DESCRIPTIONS": [
+      "Quand vous êtes sur le point de mourir, récupérez des PV pour atteindre #b30 % de vos PV max à la place. Prend les étages #b5 pour repousser."
+    ]
+  },
+  "Old Coin": {
+    "NAME": "Vieille pièce",
+    "FLAVOR": "Les pièces uniques sont très prisées par les Marchands en raison de leur valeur historique et de leur composition rare.",
+    "DESCRIPTIONS": [
+      "Quand vous l'obtenez, gagnez #b250 #yd'or. Chaque fois que vous gagnez #yd'or, gagnez #b5 de plus."
+    ]
+  },
+  "Omamori": {
+    "NAME": "Omamori",
+    "FLAVOR": "Une amulette servant à repousser les mauvais esprits. Celle-ci semble avoir une étincelle d'énergie divine.",
+    "DESCRIPTIONS": [
+      "Épuisez la première #rMalédiction que vous tirez à chaque combat. Lorsque vous épuisez une #rMalédiction, piochez une carte.",
+      "Cette relique a été épuisée.",
+      "Cette relique a été épuisée."
+    ]
+  },
+  "WingedGreaves": {
+    "NAME": "Bottes ailées",
+    "FLAVOR": "Stylées.",
+    "DESCRIPTIONS": [
+      "Vous pouvez ignorer les lignes au moment de choisir l'étage suivant #b3 fois. Se recharge au repos."
+    ]
+  },
+  "Cauldron": {
+    "NAME": "Chaudron",
+    "FLAVOR": "Le Marchand est passé maître dans la préparation de potions. 1 offerte pour 4 achetées.",
+    "DESCRIPTIONS": [
+      "Lorsque vous l'obtenez, il prépare #b5 potions aléatoires. Gagnez [E] chaque fois que vous utilisez une potion.",
+      "Glou glou glou... !"
+    ]
+  },
+  "DollysMirror": {
+    "NAME": "Miroir de Dolly",
+    "FLAVOR": "\"Ce miroir me donne l'air bizarre.\"",
+    "DESCRIPTIONS": [
+      "La première carte jouée à chaque combat est jouée deux fois.",
+      "Choisissez 1 carte à Copier."
+    ]
+  },
+  "Lee's Waffle": {
+    "NAME": "Gaufre de Lee",
+    "FLAVOR": "\"La meilleure gourmandise de toute la Tour ! Tout juste sortie du four, rien que pour vous.\"",
+    "DESCRIPTIONS": [
+      "Quand vous l'obtenez, augmentez vos PV max de #b",
+      " et récupérez tous vos PV. Chaque fois que vos PV max augmentent de #bX, récupérez #bX."
+    ]
+  },
+  "Orrery": {
+    "NAME": "Planétaire",
+    "FLAVOR": "\"Une fois que vous connaîtrez l'univers...\" - Zoroth",
+    "DESCRIPTIONS": [
+      "Quand vous le ramassez, choisissez et ajoutez #b5 cartes à votre deck. Pour chaque #b5 cartes que vous ajoutez à votre deck, améliorez une carte aléatoire.",
+      "Eurêka !"
+    ]
   }
 }
