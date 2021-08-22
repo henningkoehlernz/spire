@@ -63,7 +63,7 @@ public class BossedOmamori {
         public static void Postfix(AbstractRelic __instance, AbstractCard card) {
             if ( __instance instanceof Omamori && card.type == AbstractCard.CardType.CURSE ) {
                 __instance.flash();
-                AbstractDungeon.actionManager.addToTop(new DrawCardAction(1));
+                AbstractDungeon.actionManager.addToBottom(new DrawCardAction(1));
             }
         }
     }
