@@ -42,6 +42,8 @@ public class Evolution implements
     private static final String CONFIG_PATH = "preferences/evolution.cfg";
     private static final String CONFIG_VARIETY = "variety";
     private static final String CONFIG_STRICT = "strict";
+    private static final String CONFIG_STRIKE = "strike";
+    private static final String CONFIG_DEFEND = "defend";
     private static TreeMap<String, int[]> evolution = new TreeMap<String, int[]>();
     private static TreeMap<String, String> config = new TreeMap<String, String>();
 
@@ -107,11 +109,19 @@ public class Evolution implements
     }
 
     public static int getVariety() {
-        return Integer.valueOf(config.getOrDefault(CONFIG_VARIETY, "1"));
+        return Integer.parseInt(config.getOrDefault(CONFIG_VARIETY, "1"));
     }
 
     public static boolean strictTags() {
-        return Boolean.valueOf(config.getOrDefault(CONFIG_STRICT, "true"));
+        return Boolean.parseBoolean(config.getOrDefault(CONFIG_STRICT, "true"));
+    }
+
+    public static boolean replaceStrikes() {
+        return Boolean.parseBoolean(config.getOrDefault(CONFIG_STRIKE, "true"));
+    }
+
+    public static boolean replaceDefends() {
+        return Boolean.parseBoolean(config.getOrDefault(CONFIG_DEFEND, "true"));
     }
 
     public static void initialize() {
@@ -167,6 +177,25 @@ public class Evolution implements
                 }
         );
         configPanel.addUIElement(strictButton);
+        // configure basic strike/defend replacement
+        ModLabeledToggleButton strikeButton = new ModLabeledToggleButton(
+                "Replace basic strikes.", 400.0f, 500.0f,
+                Settings.CREAM_COLOR, FontHelper.charDescFont, replaceStrikes(),
+                configPanel, (label) -> {}, (button) -> {
+                    config.put(CONFIG_STRIKE, String.valueOf(button.enabled));
+                    saveConfig();
+                }
+        );
+        ModLabeledToggleButton defendButton = new ModLabeledToggleButton(
+                "Replace basic defends.", 400.0f, 450.0f,
+                Settings.CREAM_COLOR, FontHelper.charDescFont, replaceDefends(),
+                configPanel, (label) -> {}, (button) -> {
+                    config.put(CONFIG_DEFEND, String.valueOf(button.enabled));
+                    saveConfig();
+                }
+        );
+        configPanel.addUIElement(strikeButton);
+        configPanel.addUIElement(defendButton);
         BaseMod.registerModBadge(badgeTexture, "Evolution", "Henning Koehler",
                 "Defeat bosses for persistent improvements.", configPanel);
     }
@@ -178,9 +207,12 @@ public class Evolution implements
         AbstractRelic relic = new Axolotl();
         relic.counter = ep;
         relic.instantObtain();
-        int leftover = ep - CardReplacer.replaceBasicCards(ep, strictTags());
-        if ( leftover > 0 )
-            p.increaseMaxHp(leftover, true);
+        if ( replaceStrikes() )
+            ep -= CardReplacer.replaceBasicStrikes(ep, strictTags());
+        if ( replaceDefends() )
+            ep -= CardReplacer.replaceBasicDefends(ep, strictTags());
+        if ( ep > 0 )
+            p.increaseMaxHp(ep, true);
         logger.info("added evolution relic");
     }
 

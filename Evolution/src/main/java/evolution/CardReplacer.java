@@ -54,31 +54,44 @@ public class CardReplacer {
         return null;
     }
 
-    // replace strikes & defends
     // returns number of cards replaced
-    public static int replaceBasicCards(int maxReplace, boolean strictTags) {
+    public static int replaceBasicStrikes(int maxReplace, boolean strictTags) {
         int variety = Evolution.getVariety() > 2 ? 99 : Evolution.getVariety();
         ArrayList<AbstractCard> strikeReplacements = getReplacements(true, variety);
-        ArrayList<AbstractCard> defendReplacements = getReplacements(false, variety);
         ArrayList<AbstractCard> cards = AbstractDungeon.player.masterDeck.group;
         String basicStrikeID = strictTags ? null : getBasicStrikeID(cards);
-        String basicDefendID = strictTags ? null : getBasicDefendID(cards);
-        int next = 0, strikeReplaced = 0, defendReplaced = 0;
-        while ( next < cards.size() && strikeReplaced + defendReplaced < maxReplace ) {
+        int next = 0, strikeReplaced = 0;
+        while ( next < cards.size() && strikeReplaced < maxReplace ) {
             AbstractCard card = cards.get(next);
             // isStarterStrike checks for STRIKE, not STARTER_STRIKE
             if ( (card.isStarterStrike() || card.hasTag(AbstractCard.CardTags.STARTER_STRIKE) || card.cardID.equals(basicStrikeID))
                     && !strikeReplacements.isEmpty() ) {
                 cards.set(next, strikeReplacements.get(strikeReplaced % strikeReplacements.size()).makeCopy());
                 strikeReplaced++;
-            } else if ( (card.isStarterDefend() || card.cardID.equals(basicDefendID)) && !defendReplacements.isEmpty()  ) {
+            } else if ( Loader.DEBUG )
+                logger.info("replaceBasicStrikes: skipping " + card.cardID);
+            next++;
+        }
+        return strikeReplaced;
+    }
+
+    // returns number of cards replaced
+    public static int replaceBasicDefends(int maxReplace, boolean strictTags) {
+        int variety = Evolution.getVariety() > 2 ? 99 : Evolution.getVariety();
+        ArrayList<AbstractCard> defendReplacements = getReplacements(false, variety);
+        ArrayList<AbstractCard> cards = AbstractDungeon.player.masterDeck.group;
+        String basicDefendID = strictTags ? null : getBasicDefendID(cards);
+        int next = 0, defendReplaced = 0;
+        while ( next < cards.size() && defendReplaced < maxReplace ) {
+            AbstractCard card = cards.get(next);
+            if ( (card.isStarterDefend() || card.cardID.equals(basicDefendID)) && !defendReplacements.isEmpty() ) {
                 cards.set(next, defendReplacements.get(defendReplaced % defendReplacements.size()).makeCopy());
                 defendReplaced++;
             } else if ( Loader.DEBUG )
-                logger.info("skipping " + card.cardID);
+                logger.info("replaceBasicDefends: skipping " + card.cardID);
             next++;
         }
-        return strikeReplaced + defendReplaced;
+        return defendReplaced;
     }
 
 }
