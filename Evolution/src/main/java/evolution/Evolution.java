@@ -203,17 +203,20 @@ public class Evolution implements
     @Override
     public void receivePostCreateStartingDeck(AbstractPlayer.PlayerClass pc, CardGroup cg) {
         AbstractPlayer p = AbstractDungeon.player;
-        int ep = Evolution.getEvolutionTotal(p.chosenClass, AbstractDungeon.ascensionLevel);
-        AbstractRelic relic = new Axolotl();
-        relic.counter = ep;
-        relic.instantObtain();
-        if ( replaceStrikes() )
-            ep -= CardReplacer.replaceBasicStrikes(ep, strictTags());
-        if ( replaceDefends() )
-            ep -= CardReplacer.replaceBasicDefends(ep, strictTags());
-        if ( ep > 0 )
-            p.increaseMaxHp(ep, true);
-        logger.info("added evolution relic");
+        // apparently some mod conflicts can trigger double relic creation
+        if (p.getRelic(Axolotl.ID) == null) {
+            int ep = Evolution.getEvolutionTotal(p.chosenClass, AbstractDungeon.ascensionLevel);
+            AbstractRelic relic = new Axolotl();
+            relic.counter = ep;
+            relic.instantObtain();
+            if (replaceStrikes())
+                ep -= CardReplacer.replaceBasicStrikes(ep, strictTags());
+            if (replaceDefends())
+                ep -= CardReplacer.replaceBasicDefends(ep, strictTags());
+            if (ep > 0)
+                p.increaseMaxHp(ep, true);
+            logger.info("added evolution relic");
+        }
     }
 
 }
