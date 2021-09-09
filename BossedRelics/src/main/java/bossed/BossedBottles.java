@@ -13,10 +13,10 @@ public class BossedBottles {
 
     @SpirePatch(
             clz = AbstractPlayer.class,
-            method = "applyStartOfCombatPreDrawLogic",
+            method = "applyPreCombatLogic",
             paramtypez = {}
     )
-    public static class ApplyStartOfCombatPreDrawLogic {
+    public static class ApplyPreCombatLogic {
         public static void Postfix(AbstractPlayer __instance) {
             for ( AbstractCard card : __instance.drawPile.group )
                 if ( card.inBottleFlame || card.inBottleLightning || card.inBottleTornado )

@@ -3,7 +3,7 @@
   "name": "Bossed Relics",
   "author_list": ["hkoehler"],
   "description": "Improves or reworks some of the weaker boss relics, as well as non-boss relics with one time effects.",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "sts_version": "12-13-2020",
   "mts_version": "3.15.0",
   "dependencies": ["basemod"]
