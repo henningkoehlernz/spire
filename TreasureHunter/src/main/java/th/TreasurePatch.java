@@ -84,6 +84,12 @@ public class TreasurePatch {
         }
     }
 
+    // increase gold while ignoring relics like Ectoplasm
+    private static void gainGold(int amount) {
+        CardCrawlGame.goldGained += amount;
+        AbstractDungeon.player.gold += amount;
+    }
+
     // grant bonus gold for new games
     /*
     @SpirePatch(
@@ -106,9 +112,9 @@ public class TreasurePatch {
     )
     public static class NextRoomTransition {
         public static void Postfix(AbstractDungeon __instance, SaveFile saveFile) {
-            if ( AbstractDungeon.floorNum <= 1 ) {
+            if ( AbstractDungeon.floorNum == 1 && (saveFile == null || !saveFile.post_combat) ) {
                 int bonusGold = TreasureHunter.getTreasureTotal(AbstractDungeon.player.chosenClass, AbstractDungeon.ascensionLevel);
-                AbstractDungeon.player.gainGold(bonusGold);
+                gainGold(bonusGold);
                 AbstractDungeon.effectList.add(new GainGoldTextEffect(bonusGold));
                 logger.info("added " + bonusGold + " gold");
             }
