@@ -41,7 +41,7 @@
     "NAME": "Astrolabe",
     "FLAVOR": "A tool to glean invaluable knowledge from the stars.",
     "DESCRIPTIONS": [
-      "At the start of combat, upgrade #b3 random cards and reduce their cost by #b1."
+      "At the start of your turn, transform the lowest rarity card in your hand and upgrade it."
     ]
   },
   "Tiny House": {

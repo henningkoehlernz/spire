@@ -41,7 +41,7 @@
     "NAME": "Astrolabe",
     "FLAVOR": "Un outil pour glaner des connaissances inestimables des étoiles.",
     "DESCRIPTIONS": [
-      "Au début de chaque combat, réduisez le coût de #b3 cartes aléatoires de #b1 améliorez les.",
+      "Au début de votre tour, transformez la carte de rareté la plus basse de votre main et améliorez-la.",
       "Choose 3 cards for "
     ]
   },
