@@ -1,78 +1,46 @@
 package bossed;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.TransformCardInHandAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-
-import java.util.ArrayList;
 
 public class SuperTransformAction extends AbstractGameAction {
 
-    public static AbstractCard getCardOfRarity(ArrayList<AbstractCard> cards, AbstractCard.CardRarity rarity) {
-        for (AbstractCard card : cards) {
-            if (card.rarity == rarity)
-                return card;
-        }
-        return null;
-    }
+    private static final float DURATION = Settings.ACTION_DUR_XFAST;
+    public static final String[] TEXT = CardCrawlGame.languagePack.getUIString("SuperTransformAction").TEXT;
 
-    public static AbstractCard getMinRarityCard(ArrayList<AbstractCard> cards) {
-        AbstractCard card = getCardOfRarity(cards, AbstractCard.CardRarity.BASIC);
-        if (card == null)
-            card = getCardOfRarity(cards, AbstractCard.CardRarity.COMMON);
-        if (card == null)
-            card = getCardOfRarity(cards, AbstractCard.CardRarity.UNCOMMON);
-        if (card == null)
-            card = getCardOfRarity(cards, AbstractCard.CardRarity.RARE);
-        return card;
+    public SuperTransformAction() {
+        this.duration = DURATION;
     }
-
-    /*
-    public static boolean rarityLessThan(AbstractCard.CardRarity a, AbstractCard.CardRarity b) {
-        if (a == AbstractCard.CardRarity.BASIC)
-            return b == AbstractCard.CardRarity.COMMON || b == AbstractCard.CardRarity.UNCOMMON || b == AbstractCard.CardRarity.RARE;
-        if (a == AbstractCard.CardRarity.COMMON)
-            return b == AbstractCard.CardRarity.UNCOMMON || b == AbstractCard.CardRarity.RARE;
-        if (a == AbstractCard.CardRarity.UNCOMMON)
-            return b == AbstractCard.CardRarity.RARE;
-        return false;
-    }
-
-    public static AbstractCard randomCardOfHigherRarityInCombat(AbstractCard.CardRarity rarity) {
-        ArrayList<AbstractCard> list = new ArrayList();
-        if (rarityLessThan(rarity, AbstractCard.CardRarity.COMMON)) {
-            for (AbstractCard c : AbstractDungeon.srcCommonCardPool.group) {
-                if (!c.hasTag(AbstractCard.CardTags.HEALING))
-                    list.add(c);
-            }
-        }
-        if (rarityLessThan(rarity, AbstractCard.CardRarity.UNCOMMON)) {
-            for (AbstractCard c : AbstractDungeon.srcUncommonCardPool.group) {
-                if (!c.hasTag(AbstractCard.CardTags.HEALING))
-                    list.add(c);
-            }
-        }
-        for (AbstractCard c : AbstractDungeon.srcRareCardPool.group) {
-            if (!c.hasTag(AbstractCard.CardTags.HEALING))
-                list.add(c);
-        }
-        return (AbstractCard)list.get(AbstractDungeon.cardRandomRng.random(list.size() - 1));
-    }
-    */
 
     @Override
     public void update() {
-        AbstractCard oldCard = getMinRarityCard(AbstractDungeon.player.hand.group);
-        if (oldCard != null) {
-            AbstractCard newCard = AbstractDungeon.returnTrulyRandomCardInCombat().makeCopy();
-            newCard.upgrade();
-            // replace, preserving position
-            int index = AbstractDungeon.player.hand.group.indexOf(oldCard);
-            AbstractDungeon.actionManager.addToTop(new TransformCardInHandAction(index, newCard));
+        AbstractPlayer p = AbstractDungeon.player;
+        // select a card
+        if (this.duration == DURATION) {
+            if (AbstractDungeon.getMonsters().areMonstersBasicallyDead() || p.hand.size() == 0) {
+                this.isDone = true;
+            } else {
+                AbstractDungeon.handCardSelectScreen.open(TEXT[0], 1, true, true);
+                AbstractDungeon.player.hand.applyPowers();
+                this.tickDuration();
+            }
+            return;
         }
-        this.isDone = true;
+        // transform and upgrade
+        if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
+            for (AbstractCard oldCard : AbstractDungeon.handCardSelectScreen.selectedCards.group) {
+                AbstractCard newCard = AbstractDungeon.returnTrulyRandomCardInCombat().makeCopy();
+                newCard.upgrade();
+                this.addToBot(new MakeTempCardInHandAction(newCard, 1));
+            }
+            AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;
+        }
+        this.tickDuration();
     }
 
 }

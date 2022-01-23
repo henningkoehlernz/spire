@@ -1,15 +1,13 @@
 package bossed;
 
 import basemod.*;
+import basemod.interfaces.*;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
-
-import basemod.interfaces.*;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.megacrit.cardcrawl.localization.UIStrings;
 
 @SpireInitializer
 public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscriber {
@@ -36,6 +34,7 @@ public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscr
     @Override
     public void receiveEditStrings() {
         BaseMod.loadCustomStringsFile(RelicStrings.class, languagePath() + "BossedRelicStrings.json");
+        BaseMod.loadCustomStringsFile(UIStrings.class, languagePath() + "BossedUiStrings.json");
     }
 
     @Override
