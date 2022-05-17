@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
@@ -200,6 +201,18 @@ public class Evolution implements
                 "Defeat bosses for persistent improvements.", configPanel);
     }
 
+    private static int upgradeCards(int maxReplace) {
+        int upgraded = 0;
+        ArrayList<AbstractCard> cards = AbstractDungeon.player.masterDeck.group;
+        for (AbstractCard card : cards) {
+            if (upgraded < maxReplace && card.canUpgrade()) {
+                card.upgrade();
+                upgraded++;
+            }
+        }
+        return upgraded;
+    }
+
     @Override
     public void receivePostCreateStartingDeck(AbstractPlayer.PlayerClass pc, CardGroup cg) {
         AbstractPlayer p = AbstractDungeon.player;
@@ -213,6 +226,7 @@ public class Evolution implements
                 ep -= CardReplacer.replaceBasicStrikes(ep, strictTags());
             if (replaceDefends())
                 ep -= CardReplacer.replaceBasicDefends(ep, strictTags());
+            ep -= upgradeCards(ep);
             if (ep > 0)
                 p.increaseMaxHp(ep, true);
             logger.info("added evolution relic");
