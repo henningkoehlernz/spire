@@ -2,7 +2,9 @@ package bossed;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.powers.PlatedArmorPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.TinyHouse;
@@ -30,7 +32,8 @@ public class BossedTinyHouse {
     )
     public static class GetUpdatedDescription {
         public static String Replace(TinyHouse __instance) {
-            String description = __instance.DESCRIPTIONS[0] + BLOCK + __instance.DESCRIPTIONS[1];
+            RelicStrings strings = CardCrawlGame.languagePack.getRelicStrings("Bossed:Tiny House");
+            String description = strings.DESCRIPTIONS[0] + BLOCK + strings.DESCRIPTIONS[1];
             if ( REPEATS > 0 )
                 description += " (x" + REPEATS + ")";
             return description;
