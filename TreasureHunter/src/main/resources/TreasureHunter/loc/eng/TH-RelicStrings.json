@@ -24,7 +24,7 @@
     "NAME": "Rum",
     "FLAVOR": "Yo ho ho and a bottle of rum.",
     "DESCRIPTIONS": [
-      "Whenever you play a treasure, heal 1 HP."
+      "Whenever you play a treasure, heal 1 HP and reduce weak, frail and vulnerable by 1."
     ]
   },
   "TH:Parrot": {
