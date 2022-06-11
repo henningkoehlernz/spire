@@ -13,7 +13,7 @@ public class Strongbox extends CustomRelic {
     private static final String IMG_PATH = TreasureHunter.IMG_PATH + "strongbox.png";
 
     public Strongbox() {
-        super(ID, new Texture(IMG_PATH), RelicTier.UNCOMMON, LandingSound.CLINK);
+        super(ID, new Texture(IMG_PATH), RelicTier.RARE, LandingSound.CLINK);
     }
 
     @Override

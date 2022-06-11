@@ -19,5 +19,12 @@
     "DESCRIPTIONS": [
       "Whenever you add a treasure card to your deck, it is upgraded."
     ]
+  },
+  "TH:Rum": {
+    "NAME": "Rum",
+    "FLAVOR": "Yo ho ho and a bottle of rum.",
+    "DESCRIPTIONS": [
+      "The first time you draw a treasure each combat, gain 1 strength and draw a card."
+    ]
   }
 }
