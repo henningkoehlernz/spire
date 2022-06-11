@@ -33,5 +33,13 @@
     "DESCRIPTIONS": [
       "Whenever you draw a treasure, draw a card."
     ]
+  },
+  "TH:GoldenGun": {
+    "NAME": "Golden Gun",
+    "FLAVOR": "Shoots golden bullets too.",
+    "DESCRIPTIONS": [
+      "Whenever you play a treasure, deal ",
+      " damage to a random enemy."
+    ]
   }
 }

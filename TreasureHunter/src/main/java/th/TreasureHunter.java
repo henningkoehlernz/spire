@@ -151,6 +151,7 @@ public class TreasureHunter implements
         BaseMod.addRelic(new Anvil(), RelicType.SHARED);
         BaseMod.addRelic(new Rum(), RelicType.SHARED);
         BaseMod.addRelic(new Parrot(), RelicType.SHARED);
+        BaseMod.addRelic(new GoldenGun(), RelicType.SHARED);
     }
 
     public static AbstractCard getRandomTreasure() {
