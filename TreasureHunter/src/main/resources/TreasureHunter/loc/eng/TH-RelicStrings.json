@@ -24,7 +24,14 @@
     "NAME": "Rum",
     "FLAVOR": "Yo ho ho and a bottle of rum.",
     "DESCRIPTIONS": [
-      "The first time you draw a treasure each combat, gain 1 strength and draw a card."
+      "Whenever you play a treasure, heal 1 HP."
+    ]
+  },
+  "TH:Parrot": {
+    "NAME": "Parrot",
+    "FLAVOR": "Polly wants a cracker.",
+    "DESCRIPTIONS": [
+      "Whenever you draw a treasure, draw a card."
     ]
   }
 }

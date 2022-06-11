@@ -2,12 +2,10 @@ package th;
 
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 public class Rum extends CustomRelic {
 
@@ -19,18 +17,11 @@ public class Rum extends CustomRelic {
     }
 
     @Override
-    public void atBattleStart() {
-        grayscale = false;
-    }
-
-    @Override
-    public void onCardDraw(AbstractCard drawnCard) {
-        if (!grayscale && drawnCard.type == TreasurePatch.TREASURE) {
-            flash();
-            grayscale = true;
-            AbstractPlayer p = AbstractDungeon.player;
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new StrengthPower(p, 1), 1));
-            AbstractDungeon.actionManager.addToBottom(new DrawCardAction(1));
+    public void onPlayCard(AbstractCard c, AbstractMonster m) {
+        if (c.type == TreasurePatch.TREASURE) {
+            this.flash();
+            AbstractDungeon.actionManager.addToTop(new RelicAboveCreatureAction(AbstractDungeon.player, this));
+            AbstractDungeon.player.heal(1);
         }
     }
 
