@@ -15,6 +15,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rewards.chests.AbstractChest;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.rooms.MonsterRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 import com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue;
@@ -171,7 +172,15 @@ public class TreasurePatch {
         )
         public static void Insert(CombatRewardScreen __instance) {
             AbstractRoom room = AbstractDungeon.getCurrRoom();
-            if ( room instanceof MonsterRoomBoss || room instanceof MonsterRoomElite )
+            boolean dropTreasure = room instanceof MonsterRoomBoss || room instanceof MonsterRoomElite;
+            if (!dropTreasure && room instanceof MonsterRoom) {
+                AbstractRelic relic = AbstractDungeon.player.getRelic(BlackFlag.ID);
+                if (relic != null && AbstractDungeon.treasureRng.randomBoolean()) {
+                    relic.flash();
+                    dropTreasure = true;
+                }
+            }
+            if (dropTreasure)
                 __instance.rewards.add(getTreasureReward());
         }
     }

@@ -17,7 +17,7 @@
     "NAME": "Anvil",
     "FLAVOR": "Makes your precious things even more precious.",
     "DESCRIPTIONS": [
-      "Whenever you add a treasure card to your deck, it is upgraded."
+      "Whenever you add a treasure to your deck, upgrade it."
     ]
   },
   "TH:Rum": {
@@ -40,6 +40,13 @@
     "DESCRIPTIONS": [
       "Whenever you play a treasure, deal ",
       " damage to a random enemy."
+    ]
+  },
+  "TH:BlackFlag": {
+    "NAME": "Black Flag",
+    "FLAVOR": "Take what you can, give nothing back!",
+    "DESCRIPTIONS": [
+      "Normal fights have a 50% chance to award treasures."
     ]
   }
 }
