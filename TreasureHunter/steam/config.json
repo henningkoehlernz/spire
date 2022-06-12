@@ -3,7 +3,8 @@
   "title": "Treasure Hunter",
   "description": "[h1]Adds treasures that can be collected to increase starting gold for future runs.[/h1]
 
-Treasures are weak cards that clog up the deck, making the current run harder but future runs easier.
+Treasures are weak cards that clog up the deck, making the current run harder but future runs easier. However, with the right set of relics, treasures can be turned into assets for the current run as well.
+
 Only treasures collected at current or higher ascension level contribute to starting gold.",
   "visibility": "public",
   "changeNote": "",
