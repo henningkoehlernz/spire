@@ -1,45 +1,45 @@
 {
   "TH:CopperCoins": {
-    "NAME": "Copper Coins",
-    "DESCRIPTION": "Gain !M! gold. NL Exhaust."
+    "NAME": "铜币",
+    "DESCRIPTION": "获得 !M! 金币。 NL 消耗 。"
   },
   "TH:BikiniMail": {
-    "NAME": "Bikini Mail",
-    "DESCRIPTION": "At the end of your turn, gain !M! block. NL Exhaust."
+    "NAME": "比基尼邮件",
+    "DESCRIPTION": "在你的回合结束时获得 !M! 堵塞。 NL 消耗 。"
   },
   "TH:CursedSword": {
-    "NAME": "Cursed Sword",
-    "DESCRIPTION": "Gain !M! Strength. NL Exhaust. NL NL That's all, honest!"
+    "NAME": "诅咒之剑",
+    "DESCRIPTION": "增益 !M! 力量。 NL 消耗 。 NL NL 就是这样，老实说！"
   },
   "TH:EnergyPotion": {
-    "NAME": "Energy Potion",
-    "DESCRIPTION": "Gain [E] and !M! poison. NL Exhaust."
+    "NAME": "能量药水",
+    "DESCRIPTION": "获得 [E] 和 !M! 毒。 NL 消耗。"
   },
   "TH:TreasureMap": {
-    "NAME": "Treasure Map",
-    "DESCRIPTION": "Gain 1 Artifact. NL Exhaust."
+    "NAME": "藏宝图",
+    "DESCRIPTION": "获得 1 个神器。 NL 消耗。"
   },
   "TH:DeckOfManyThings": {
-    "NAME": "Deck of Many Things",
-    "DESCRIPTION": "Add a random rare card to your hand. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Add a random upgraded rare card to your hand. NL Exhaust."
+    "NAME": "许多东西的甲板",
+    "DESCRIPTION": "将一张随机稀有牌加入你的手牌。 NL 消耗。",
+    "UPGRADE_DESCRIPTION": "将一张随机升级的稀有牌加入你的手牌。 NL 消耗。"
   },
   "TH:ArmorSpikes": {
-    "NAME": "Armor Spikes",
-    "DESCRIPTION": "Gain !M! Thorns. NL Exhaust."
+    "NAME": "护甲尖刺",
+    "DESCRIPTION": "增益 !M! 荆棘。 NL 消耗。"
   },
   "TH:Mimic": {
-    "NAME": "Treasure Chest",
-    "DESCRIPTION": "Lose 1 HP. NL Draw !M! cards. NL Exhaust."
+    "NAME": "百宝箱",
+    "DESCRIPTION": "损失 1 点生命值。 NL 抽奖 !M! 牌。 NL 消耗。"
   },
   "TH:PixieDust": {
-    "NAME": "Pixie Dust",
-    "DESCRIPTION": "Discard a card. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Exhaust a card. NL Exhaust."
+    "NAME": "仙尘",
+    "DESCRIPTION": "丢弃一张牌。 NL 消耗。",
+    "UPGRADE_DESCRIPTION": "消耗一张牌。 NL 消耗。"
   },
   "TH:ElvenBoots": {
-    "NAME": "Elven Boots",
-    "DESCRIPTION": "Gain !M! Dexterity. NL Exhaust. NL NL One size too small.",
-    "UPGRADE_DESCRIPTION": "Gain !M! Dexterity. NL Exhaust."
+    "NAME": "精灵靴子",
+    "DESCRIPTION": "增益 !M! 灵巧。 NL 消耗。 NL NL 一种尺寸太小。",
+    "UPGRADE_DESCRIPTION": "增益 !M! 灵巧。 NL 消耗。"
   }
 }

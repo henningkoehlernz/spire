@@ -1,8 +1,8 @@
 [
     {
       "NAMES": [
-        "treasure"
+        "宝藏"
       ],
-      "DESCRIPTION": "Increases starting gold for all future runs."
+      "DESCRIPTION": "增加所有未来运行的起始金币。"
     }
 ]

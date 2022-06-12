@@ -3,7 +3,7 @@
   "name": "Treasure Hunter",
   "author_list": ["hkoehler"],
   "description": "Enables treasure mechanic for persistent improvements.",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "sts_version": "07-17-2019",
   "mts_version": "3.6.3",
   "dependencies": ["basemod"]

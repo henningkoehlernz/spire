@@ -1,65 +1,65 @@
 {
   "TH:Strongbox": {
-    "NAME": "Strongbox",
-    "FLAVOR": "Keeps your treasures safe and sound.",
+    "NAME": "保险柜",
+    "FLAVOR": "让您的财宝安全无虞。",
     "DESCRIPTIONS": [
-      "Gain [E] whenever you play a treasure."
+      "每当你打出宝藏时获得 [E] 。"
     ]
   },
   "TH:HealthInsurance": {
-    "NAME": "Health Insurance",
-    "FLAVOR": "We care for your coin.",
+    "NAME": "健康保险",
+    "FLAVOR": "我们关心您的硬币。",
     "DESCRIPTIONS": [
-      "When you start your turn bloodied, heal 1 HP and lose 1 gold per treasure."
+      "当你开始血腥的回合时，每件宝藏会恢复 1 点生命值并损失 1 点金币。"
     ]
   },
   "TH:PirateNurse": {
-    "NAME": "Pirate Nurse",
-    "FLAVOR": "I'll keep you alive - for a price.",
+    "NAME": "海盗护士",
+    "FLAVOR": "我会让你活着——有代价的。",
     "DESCRIPTIONS": [
-      "When you start your turn bloodied, heal 1 HP and lose 1 gold per treasure."
+      "当你开始血腥的回合时，每件宝藏会恢复 1 点生命值并损失 1 点金币。"
     ]
   },
   "TH:Anvil": {
-    "NAME": "Anvil",
-    "FLAVOR": "Makes your precious things even more precious.",
+    "NAME": "砧",
+    "FLAVOR": "让您珍贵的东西更加珍贵。",
     "DESCRIPTIONS": [
-      "Whenever you add a treasure to your deck, upgrade it."
+      "每当您将宝藏添加到您的牌组时，升级它。"
     ]
   },
   "TH:Rum": {
-    "NAME": "Rum",
-    "FLAVOR": "Yo ho ho and a bottle of rum.",
+    "NAME": "朗姆酒",
+    "FLAVOR": "哟嗬嗬和一瓶朗姆酒。",
     "DESCRIPTIONS": [
-      "Whenever you play a treasure, heal 1 HP and reduce weak, frail and vulnerable by 1."
+      "每当你打出宝藏时，治疗 1 点生命值并减少 1 点虚弱、虚弱和易受伤害。"
     ]
   },
   "TH:Parrot": {
-    "NAME": "Parrot",
-    "FLAVOR": "Polly wants a cracker.",
+    "NAME": "鹦鹉",
+    "FLAVOR": "波莉想要一块饼干。",
     "DESCRIPTIONS": [
-      "Whenever you draw a treasure, draw a card."
+      "每当你抽到宝藏时，抽一张牌。"
     ]
   },
   "TH:GoldenGun": {
-    "NAME": "Golden Gun",
-    "FLAVOR": "Shoots golden bullets too.",
+    "NAME": "黄金枪",
+    "FLAVOR": "也射出金色的子弹。",
     "DESCRIPTIONS": [
-      "Whenever you play a treasure, deal !D! damage to a random enemy."
+      "每当您玩宝藏时，交易 !D! 对随机敌人造成伤害。"
     ]
   },
   "TH:BlackFlag": {
-    "NAME": "Black Flag",
-    "FLAVOR": "Take what you can, give nothing back!",
+    "NAME": "黑旗",
+    "FLAVOR": "拿走你能拿的，什么都不给！",
     "DESCRIPTIONS": [
-      "Normal fights have a 50% chance to award treasures."
+      "普通战斗有50%的几率奖励宝物。"
     ]
   },
   "TH:CursedGold": {
-    "NAME": "Cursed Gold",
-    "FLAVOR": "My sympathies, friend. You've no manner of luck at all.",
+    "NAME": "诅咒金",
+    "FLAVOR": "我的同情，朋友。你一点运气都没有。",
     "DESCRIPTIONS": [
-      "When you draw a treasure, apply vulnerable to everyone. When you play a treasure, gain !M! gold."
+      "当你抽到宝物时，适用于所有人。当你玩一个宝藏，获得 !M! 金子。"
     ]
   }
 }
