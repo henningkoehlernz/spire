@@ -38,8 +38,7 @@
     "NAME": "Golden Gun",
     "FLAVOR": "Shoots golden bullets too.",
     "DESCRIPTIONS": [
-      "Whenever you play a treasure, deal ",
-      " damage to a random enemy."
+      "Whenever you play a treasure, deal !D! damage to a random enemy."
     ]
   },
   "TH:BlackFlag": {
@@ -47,6 +46,13 @@
     "FLAVOR": "Take what you can, give nothing back!",
     "DESCRIPTIONS": [
       "Normal fights have a 50% chance to award treasures."
+    ]
+  },
+  "TH:CursedGold": {
+    "NAME": "Cursed Gold",
+    "FLAVOR": "My sympathies, friend. You've no manner of luck at all.",
+    "DESCRIPTIONS": [
+      "When you draw a treasure, apply vulnerable to everyone. When you play a treasure, gain !M! gold."
     ]
   }
 }

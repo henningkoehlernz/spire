@@ -31,7 +31,7 @@ public class GoldenGun extends CustomRelic {
 
     @Override
     public String getUpdatedDescription() {
-        return DESCRIPTIONS[0] + DAMAGE + DESCRIPTIONS[1];
+        return DESCRIPTIONS[0].replace("!D!", Integer.toString(DAMAGE));
     }
 
 }
