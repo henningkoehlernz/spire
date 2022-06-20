@@ -29,7 +29,7 @@
       "Choose 2 Cards to Remove."
     ]
   },
-  "Pandora's Box": {
+  "Bossed:Pandora's Box": {
     "NAME": "Pandora's Box",
     "FLAVOR": "You have a bad feeling about opening this.",
     "DESCRIPTIONS": [
@@ -37,7 +37,7 @@
       "Pandora's Box has been opened..."
     ]
   },
-  "Astrolabe": {
+  "Bossed:Astrolabe": {
     "NAME": "Astrolabe",
     "FLAVOR": "A tool to glean invaluable knowledge from the stars.",
     "DESCRIPTIONS": [

@@ -29,7 +29,7 @@
       "选择2张要移除的牌。"
     ]
   },
-  "Pandora's Box": {
+  "Bossed:Pandora's Box": {
     "NAME": "潘多拉的魔盒",
     "FLAVOR": "你觉得打开这个盒子会很不吉利。",
     "DESCRIPTIONS": [
@@ -37,7 +37,7 @@
       "潘多拉的魔盒已经打开了......"
     ]
   },
-  "Astrolabe": {
+  "Bossed:Astrolabe": {
     "NAME": "星盘",
     "FLAVOR": "可以从星星中探知宝贵知识的工具。",
     "DESCRIPTIONS": [
