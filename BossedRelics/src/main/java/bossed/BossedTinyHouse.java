@@ -1,8 +1,8 @@
 package bossed;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.powers.PlatedArmorPower;
@@ -21,7 +21,8 @@ public class BossedTinyHouse {
             paramtypez = {}
     )
     public static class OnEquip {
-        public static void Replace(TinyHouse __instance) {
+        public static SpireReturn<Void> Prefix(TinyHouse __instance) {
+            return BossedRelics.isDisabled(TinyHouse.ID) ? SpireReturn.Continue() : SpireReturn.Return();
         }
     }
 
@@ -31,12 +32,14 @@ public class BossedTinyHouse {
             paramtypez = {}
     )
     public static class GetUpdatedDescription {
-        public static String Replace(TinyHouse __instance) {
-            RelicStrings strings = CardCrawlGame.languagePack.getRelicStrings("Bossed:Tiny House");
+        public static SpireReturn<String> Prefix(TinyHouse __instance) {
+            if (BossedRelics.isDisabled(TinyHouse.ID))
+                return SpireReturn.Continue();
+            RelicStrings strings = BossedRelics.getRelicStrings(TinyHouse.ID);
             String description = strings.DESCRIPTIONS[0] + BLOCK + strings.DESCRIPTIONS[1];
-            if ( REPEATS > 0 )
+            if (REPEATS > 0)
                 description += " (x" + REPEATS + ")";
-            return description;
+            return SpireReturn.Return(description);
         }
     }
 
@@ -47,7 +50,7 @@ public class BossedTinyHouse {
     )
     public static class AtBattleStart {
         public static void Postfix(AbstractRelic __instance) {
-            if ( __instance instanceof TinyHouse )
+            if (__instance instanceof TinyHouse && !BossedRelics.isDisabled(TinyHouse.ID))
                 __instance.counter = REPEATS;
         }
     }
@@ -59,9 +62,9 @@ public class BossedTinyHouse {
     )
     public static class WasHPLost {
         public static void Postfix(AbstractRelic __instance, int damageAmount) {
-            if ( __instance instanceof TinyHouse ) {
-                if ( AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && damageAmount > 0 && (__instance.counter > 0 || REPEATS < 0) ) {
-                    if ( __instance.counter > 0 )
+            if (__instance instanceof TinyHouse && !BossedRelics.isDisabled(TinyHouse.ID)) {
+                if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && damageAmount > 0 && (__instance.counter > 0 || REPEATS < 0)) {
+                    if (__instance.counter > 0)
                         __instance.counter--;
                     __instance.flash();
                     AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new PlatedArmorPower(AbstractDungeon.player, BLOCK), BLOCK));

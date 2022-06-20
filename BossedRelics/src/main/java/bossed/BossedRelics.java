@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.RelicStrings;
@@ -30,7 +31,7 @@ public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscr
     public static final String MODNAME = "BossedRelics";
     private static final String CONFIG_PATH = "preferences/bossed.cfg";
     private static final String CONFIG_DISABLED = "disabled";
-    private static TreeMap<String, String> config = new TreeMap<String, String>();
+    private static TreeMap<String, HashSet<String>> config = new TreeMap<>();
     private static HashSet<String> disabled = new HashSet<>();
     private static final Logger logger = LogManager.getLogger(BossedRelics.class.getName());
 
@@ -50,8 +51,11 @@ public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscr
         return MODNAME + "/loc/eng/";
     }
 
+    public static RelicStrings getRelicStrings(String relicID) {
+        return CardCrawlGame.languagePack.getRelicStrings("Bossed:" + relicID);
+    }
+
     private static void saveConfig() {
-        config.put(CONFIG_DISABLED, (new Gson()).toJson(disabled));
         String sConfig = (new Gson()).toJson(config);
         Gdx.files.local(CONFIG_PATH).writeString(sConfig, false, String.valueOf(StandardCharsets.UTF_8));
         logger.info("saved config=" + sConfig);
@@ -62,10 +66,11 @@ public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscr
             String sConfig = Gdx.files.local(CONFIG_PATH).readString(String.valueOf(StandardCharsets.UTF_8));
             logger.info("loaded config=" + sConfig);
             // parsing maps requires Type object to get around type erasure
-            Type mapType = new TypeToken<TreeMap<String, String>>(){}.getType();
+            Type mapType = new TypeToken<TreeMap<String, HashSet<String>>>(){}.getType();
             config = (new Gson()).fromJson(sConfig, mapType);
-            Type setType = new TypeToken<HashSet<String>>(){}.getType();
-            disabled = (new Gson()).fromJson(config.get(CONFIG_DISABLED), setType);
+            disabled = config.get(CONFIG_DISABLED);
+        } else {
+            config.put(CONFIG_DISABLED, disabled);
         }
     }
 
