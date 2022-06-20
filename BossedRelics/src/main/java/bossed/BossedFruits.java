@@ -1,16 +1,11 @@
 package bossed;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.powers.PlatedArmorPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.Strawberry;
 import com.megacrit.cardcrawl.relics.Pear;
 import com.megacrit.cardcrawl.relics.Mango;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 public class BossedFruits {
 
