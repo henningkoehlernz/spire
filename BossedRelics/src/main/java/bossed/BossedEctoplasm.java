@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.Ectoplasm;
-import com.megacrit.cardcrawl.rewards.RewardItem;
 
 public class BossedEctoplasm {
 
@@ -30,6 +29,28 @@ public class BossedEctoplasm {
     }
 
     @SpirePatch(
+            clz = AbstractRelic.class,
+            method = "onLoseHp",
+            paramtypez = { int.class }
+    )
+    public static class OnLoseHp {
+        public static void Prefix(AbstractRelic __instance, int damageAmount) {
+            if (__instance instanceof Ectoplasm) {
+                int goldAmt = Math.min(damageAmount, AbstractDungeon.player.gold);
+                if (goldAmt > 0) {
+                    AbstractDungeon.player.loseGold(goldAmt);
+                    __instance.counter = Math.max(0, __instance.counter) + goldAmt;
+                    // some animation & sound
+                    __instance.flash();
+                    CardCrawlGame.sound.play("GOLD_JINGLE");
+                }
+            }
+        }
+
+    }
+
+    /*
+    @SpirePatch(
             clz = RewardItem.class,
             method = "applyGoldBonus",
             paramtypez = { boolean.class }
@@ -47,5 +68,6 @@ public class BossedEctoplasm {
             }
         }
     }
+    */
 
 }

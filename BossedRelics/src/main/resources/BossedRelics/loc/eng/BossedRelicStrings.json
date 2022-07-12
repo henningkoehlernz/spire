@@ -79,7 +79,7 @@
     "NAME": "Ectoplasm",
     "FLAVOR": "This blob of slime and energy seems to pulse with life.",
     "DESCRIPTIONS": [
-      " Enemies and chests provide 50% less #yGold.",
+      " Whenever you lose HP lose an equal amount of #yGold.",
       "Gain [E] at the start of your turn."
     ]
   },

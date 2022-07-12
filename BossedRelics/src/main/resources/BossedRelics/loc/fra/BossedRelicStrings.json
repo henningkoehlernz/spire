@@ -80,7 +80,7 @@
     "NAME": "Ectoplasme",
     "FLAVOR": "Cette masse visqueuse et informe montre des signes de vie.",
     "DESCRIPTIONS": [
-      " Les ennemis et les coffres fournissent 50% #yd'or en moins.",
+      " Lorsque vous perdez des PV, perdez une quantité égale #yd'or.",
       "Gagnez [E] au début de chaque tour."
     ]
   },
