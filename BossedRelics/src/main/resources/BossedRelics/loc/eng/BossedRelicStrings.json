@@ -75,6 +75,14 @@
       "Double the effectiveness of potions. Reduce all HP loss by the number of empty potion slots (max 2)."
     ]
   },
+  "Ectoplasm": {
+    "NAME": "Ectoplasm",
+    "FLAVOR": "This blob of slime and energy seems to pulse with life.",
+    "DESCRIPTIONS": [
+      " Enemies and chests provide 50% less #yGold.",
+      "Gain [E] at the start of your turn."
+    ]
+  },
   "MawBank": {
     "NAME": "Maw Bank",
     "FLAVOR": "Surprisingly popular, despite maw attacks being a regular occurrence.",
