@@ -33,7 +33,7 @@
     "NAME": "Pandora's Box",
     "FLAVOR": "You have a bad feeling about opening this.",
     "DESCRIPTIONS": [
-      "At the start of your turn, play the top card of your draw pile.",
+      "Upon pickup, #bTransform all X Strike and Defend cards. After X turns, play the top card of your draw pile each turn.",
       "Pandora's Box has been opened..."
     ]
   },

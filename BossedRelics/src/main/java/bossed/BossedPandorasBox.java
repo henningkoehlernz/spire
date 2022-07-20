@@ -2,8 +2,8 @@ package bossed;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
+import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.PlayTopCardAction;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -18,8 +18,10 @@ public class BossedPandorasBox {
             paramtypez = {}
     )
     public static class OnEquip {
-        public static SpireReturn<Void> Prefix(PandorasBox __instance) {
-            return BossedRelics.isDisabled(PandorasBox.ID) ? SpireReturn.Continue() : SpireReturn.Return();
+        public static void Postfix(PandorasBox __instance) {
+            if (BossedRelics.isDisabled(PandorasBox.ID))
+                return;
+            __instance.counter = (Integer)Reflection.get(__instance, PandorasBox.class, "count");
         }
     }
 
@@ -38,17 +40,18 @@ public class BossedPandorasBox {
     }
 
     @SpirePatch(
-            clz = AbstractPlayer.class,
-            method = "applyStartOfTurnRelics",
+            clz = AbstractRelic.class,
+            method = "atTurnStart",
             paramtypez = {}
     )
-    public static class ApplyStartOfTurnRelics {
-        public static void Postfix(AbstractPlayer __instance) {
-            AbstractRelic relic = __instance.getRelic(PandorasBox.ID);
-            if (relic != null && !BossedRelics.isDisabled(PandorasBox.ID)) {
-                relic.flash();
-                AbstractMonster target = AbstractDungeon.getCurrRoom().monsters.getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
-                AbstractDungeon.actionManager.addToBottom(new PlayTopCardAction(target, false));
+    public static class AtTurnStart {
+        public static void Prefix(AbstractRelic __instance) {
+            if (__instance instanceof PandorasBox && !BossedRelics.isDisabled(PandorasBox.ID)) {
+                if (GameActionManager.turn >= __instance.counter) {
+                    __instance.flash();
+                    AbstractMonster target = AbstractDungeon.getCurrRoom().monsters.getRandomMonster(null, true, AbstractDungeon.cardRandomRng);
+                    AbstractDungeon.actionManager.addToBottom(new PlayTopCardAction(target, false));
+                }
             }
         }
     }
