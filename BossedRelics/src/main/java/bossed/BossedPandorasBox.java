@@ -19,9 +19,8 @@ public class BossedPandorasBox {
     )
     public static class OnEquip {
         public static void Postfix(PandorasBox __instance) {
-            if (BossedRelics.isDisabled(PandorasBox.ID))
-                return;
-            __instance.counter = (Integer)Reflection.get(__instance, PandorasBox.class, "count");
+            if (!BossedRelics.isDisabled(PandorasBox.ID))
+                __instance.counter = (Integer)Reflection.get(__instance, PandorasBox.class, "count");
         }
     }
 
