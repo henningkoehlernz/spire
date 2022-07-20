@@ -49,8 +49,7 @@
     "NAME": "Petite maison",
     "FLAVOR": "\"Une mise en œuvre quasi parfaite de la miniaturisation. Mon meilleur travail à ce jour, mais toujours insuffisant.\" - L'architect",
     "DESCRIPTIONS": [
-      "Lorsque vou perdez des PV, gagnez #b",
-      " #yd'Armure #yPlaquée."
+      "Obtenez #b1 potion et un emplacement. NL Gagnez #b50 pièces #yd'or. NL Augmentez votre Max HP de #b5. NL Obtenez #b1 carte. NL Améliorez #b1 carte aléatoire. NL Subit #b1 dégâts d'attaque en moins."
     ]
   },
   "Runic Cube": {

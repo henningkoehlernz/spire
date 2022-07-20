@@ -22,4 +22,16 @@ public class Reflection {
         }
     }
 
+    // gain access to private field
+    public static void set(Object obj, Class c, String fieldName, Object value) {
+        try {
+            // must use class where field is originally defined
+            Field f = (c == null ? obj.getClass() : c).getDeclaredField(fieldName);
+            f.setAccessible(true);
+            f.set(obj, value);
+        } catch (Exception e) {
+            logger.error(e);
+        }
+    }
+
 }

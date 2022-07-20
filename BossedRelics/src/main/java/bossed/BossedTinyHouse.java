@@ -2,18 +2,15 @@ package bossed;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.RelicStrings;
-import com.megacrit.cardcrawl.powers.PlatedArmorPower;
-import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.potions.PotionSlot;
 import com.megacrit.cardcrawl.relics.TinyHouse;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 public class BossedTinyHouse {
-
-    static final int BLOCK = 3;
-    static final int REPEATS = -1; // -1 means infinite repeats
 
     @SpirePatch(
             clz = TinyHouse.class,
@@ -21,8 +18,11 @@ public class BossedTinyHouse {
             paramtypez = {}
     )
     public static class OnEquip {
-        public static SpireReturn<Void> Prefix(TinyHouse __instance) {
-            return BossedRelics.isDisabled(TinyHouse.ID) ? SpireReturn.Continue() : SpireReturn.Return();
+        public static void Prefix(TinyHouse __instance) {
+            if (!BossedRelics.isDisabled(TinyHouse.ID)) {
+                AbstractDungeon.player.potionSlots += 1;
+                AbstractDungeon.player.potions.add(new PotionSlot(AbstractDungeon.player.potionSlots - 1));
+            }
         }
     }
 
@@ -36,38 +36,40 @@ public class BossedTinyHouse {
             if (BossedRelics.isDisabled(TinyHouse.ID))
                 return SpireReturn.Continue();
             RelicStrings strings = BossedRelics.getRelicStrings(TinyHouse.ID);
-            String description = strings.DESCRIPTIONS[0] + BLOCK + strings.DESCRIPTIONS[1];
-            if (REPEATS > 0)
-                description += " (x" + REPEATS + ")";
-            return SpireReturn.Return(description);
+            return SpireReturn.Return(strings.DESCRIPTIONS[0]);
         }
     }
 
     @SpirePatch(
-            clz = AbstractRelic.class,
-            method = "atBattleStart",
-            paramtypez = {}
-    )
-    public static class AtBattleStart {
-        public static void Postfix(AbstractRelic __instance) {
-            if (__instance instanceof TinyHouse && !BossedRelics.isDisabled(TinyHouse.ID))
-                __instance.counter = REPEATS;
-        }
-    }
-
-    @SpirePatch(
-            clz = AbstractRelic.class,
-            method = "wasHPLost",
+            clz = AbstractMonster.class,
+            method = "calculateDamage",
             paramtypez = {int.class}
     )
-    public static class WasHPLost {
-        public static void Postfix(AbstractRelic __instance, int damageAmount) {
-            if (__instance instanceof TinyHouse && !BossedRelics.isDisabled(TinyHouse.ID)) {
-                if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && damageAmount > 0 && (__instance.counter > 0 || REPEATS < 0)) {
-                    if (__instance.counter > 0)
-                        __instance.counter--;
-                    __instance.flash();
-                    AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new PlatedArmorPower(AbstractDungeon.player, BLOCK), BLOCK));
+    public static class CalculateDamage {
+        private static final String fieldName = "intentDmg";
+        public static void Postfix(AbstractMonster __instance, int __dmg) {
+            if (!BossedRelics.isDisabled(TinyHouse.ID) && AbstractDungeon.player.hasRelic(TinyHouse.ID)) {
+                int intentDmg = (Integer)Reflection.get(__instance, AbstractMonster.class, fieldName);
+                if (intentDmg > 0) {
+                    Reflection.set(__instance, AbstractMonster.class, fieldName, intentDmg - 1);
+                }
+            }
+        }
+    }
+
+    @SpirePatch(
+            clz = DamageInfo.class,
+            method = "applyPowers",
+            paramtypez = {AbstractCreature.class, AbstractCreature.class}
+    )
+    public static class ApplyPowers {
+        public static void Postfix(DamageInfo __instance, AbstractCreature __owner, AbstractCreature target) {
+            if (target != AbstractDungeon.player)
+                return;
+            if (!BossedRelics.isDisabled(TinyHouse.ID) && AbstractDungeon.player.hasRelic(TinyHouse.ID)) {
+                if (__instance.output > 0) {
+                    __instance.output -= 1;
+                    __instance.isModified = true;
                 }
             }
         }

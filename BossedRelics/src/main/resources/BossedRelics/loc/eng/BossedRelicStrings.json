@@ -48,8 +48,7 @@
     "NAME": "Tiny House",
     "FLAVOR": "\"A near perfect implementation of miniaturization. My finest work to date, but still not adequate.\" - The Architect",
     "DESCRIPTIONS": [
-      "Whenever you lose HP, gain #b",
-      " #yPlated #yArmor."
+      "Obtain #b1 potion and slot. NL Gain #b50 #yGold. NL Raise your Max HP by #b5. NL Obtain #b1 card. NL Upgrade #b1 random card. NL Take #b1 less attack damage."
     ]
   },
   "Runic Cube": {
