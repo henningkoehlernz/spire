@@ -33,7 +33,7 @@
     "NAME": "Boîte de Pandore",
     "FLAVOR": "Vous avez un mauvais préssentiment.",
     "DESCRIPTIONS": [
-      "Quand vous la ramassez, #bTransformez toutes vos X cartes Frappe et Défense. Après X tours, jouez la carte du dessus de votre pioche à chaque tour.",
+      "Transformez #bX cartes. Après #bX tours, jouez la carte du dessus de votre pioche à chaque tour.",
       "La boîte de Pandore a été ouverte..."
     ]
   },
