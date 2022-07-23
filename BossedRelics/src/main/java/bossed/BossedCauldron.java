@@ -17,7 +17,8 @@ public class BossedCauldron {
     )
     public static class OnUsePotion {
         public static void Postfix(AbstractRelic __instance) {
-            if ( __instance instanceof Cauldron && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT ) {
+            if ( __instance instanceof Cauldron && !BossedRelics.isDisabled(Cauldron.ID)
+                    && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT ) {
                 __instance.flash();
                 AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(AbstractDungeon.player, __instance));
                 AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(1));

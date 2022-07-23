@@ -1,6 +1,7 @@
 package bossed;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardQueueItem;
 import com.megacrit.cardcrawl.core.Settings;
@@ -17,7 +18,8 @@ public class BossedDollysMirror {
             paramtypez = {}
     )
     public static class OnEquip {
-        public static void Replace(DollysMirror __instance) {
+        public static SpireReturn<Void> Prefix(DollysMirror __instance) {
+            return BossedRelics.isDisabled(DollysMirror.ID) ? SpireReturn.Continue() : SpireReturn.Return();
         }
     }
 
@@ -28,7 +30,7 @@ public class BossedDollysMirror {
     )
     public static class OnVictory {
         public static void Postfix(AbstractRelic __instance) {
-            if ( __instance instanceof DollysMirror )
+            if (__instance instanceof DollysMirror && !BossedRelics.isDisabled(DollysMirror.ID))
                 __instance.grayscale = false;
         }
     }
@@ -40,7 +42,7 @@ public class BossedDollysMirror {
     )
     public static class OnPlayCard {
         public static void Postfix(AbstractRelic __instance, AbstractCard c, AbstractMonster m) {
-            if ( __instance instanceof DollysMirror && !__instance.grayscale ) {
+            if (__instance instanceof DollysMirror && !__instance.grayscale && !BossedRelics.isDisabled(DollysMirror.ID)) {
                 __instance.flash();
                 __instance.grayscale = true;
                 AbstractCard copy = c.makeSameInstanceOf();

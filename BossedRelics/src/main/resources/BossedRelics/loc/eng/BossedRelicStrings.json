@@ -1,5 +1,5 @@
 {
-  "Ring of the Serpent": {
+  "Bossed:Ring of the Serpent": {
     "NAME": "Ring of the Serpent",
     "FLAVOR": "Your ring has morphed and changed forms.",
     "DESCRIPTIONS": [
@@ -7,21 +7,21 @@
       "At the start of your turn, draw #b2 additional cards."
     ]
   },
-  "FrozenCore": {
+  "Bossed:FrozenCore": {
     "NAME": "Frozen Core",
     "FLAVOR": "The crack in your core has been filled with a pulsating cold energy.",
     "DESCRIPTIONS": [
       "Replaces #bCracked #bCore. At the end of your turn, #yChannel #b1 #yFrost."
     ]
   },
-  "HolyWater": {
+  "Bossed:HolyWater": {
     "NAME": "Holy Water",
     "FLAVOR": "Collected from a time before the Spire.",
     "DESCRIPTIONS": [
       "Replaces #pPure #pWater. At the start of each combat, add #b3 #yMiracles into your hand. Whenever you play a #yMiracle, draw a card."
     ]
   },
-  "Empty Cage": {
+  "Bossed:Empty Cage": {
     "NAME": "Empty Cage",
     "FLAVOR": "\"How unusual to cage that which you worship.\" - Ranwid",
     "DESCRIPTIONS": [
@@ -54,7 +54,7 @@
       "Tiny House!"
     ]
   },
-  "Runic Cube": {
+  "Bossed:Runic Cube": {
     "NAME": "Runic Cube",
     "FLAVOR": "The runes are indecipherable.",
     "DESCRIPTIONS": [
@@ -63,7 +63,7 @@
       ""
     ]
   },
-  "WristBlade": {
+  "Bossed:WristBlade": {
     "NAME": "Wrist Blade",
     "FLAVOR": "Handy for assassinations.",
     "DESCRIPTIONS": [
@@ -77,7 +77,7 @@
       "Double the effectiveness of potions. Reduce all HP loss by the number of empty potion slots (max 2)."
     ]
   },
-  "Ectoplasm": {
+  "Bossed:Ectoplasm": {
     "NAME": "Ectoplasm",
     "FLAVOR": "This blob of slime and energy seems to pulse with life.",
     "DESCRIPTIONS": [
@@ -85,7 +85,7 @@
       "Gain [E] at the start of your turn."
     ]
   },
-  "MawBank": {
+  "Bossed:MawBank": {
     "NAME": "Maw Bank",
     "FLAVOR": "Surprisingly popular, despite maw attacks being a regular occurrence.",
     "DESCRIPTIONS": [
@@ -94,7 +94,7 @@
       "This relic has been used up."
     ]
   },
-  "Strawberry": {
+  "Bossed:Strawberry": {
     "NAME": "Strawberry",
     "FLAVOR": "\"Delicious! Haven't seen any of these since the blight.\" - Ranwid",
     "DESCRIPTIONS": [
@@ -102,7 +102,7 @@
       "At the end of combat, heal #b1 HP."
     ]
   },
-  "Pear": {
+  "Bossed:Pear": {
     "NAME": "Pear",
     "FLAVOR": "A common fruit before the Spireblight.",
     "DESCRIPTIONS": [
@@ -110,7 +110,7 @@
       "At the end of combat, heal #b1 HP."
     ]
   },
-  "Mango": {
+  "Bossed:Mango": {
     "NAME": "Mango",
     "FLAVOR": "The most coveted forgotten fruit. Impeccably preserved with no signs of Spireblight.",
     "DESCRIPTIONS": [
@@ -118,7 +118,7 @@
       "At the end of combat, heal #b1 HP."
     ]
   },
-  "War Paint": {
+  "Bossed:War Paint": {
     "NAME": "War Paint",
     "FLAVOR": "In the past, Ironclads would create wards using enchanted war paint before charging into battle.",
     "DESCRIPTIONS": [
@@ -126,7 +126,7 @@
       " random #ySkills."
     ]
   },
-  "Whetstone": {
+  "Bossed:Whetstone": {
     "NAME": "Whetstone",
     "FLAVOR": "\"Flesh never beats steel.\" - Kublai the Great",
     "DESCRIPTIONS": [
@@ -164,21 +164,21 @@
       " in your hand. It costs #b1 less that turn."
     ]
   },
-  "Lizard Tail": {
+  "Bossed:Lizard Tail": {
     "NAME": "Lizard Tail",
     "FLAVOR": "A fake tail to trick enemies during combat.",
     "DESCRIPTIONS": [
       "When you would die, heal to #b30% of your Max HP instead. Takes #b5 floors to grow back."
     ]
   },
-  "Old Coin": {
+  "Bossed:Old Coin": {
     "NAME": "Old Coin",
     "FLAVOR": "Unique coins are highly valued by merchants for their historical value and rare metallic composition.",
     "DESCRIPTIONS": [
       "Upon pickup, gain #b250 #yGold. Whenever you gain gold, gain #b5 more."
     ]
   },
-  "Omamori": {
+  "Bossed:Omamori": {
     "NAME": "Omamori",
     "FLAVOR": "A common charm for staving off vile spirits. This one seems to possess a spark of divine energy.",
     "DESCRIPTIONS": [
@@ -187,14 +187,14 @@
       "When you exhaust a curse, draw a card."
     ]
   },
-  "WingedGreaves": {
+  "Bossed:WingedGreaves": {
     "NAME": "Wing Boots",
     "FLAVOR": "Stylish.",
     "DESCRIPTIONS": [
       "You may ignore paths when choosing the next room to travel to #b3 times. Recharges when resting."
     ]
   },
-  "Cauldron": {
+  "Bossed:Cauldron": {
     "NAME": "Cauldron",
     "FLAVOR": "The Merchant is actually a rather skilled potion brewer. Buy 4 get 1 free.",
     "DESCRIPTIONS": [
@@ -202,7 +202,7 @@
       "Blup blip bloop...!"
     ]
   },
-  "DollysMirror": {
+  "Bossed:DollysMirror": {
     "NAME": "Dolly's Mirror",
     "FLAVOR": "\"I look funny in this.\"",
     "DESCRIPTIONS": [
@@ -210,7 +210,7 @@
       "Choose 1 Card to Copy."
     ]
   },
-  "Lee's Waffle": {
+  "Bossed:Lee's Waffle": {
     "NAME": "Lee's Waffle",
     "FLAVOR": "\"Tastiest treat you will find in all the Spire! Baked today just for you.\"",
     "DESCRIPTIONS": [
@@ -218,7 +218,7 @@
       " and heal all of your HP. Whenever your Max HP increase by #bX, heal #bX."
     ]
   },
-  "Orrery": {
+  "Bossed:Orrery": {
     "NAME": "Orrery",
     "FLAVOR": "\"Once you understand the universe...\" - Zoroth",
     "DESCRIPTIONS": [

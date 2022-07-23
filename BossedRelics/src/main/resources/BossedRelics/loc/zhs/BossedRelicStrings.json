@@ -1,5 +1,5 @@
 {
-  "Ring of the Serpent": {
+  "Bossed:Ring of the Serpent": {
     "NAME": "长蛇戒指",
     "FLAVOR": "你的戒指改变了形态，焕然一新。",
     "DESCRIPTIONS": [
@@ -7,21 +7,21 @@
       "在你的每个回合开始时，额外抽 #b2 张牌。"
     ]
   },
-  "FrozenCore": {
+  "Bossed:FrozenCore": {
     "NAME": "冻结核心",
     "FLAVOR": "某种脉动的冰冷能量充满了你核心中的破损处。",
     "DESCRIPTIONS": [
       "替换 #b破损核心 。在你的回合结束时， #y生成 #b1 个 #y冰霜 充能球。"
     ]
   },
-  "HolyWater": {
+  "Bossed:HolyWater": {
     "NAME": "圣水",
     "FLAVOR": "从高塔出现的时代前收集来的水。",
     "DESCRIPTIONS": [
       "替换 #p至纯之水 。在每场战斗开始时，将 #b3 张 #y奇迹 放入你的手牌。每当你打出一张 #y奇迹，抽一张牌。"
     ]
   },
-  "Empty Cage": {
+  "Bossed:Empty Cage": {
     "NAME": "空鸟笼",
     "FLAVOR": "“将崇拜之物关进笼子，这是多么奇异的行为啊。”——兰伟德",
     "DESCRIPTIONS": [
@@ -55,7 +55,7 @@
 
     ]
   },
-  "Runic Cube": {
+  "Bossed:Runic Cube": {
     "NAME": "符文立方体",
     "FLAVOR": "上面的符文无法辨识。",
     "DESCRIPTIONS": [
@@ -64,21 +64,21 @@
       ""
     ]
   },
-  "WristBlade": {
+  "Bossed:WristBlade": {
     "NAME": "袖刃",
     "FLAVOR": "实用的暗杀工具。",
     "DESCRIPTIONS": [
       "费用为 #b0 的 #y攻击牌 额外造成 4 点伤害。你每回合第一次打出此种 #y攻击牌 时，抽一张牌。"
     ]
   },
-  "SacredBark": {
+  "Bossed:SacredBark": {
     "NAME": "神圣树皮",
     "FLAVOR": "传说中来自于世界树上的一块树皮。",
     "DESCRIPTIONS": [
       "药水的效果翻倍。你每次失去生命时，减少失去的生命值若干点，数值等于空余的药水栏位数（最多2点）。"
     ]
   },
-  "Ectoplasm": {
+  "Bossed:Ectoplasm": {
     "NAME": "灵体外质",
     "FLAVOR": "这团黏液与能量的混合物微微脉动，仿佛有着生命。",
     "DESCRIPTIONS": [
@@ -86,7 +86,7 @@
       "在回合开始时获得 [E] 。"
     ]
   },
-  "MawBank": {
+  "Bossed:MawBank": {
     "NAME": "巨口储蓄罐",
     "FLAVOR": "尽管巨口袭击频繁发生，这个造型的储蓄罐却意外相当流行。",
     "DESCRIPTIONS": [
@@ -95,7 +95,7 @@
       "这件遗物的效果已经使用完毕。"
     ]
   },
-  "Strawberry": {
+  "Bossed:Strawberry": {
     "NAME": "草莓",
     "FLAVOR": "“太好吃了！荒疫之后就没见过这东西了啊。”——兰伟德",
     "DESCRIPTIONS": [
@@ -103,7 +103,7 @@
       " 在战斗结束时，回复 #b1 点生命。"
     ]
   },
-  "Pear": {
+  "Bossed:Pear": {
     "NAME": "梨子",
     "FLAVOR": "在高塔荒疫发生之前十分常见的水果。",
     "DESCRIPTIONS": [
@@ -111,7 +111,7 @@
       " 在战斗结束时，回复 #b1 点生命。"
     ]
   },
-  "Mango": {
+  "Bossed:Mango": {
     "NAME": "芒果",
     "FLAVOR": "在众多被遗忘的水果中最令人垂涎的一种。被完美地保存了下来，没有任何受到高塔荒疫影响的迹象。",
     "DESCRIPTIONS": [
@@ -119,7 +119,7 @@
       " 在战斗结束时，回复 #b1 点生命。"
     ]
   },
-  "War Paint": {
+  "Bossed:War Paint": {
     "NAME": "战纹涂料",
     "FLAVOR": "在过去，铁甲军团的士兵们会在战斗前使用带有魔力的涂料来绘制保护性的战纹。",
     "DESCRIPTIONS": [
@@ -127,7 +127,7 @@
       " 张 #y技能牌 。"
     ]
   },
-  "Whetstone": {
+  "Bossed:Whetstone": {
     "NAME": "磨刀石",
     "FLAVOR": "“肉体永远无法打败钢铁。”——忽必烈大帝",
     "DESCRIPTIONS": [
@@ -165,21 +165,21 @@
       " 会出现在手牌中，且当回合耗能减少 #b1 。"
     ]
   },
-  "Lizard Tail": {
+  "Bossed:Lizard Tail": {
     "NAME": "蜥蜴尾巴",
     "FLAVOR": "在战斗中可以用来骗过敌人的假尾巴。",
     "DESCRIPTIONS": [
       "当你要被杀死时，免死并回复到最大生命值的 #b30% 并失效。 #b5 层楼层后复原。"
     ]
   },
-  "Old Coin": {
+  "Bossed:Old Coin": {
     "NAME": "古钱币",
     "FLAVOR": "因为其历史价值和稀有金属成分而被商人出以高价的独特钱币。",
     "DESCRIPTIONS": [
       "拾起时，获得 #b250 #y金币 。每当你获得金币，额外获得 #b5 金币。"
     ]
   },
-  "Omamori": {
+  "Bossed:Omamori": {
     "NAME": "御守",
     "FLAVOR": "常见的用来抵御邪灵的护身符，这个护符里似乎有一股神圣的能量。",
     "DESCRIPTIONS": [
@@ -188,14 +188,14 @@
       "当你 #y消耗 一张 #r诅咒 牌时，抽一张牌。"
     ]
   },
-  "WingedGreaves": {
+  "Bossed:WingedGreaves": {
     "NAME": "羽翼之靴",
     "FLAVOR": "很帅气。",
     "DESCRIPTIONS": [
       "你在选择下一层的房间时有 #b3 次机会可以无视当前的路线。休息时重新充满能。"
     ]
   },
-  "Cauldron": {
+  "Bossed:Cauldron": {
     "NAME": "大锅",
     "FLAVOR": "商人其实是位技术相当不错的药剂师。买四送一。",
     "DESCRIPTIONS": [
@@ -203,7 +203,7 @@
       "咕嘟咕嘟咕噜……！"
     ]
   },
-  "DollysMirror": {
+  "Bossed:DollysMirror": {
     "NAME": "多利之镜",
     "FLAVOR": "“照出来我的样子怪怪的。”",
     "DESCRIPTIONS": [
@@ -211,7 +211,7 @@
       "选择1张牌复制。"
     ]
   },
-  "Lee's Waffle": {
+  "Bossed:Lee's Waffle": {
     "NAME": "李家华夫饼",
     "FLAVOR": "“全高塔你能找到的最好吃的东西！今天特地为你烤的。”",
     "DESCRIPTIONS": [
@@ -219,7 +219,7 @@
       " 点，并回复所有生命。每当你的最大生命值增加时，回复等量生命（指游戏本来的回复机制以外额外的）。"
     ]
   },
-  "Orrery": {
+  "Bossed:Orrery": {
     "NAME": "星系仪",
     "FLAVOR": "“一旦你理解了宇宙……”——佐罗斯",
     "DESCRIPTIONS": [

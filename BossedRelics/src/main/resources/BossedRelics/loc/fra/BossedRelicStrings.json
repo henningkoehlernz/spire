@@ -1,5 +1,5 @@
 {
-  "Ring of the Serpent": {
+  "Bossed:Ring of the Serpent": {
     "NAME": "Anneau du grand serpent",
     "FLAVOR": "Votre anneau à mué et à changé de forme.",
     "DESCRIPTIONS": [
@@ -7,21 +7,21 @@
       "Au debut de votre tour, piochez #b2 cartes supplémentaires."
     ]
   },
-  "FrozenCore": {
+  "Bossed:FrozenCore": {
     "NAME": "Noyau congelé",
     "FLAVOR": "La fissure dans votre noyau a été remplie par une puissante énergie froide.",
     "DESCRIPTIONS": [
       "Remplace #bNoyau #bfissuré. A la fin de votre tour, #yCanalisez #b1 #yOrbe #yGlaciaire."
     ]
   },
-  "HolyWater": {
+  "Bossed:HolyWater": {
     "NAME": "Eau miraculeuse",
     "FLAVOR": "Collectée bien avant l'apparition de la tour.",
     "DESCRIPTIONS": [
       "Remplace #pEau #pPure. Au début de chaque combat, ajoute #b3 #yMiracles dans votre main. Quand vous jouez un #yMiracle, Piochez une carte."
     ]
   },
-  "Empty Cage": {
+  "Bossed:Empty Cage": {
     "NAME": "Cage vide",
     "FLAVOR": "\"Comme il est inhabituel de mettre en cage ce que vous adorez.\" - Ranwid",
     "DESCRIPTIONS": [
@@ -55,7 +55,7 @@
       "Tiny House!",
     ]
   },
-  "Runic Cube": {
+  "Bossed:Runic Cube": {
     "NAME": "Cube runique",
     "FLAVOR": "Les runes sont indéchiffrables.",
     "DESCRIPTIONS": [
@@ -64,21 +64,21 @@
       ""
     ]
   },
-  "WristBlade": {
+  "Bossed:WristBlade": {
     "NAME": "Poignard",
     "FLAVOR": "Pratique pour les assassinats.",
     "DESCRIPTIONS": [
       "Les #yAttaques qui coûtent #b0 infligent #b4 dégâts supplémentaires. La première fois que vous jouez une telle #yattaque à chaque tour, piochez une carte."
     ]
   },
-  "SacredBark": {
+  "Bossed:SacredBark": {
     "NAME": "Écorce sacrée",
     "FLAVOR": "Une écorce originaire de l'arbre Monde selon les rumeurs.",
     "DESCRIPTIONS": [
       "Double l'efficacité des potions. Réduisez toutes les pertes de HP du nombre d'emplacements de potions vides (max 2)."
     ]
   },
-  "Ectoplasm": {
+  "Bossed:Ectoplasm": {
     "NAME": "Ectoplasme",
     "FLAVOR": "Cette masse visqueuse et informe montre des signes de vie.",
     "DESCRIPTIONS": [
@@ -86,7 +86,7 @@
       "Gagnez [E] au début de chaque tour."
     ]
   },
-  "MawBank": {
+  "Bossed:MawBank": {
     "NAME": "Tirelire Gueule",
     "FLAVOR": "Étonnamment populaire, malgré que les attaques de Gueules soient fréquentes.",
     "DESCRIPTIONS": [
@@ -95,7 +95,7 @@
       "Cette relique a été épuisée."
     ]
   },
-  "Strawberry": {
+  "Bossed:Strawberry": {
     "NAME": "Fraise",
     "FLAVOR": "\"Délicieuse ! Je n'en avais pas vue depuis l'épidémie de rouille.\" - Ranwid",
     "DESCRIPTIONS": [
@@ -103,7 +103,7 @@
       "À la fin du combat, récupérez #b1 PV."
     ]
   },
-  "Pear": {
+  "Bossed:Pear": {
     "NAME": "Poire",
     "FLAVOR": "Un fruit ordinaire avant les ravages de la tourouille.",
     "DESCRIPTIONS": [
@@ -111,7 +111,7 @@
       "À la fin du combat, récupérez #b1 PV."
     ]
   },
-  "Mango": {
+  "Bossed:Mango": {
     "NAME": "Mangue",
     "FLAVOR": "Le plus convoité des fruits oubliés. Parfaitement conservé sans aucun signe de tourouille.",
     "DESCRIPTIONS": [
@@ -119,7 +119,7 @@
       "À la fin du combat, récupérez #b1 PV."
     ]
   },
-  "War Paint": {
+  "Bossed:War Paint": {
     "NAME": "Peinture de guerre",
     "FLAVOR": "Jadis, les Soldats de fer utilisaient de la peinture de guerre enchantée pour se protéger avant de charger au combat.",
     "DESCRIPTIONS": [
@@ -127,7 +127,7 @@
       " #yCompétences aléatoires."
     ]
   },
-  "Whetstone": {
+  "Bossed:Whetstone": {
     "NAME": "Pierre à aiguiser",
     "FLAVOR": "\"La chair ne bat jamais le fer.\" - Le grand Kublai",
     "DESCRIPTIONS": [
@@ -165,21 +165,21 @@
       " dans votre main. Cela coûte #b1 de moins ce tour."
     ]
   },
-  "Lizard Tail": {
+  "Bossed:Lizard Tail": {
     "NAME": "Queue de lézard",
     "FLAVOR": "Une fausse queue permettant de leurrer les ennemis pendant le combat.",
     "DESCRIPTIONS": [
       "Quand vous êtes sur le point de mourir, récupérez des PV pour atteindre #b30 % de vos PV max à la place. Prend les étages #b5 pour repousser."
     ]
   },
-  "Old Coin": {
+  "Bossed:Old Coin": {
     "NAME": "Vieille pièce",
     "FLAVOR": "Les pièces uniques sont très prisées par les Marchands en raison de leur valeur historique et de leur composition rare.",
     "DESCRIPTIONS": [
       "Quand vous l'obtenez, gagnez #b250 #yd'or. Chaque fois que vous gagnez #yd'or, gagnez #b5 de plus."
     ]
   },
-  "Omamori": {
+  "Bossed:Omamori": {
     "NAME": "Omamori",
     "FLAVOR": "Une amulette servant à repousser les mauvais esprits. Celle-ci semble avoir une étincelle d'énergie divine.",
     "DESCRIPTIONS": [
@@ -188,14 +188,14 @@
       "Cette relique a été épuisée."
     ]
   },
-  "WingedGreaves": {
+  "Bossed:WingedGreaves": {
     "NAME": "Bottes ailées",
     "FLAVOR": "Stylées.",
     "DESCRIPTIONS": [
       "Vous pouvez ignorer les lignes au moment de choisir l'étage suivant #b3 fois. Se recharge au repos."
     ]
   },
-  "Cauldron": {
+  "Bossed:Cauldron": {
     "NAME": "Chaudron",
     "FLAVOR": "Le Marchand est passé maître dans la préparation de potions. 1 offerte pour 4 achetées.",
     "DESCRIPTIONS": [
@@ -203,7 +203,7 @@
       "Glou glou glou... !"
     ]
   },
-  "DollysMirror": {
+  "Bossed:DollysMirror": {
     "NAME": "Miroir de Dolly",
     "FLAVOR": "\"Ce miroir me donne l'air bizarre.\"",
     "DESCRIPTIONS": [
@@ -211,7 +211,7 @@
       "Choisissez 1 carte à Copier."
     ]
   },
-  "Lee's Waffle": {
+  "Bossed:Lee's Waffle": {
     "NAME": "Gaufre de Lee",
     "FLAVOR": "\"La meilleure gourmandise de toute la Tour ! Tout juste sortie du four, rien que pour vous.\"",
     "DESCRIPTIONS": [
@@ -219,7 +219,7 @@
       " et récupérez tous vos PV. Chaque fois que vos PV max augmentent de #bX, récupérez #bX."
     ]
   },
-  "Orrery": {
+  "Bossed:Orrery": {
     "NAME": "Planétaire",
     "FLAVOR": "\"Une fois que vous connaîtrez l'univers...\" - Zoroth",
     "DESCRIPTIONS": [
