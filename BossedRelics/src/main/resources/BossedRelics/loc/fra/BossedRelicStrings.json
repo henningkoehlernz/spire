@@ -49,7 +49,10 @@
     "NAME": "Petite maison",
     "FLAVOR": "\"Une mise en œuvre quasi parfaite de la miniaturisation. Mon meilleur travail à ce jour, mais toujours insuffisant.\" - L'architect",
     "DESCRIPTIONS": [
-      "Obtenez #b1 potion et un emplacement. NL Gagnez #b50 pièces #yd'or. NL Augmentez votre Max HP de #b5. NL Obtenez #b1 carte. NL Améliorez #b1 carte aléatoire. NL Subit #b1 dégâts d'attaque en moins."
+      "Obtenez #b1 potion et un emplacement. NL Gagnez #b",
+      " pièces #yd'or. NL Augmentez votre Max HP de #b",
+      ". NL Obtenez #b1 carte. NL Améliorez #b1 carte aléatoire. NL Subit #b1 dégâts d'attaque en moins.",
+      "Tiny House!",
     ]
   },
   "Runic Cube": {
@@ -132,7 +135,7 @@
       " #yAttaques aléatoires."
     ]
   },
-  "Bottled Flame": {
+  "Bossed:Bottled Flame": {
     "NAME": "Flamme embouteillée",
     "FLAVOR": "Dans cette bouteille brûle une flamme éternelle.",
     "DESCRIPTIONS": [
@@ -142,7 +145,7 @@
       " dans votre main. Cela coûte #b1 de moins ce tour."
     ]
   },
-  "Bottled Lightning": {
+  "Bossed:Bottled Lightning": {
     "NAME": "Foudre embouteillée",
     "FLAVOR": "En observant ce maelström tourbillonnant, vous apercevez une partie de vous-même qui vous fixe.",
     "DESCRIPTIONS": [
@@ -152,7 +155,7 @@
       " dans votre main. Cela coûte #b1 de moins ce tour."
     ]
   },
-  "Bottled Tornado": {
+  "Bossed:Bottled Tornado": {
     "NAME": "Tornade embouteillée",
     "FLAVOR": "La bouteille bourdonne et siffle doucement.",
     "DESCRIPTIONS": [

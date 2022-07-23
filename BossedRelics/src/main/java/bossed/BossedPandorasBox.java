@@ -6,7 +6,6 @@ import com.megacrit.cardcrawl.actions.common.PlayTopCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.PandorasBox;
@@ -31,12 +30,11 @@ public class BossedPandorasBox {
             if (BossedRelics.isDisabled(PandorasBox.ID))
                 return SpireReturn.Continue();
             Reflection.set(__instance, PandorasBox.class, CALLED_TRANSFORM, false);
-            RelicStrings strings = BossedRelics.getRelicStrings(PandorasBox.ID);
             if (AbstractDungeon.isScreenUp) {
                 AbstractDungeon.dynamicBanner.hide();
                 AbstractDungeon.previousScreen = AbstractDungeon.screen;
             }
-            AbstractDungeon.gridSelectScreen.open(AbstractDungeon.player.masterDeck.getPurgeableCards(),10, true, strings.DESCRIPTIONS[1]);
+            AbstractDungeon.gridSelectScreen.open(AbstractDungeon.player.masterDeck.getPurgeableCards(),10, true, __instance.DESCRIPTIONS[1]);
             return SpireReturn.Return();
         }
     }
@@ -78,20 +76,6 @@ public class BossedPandorasBox {
             }
             AbstractDungeon.gridSelectScreen.selectedCards.clear();
             AbstractDungeon.getCurrRoom().rewardPopOutTimer = 0.25F;
-        }
-    }
-
-    @SpirePatch(
-            clz = PandorasBox.class,
-            method = "getUpdatedDescription",
-            paramtypez = {}
-    )
-    public static class GetUpdatedDescription {
-        public static SpireReturn<String> Prefix(PandorasBox __instance) {
-            if (BossedRelics.isDisabled(PandorasBox.ID))
-                return SpireReturn.Continue();
-            RelicStrings strings = BossedRelics.getRelicStrings(PandorasBox.ID);
-            return SpireReturn.Return(strings.DESCRIPTIONS[0]);
         }
     }
 

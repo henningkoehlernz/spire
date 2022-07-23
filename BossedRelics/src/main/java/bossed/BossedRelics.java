@@ -50,10 +50,6 @@ public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscr
         return MODNAME + "/loc/eng/";
     }
 
-    public static RelicStrings getRelicStrings(String relicID) {
-        return CardCrawlGame.languagePack.getRelicStrings(MOD_PREFIX + relicID);
-    }
-
     public static UIStrings getUIString(String uiName) {
         return CardCrawlGame.languagePack.getUIString(MOD_PREFIX + uiName);
     }
@@ -112,7 +108,7 @@ public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscr
                 Settings.CREAM_COLOR, FontHelper.charDescFont, isDisabled(relicID),
                 configPanel, (label) -> {}, (button) -> {
                     if (button.enabled)
-                       disabled.add(relicID);
+                        disabled.add(relicID);
                     else
                         disabled.remove(relicID);
                     saveConfig();

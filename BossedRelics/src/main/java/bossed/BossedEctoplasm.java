@@ -15,7 +15,7 @@ public class BossedEctoplasm {
             method = "gainGold",
             paramtypez = { int.class }
     )
-    public static class GetUpdatedDescription {
+    public static class GainGold {
         public static SpireReturn<Void> Prefix(AbstractPlayer __instance, int amount) {
             if (amount > 0) {
                 CardCrawlGame.goldGained += amount;

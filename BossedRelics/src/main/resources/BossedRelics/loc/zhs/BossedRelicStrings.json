@@ -48,7 +48,11 @@
     "NAME": "小屋子",
     "FLAVOR": "“一项近乎完美的微缩化工程。这是我至今最优秀的作品，但仍然远远不够。”——建筑师",
     "DESCRIPTIONS": [
-      "获得 #b1 个药水和插槽。 NL 获得 #b50 #y金币。 NL 将你的最大生命值提高 #b5。 NL 获得 #b1 张卡片。 NL 升级 #b1 张随机卡。 NL 减少 #b1 点攻击伤害。"
+      "获得 #b1 个药水和插槽。 NL 获得 #b",
+      " #y金币。 NL 将你的最大生命值提高 #b",
+      "。 NL 获得 #b1 张卡片。 NL 升级 #b1 张随机卡。 NL 减少 #b1 点攻击伤害。",
+      "Tiny House!"
+
     ]
   },
   "Runic Cube": {
@@ -131,7 +135,7 @@
       " 张 #y攻击牌 。"
     ]
   },
-  "Bottled Flame": {
+  "Bossed:Bottled Flame": {
     "NAME": "瓶装火焰",
     "FLAVOR": "在这个瓶子里，有着一团永远燃烧的火焰。",
     "DESCRIPTIONS": [
@@ -141,7 +145,7 @@
       " 会出现在手牌中，且当回合耗能减少 #b1 。"
     ]
   },
-  "Bottled Lightning": {
+  "Bossed:Bottled Lightning": {
     "NAME": "瓶装闪电",
     "FLAVOR": "细看这团旋转的雷云，你仿佛能看见自己的一部分在回望着你。",
     "DESCRIPTIONS": [
@@ -151,7 +155,7 @@
       " 会出现在手牌中，且当回合耗能减少 #b1 。"
     ]
   },
-  "Bottled Tornado": {
+  "Bossed:Bottled Tornado": {
     "NAME": "瓶装旋风",
     "FLAVOR": "这个瓶子中传来轻轻的嗡嗡声与嗖嗖声。",
     "DESCRIPTIONS": [

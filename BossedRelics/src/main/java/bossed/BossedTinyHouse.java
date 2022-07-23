@@ -1,11 +1,9 @@
 package bossed;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.PotionSlot;
 import com.megacrit.cardcrawl.relics.TinyHouse;
@@ -23,20 +21,6 @@ public class BossedTinyHouse {
                 AbstractDungeon.player.potionSlots += 1;
                 AbstractDungeon.player.potions.add(new PotionSlot(AbstractDungeon.player.potionSlots - 1));
             }
-        }
-    }
-
-    @SpirePatch(
-            clz = TinyHouse.class,
-            method = "getUpdatedDescription",
-            paramtypez = {}
-    )
-    public static class GetUpdatedDescription {
-        public static SpireReturn<String> Prefix(TinyHouse __instance) {
-            if (BossedRelics.isDisabled(TinyHouse.ID))
-                return SpireReturn.Continue();
-            RelicStrings strings = BossedRelics.getRelicStrings(TinyHouse.ID);
-            return SpireReturn.Return(strings.DESCRIPTIONS[0]);
         }
     }
 

@@ -48,7 +48,10 @@
     "NAME": "Tiny House",
     "FLAVOR": "\"A near perfect implementation of miniaturization. My finest work to date, but still not adequate.\" - The Architect",
     "DESCRIPTIONS": [
-      "Obtain #b1 potion and slot. NL Gain #b50 #yGold. NL Raise your Max HP by #b5. NL Obtain #b1 card. NL Upgrade #b1 random card. NL Take #b1 less attack damage."
+      "Obtain #b1 potion and slot. NL Gain #b",
+      " #yGold. NL Raise your Max HP by #b",
+      ". NL Obtain #b1 card. NL Upgrade #b1 random card. NL Take #b1 less attack damage.",
+      "Tiny House!"
     ]
   },
   "Runic Cube": {
@@ -131,7 +134,7 @@
       " random #yAttacks."
     ]
   },
-  "Bottled Flame": {
+  "Bossed:Bottled Flame": {
     "NAME": "Bottled Flame",
     "FLAVOR": "Inside the bottle resides a flame that eternally burns.",
     "DESCRIPTIONS": [
@@ -141,7 +144,7 @@
       " in your hand. It costs #b1 less that turn."
     ]
   },
-  "Bottled Lightning": {
+  "Bossed:Bottled Lightning": {
     "NAME": "Bottled Lightning",
     "FLAVOR": "Peering into the swirling maelstrom, you see a part of yourself staring back.",
     "DESCRIPTIONS": [
@@ -151,7 +154,7 @@
       " in your hand. It costs #b1 less that turn."
     ]
   },
-  "Bottled Tornado": {
+  "Bossed:Bottled Tornado": {
     "NAME": "Bottled Tornado",
     "FLAVOR": "The bottle gently hums and whirs.",
     "DESCRIPTIONS": [

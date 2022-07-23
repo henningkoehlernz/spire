@@ -4,10 +4,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.relics.AbstractRelic;
-import com.megacrit.cardcrawl.relics.BottledFlame;
-import com.megacrit.cardcrawl.relics.BottledLightning;
-import com.megacrit.cardcrawl.relics.BottledTornado;
+import com.megacrit.cardcrawl.relics.*;
 
 public class BossedBottles {
 
@@ -19,7 +16,9 @@ public class BossedBottles {
     public static class ApplyPreCombatLogic {
         public static void Postfix(AbstractPlayer __instance) {
             for ( AbstractCard card : __instance.drawPile.group )
-                if ( card.inBottleFlame || card.inBottleLightning || card.inBottleTornado )
+                if ( card.inBottleFlame && !BossedRelics.isDisabled(BottledFlame.ID)
+                        || card.inBottleLightning && !BossedRelics.isDisabled(BottledLightning.ID)
+                        || card.inBottleTornado && !BossedRelics.isDisabled(BottledTornado.ID) )
                     card.setCostForTurn(card.costForTurn - 1);
         }
     }
@@ -31,7 +30,9 @@ public class BossedBottles {
     )
     public static class OnEnterRestRoom {
         public static void Postfix(AbstractRelic __instance) {
-            if ( __instance instanceof BottledFlame || __instance instanceof BottledLightning || __instance instanceof BottledTornado ) {
+            if ( __instance instanceof BottledFlame && !BossedRelics.isDisabled(BottledFlame.ID)
+                    || __instance instanceof BottledLightning && !BossedRelics.isDisabled(BottledLightning.ID)
+                    || __instance instanceof BottledTornado && !BossedRelics.isDisabled(BottledTornado.ID) ) {
                 AbstractCard card = __instance instanceof BottledFlame ? ((BottledFlame)__instance).card
                         : __instance instanceof BottledLightning ? ((BottledLightning)__instance).card
                         : ((BottledTornado)__instance).card;
