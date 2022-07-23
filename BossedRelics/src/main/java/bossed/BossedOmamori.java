@@ -1,6 +1,7 @@
 package bossed;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -19,7 +20,7 @@ public class BossedOmamori {
     )
     public static class AtBattleStart {
         public static void Postfix(AbstractRelic __instance) {
-            if ( __instance instanceof Omamori )
+            if (__instance instanceof Omamori && !BossedRelics.isDisabled(Omamori.ID))
                 __instance.grayscale = false;
         }
     }
@@ -30,13 +31,16 @@ public class BossedOmamori {
         paramtypez = {int.class}
     )
     public static class SetCounter {
-        public static void Replace(Omamori __instance, int setCounter) {
+        public static SpireReturn<Void> Prefix(Omamori __instance, int setCounter) {
+            if (BossedRelics.isDisabled(Omamori.ID))
+                return SpireReturn.Continue();
             __instance.counter = setCounter;
             if (setCounter == 0) {
                 __instance.description = __instance.DESCRIPTIONS[0];
             } else if (setCounter == 1) {
                 __instance.description = __instance.DESCRIPTIONS[1];
             }
+            return SpireReturn.Return();
         }
     }
 
@@ -47,7 +51,8 @@ public class BossedOmamori {
     )
     public static class OnCardDraw {
         public static void Postfix(AbstractRelic __instance, AbstractCard drawnCard) {
-            if ( __instance instanceof Omamori && !__instance.grayscale && drawnCard.type == AbstractCard.CardType.CURSE ) {
+            if (__instance instanceof Omamori && !__instance.grayscale && drawnCard.type == AbstractCard.CardType.CURSE
+                    && !BossedRelics.isDisabled(Omamori.ID)) {
                 __instance.grayscale = true;
                 AbstractDungeon.actionManager.addToTop(new ExhaustSpecificCardAction(drawnCard, AbstractDungeon.player.hand));
             }
@@ -61,7 +66,7 @@ public class BossedOmamori {
     )
     public static class OnExhaust {
         public static void Postfix(AbstractRelic __instance, AbstractCard card) {
-            if ( __instance instanceof Omamori && card.type == AbstractCard.CardType.CURSE ) {
+            if (__instance instanceof Omamori && card.type == AbstractCard.CardType.CURSE && !BossedRelics.isDisabled(Omamori.ID)) {
                 __instance.flash();
                 AbstractDungeon.actionManager.addToBottom(new DrawCardAction(1));
             }
@@ -77,7 +82,8 @@ public class BossedOmamori {
     )
     public static class Constructor {
         public static void Postfix(Omamori __instance) {
-            __instance.counter = -1;
+            if (!BossedRelics.isDisabled(Omamori.ID))
+                __instance.counter = -1;
         }
     }
 
@@ -87,7 +93,9 @@ public class BossedOmamori {
             paramtypez = {}
     )
     public static class Use {
-        public static void Replace(Omamori __instance) { }
+        public static SpireReturn<Void> Prefix(Omamori __instance) {
+            return BossedRelics.isDisabled(Omamori.ID) ? SpireReturn.Continue() : SpireReturn.Return();
+        }
     }
 
     @SpirePatch(
@@ -97,7 +105,7 @@ public class BossedOmamori {
     )
     public static class ConstructorFastCardObtainEffect {
         public static void Postfix(FastCardObtainEffect __instance, AbstractCard card, float x, float y) {
-            if ( card.type == AbstractCard.CardType.CURSE )
+            if (card.type == AbstractCard.CardType.CURSE && !BossedRelics.isDisabled(Omamori.ID))
                 __instance.isDone = false;
         }
     }
@@ -109,7 +117,7 @@ public class BossedOmamori {
     )
     public static class ConstructorShowCardAndObtainEffect {
         public static void Postfix(ShowCardAndObtainEffect __instance, AbstractCard card, float x, float y, boolean convergeCards) {
-            if ( card.type == AbstractCard.CardType.CURSE )
+            if (card.type == AbstractCard.CardType.CURSE && !BossedRelics.isDisabled(Omamori.ID))
                 __instance.isDone = false;
         }
     }

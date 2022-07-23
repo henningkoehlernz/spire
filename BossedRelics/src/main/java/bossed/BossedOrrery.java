@@ -36,7 +36,8 @@ public class BossedOrrery {
     )
     public static class Constructor {
         public static void Postfix(Orrery __instance) {
-            __instance.counter = 0;
+            if (!BossedRelics.isDisabled(Orrery.ID))
+                __instance.counter = 0;
         }
     }
 
@@ -47,7 +48,7 @@ public class BossedOrrery {
     )
     public static class OnObtainCard {
         public static void Postfix(AbstractRelic __instance, AbstractCard c) {
-            if ( __instance instanceof Orrery ) {
+            if (__instance instanceof Orrery && !BossedRelics.isDisabled(Orrery.ID)) {
                 __instance.counter += 1;
                 if ( __instance.counter >= 5 ) {
                     __instance.counter = 0;
