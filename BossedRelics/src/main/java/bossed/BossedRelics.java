@@ -13,9 +13,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.localization.UIStrings;
-import com.megacrit.cardcrawl.relics.Astrolabe;
-import com.megacrit.cardcrawl.relics.PandorasBox;
-import com.megacrit.cardcrawl.relics.TinyHouse;
+import com.megacrit.cardcrawl.relics.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -29,6 +27,7 @@ public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscr
 
     // mod config variables
     public static final String MODNAME = "BossedRelics";
+    public static final String MOD_PREFIX = "Bossed:";
     private static final String CONFIG_PATH = "preferences/bossed.cfg";
     private static final String CONFIG_DISABLED = "disabled";
     private static TreeMap<String, HashSet<String>> config = new TreeMap<>();
@@ -52,7 +51,11 @@ public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscr
     }
 
     public static RelicStrings getRelicStrings(String relicID) {
-        return CardCrawlGame.languagePack.getRelicStrings("Bossed:" + relicID);
+        return CardCrawlGame.languagePack.getRelicStrings(MOD_PREFIX + relicID);
+    }
+
+    public static UIStrings getUIString(String uiName) {
+        return CardCrawlGame.languagePack.getUIString(MOD_PREFIX + uiName);
     }
 
     private static void saveConfig() {
@@ -84,8 +87,8 @@ public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscr
         BaseMod.loadCustomStringsFile(UIStrings.class, languagePath() + "BossedUiStrings.json");
     }
 
-    private static float xPos(int index) { return 420f + 200f * (index / 8); }
-    private static float yPos(int index) { return 550f - 50f * (index % 8); }
+    private static float xPos(int index) { return 410f + 400f * (index / 10); }
+    private static float yPos(int index) { return 660f - 50f * (index % 10); }
     @Override
     public void receivePostInitialize() {
         loadConfig();
@@ -93,13 +96,19 @@ public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscr
         Texture badgeTexture = new Texture(MODNAME + "/badge.png");
         ModPanel configPanel = new ModPanel();
         // disable change for specific artefacts
-        ModLabel disabledLabel = new ModLabel("Disable changes for selected relics", 400f, 650f, configPanel, (label) -> {});
+        String labelText = getUIString("DisableChanges").TEXT[0];
+        ModLabel disabledLabel = new ModLabel(labelText, 400f, 730f, configPanel, (label) -> {});
         configPanel.addUIElement(disabledLabel);
-        final String[] relicChoices = { Astrolabe.ID, PandorasBox.ID, TinyHouse.ID };
+        final String[] relicChoices = {
+                Astrolabe.ID, Ectoplasm.ID, EmptyCage.ID, FrozenCore.ID, HolyWater.ID, PandorasBox.ID, RingOfTheSerpent.ID,
+                RunicCube.ID, SacredBark.ID, TinyHouse.ID, WristBlade.ID,
+                BottledFlame.ID, BottledLightning.ID, BottledTornado.ID, Cauldron.ID, DollysMirror.ID, LizardTail.ID, Mango.ID,
+                MawBank.ID, OldCoin.ID, Omamori.ID, Orrery.ID, Pear.ID, Strawberry.ID, Waffle.ID, WarPaint.ID, WingBoots.ID
+            };
         for (int index = 0; index < relicChoices.length; index++) {
             String relicID = relicChoices[index];
             ModLabeledToggleButton disableButton = new ModLabeledToggleButton(
-                relicID, xPos(index), yPos(index),
+                CardCrawlGame.languagePack.getRelicStrings(relicID).NAME, xPos(index), yPos(index),
                 Settings.CREAM_COLOR, FontHelper.charDescFont, isDisabled(relicID),
                 configPanel, (label) -> {}, (button) -> {
                     if (button.enabled)
@@ -111,8 +120,7 @@ public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscr
             );
             configPanel.addUIElement(disableButton);
         }
-        BaseMod.registerModBadge(badgeTexture, "Bossed Relics", "Henning Koehler",
-                "Improves or reworks some of the weaker boss relics, as well as non-boss relics with one time effects.", configPanel);
+        BaseMod.registerModBadge(badgeTexture, "Bossed Relics", "Henning Koehler", getUIString("ModDesc").TEXT[0], configPanel);
     }
 
 }

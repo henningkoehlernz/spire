@@ -1,7 +1,17 @@
 {
-  "SuperTransformAction": {
+  "Bossed:SuperTransformAction": {
     "TEXT": [
        "Transform and Upgrade"
+    ]
+  },
+  "Bossed:DisableChanges": {
+    "TEXT": [
+      "Disable changes for selected relics"
+    ]
+  },
+  "Bossed:ModDesc": {
+    "TEXT": [
+      "Improves or reworks some of the weaker boss relics, as well as non-boss relics with one time effects."
     ]
   }
 }

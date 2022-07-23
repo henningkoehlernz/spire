@@ -1,7 +1,17 @@
 {
-  "SuperTransformAction": {
+  "Bossed:SuperTransformAction": {
     "TEXT": [
       "转型升级"
+    ]
+  },
+  "Bossed:DisableChanges": {
+    "TEXT": [
+      "禁用所选遗物的更改"
+    ]
+  },
+  "Bossed:ModDesc": {
+    "TEXT": [
+      "改进或重做一些较弱的 Boss 遗物，以及具有一次性效果的非 Boss 遗物。"
     ]
   }
 }
