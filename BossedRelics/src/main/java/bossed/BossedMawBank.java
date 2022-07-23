@@ -34,7 +34,7 @@ public class BossedMawBank {
             paramtypez = {}
     )
     public static class OnSpendGold {
-        public static SpireReturn<Void> Prefix(MawBank __instance, AbstractRoom room) {
+        public static SpireReturn<Void> Prefix(MawBank __instance) {
             if (BossedRelics.isDisabled(MawBank.ID))
                 return SpireReturn.Continue();
             __instance.flash();
