@@ -19,7 +19,7 @@ public class BossedHolyWater {
     public static class UseMiracle {
         public static void Postfix(Miracle __instance, AbstractPlayer p, AbstractMonster m) {
             AbstractRelic relic = p.getRelic(HolyWater.ID);
-            if ( relic != null ) {
+            if (relic != null && !BossedRelics.isDisabled(HolyWater.ID)) {
                 relic.flash();
                 AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, 1));
             }

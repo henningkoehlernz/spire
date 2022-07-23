@@ -18,7 +18,7 @@ public class BossedEmptyCage {
     public static class EmptyCageDeckShuffle {
         public static void Postfix(EmptyDeckShuffleAction __instance) {
             AbstractRelic relic = AbstractDungeon.player.getRelic(EmptyCage.ID);
-            if ( relic != null && !relic.usedUp ) {
+            if (relic != null && !relic.usedUp && !BossedRelics.isDisabled(EmptyCage.ID)) {
                 relic.usedUp = true;
                 relic.flash();
                 AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(1));
@@ -34,7 +34,7 @@ public class BossedEmptyCage {
     public static class ApplyStartOfTurnRelics {
         public static void Postfix(AbstractPlayer __instance) {
             AbstractRelic relic = __instance.getRelic(EmptyCage.ID);
-            if ( relic != null ) {
+            if (relic != null && !BossedRelics.isDisabled(EmptyCage.ID)) {
                 relic.usedUp = false;
             }
         }

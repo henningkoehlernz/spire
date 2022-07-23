@@ -17,14 +17,13 @@ public class BossedEctoplasm {
     )
     public static class GainGold {
         public static SpireReturn<Void> Prefix(AbstractPlayer __instance, int amount) {
-            if (amount > 0) {
-                CardCrawlGame.goldGained += amount;
-                __instance.gold += amount;
-                for (AbstractRelic relic : __instance.relics)
-                    relic.onGainGold();
-                return SpireReturn.Return();
-            }
-            return SpireReturn.Continue();
+            if (amount <= 0 || BossedRelics.isDisabled(Ectoplasm.ID))
+                return SpireReturn.Continue();
+            CardCrawlGame.goldGained += amount;
+            __instance.gold += amount;
+            for (AbstractRelic relic : __instance.relics)
+                relic.onGainGold();
+            return SpireReturn.Return();
         }
     }
 
@@ -35,7 +34,7 @@ public class BossedEctoplasm {
     )
     public static class OnLoseHp {
         public static void Prefix(AbstractRelic __instance, int damageAmount) {
-            if (__instance instanceof Ectoplasm) {
+            if (__instance instanceof Ectoplasm && !BossedRelics.isDisabled(Ectoplasm.ID)) {
                 int goldAmt = Math.min(damageAmount, AbstractDungeon.player.gold);
                 if (goldAmt > 0) {
                     AbstractDungeon.player.loseGold(goldAmt);
@@ -46,28 +45,6 @@ public class BossedEctoplasm {
                 }
             }
         }
-
     }
-
-    /*
-    @SpirePatch(
-            clz = RewardItem.class,
-            method = "applyGoldBonus",
-            paramtypez = { boolean.class }
-    )
-    public static class ApplyGoldBonus {
-        public static void Prefix(RewardItem __instance, boolean theft) {
-            AbstractRelic relic = AbstractDungeon.player.getRelic(Ectoplasm.ID);
-            if (!theft && relic != null) {
-                int reduction = __instance.goldAmt / 2;
-                if (reduction > 0) {
-                    __instance.goldAmt -= reduction;
-                    relic.flash();
-                    relic.counter = Math.max(0, relic.counter) + reduction;
-                }
-            }
-        }
-    }
-    */
 
 }

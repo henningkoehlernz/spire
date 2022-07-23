@@ -16,7 +16,9 @@ public class BossedFruits {
     )
     public static class OnVictory {
         public static void Postfix(AbstractRelic __instance) {
-            if ( __instance instanceof Strawberry || __instance instanceof Pear || __instance instanceof Mango ) {
+            if (__instance instanceof Strawberry && !BossedRelics.isDisabled(Strawberry.ID)
+                    || __instance instanceof Pear && !BossedRelics.isDisabled(Pear.ID)
+                    || __instance instanceof Mango && !BossedRelics.isDisabled(Mango.ID)) {
                 if ( AbstractDungeon.player.currentHealth > 0 ) {
                     __instance.flash();
                     AbstractDungeon.player.heal(1);
