@@ -35,7 +35,7 @@ public class BossedSacredBark {
     )
     public static class OnLoseHpLast {
         public static int Postfix(int damageAmount, AbstractRelic __instance, int __originalDamageAmount) {
-            if ( __instance instanceof SacredBark && damageAmount > 0 ) {
+            if (__instance instanceof SacredBark && damageAmount > 0 && !BossedRelics.isDisabled(SacredBark.ID)) {
                 int dr = Math.min(2, emptyPotionSlots());
                 if ( dr > 0 ) {
                     __instance.flash();

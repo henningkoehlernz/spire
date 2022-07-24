@@ -1,6 +1,7 @@
 package bossed;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -17,7 +18,8 @@ public class BossedWarPaint {
             paramtypez = {}
     )
     public static class OnEquip {
-        public static void Replace(WarPaint __instance) {
+        public static SpireReturn<Void> Prefix(WarPaint __instance) {
+            return BossedRelics.isDisabled(WarPaint.ID) ? SpireReturn.Continue() : SpireReturn.Return();
         }
     }
 
@@ -30,7 +32,7 @@ public class BossedWarPaint {
         static final int COUNT = 2;
         public static void Postfix(AbstractPlayer __instance) {
             AbstractRelic relic = __instance.getRelic(WarPaint.ID);
-            if ( relic != null ) {
+            if (relic != null && !BossedRelics.isDisabled(WarPaint.ID)) {
                 relic.flash();
                 // find candidates
                 ArrayList<AbstractCard> candidates = new ArrayList<AbstractCard>();

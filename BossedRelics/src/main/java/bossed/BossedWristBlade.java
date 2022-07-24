@@ -17,7 +17,7 @@ public class BossedWristBlade {
     )
     public static class AtTurnStart {
         public static void Postfix(AbstractRelic __instance) {
-            if ( __instance instanceof WristBlade)
+            if (__instance instanceof WristBlade && !BossedRelics.isDisabled(WristBlade.ID))
                 __instance.counter = 1;
         }
     }
@@ -29,7 +29,7 @@ public class BossedWristBlade {
     )
     public static class OnPlayCard {
         public static void Postfix(AbstractRelic __instance, AbstractCard c, AbstractMonster m) {
-            if ( __instance instanceof WristBlade) {
+            if (__instance instanceof WristBlade && !BossedRelics.isDisabled(WristBlade.ID)) {
                 boolean costZero = c.costForTurn == 0 || (c.freeToPlayOnce && c.cost != -1);
                 if ( c.type == AbstractCard.CardType.ATTACK && costZero && __instance.counter > 0 ) {
                     __instance.counter--;

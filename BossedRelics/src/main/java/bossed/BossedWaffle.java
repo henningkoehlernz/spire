@@ -15,12 +15,12 @@ public class BossedWaffle {
             method = "increaseMaxHp",
             paramtypez = {int.class, boolean.class}
     )
-    public static class OnRest {
+    public static class IncreaseMaxHP {
         public static void Postfix(AbstractCreature __instance, int amount, boolean showEffect) {
             if ( amount > 0 && __instance == AbstractDungeon.player ) {
                 AbstractRelic waffle = AbstractDungeon.player.getRelic(Waffle.ID);
                 boolean muzzled = Settings.isEndless && AbstractDungeon.player.hasBlight(Muzzle.ID);
-                if ( waffle != null && !muzzled ) {
+                if (waffle != null && !muzzled && !BossedRelics.isDisabled(Waffle.ID)) {
                     waffle.flash();
                     __instance.heal(amount, true);
                 }

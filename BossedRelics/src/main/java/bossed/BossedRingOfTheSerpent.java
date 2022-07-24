@@ -12,8 +12,9 @@ public class BossedRingOfTheSerpent {
             paramtypez = {}
     )
     public static class OnEquip {
-        public static void Replace(RingOfTheSerpent __instance) {
-            AbstractDungeon.player.masterHandSize += 2;
+        public static void Postfix(RingOfTheSerpent __instance) {
+            if (!BossedRelics.isDisabled(RingOfTheSerpent.ID))
+                AbstractDungeon.player.masterHandSize += 1;
         }
     }
 
@@ -23,8 +24,9 @@ public class BossedRingOfTheSerpent {
             paramtypez = {}
     )
     public static class OnUnequip {
-        public static void Replace(RingOfTheSerpent __instance) {
-            AbstractDungeon.player.masterHandSize -= 2;
+        public static void Postfix(RingOfTheSerpent __instance) {
+            if (!BossedRelics.isDisabled(RingOfTheSerpent.ID))
+                AbstractDungeon.player.masterHandSize -= 1;
         }
     }
 

@@ -1,6 +1,7 @@
 package bossed;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -17,7 +18,8 @@ public class BossedWhetstone {
             paramtypez = {}
     )
     public static class OnEquip {
-        public static void Replace(Whetstone __instance) {
+        public static SpireReturn<Void> Prefix(Whetstone __instance) {
+            return BossedRelics.isDisabled(Whetstone.ID) ? SpireReturn.Continue() : SpireReturn.Return();
         }
     }
 
@@ -30,7 +32,7 @@ public class BossedWhetstone {
         static final int COUNT = 2;
         public static void Postfix(AbstractPlayer __instance) {
             AbstractRelic relic = __instance.getRelic(Whetstone.ID);
-            if ( relic != null ) {
+            if (relic != null && !BossedRelics.isDisabled(Whetstone.ID)) {
                 relic.flash();
                 // find candidates
                 ArrayList<AbstractCard> candidates = new ArrayList<AbstractCard>();
