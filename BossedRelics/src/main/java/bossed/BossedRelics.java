@@ -99,7 +99,7 @@ public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscr
                 Astrolabe.ID, Ectoplasm.ID, EmptyCage.ID, FrozenCore.ID, HolyWater.ID, PandorasBox.ID, RingOfTheSerpent.ID,
                 RunicCube.ID, SacredBark.ID, TinyHouse.ID, WristBlade.ID,
                 BottledFlame.ID, BottledLightning.ID, BottledTornado.ID, Cauldron.ID, DollysMirror.ID, LizardTail.ID, Mango.ID,
-                MawBank.ID, OldCoin.ID, Omamori.ID, Orrery.ID, Pear.ID, Strawberry.ID, Waffle.ID, WarPaint.ID, WingBoots.ID
+                MawBank.ID, OldCoin.ID, Omamori.ID, Orrery.ID, Pear.ID, Strawberry.ID, Waffle.ID, WarPaint.ID, Whetstone.ID, WingBoots.ID
             };
         for (int index = 0; index < relicChoices.length; index++) {
             String relicID = relicChoices[index];
