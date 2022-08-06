@@ -1,6 +1,5 @@
 package th;
 
-import com.megacrit.cardcrawl.cards.AbstractCard;
 import basemod.abstracts.CustomCard;
 
 public abstract class AbstractTreasure extends CustomCard {

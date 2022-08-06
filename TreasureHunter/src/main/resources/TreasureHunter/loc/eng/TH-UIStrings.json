@@ -4,5 +4,10 @@
       "Treasure",
       "Treasures"
     ]
+  },
+  "TH:Potion": {
+    "TEXT": [
+      "Potion"
+    ]
   }
 }

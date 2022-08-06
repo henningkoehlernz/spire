@@ -1,8 +1,14 @@
 [
-    {
-      "NAMES": [
-        "treasure"
-      ],
-      "DESCRIPTION": "Increases starting gold for all future runs."
-    }
+  {
+    "NAMES": [
+      "treasure"
+    ],
+    "DESCRIPTION": "Increases starting gold for all future runs."
+  },
+  {
+    "NAMES": [
+      "potion"
+    ],
+    "DESCRIPTION": "Interacts with certain relics."
+  }
 ]
