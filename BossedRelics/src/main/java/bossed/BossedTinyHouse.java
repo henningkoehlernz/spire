@@ -1,11 +1,12 @@
 package bossed;
 
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.PotionSlot;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.TinyHouse;
 
 public class BossedTinyHouse {
@@ -24,6 +25,8 @@ public class BossedTinyHouse {
         }
     }
 
+    // fix intent damage (=damage preview)
+    // current implementation does not check for player relics (bug)
     @SpirePatch(
             clz = AbstractMonster.class,
             method = "calculateDamage",
@@ -41,21 +44,17 @@ public class BossedTinyHouse {
         }
     }
 
+    // fix actual damage received
     @SpirePatch(
-            clz = DamageInfo.class,
-            method = "applyPowers",
-            paramtypez = {AbstractCreature.class, AbstractCreature.class}
+            clz = AbstractRelic.class,
+            method = "onAttackedToChangeDamage",
+            paramtypez = {DamageInfo.class, int.class}
     )
-    public static class ApplyPowers {
-        public static void Postfix(DamageInfo __instance, AbstractCreature __owner, AbstractCreature target) {
-            if (target != AbstractDungeon.player)
-                return;
-            if (!BossedRelics.isDisabled(TinyHouse.ID) && AbstractDungeon.player.hasRelic(TinyHouse.ID)) {
-                if (__instance.output > 0) {
-                    __instance.output -= 1;
-                    __instance.isModified = true;
-                }
-            }
+    public static class OnAttackedToChangeDamage {
+        public static SpireReturn<Integer> Prefix(AbstractRelic __instance, DamageInfo info, int damageAmount) {
+            if (__instance instanceof TinyHouse && !BossedRelics.isDisabled(TinyHouse.ID))
+                return SpireReturn.Return(Math.max(0, damageAmount - 1));
+            return SpireReturn.Continue();
         }
     }
 
