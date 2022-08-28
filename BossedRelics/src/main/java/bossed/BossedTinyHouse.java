@@ -1,10 +1,11 @@
 package bossed;
 
+import com.evacipated.cardcrawl.modthespire.lib.ByRef;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.PotionSlot;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.TinyHouse;
@@ -25,36 +26,23 @@ public class BossedTinyHouse {
         }
     }
 
-    // fix intent damage (=damage preview)
-    // current implementation does not check for player relics (bug)
+    // decrementBlock is called in AbstractPlayer.damage
+    // we reduce damage here to ensure blocked damage is reduced as well
     @SpirePatch(
-            clz = AbstractMonster.class,
-            method = "calculateDamage",
-            paramtypez = {int.class}
-    )
-    public static class CalculateDamage {
-        private static final String fieldName = "intentDmg";
-        public static void Postfix(AbstractMonster __instance, int __dmg) {
-            if (!BossedRelics.isDisabled(TinyHouse.ID) && AbstractDungeon.player.hasRelic(TinyHouse.ID)) {
-                int intentDmg = (Integer)Reflection.get(__instance, AbstractMonster.class, fieldName);
-                if (intentDmg > 0) {
-                    Reflection.set(__instance, AbstractMonster.class, fieldName, intentDmg - 1);
-                }
-            }
-        }
-    }
-
-    // fix actual damage received
-    @SpirePatch(
-            clz = AbstractRelic.class,
-            method = "onAttackedToChangeDamage",
+            clz = AbstractCreature.class,
+            method = "decrementBlock",
             paramtypez = {DamageInfo.class, int.class}
     )
-    public static class OnAttackedToChangeDamage {
-        public static SpireReturn<Integer> Prefix(AbstractRelic __instance, DamageInfo info, int damageAmount) {
-            if (__instance instanceof TinyHouse && !BossedRelics.isDisabled(TinyHouse.ID))
-                return SpireReturn.Return(Math.max(0, damageAmount - 1));
-            return SpireReturn.Continue();
+    public static class DecrementBlock {
+        public static void Prefix(AbstractCreature __instance, DamageInfo info, @ByRef int[] damageAmount) {
+            if (__instance instanceof AbstractPlayer && !BossedRelics.isDisabled(TinyHouse.ID)
+                    && damageAmount[0] > 0 && info.type == DamageInfo.DamageType.NORMAL) {
+                AbstractRelic r = ((AbstractPlayer)__instance).getRelic(TinyHouse.ID);
+                if (r != null) {
+                    damageAmount[0] -= 1;
+                    r.flash();
+                }
+            }
         }
     }
 
