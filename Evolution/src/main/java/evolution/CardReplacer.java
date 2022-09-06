@@ -23,9 +23,7 @@ public class CardReplacer {
 
     private static ArrayList<AbstractCard> getReplacements(boolean strike, int max) {
         ArrayList<AbstractCard> candidates = new ArrayList<AbstractCard>();
-        Iterator<AbstractCard> it = AbstractDungeon.commonCardPool.group.iterator();
-        while ( it.hasNext() ) {
-            AbstractCard card = it.next();
+        for (AbstractCard card : AbstractDungeon.commonCardPool.group) {
             if ( strike ? isStrikeLike(card) : isDefendLike(card) )
                 candidates.add(card);
         }
@@ -54,12 +52,28 @@ public class CardReplacer {
         return null;
     }
 
+    private static boolean strikeTagUsed(ArrayList<AbstractCard> cards) {
+        for ( AbstractCard card : cards ) {
+            if (card.isStarterStrike() || card.hasTag(AbstractCard.CardTags.STARTER_STRIKE))
+                return true;
+        }
+        return false;
+    }
+
+    private static boolean defendTagUsed(ArrayList<AbstractCard> cards) {
+        for ( AbstractCard card : cards ) {
+            if (card.isStarterDefend())
+                return true;
+        }
+        return false;
+    }
+
     // returns number of cards replaced
-    public static int replaceBasicStrikes(int maxReplace, boolean strictTags) {
+    public static int replaceBasicStrikes(int maxReplace) {
         int variety = Evolution.getVariety() > 2 ? 99 : Evolution.getVariety();
         ArrayList<AbstractCard> strikeReplacements = getReplacements(true, variety);
         ArrayList<AbstractCard> cards = AbstractDungeon.player.masterDeck.group;
-        String basicStrikeID = strictTags ? null : getBasicStrikeID(cards);
+        String basicStrikeID = strikeTagUsed(cards) ? null : getBasicStrikeID(cards);
         int next = 0, strikeReplaced = 0;
         while ( next < cards.size() && strikeReplaced < maxReplace ) {
             AbstractCard card = cards.get(next);
@@ -76,11 +90,11 @@ public class CardReplacer {
     }
 
     // returns number of cards replaced
-    public static int replaceBasicDefends(int maxReplace, boolean strictTags) {
+    public static int replaceBasicDefends(int maxReplace) {
         int variety = Evolution.getVariety() > 2 ? 99 : Evolution.getVariety();
         ArrayList<AbstractCard> defendReplacements = getReplacements(false, variety);
         ArrayList<AbstractCard> cards = AbstractDungeon.player.masterDeck.group;
-        String basicDefendID = strictTags ? null : getBasicDefendID(cards);
+        String basicDefendID = defendTagUsed(cards) ? null : getBasicDefendID(cards);
         int next = 0, defendReplaced = 0;
         while ( next < cards.size() && defendReplaced < maxReplace ) {
             AbstractCard card = cards.get(next);

@@ -42,7 +42,6 @@ public class Evolution implements
     private static final String EVOLUTION_PATH = "preferences/evolution";
     private static final String CONFIG_PATH = "preferences/evolution.cfg";
     private static final String CONFIG_VARIETY = "variety";
-    private static final String CONFIG_STRICT = "strict";
     private static final String CONFIG_STRIKE = "strike";
     private static final String CONFIG_DEFEND = "defend";
     private static TreeMap<String, int[]> evolution = new TreeMap<String, int[]>();
@@ -113,10 +112,6 @@ public class Evolution implements
         return Integer.parseInt(config.getOrDefault(CONFIG_VARIETY, "1"));
     }
 
-    public static boolean strictTags() {
-        return Boolean.parseBoolean(config.getOrDefault(CONFIG_STRICT, "true"));
-    }
-
     public static boolean replaceStrikes() {
         return Boolean.parseBoolean(config.getOrDefault(CONFIG_STRIKE, "true"));
     }
@@ -168,19 +163,9 @@ public class Evolution implements
         );
         configPanel.addUIElement(varietyLabel);
         configPanel.addUIElement(varietySlider);
-        // configure basic strike/defend matching
-        ModLabeledToggleButton strictButton = new ModLabeledToggleButton(
-                "Require tags for basic strike/defend.", 400.0f, 550.0f,
-                Settings.CREAM_COLOR, FontHelper.charDescFont, strictTags(),
-                configPanel, (label) -> {}, (button) -> {
-                    config.put(CONFIG_STRICT, String.valueOf(button.enabled));
-                    saveConfig();
-                }
-        );
-        configPanel.addUIElement(strictButton);
         // configure basic strike/defend replacement
         ModLabeledToggleButton strikeButton = new ModLabeledToggleButton(
-                "Replace basic strikes.", 400.0f, 500.0f,
+                "Replace basic strikes.", 400.0f, 550.0f,
                 Settings.CREAM_COLOR, FontHelper.charDescFont, replaceStrikes(),
                 configPanel, (label) -> {}, (button) -> {
                     config.put(CONFIG_STRIKE, String.valueOf(button.enabled));
@@ -188,7 +173,7 @@ public class Evolution implements
                 }
         );
         ModLabeledToggleButton defendButton = new ModLabeledToggleButton(
-                "Replace basic defends.", 400.0f, 450.0f,
+                "Replace basic defends.", 400.0f, 500.0f,
                 Settings.CREAM_COLOR, FontHelper.charDescFont, replaceDefends(),
                 configPanel, (label) -> {}, (button) -> {
                     config.put(CONFIG_DEFEND, String.valueOf(button.enabled));
@@ -223,9 +208,9 @@ public class Evolution implements
             relic.counter = ep;
             relic.instantObtain();
             if (replaceStrikes())
-                ep -= CardReplacer.replaceBasicStrikes(ep, strictTags());
+                ep -= CardReplacer.replaceBasicStrikes(ep);
             if (replaceDefends())
-                ep -= CardReplacer.replaceBasicDefends(ep, strictTags());
+                ep -= CardReplacer.replaceBasicDefends(ep);
             ep -= upgradeCards(ep);
             if (ep > 0)
                 p.increaseMaxHp(ep, true);
