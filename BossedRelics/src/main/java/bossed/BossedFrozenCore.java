@@ -4,7 +4,6 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.Frost;
-import com.megacrit.cardcrawl.relics.Ectoplasm;
 import com.megacrit.cardcrawl.relics.FrozenCore;
 
 public class BossedFrozenCore {
@@ -16,7 +15,7 @@ public class BossedFrozenCore {
     )
     public static class OnPlayerEndTurn {
         public static SpireReturn<Void> Prefix(FrozenCore __instance) {
-            if (BossedRelics.isDisabled(Ectoplasm.ID))
+            if (BossedRelics.isDisabled(FrozenCore.ID))
                 return SpireReturn.Continue();
             __instance.flash();
             AbstractDungeon.player.channelOrb(new Frost());
