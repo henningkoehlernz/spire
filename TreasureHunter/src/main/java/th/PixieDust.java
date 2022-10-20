@@ -1,8 +1,7 @@
 package th;
 
-import com.megacrit.cardcrawl.actions.common.DiscardAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.ExhaustAction;
+import com.megacrit.cardcrawl.actions.common.TransformCardInHandAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -25,11 +24,15 @@ public class PixieDust extends AbstractTreasure {
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
-        if ( upgraded )
-            AbstractDungeon.actionManager.addToBottom(new ExhaustAction(p, p, 1, false));
-        else
-            AbstractDungeon.actionManager.addToBottom(new DiscardAction(p, p, 1, false));
-        AbstractDungeon.actionManager.addToBottom(new DrawCardAction(1));
+        int handSize = p.hand.size() - 1; // don't count pixie dust itself
+        if (handSize > 0) {
+            int cardIndex = AbstractDungeon.miscRng.random(handSize - 1);
+            //LogManager.getLogger(PixieDust.class.getName()).info("hand size=" + handSize + ", index=" + cardIndex);
+            AbstractCard newCard = AbstractDungeon.returnTrulyRandomCardInCombat().makeCopy();
+            if (upgraded)
+                newCard.upgrade();
+            AbstractDungeon.actionManager.addToBottom(new TransformCardInHandAction(cardIndex, newCard));
+        }
     }
 
     @Override

@@ -34,8 +34,8 @@
   },
   "TH:PixieDust": {
     "NAME": "Pixie Dust",
-    "DESCRIPTION": "Discard a card. NL Draw a card. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Exhaust a card. NL Draw a card. NL Exhaust."
+    "DESCRIPTION": "Transform a random card. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Transform and upgrade a random card. NL Exhaust."
   },
   "TH:ElvenBoots": {
     "NAME": "Elven Boots",
