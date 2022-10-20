@@ -34,8 +34,8 @@
   },
   "TH:PixieDust": {
     "NAME": "仙尘",
-    "DESCRIPTION": "丢弃一张牌。 NL 消耗。",
-    "UPGRADE_DESCRIPTION": "消耗一张牌。 NL 消耗。"
+    "DESCRIPTION": "丢弃一张牌。 NL 抽一张牌。 NL 消耗。",
+    "UPGRADE_DESCRIPTION": "消耗一张牌。 NL 抽一张牌。 NL 消耗。"
   },
   "TH:ElvenBoots": {
     "NAME": "精灵靴子",

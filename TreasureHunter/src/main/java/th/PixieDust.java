@@ -1,6 +1,7 @@
 package th;
 
 import com.megacrit.cardcrawl.actions.common.DiscardAction;
+import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -28,6 +29,7 @@ public class PixieDust extends AbstractTreasure {
             AbstractDungeon.actionManager.addToBottom(new ExhaustAction(p, p, 1, false));
         else
             AbstractDungeon.actionManager.addToBottom(new DiscardAction(p, p, 1, false));
+        AbstractDungeon.actionManager.addToBottom(new DrawCardAction(1));
     }
 
     @Override
