@@ -70,7 +70,7 @@
       "#yAttacks that cost #b0 deal #b4 additional damage. The first time you play such an #yattack each turn, draw a card."
     ]
   },
-  "SacredBark": {
+  "Bossed:SacredBark": {
     "NAME": "Sacred Bark",
     "FLAVOR": "A bark rumored to originate from the World tree.",
     "DESCRIPTIONS": [
@@ -83,6 +83,16 @@
     "DESCRIPTIONS": [
       " Whenever you lose HP lose an equal amount of #yGold.",
       "Gain [E] at the start of your turn."
+    ]
+  },
+  "Bossed:Calling Bell": {
+    "NAME": "Calling Bell",
+    "FLAVOR": "This dark iron bell rang 3 times when you found it, but now stays silent.",
+    "DESCRIPTIONS": [
+      "Upon pickup, obtain a unique #rCurse and #b3 relics. When you draw a #rCurse deal #b3 damage to all enemies.",
+      "The Bell Tolls...",
+      "Skip Rewards",
+      "Close"
     ]
   },
   "Bossed:MawBank": {

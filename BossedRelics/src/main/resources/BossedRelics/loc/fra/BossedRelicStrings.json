@@ -86,6 +86,16 @@
       "Gagnez [E] au début de chaque tour."
     ]
   },
+  "Bossed:Calling Bell": {
+    "NAME": "Cloche d'appel",
+    "FLAVOR": "Cette sombre cloche en fer a sonné 3 fois lorsque vous l'avez trouvée, mais elle est silencieuse depuis.",
+    "DESCRIPTIONS": [
+      "Quand vous la ramassez, obtenez une #rMalédiction unique et #b3 reliques. Lorsque vous piochez une #rMalédiction, infligez #b3 dégâts à tous les ennemis.",
+      "La cloche sonne...",
+      "Passer les récompenses",
+      "Fermer"
+    ]
+  },
   "Bossed:MawBank": {
     "NAME": "Tirelire Gueule",
     "FLAVOR": "Étonnamment populaire, malgré que les attaques de Gueules soient fréquentes.",

@@ -96,7 +96,7 @@ public class BossedRelics implements EditStringsSubscriber, PostInitializeSubscr
         ModLabel disabledLabel = new ModLabel(labelText, 400f, 730f, configPanel, (label) -> {});
         configPanel.addUIElement(disabledLabel);
         final String[] relicChoices = {
-                Astrolabe.ID, Ectoplasm.ID, EmptyCage.ID, FrozenCore.ID, HolyWater.ID, PandorasBox.ID, RingOfTheSerpent.ID,
+                Astrolabe.ID, CallingBell.ID, Ectoplasm.ID, EmptyCage.ID, FrozenCore.ID, HolyWater.ID, PandorasBox.ID, RingOfTheSerpent.ID,
                 RunicCube.ID, SacredBark.ID, TinyHouse.ID, WristBlade.ID,
                 BottledFlame.ID, BottledLightning.ID, BottledTornado.ID, Cauldron.ID, DollysMirror.ID, LizardTail.ID, Mango.ID,
                 MawBank.ID, OldCoin.ID, Omamori.ID, Orrery.ID, Pear.ID, Strawberry.ID, Waffle.ID, WarPaint.ID, Whetstone.ID, WingBoots.ID
