@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 public class ShrinkRayGun extends CustomRelic {
 
     public static final String ID = "nimble:ShrinkRayGun";
-    private static final String IMG_PATH = Nimble.IMG_PATH + "shrink_ray.png";
+    private static final String IMG_PATH = Nimble.IMG_PATH + "shrink_ray_gun.png";
 
     public ShrinkRayGun() {
         super(ID, new Texture(IMG_PATH), RelicTier.STARTER, LandingSound.MAGICAL);

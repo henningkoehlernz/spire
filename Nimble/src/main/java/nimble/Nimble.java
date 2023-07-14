@@ -46,7 +46,7 @@ public class Nimble implements
     @Override
     public void receiveEditStrings() {
         String basePath = languagePath();
-        BaseMod.loadCustomStringsFile(RelicStrings.class, basePath + "EVO-RelicStrings.json");
+        BaseMod.loadCustomStringsFile(RelicStrings.class, basePath + "Nimble-RelicStrings.json");
     }
 
     @Override
