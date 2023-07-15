@@ -4,23 +4,15 @@ import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.evacipated.cardcrawl.modthespire.lib.ByRef;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
-import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.powers.BufferPower;
-import com.megacrit.cardcrawl.relics.LizardTail;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
-import com.megacrit.cardcrawl.vfx.combat.BlockedWordEffect;
-import com.megacrit.cardcrawl.vfx.combat.StrikeEffect;
 
 public class ShrinkRayGun extends CustomRelic {
 
@@ -57,84 +49,34 @@ public class ShrinkRayGun extends CustomRelic {
         }
     }
 
-    private void increaseMaxAgility(int amount) {
+    public void increaseMaxAgility(int amount) {
         setCounter(counter + amount * (COUNTER_MOD + 1));
     }
 
-    private void increaseCurrentAgility(int amount) {
+    public void increaseCurrentAgility(int amount) {
         int missing = getMaxAgility() - getCurrentAgility();
         amount = Math.min(amount, missing);
         setCounter(counter + amount * COUNTER_MOD);
     }
 
-    private void decreaseCurrentAgility(int amount) {
+    public void decreaseCurrentAgility(int amount) {
         int current = getCurrentAgility();
         amount = Math.min(amount, current);
         setCounter(counter - amount * COUNTER_MOD);
     }
 
-    private void updateHealth() {
+    public float getDodgeChance() {
+        int agility = getCurrentAgility();
+        return agility / (50.0f + agility);
+    }
+
+    @Override
+    public void onEnterRoom(AbstractRoom room) {
         AbstractPlayer p = AbstractDungeon.player;
         if (p.maxHealth > 1) {
             int transfer = p.maxHealth - 1;
             increaseMaxAgility(transfer);
             p.decreaseMaxHealth(transfer);
-        }
-    }
-
-    public double getDodgeChance() {
-        double agility = getCurrentAgility();
-        return (20.0 + agility) / (100.0 + agility);
-    }
-
-    @Override
-    public void onEnterRoom(AbstractRoom room) {
-        updateHealth();
-    }
-
-    // decrementBlock is called in AbstractPlayer.damage
-    // we reduce damage here to ensure blocked damage is reduced as well
-    @SpirePatch(
-            clz = AbstractPlayer.class,
-            method = "damage",
-            paramtypez = {DamageInfo.class}
-    )
-    public static class AbstractPlayerDamage {
-        public static SpireReturn<Void> Prefix(AbstractPlayer p, DamageInfo info) {
-            ShrinkRayGun r = (ShrinkRayGun)p.getRelic(ShrinkRayGun.ID);
-            if (r == null)
-                return SpireReturn.Continue();
-            // attack damage can be avoided
-            if (info.type == DamageInfo.DamageType.NORMAL && info.output > 0 && info.owner != p && info.owner != null) {
-                float dodgeChance = (float)r.getDodgeChance();
-                r.decreaseCurrentAgility(1);
-                if (AbstractDungeon.miscRng.randomBoolean(dodgeChance)) {
-                    r.flash();
-                    AbstractDungeon.effectList.add(new BlockedWordEffect(p, p.hb.cX, p.hb.cY, r.DESCRIPTIONS[2]));
-                    p.useStaggerAnimation();
-                    p.lastDamageTaken = 0;
-                    return SpireReturn.Return();
-                }
-                return SpireReturn.Continue();
-            }
-            // other damage sources apply to agility instead
-            r.decreaseCurrentAgility(info.output);
-            AbstractDungeon.effectList.add(new StrikeEffect(p, p.hb.cX, p.hb.cY, info.output));
-            p.lastDamageTaken = 0;
-            return SpireReturn.Return();
-        }
-    }
-
-    // make player look smaller
-    @SpirePatch(
-            clz = AbstractCreature.class,
-            method = "loadAnimation",
-            paramtypez = {String.class, String.class, float.class}
-    )
-    public static class LoadAnimation {
-        public static void Prefix(AbstractCreature p, String atlasUrl, String skeletonUrl, @ByRef float[] scale) {
-            if (p instanceof AbstractPlayer && ((AbstractPlayer)p).hasRelic(ShrinkRayGun.ID))
-                scale[0] += 0.5;
         }
     }
 
@@ -155,7 +97,7 @@ public class ShrinkRayGun extends CustomRelic {
 
     @Override
     public String getUpdatedDescription() {
-        int percentChance = (int)(getDodgeChance() * 100.0);
+        int percentChance = Math.round(getDodgeChance() * 100.0f);
         return DESCRIPTIONS[0] + percentChance + DESCRIPTIONS[1];
     }
 

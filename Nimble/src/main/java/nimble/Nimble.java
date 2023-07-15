@@ -57,6 +57,5 @@ public class Nimble implements
 
     @Override
     public void receivePostInitialize() {
-
     }
 }
