@@ -27,6 +27,19 @@ public class NimblePatcher {
         }
     }
 
+    // make player look smaller
+    @SpirePatch(
+            clz = AbstractCreature.class,
+            method = "loadAnimation",
+            paramtypez = {String.class, String.class, float.class}
+    )
+    public static class LoadAnimation {
+        public static void Prefix(AbstractCreature p, String atlasUrl, String skeletonUrl, @ByRef float[] scale) {
+            if (p instanceof AbstractPlayer && ((AbstractPlayer)p).hasRelic(ShrinkRayGun.ID))
+                scale[0] += 0.5f;
+        }
+    }
+
     // damage avoidance mechanic
     @SpirePatch(
             clz = AbstractPlayer.class,
@@ -59,17 +72,22 @@ public class NimblePatcher {
         }
     }
 
-    // make player look smaller
+    // max HP reductions reduce max agility instead
     @SpirePatch(
             clz = AbstractCreature.class,
-            method = "loadAnimation",
-            paramtypez = {String.class, String.class, float.class}
+            method = "decreaseMaxHealth",
+            paramtypez = {int.class}
     )
-    public static class LoadAnimation {
-        public static void Prefix(AbstractCreature p, String atlasUrl, String skeletonUrl, @ByRef float[] scale) {
-            if (p instanceof AbstractPlayer && ((AbstractPlayer)p).hasRelic(ShrinkRayGun.ID))
-                scale[0] += 0.5f;
+    public static class DecreaseMaxHealth {
+        public static void Prefix(AbstractCreature p, @ByRef int[] amount) {
+            if (p instanceof AbstractPlayer) {
+                ShrinkRayGun r = (ShrinkRayGun)((AbstractPlayer)p).getRelic(ShrinkRayGun.ID);
+                if (r != null && p.maxHealth <= amount[0]) {
+                    int hpDecrease = p.maxHealth - 1;
+                    r.decreaseMaxAgility(amount[0] - hpDecrease);
+                    amount[0] = hpDecrease;
+                }
+            }
         }
     }
-
 }
