@@ -20,6 +20,7 @@ import com.megacrit.cardcrawl.powers.BufferPower;
 import com.megacrit.cardcrawl.relics.LizardTail;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.combat.BlockedWordEffect;
+import com.megacrit.cardcrawl.vfx.combat.StrikeEffect;
 
 public class ShrinkRayGun extends CustomRelic {
 
@@ -50,8 +51,10 @@ public class ShrinkRayGun extends CustomRelic {
 
     @Override
     public void setCounter(int counter) {
-        this.counter = counter;
-        updateDescription();
+        if (this.counter != counter) {
+            this.counter = counter;
+            updateDescription();
+        }
     }
 
     private void increaseMaxAgility(int amount) {
@@ -98,21 +101,27 @@ public class ShrinkRayGun extends CustomRelic {
     )
     public static class AbstractPlayerDamage {
         public static SpireReturn<Void> Prefix(AbstractPlayer p, DamageInfo info) {
-            if (info.type == DamageInfo.DamageType.NORMAL && info.output > 0 && info.owner != p) {
-                ShrinkRayGun r = (ShrinkRayGun)p.getRelic(ShrinkRayGun.ID);
-                if (r != null) {
-                    float dodgeChance = (float)r.getDodgeChance();
-                    r.decreaseCurrentAgility(1);
-                    if (AbstractDungeon.miscRng.randomBoolean(dodgeChance)) {
-                        r.flash();
-                        AbstractDungeon.effectList.add(new BlockedWordEffect(p, p.hb.cX, p.hb.cY, r.DESCRIPTIONS[2]));
-                        p.useStaggerAnimation();
-                        p.lastDamageTaken = 0;
-                        return SpireReturn.Return();
-                    }
+            ShrinkRayGun r = (ShrinkRayGun)p.getRelic(ShrinkRayGun.ID);
+            if (r == null)
+                return SpireReturn.Continue();
+            // attack damage can be avoided
+            if (info.type == DamageInfo.DamageType.NORMAL && info.output > 0 && info.owner != p && info.owner != null) {
+                float dodgeChance = (float)r.getDodgeChance();
+                r.decreaseCurrentAgility(1);
+                if (AbstractDungeon.miscRng.randomBoolean(dodgeChance)) {
+                    r.flash();
+                    AbstractDungeon.effectList.add(new BlockedWordEffect(p, p.hb.cX, p.hb.cY, r.DESCRIPTIONS[2]));
+                    p.useStaggerAnimation();
+                    p.lastDamageTaken = 0;
+                    return SpireReturn.Return();
                 }
+                return SpireReturn.Continue();
             }
-            return SpireReturn.Continue();
+            // other damage sources apply to agility instead
+            r.decreaseCurrentAgility(info.output);
+            AbstractDungeon.effectList.add(new StrikeEffect(p, p.hb.cX, p.hb.cY, info.output));
+            p.lastDamageTaken = 0;
+            return SpireReturn.Return();
         }
     }
 
@@ -125,7 +134,7 @@ public class ShrinkRayGun extends CustomRelic {
     public static class LoadAnimation {
         public static void Prefix(AbstractCreature p, String atlasUrl, String skeletonUrl, @ByRef float[] scale) {
             if (p instanceof AbstractPlayer && ((AbstractPlayer)p).hasRelic(ShrinkRayGun.ID))
-                scale[0] += 0.3;
+                scale[0] += 0.5;
         }
     }
 

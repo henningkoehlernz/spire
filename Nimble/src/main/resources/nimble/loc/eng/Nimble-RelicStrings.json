@@ -4,7 +4,7 @@
     "FLAVOR": "I'll be harder to hit when smaller - brilliant!",
     "DESCRIPTIONS": [
       "Converts HP into agility, which currently grants a #y",
-      "% chance to avoid attacks. Each attempt reduces agility, healing restores it. Also grants buffer at the start of combat.",
+      "% chance to dodge attacks. Dodge attempts and damage from other sources reduce agility, healing restores it. Also grants one buffer.",
       "Missed!"
     ]
   }
