@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
+import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.powers.BufferPower;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
@@ -24,17 +25,18 @@ public class ShrinkRayGun extends CustomRelic {
 
     public ShrinkRayGun() {
         super(ID, new Texture(IMG_PATH), RelicTier.STARTER, LandingSound.MAGICAL);
+        counter = 0;
     }
 
     // max and current agility are both encoded in counter
     private static final int COUNTER_MOD = 1000;
 
     public int getMaxAgility() {
-        return counter < 0 ? 0 : counter % COUNTER_MOD;
+        return counter % COUNTER_MOD;
     }
 
     public int getCurrentAgility() {
-        return counter < 0 ? 0 : counter / COUNTER_MOD;
+        return counter / COUNTER_MOD;
     }
 
     @Override
@@ -44,21 +46,22 @@ public class ShrinkRayGun extends CustomRelic {
     }
 
     private void increaseMaxAgility(int amount) {
-        if (counter < 0)
-            counter = 0;
         counter += amount * (COUNTER_MOD + 1);
+        updateDescription();
     }
 
     private void increaseCurrentAgility(int amount) {
         int missing = getMaxAgility() - getCurrentAgility();
         amount = Math.min(amount, missing);
         counter += amount * COUNTER_MOD;
+        updateDescription();
     }
 
     private void decreaseCurrentAgility(int amount) {
         int current = getCurrentAgility();
         amount = Math.min(amount, current);
         counter -= amount * COUNTER_MOD;
+        updateDescription();
     }
 
     private void updateHealth() {
@@ -68,6 +71,11 @@ public class ShrinkRayGun extends CustomRelic {
             increaseMaxAgility(transfer);
             p.decreaseMaxHealth(transfer);
         }
+    }
+
+    public double getDodgeChance() {
+        double agility = getCurrentAgility();
+        return (20.0 + agility) / (100.0 + agility);
     }
 
     @Override
@@ -88,15 +96,11 @@ public class ShrinkRayGun extends CustomRelic {
                 AbstractPlayer p = (AbstractPlayer)__instance;
                 ShrinkRayGun r = (ShrinkRayGun)p.getRelic(ShrinkRayGun.ID);
                 if (r != null) {
-                    int agility = r.getCurrentAgility();
-                    if (agility > 0) {
-                        if (AbstractDungeon.miscRng.random(100 + agility) < agility) {
-                            damageAmount[0] = 0;
-                            //r.addToTop(new TextAboveCreatureAction(AbstractDungeon.player, r.DESCRIPTIONS[1]));
-                            r.flash();
-                        }
-                        r.decreaseCurrentAgility(1);
+                    if (AbstractDungeon.miscRng.randomBoolean((float)r.getDodgeChance())) {
+                        damageAmount[0] = 0;
+                        r.flash();
                     }
+                    r.decreaseCurrentAgility(1);
                 }
             }
         }
@@ -119,7 +123,14 @@ public class ShrinkRayGun extends CustomRelic {
 
     @Override
     public String getUpdatedDescription() {
-        return DESCRIPTIONS[0];
+        int percentChance = (int)(getDodgeChance() * 100.0);
+        return DESCRIPTIONS[0] + percentChance + DESCRIPTIONS[1];
     }
 
+    private void updateDescription() {
+        description = getUpdatedDescription();
+        tips.clear();
+        tips.add(new PowerTip(this.name, this.description));
+        initializeTips();
+    }
 }

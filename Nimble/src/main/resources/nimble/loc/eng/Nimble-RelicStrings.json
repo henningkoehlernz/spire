@@ -3,7 +3,8 @@
     "NAME": "Shrink Ray Gun",
     "FLAVOR": "I'll be harder to hit when smaller - brilliant!.",
     "DESCRIPTIONS": [
-      "Converts HP into agility, which grants x/(100+x) chance to avoid attacks. Each attempt reduces agility by one, which can be restored by healing effects. Also grants one buffer at the start of combat.",
+      "Converts HP into agility, which currently grants a #y",
+      "% chance to avoid attacks. Each attempt reduces agility, healing restores it. Also grants buffer at the start of combat.",
       "Missed!"
     ]
   }
