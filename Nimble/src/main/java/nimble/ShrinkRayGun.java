@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.ByRef;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -16,7 +17,9 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.powers.BufferPower;
+import com.megacrit.cardcrawl.relics.LizardTail;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.vfx.combat.BlockedWordEffect;
 
 public class ShrinkRayGun extends CustomRelic {
 
@@ -45,23 +48,26 @@ public class ShrinkRayGun extends CustomRelic {
         FontHelper.renderFontRightTopAligned(sb, FontHelper.topPanelInfoFont, counterString, this.currentX + 30.0F * Settings.scale, this.currentY - 7.0F * Settings.scale, Color.WHITE);
     }
 
-    private void increaseMaxAgility(int amount) {
-        counter += amount * (COUNTER_MOD + 1);
+    @Override
+    public void setCounter(int counter) {
+        this.counter = counter;
         updateDescription();
+    }
+
+    private void increaseMaxAgility(int amount) {
+        setCounter(counter + amount * (COUNTER_MOD + 1));
     }
 
     private void increaseCurrentAgility(int amount) {
         int missing = getMaxAgility() - getCurrentAgility();
         amount = Math.min(amount, missing);
-        counter += amount * COUNTER_MOD;
-        updateDescription();
+        setCounter(counter + amount * COUNTER_MOD);
     }
 
     private void decreaseCurrentAgility(int amount) {
         int current = getCurrentAgility();
         amount = Math.min(amount, current);
-        counter -= amount * COUNTER_MOD;
-        updateDescription();
+        setCounter(counter - amount * COUNTER_MOD);
     }
 
     private void updateHealth() {
@@ -86,23 +92,27 @@ public class ShrinkRayGun extends CustomRelic {
     // decrementBlock is called in AbstractPlayer.damage
     // we reduce damage here to ensure blocked damage is reduced as well
     @SpirePatch(
-            clz = AbstractCreature.class,
-            method = "decrementBlock",
-            paramtypez = {DamageInfo.class, int.class}
+            clz = AbstractPlayer.class,
+            method = "damage",
+            paramtypez = {DamageInfo.class}
     )
-    public static class DecrementBlock {
-        public static void Prefix(AbstractCreature __instance, DamageInfo info, @ByRef int[] damageAmount) {
-            if (__instance instanceof AbstractPlayer && damageAmount[0] > 0 && info.type == DamageInfo.DamageType.NORMAL) {
-                AbstractPlayer p = (AbstractPlayer)__instance;
+    public static class AbstractPlayerDamage {
+        public static SpireReturn<Void> Prefix(AbstractPlayer p, DamageInfo info) {
+            if (info.type == DamageInfo.DamageType.NORMAL && info.output > 0 && info.owner != p) {
                 ShrinkRayGun r = (ShrinkRayGun)p.getRelic(ShrinkRayGun.ID);
                 if (r != null) {
-                    if (AbstractDungeon.miscRng.randomBoolean((float)r.getDodgeChance())) {
-                        damageAmount[0] = 0;
-                        r.flash();
-                    }
+                    float dodgeChance = (float)r.getDodgeChance();
                     r.decreaseCurrentAgility(1);
+                    if (AbstractDungeon.miscRng.randomBoolean(dodgeChance)) {
+                        r.flash();
+                        AbstractDungeon.effectList.add(new BlockedWordEffect(p, p.hb.cX, p.hb.cY, r.DESCRIPTIONS[2]));
+                        p.useStaggerAnimation();
+                        p.lastDamageTaken = 0;
+                        return SpireReturn.Return();
+                    }
                 }
             }
+            return SpireReturn.Continue();
         }
     }
 
