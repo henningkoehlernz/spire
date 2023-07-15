@@ -12,7 +12,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.powers.BufferPower;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 public class ShrinkRayGun extends CustomRelic {
 
@@ -50,7 +49,7 @@ public class ShrinkRayGun extends CustomRelic {
     }
 
     public void increaseMaxAgility(int amount) {
-        setCounter(counter + amount * (COUNTER_MOD + 1));
+        setCounter(counter + amount);
     }
 
     public void decreaseMaxAgility(int amount) {
@@ -71,19 +70,26 @@ public class ShrinkRayGun extends CustomRelic {
         setCounter(counter - amount * COUNTER_MOD);
     }
 
+    private void convertHealth() {
+        AbstractPlayer p = AbstractDungeon.player;
+        if (p.maxHealth > 1) {
+            increaseMaxAgility(p.maxHealth - 1);
+            increaseCurrentAgility(p.currentHealth - 1);
+            p.decreaseMaxHealth(p.maxHealth - 1);
+        }
+    }
+
+    private void revertHealth() {
+        AbstractPlayer p = AbstractDungeon.player;
+        p.maxHealth += getMaxAgility();
+        p.currentHealth += getCurrentAgility();
+        p.healthBarUpdatedEvent();
+        setCounter(0);
+    }
+
     public float getDodgeChance() {
         int agility = getCurrentAgility();
         return agility / (50.0f + agility);
-    }
-
-    @Override
-    public void onEnterRoom(AbstractRoom room) {
-        AbstractPlayer p = AbstractDungeon.player;
-        if (p.maxHealth > 1) {
-            int transfer = p.maxHealth - 1;
-            increaseMaxAgility(transfer);
-            p.decreaseMaxHealth(transfer);
-        }
     }
 
     @Override
@@ -92,10 +98,17 @@ public class ShrinkRayGun extends CustomRelic {
         return healAmount;
     }
 
+    @Override
     public void atBattleStart() {
         this.flash();
         this.addToBot(new RelicAboveCreatureAction(AbstractDungeon.player, this));
         this.addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new BufferPower(AbstractDungeon.player, 1), 1));
+        convertHealth();
+    }
+
+    @Override
+    public void onVictory() {
+        revertHealth();
     }
 
     @Override
