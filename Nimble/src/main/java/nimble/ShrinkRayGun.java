@@ -116,6 +116,19 @@ public class ShrinkRayGun extends CustomRelic {
         }
     }
 
+    // make player look smaller
+    @SpirePatch(
+            clz = AbstractCreature.class,
+            method = "loadAnimation",
+            paramtypez = {String.class, String.class, float.class}
+    )
+    public static class LoadAnimation {
+        public static void Prefix(AbstractCreature p, String atlasUrl, String skeletonUrl, @ByRef float[] scale) {
+            if (p instanceof AbstractPlayer && ((AbstractPlayer)p).hasRelic(ShrinkRayGun.ID))
+                scale[0] += 0.3;
+        }
+    }
+
     @Override
     public int onPlayerHeal(int healAmount) {
         increaseCurrentAgility(healAmount);
