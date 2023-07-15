@@ -92,6 +92,10 @@ public class ShrinkRayGun extends CustomRelic {
         return agility / (50.0f + agility);
     }
 
+    public boolean isActive() {
+        return counter > 0;
+    }
+
     @Override
     public int onPlayerHeal(int healAmount) {
         increaseCurrentAgility(healAmount);

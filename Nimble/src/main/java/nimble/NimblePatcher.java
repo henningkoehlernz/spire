@@ -49,7 +49,7 @@ public class NimblePatcher {
     public static class AbstractPlayerDamage {
         public static SpireReturn<Void> Prefix(AbstractPlayer p, DamageInfo info) {
             ShrinkRayGun r = (ShrinkRayGun)p.getRelic(ShrinkRayGun.ID);
-            if (r == null)
+            if (r == null || !r.isActive())
                 return SpireReturn.Continue();
             // attack damage can be avoided
             if (info.type == DamageInfo.DamageType.NORMAL && info.output > 0 && info.owner != p && info.owner != null) {
@@ -82,7 +82,7 @@ public class NimblePatcher {
         public static void Prefix(AbstractCreature p, @ByRef int[] amount) {
             if (p instanceof AbstractPlayer) {
                 ShrinkRayGun r = (ShrinkRayGun)((AbstractPlayer)p).getRelic(ShrinkRayGun.ID);
-                if (r != null && p.maxHealth <= amount[0]) {
+                if (r != null && r.isActive() && p.maxHealth <= amount[0]) {
                     int hpDecrease = p.maxHealth - 1;
                     r.decreaseMaxAgility(amount[0] - hpDecrease);
                     amount[0] = hpDecrease;

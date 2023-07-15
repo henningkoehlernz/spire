@@ -5,7 +5,7 @@
     "DESCRIPTIONS": [
       "Shrinks you during combat and converts HP into agility, which currently grants a #y",
       "% chance to dodge attacks. Dodge attempts and damage from other sources reduce agility, healing restores it. Also grants one buffer.",
-      "Missed!"
+      "Dodged"
     ]
   }
 }
