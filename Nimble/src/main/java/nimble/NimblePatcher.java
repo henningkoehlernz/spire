@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.vfx.combat.BlockedWordEffect;
+import com.megacrit.cardcrawl.vfx.combat.HealEffect;
 import com.megacrit.cardcrawl.vfx.combat.StrikeEffect;
 
 import java.util.ArrayList;
@@ -73,7 +74,7 @@ public class NimblePatcher {
             // attack damage can be avoided
             if (info.type == DamageInfo.DamageType.NORMAL && info.owner != p && info.owner != null) {
                 if (AbstractDungeon.miscRng.randomBoolean(r.getDodgeChance())) {
-                    r.decreaseCurrentAgility(1);
+                    r.decreaseCurrentAgility(1, true);
                     r.flash();
                     AbstractDungeon.effectList.add(new BlockedWordEffect(p, p.hb.cX, p.hb.cY, r.DESCRIPTIONS[2]));
                     p.useStaggerAnimation();
@@ -85,7 +86,7 @@ public class NimblePatcher {
             // HP loss applies to agility instead
             if (info.type == DamageInfo.DamageType.HP_LOSS) {
                 int agilityLoss = handleAgilityLoss(p, info, info.output);
-                r.decreaseCurrentAgility(agilityLoss);
+                r.decreaseCurrentAgility(agilityLoss, true);
                 AbstractDungeon.effectList.add(new StrikeEffect(p, p.hb.cX, p.hb.cY, agilityLoss));
                 p.lastDamageTaken = 0;
                 return SpireReturn.Return();
@@ -94,7 +95,30 @@ public class NimblePatcher {
         }
     }
 
-    // max HP reductions reduce max agility instead
+    // prevent healing from triggering invalid bloodied updates
+    @SpirePatch(
+            clz = AbstractPlayer.class,
+            method = "heal",
+            paramtypez = {int.class}
+    )
+    public static class PlayerHeal {
+        public static SpireReturn<Void> Prefix(AbstractPlayer p, int healAmount) {
+            ShrinkRayGun gun = (ShrinkRayGun)p.getRelic(ShrinkRayGun.ID);
+            if (gun == null || !gun.isActive())
+                return SpireReturn.Continue();
+            // trigger relics and powers
+            for (AbstractRelic r : p.relics)
+                r.onPlayerHeal(healAmount);
+            for (AbstractPower pow : p.powers)
+                pow.onHeal(healAmount);
+            // visual feedback
+            AbstractDungeon.topPanel.panelHealEffect();
+            AbstractDungeon.effectsQueue.add(new HealEffect(p.hb.cX - p.animX, p.hb.cY, healAmount));
+            return SpireReturn.Return();
+        }
+    }
+
+    // max HP reductions during combat (e.g. Battle Towers) reduce max agility instead
     @SpirePatch(
             clz = AbstractCreature.class,
             method = "decreaseMaxHealth",

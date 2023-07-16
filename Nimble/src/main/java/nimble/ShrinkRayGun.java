@@ -12,6 +12,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.powers.BufferPower;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class ShrinkRayGun extends CustomRelic {
 
@@ -48,6 +49,25 @@ public class ShrinkRayGun extends CustomRelic {
         }
     }
 
+    public void updateBloodied() {
+        AbstractPlayer p = AbstractDungeon.player;
+        int current = p.currentHealth + getCurrentAgility();
+        int max = p.maxHealth + getMaxAgility();
+        if (current <= max / 2) {
+            if (!p.isBloodied) {
+                p.isBloodied = true;
+                for (AbstractRelic r : p.relics)
+                    r.onBloodied();
+            }
+        } else {
+            if (p.isBloodied) {
+                p.isBloodied = false;
+                for (AbstractRelic r : p.relics)
+                    r.onNotBloodied();
+            }
+        }
+    }
+
     public void increaseMaxAgility(int amount) {
         setCounter(counter + amount);
     }
@@ -58,23 +78,27 @@ public class ShrinkRayGun extends CustomRelic {
         setCounter(newCurrent * COUNTER_MOD + newMax);
     }
 
-    public void increaseCurrentAgility(int amount) {
+    public void increaseCurrentAgility(int amount, boolean checkBloodied) {
         int missing = getMaxAgility() - getCurrentAgility();
         amount = Math.min(amount, missing);
         setCounter(counter + amount * COUNTER_MOD);
+        if (checkBloodied)
+            updateBloodied();
     }
 
-    public void decreaseCurrentAgility(int amount) {
+    public void decreaseCurrentAgility(int amount, boolean checkBloodied) {
         int current = getCurrentAgility();
         amount = Math.min(amount, current);
         setCounter(counter - amount * COUNTER_MOD);
+        if (checkBloodied)
+            updateBloodied();
     }
 
     private void convertHealth() {
         AbstractPlayer p = AbstractDungeon.player;
         if (p.maxHealth > 1) {
             increaseMaxAgility(p.maxHealth - 1);
-            increaseCurrentAgility(p.currentHealth - 1);
+            increaseCurrentAgility(p.currentHealth - 1, false);
             p.decreaseMaxHealth(p.maxHealth - 1);
         }
     }
@@ -98,7 +122,7 @@ public class ShrinkRayGun extends CustomRelic {
 
     @Override
     public int onPlayerHeal(int healAmount) {
-        increaseCurrentAgility(healAmount);
+        increaseCurrentAgility(healAmount, true);
         return healAmount;
     }
 
