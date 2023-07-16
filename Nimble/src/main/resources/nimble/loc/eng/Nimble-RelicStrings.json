@@ -4,7 +4,7 @@
     "FLAVOR": "I'll be harder to hit when smaller - brilliant!",
     "DESCRIPTIONS": [
       "Shrinks you during combat and converts HP into agility, which currently grants a #y",
-      "% chance to dodge attacks. Dodge attempts and damage from other sources reduce agility, healing restores it. Also grants one buffer.",
+      "% chance to dodge attacks. Dodging and HP loss reduce agility, healing restores it. Also grants one buffer.",
       "Dodged"
     ]
   }

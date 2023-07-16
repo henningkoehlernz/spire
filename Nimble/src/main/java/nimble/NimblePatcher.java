@@ -7,6 +7,8 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.vfx.combat.BlockedWordEffect;
 import com.megacrit.cardcrawl.vfx.combat.StrikeEffect;
@@ -40,6 +42,23 @@ public class NimblePatcher {
         }
     }
 
+    // trigger powers/relics/cards that normally trigger on HP loss (mimics AbstractPlayer.damage)
+    public static int handleAgilityLoss(AbstractPlayer p, DamageInfo info, int damageAmount) {
+        for (AbstractRelic r : p.relics)
+            damageAmount = r.onLoseHpLast(damageAmount);
+        if (damageAmount > 0) {
+            for (AbstractRelic r : p.relics)
+                r.onLoseHp(damageAmount);
+            for (AbstractPower pow : p.powers)
+                pow.wasHPLost(info, damageAmount);
+            for (AbstractRelic r : p.relics)
+                r.wasHPLost(damageAmount);
+            Reflection.invoke(p, AbstractPlayer.class, "updateCardsOnDamage");
+            ++p.damagedThisCombat;
+        }
+        return damageAmount;
+    }
+
     // damage avoidance mechanic
     @SpirePatch(
             clz = AbstractPlayer.class,
@@ -49,13 +68,12 @@ public class NimblePatcher {
     public static class AbstractPlayerDamage {
         public static SpireReturn<Void> Prefix(AbstractPlayer p, DamageInfo info) {
             ShrinkRayGun r = (ShrinkRayGun)p.getRelic(ShrinkRayGun.ID);
-            if (r == null || !r.isActive())
+            if (r == null || !r.isActive() || info.output <= 0)
                 return SpireReturn.Continue();
             // attack damage can be avoided
-            if (info.type == DamageInfo.DamageType.NORMAL && info.output > 0 && info.owner != p && info.owner != null) {
-                float dodgeChance = r.getDodgeChance();
-                r.decreaseCurrentAgility(1);
-                if (AbstractDungeon.miscRng.randomBoolean(dodgeChance)) {
+            if (info.type == DamageInfo.DamageType.NORMAL && info.owner != p && info.owner != null) {
+                if (AbstractDungeon.miscRng.randomBoolean(r.getDodgeChance())) {
+                    r.decreaseCurrentAgility(1);
                     r.flash();
                     AbstractDungeon.effectList.add(new BlockedWordEffect(p, p.hb.cX, p.hb.cY, r.DESCRIPTIONS[2]));
                     p.useStaggerAnimation();
@@ -64,11 +82,15 @@ public class NimblePatcher {
                 }
                 return SpireReturn.Continue();
             }
-            // other damage sources apply to agility instead
-            r.decreaseCurrentAgility(info.output);
-            AbstractDungeon.effectList.add(new StrikeEffect(p, p.hb.cX, p.hb.cY, info.output));
-            p.lastDamageTaken = 0;
-            return SpireReturn.Return();
+            // HP loss applies to agility instead
+            if (info.type == DamageInfo.DamageType.HP_LOSS) {
+                int agilityLoss = handleAgilityLoss(p, info, info.output);
+                r.decreaseCurrentAgility(agilityLoss);
+                AbstractDungeon.effectList.add(new StrikeEffect(p, p.hb.cX, p.hb.cY, agilityLoss));
+                p.lastDamageTaken = 0;
+                return SpireReturn.Return();
+            }
+            return SpireReturn.Continue();
         }
     }
 
