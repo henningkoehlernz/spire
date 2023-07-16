@@ -69,7 +69,8 @@ public class ShrinkRayGun extends CustomRelic {
     }
 
     public void increaseMaxAgility(int amount) {
-        setCounter(counter + amount);
+        int maxIncrease = COUNTER_MOD - 1 - getMaxAgility();
+        setCounter(counter + Math.min(amount, maxIncrease));
     }
 
     public void decreaseMaxAgility(int amount) {
