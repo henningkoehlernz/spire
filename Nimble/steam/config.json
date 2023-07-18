@@ -1,5 +1,5 @@
 {
-  "steamPublishedID": "",
+  "steamPublishedID": "3006132829",
   "title": "Nimble Mod",
   "description": "[h1]Replaces HP with dodge mechanic.[/h1]\n\nCharacters are shrunk during combat, which converts HP in excess of 1 into agility. Agility provides a dodge chance of X / (X + 50) against attacks, and HP loss is applied to agility instead. Characters also receive one buffer at start of combat, allowing calculated gambles to me made without immediate risk of instant death.",
   "visibility": "public",
