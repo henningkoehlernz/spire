@@ -114,7 +114,7 @@ public class ShrinkRayGun extends CustomRelic {
 
     public float getDodgeChance() {
         int agility = getCurrentAgility();
-        return agility / (50.0f + agility);
+        return agility / (25.0f + agility);
     }
 
     public boolean isActive() {
