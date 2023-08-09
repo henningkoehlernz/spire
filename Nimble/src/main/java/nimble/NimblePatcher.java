@@ -48,6 +48,8 @@ public class NimblePatcher {
         for (AbstractRelic r : p.relics)
             damageAmount = r.onLoseHpLast(damageAmount);
         if (damageAmount > 0) {
+            for (AbstractPower pow : p.powers)
+                damageAmount = pow.onLoseHp(damageAmount);
             for (AbstractRelic r : p.relics)
                 r.onLoseHp(damageAmount);
             for (AbstractPower pow : p.powers)
@@ -71,23 +73,20 @@ public class NimblePatcher {
             ShrinkRayGun r = (ShrinkRayGun)p.getRelic(ShrinkRayGun.ID);
             if (r == null || !r.isActive() || info.output <= 0)
                 return SpireReturn.Continue();
-            // attack damage can be avoided
-            if (info.type == DamageInfo.DamageType.NORMAL && info.owner != p && info.owner != null) {
-                if (AbstractDungeon.miscRng.randomBoolean(r.getDodgeChance())) {
-                    r.decreaseCurrentAgility(1, true);
-                    r.flash();
-                    AbstractDungeon.effectList.add(new BlockedWordEffect(p, p.hb.cX, p.hb.cY, r.DESCRIPTIONS[2]));
-                    p.useStaggerAnimation();
-                    p.lastDamageTaken = 0;
-                    return SpireReturn.Return();
-                }
-                return SpireReturn.Continue();
-            }
             // HP loss applies to agility instead
             if (info.type == DamageInfo.DamageType.HP_LOSS) {
                 int agilityLoss = handleAgilityLoss(p, info, info.output);
                 r.decreaseCurrentAgility(agilityLoss, true);
                 AbstractDungeon.effectList.add(new StrikeEffect(p, p.hb.cX, p.hb.cY, agilityLoss));
+                p.lastDamageTaken = 0;
+                return SpireReturn.Return();
+            }
+            // unblocked damage can be avoided
+            if (info.output > p.currentBlock && AbstractDungeon.miscRng.randomBoolean(r.getDodgeChance())) {
+                r.decreaseCurrentAgility(1, true);
+                r.flash();
+                AbstractDungeon.effectList.add(new BlockedWordEffect(p, p.hb.cX, p.hb.cY, r.DESCRIPTIONS[2]));
+                p.useStaggerAnimation();
                 p.lastDamageTaken = 0;
                 return SpireReturn.Return();
             }
