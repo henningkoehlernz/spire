@@ -151,8 +151,8 @@ public class NimblePatcher {
             paramtypez = {SpriteBatch.class}
     )
     public static class RenderHealth {
-        private static final Color agilityBarColor = new Color(0.5F, 0.2F, 1.0F, 0.0F);
-        private static final Color agilityTextColor = new Color(1.0F, 1.0F, 1.0F, 0.0F);
+        private static final Color agilityBarColor = new Color(0.6F, 0.3F, 1.0F, 0.75F);
+        private static final Color agilityTextColor = new Color(1.0F, 1.0F, 1.0F, 0.75F);
         public static void Prefix(AbstractCreature p, SpriteBatch sb) {
             if (!(p instanceof AbstractPlayer))
                 return;
@@ -164,14 +164,16 @@ public class NimblePatcher {
                 float HEALTH_TEXT_OFFSET_Y = (Float)Reflection.get(null, AbstractCreature.class, "HEALTH_TEXT_OFFSET_Y");
                 // calculate location and width for agility bar
                 float x = p.hb.cX - p.hb.width / 2.0F;
-                float y = p.hb.cY - p.hb.height / 2.0F + hbYOffset - HEALTH_BAR_HEIGHT * 1.5F;
+                float y = p.hb.cY - p.hb.height / 2.0F + hbYOffset + HEALTH_BAR_HEIGHT * 1.1F;
                 float agilityBarWidth = p.hb.width * r.getCurrentAgility() / r.getMaxAgility();
                 // render agility bar
                 Reflection.invoke(p, AbstractCreature.class, "renderHealthBg", sb, x, y);
-                sb.setColor(agilityBarColor);
-                sb.draw(ImageMaster.HEALTH_BAR_L, x - HEALTH_BAR_HEIGHT, y + HEALTH_BAR_OFFSET_Y, HEALTH_BAR_HEIGHT, HEALTH_BAR_HEIGHT);
-                sb.draw(ImageMaster.HEALTH_BAR_B, x, y + HEALTH_BAR_OFFSET_Y, agilityBarWidth, HEALTH_BAR_HEIGHT);
-                sb.draw(ImageMaster.HEALTH_BAR_R, x + agilityBarWidth, y + HEALTH_BAR_OFFSET_Y, HEALTH_BAR_HEIGHT, HEALTH_BAR_HEIGHT);
+                if (r.getCurrentAgility() > 0) {
+                    sb.setColor(agilityBarColor);
+                    sb.draw(ImageMaster.HEALTH_BAR_L, x - HEALTH_BAR_HEIGHT, y + HEALTH_BAR_OFFSET_Y, HEALTH_BAR_HEIGHT, HEALTH_BAR_HEIGHT);
+                    sb.draw(ImageMaster.HEALTH_BAR_B, x, y + HEALTH_BAR_OFFSET_Y, agilityBarWidth, HEALTH_BAR_HEIGHT);
+                    sb.draw(ImageMaster.HEALTH_BAR_R, x + agilityBarWidth, y + HEALTH_BAR_OFFSET_Y, HEALTH_BAR_HEIGHT, HEALTH_BAR_HEIGHT);
+                }
                 // render agility text
                 FontHelper.renderFontCentered(sb, FontHelper.healthInfoFont, r.getCurrentAgility() + "/" + r.getMaxAgility(),
                         p.hb.cX, y + HEALTH_BAR_OFFSET_Y + HEALTH_TEXT_OFFSET_Y + 5.0F * Settings.scale, agilityTextColor);

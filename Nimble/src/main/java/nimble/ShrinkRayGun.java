@@ -37,7 +37,7 @@ public class ShrinkRayGun extends CustomRelic {
 
     @Override
     public void renderCounter(SpriteBatch sb, boolean inTopPanel) {
-        String counterString =  getCurrentAgility() + "/" + getMaxAgility();
+        String counterString = Math.round(getDodgeChance() * 100.0f) + "%";
         FontHelper.renderFontRightTopAligned(sb, FontHelper.topPanelInfoFont, counterString, this.currentX + 30.0F * Settings.scale, this.currentY - 7.0F * Settings.scale, Color.WHITE);
     }
 
