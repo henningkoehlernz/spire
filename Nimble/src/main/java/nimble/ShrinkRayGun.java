@@ -38,7 +38,8 @@ public class ShrinkRayGun extends CustomRelic {
     @Override
     public void renderCounter(SpriteBatch sb, boolean inTopPanel) {
         String counterString = Math.round(getDodgeChance() * 100.0f) + "%";
-        FontHelper.renderFontRightTopAligned(sb, FontHelper.topPanelInfoFont, counterString, this.currentX + 30.0F * Settings.scale, this.currentY - 7.0F * Settings.scale, Color.WHITE);
+        float offsetX = inTopPanel ? (float)Reflection.get(this, AbstractRelic.class, "offsetX") : 0;
+        FontHelper.renderFontRightTopAligned(sb, FontHelper.topPanelInfoFont, counterString, offsetX + this.currentX + 30.0F * Settings.scale, this.currentY - 7.0F * Settings.scale, Color.WHITE);
     }
 
     @Override
