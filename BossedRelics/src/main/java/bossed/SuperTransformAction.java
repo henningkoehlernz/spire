@@ -7,8 +7,6 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 
-import static bossed.BossedRelics.getUIString;
-
 public class SuperTransformAction extends AbstractGameAction {
 
     private static final float DURATION = Settings.ACTION_DUR_XFAST;
@@ -23,7 +21,7 @@ public class SuperTransformAction extends AbstractGameAction {
         AbstractPlayer p = AbstractDungeon.player;
         // select a card
         if (this.duration == DURATION) {
-            if (AbstractDungeon.getMonsters().areMonstersBasicallyDead() || p.hand.size() == 0) {
+            if (AbstractDungeon.getMonsters().areMonstersBasicallyDead() || p.hand.isEmpty()) {
                 this.isDone = true;
             } else {
                 AbstractDungeon.handCardSelectScreen.open(TEXT[0], 1, true, true);
