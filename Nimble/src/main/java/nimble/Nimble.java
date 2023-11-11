@@ -37,6 +37,7 @@ public class Nimble implements
     @Override
     public void receiveEditRelics() {
         BaseMod.addRelic(new ShrinkRayGun(), RelicType.SHARED);
+        BaseMod.addRelic(new SnakeskinBelt(), RelicType.SHARED);
     }
 
     private static String languagePath() {

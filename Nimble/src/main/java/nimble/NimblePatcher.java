@@ -87,12 +87,14 @@ public class NimblePatcher {
                 return SpireReturn.Return();
             }
             // unblocked damage can be avoided
-            if (info.output > p.currentBlock && AbstractDungeon.miscRng.randomBoolean(r.getDodgeChance())) {
+            boolean freeDodge = p.hasRelic(SnakeskinBelt.ID);
+            if ((freeDodge || info.output > p.currentBlock) && AbstractDungeon.miscRng.randomBoolean(r.getDodgeChance())) {
                 for (AbstractPower pow : p.powers)
                     pow.onAttacked(info, 0);
                 for (AbstractRelic rel : p.relics)
                     rel.onAttacked(info, 0);
-                r.decreaseCurrentAgility(1, true);
+                if (!freeDodge)
+                    r.decreaseCurrentAgility(1, true);
                 r.flash();
                 AbstractDungeon.effectList.add(new BlockedWordEffect(p, p.hb.cX, p.hb.cY, r.DESCRIPTIONS[2]));
                 p.useStaggerAnimation();

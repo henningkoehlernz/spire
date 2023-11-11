@@ -7,5 +7,12 @@
       "% chance to dodge unblocked damage and gain buffer at turn start if you have none. This and HP loss reduce agility, healing restores it.",
       "Dodged"
     ]
+  },
+  "nimble:SnakeskinBelt": {
+    "NAME": "Snakeskin Belt",
+    "FLAVOR": "Alwaysss Ssslithering!",
+    "DESCRIPTIONS": [
+      "Always attempt to dodge, regardless of block. Dodging no longer reduces agility."
+    ]
   }
 }
