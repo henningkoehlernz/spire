@@ -14,5 +14,12 @@
     "DESCRIPTIONS": [
       "Always attempt to dodge, regardless of block. Dodging no longer reduces agility."
     ]
+  },
+  "nimble:DaredevilBoots": {
+    "NAME": "Daredevil Boots",
+    "FLAVOR": "There's always a chance.",
+    "DESCRIPTIONS": [
+      "Your dodge chance cannot drop below 50%. When you have no buffer, failed dodge attempts are re-rolled (once)."
+    ]
   }
 }

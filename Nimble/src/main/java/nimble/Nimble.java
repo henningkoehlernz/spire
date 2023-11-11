@@ -38,6 +38,7 @@ public class Nimble implements
     public void receiveEditRelics() {
         BaseMod.addRelic(new ShrinkRayGun(), RelicType.SHARED);
         BaseMod.addRelic(new SnakeskinBelt(), RelicType.SHARED);
+        BaseMod.addRelic(new DaredevilBoots(), RelicType.SHARED);
     }
 
     private static String languagePath() {

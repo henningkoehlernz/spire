@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.ByRef;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
+import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -13,6 +14,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.BufferPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
 import com.megacrit.cardcrawl.vfx.combat.BlockedWordEffect;
@@ -88,18 +90,32 @@ public class NimblePatcher {
             }
             // unblocked damage can be avoided
             boolean freeDodge = p.hasRelic(SnakeskinBelt.ID);
-            if ((freeDodge || info.output > p.currentBlock) && AbstractDungeon.miscRng.randomBoolean(r.getDodgeChance())) {
-                for (AbstractPower pow : p.powers)
-                    pow.onAttacked(info, 0);
-                for (AbstractRelic rel : p.relics)
-                    rel.onAttacked(info, 0);
-                if (!freeDodge)
-                    r.decreaseCurrentAgility(1, true);
-                r.flash();
-                AbstractDungeon.effectList.add(new BlockedWordEffect(p, p.hb.cX, p.hb.cY, r.DESCRIPTIONS[2]));
-                p.useStaggerAnimation();
-                p.lastDamageTaken = 0;
-                return SpireReturn.Return();
+            if (freeDodge || info.output > p.currentBlock) {
+                float chance = r.getDodgeChance();
+                // daredevil boots provide minimum dodge chance
+                DaredevilBoots boots = (DaredevilBoots)p.getRelic(DaredevilBoots.ID);
+                if (chance < 0.5f && boots != null)
+                    chance = 0.5f;
+                boolean success = AbstractDungeon.miscRng.randomBoolean(chance);
+                // daredevil boots can provide re-roll of dodge chance
+                if (!success && boots != null && !p.hasPower(BufferPower.POWER_ID)) {
+                    boots.flash();
+                    AbstractDungeon.actionManager.addToTop(new RelicAboveCreatureAction(AbstractDungeon.player, boots));
+                    success = AbstractDungeon.miscRng.randomBoolean(chance);
+                }
+                if (success) {
+                    for (AbstractPower pow : p.powers)
+                        pow.onAttacked(info, 0);
+                    for (AbstractRelic rel : p.relics)
+                        rel.onAttacked(info, 0);
+                    if (!freeDodge)
+                        r.decreaseCurrentAgility(1, true);
+                    r.flash();
+                    AbstractDungeon.effectList.add(new BlockedWordEffect(p, p.hb.cX, p.hb.cY, r.DESCRIPTIONS[2]));
+                    p.useStaggerAnimation();
+                    p.lastDamageTaken = 0;
+                    return SpireReturn.Return();
+                }
             }
             return SpireReturn.Continue();
         }
