@@ -21,5 +21,12 @@
     "DESCRIPTIONS": [
       "Your dodge chance cannot drop below 50%. When you have no buffer, failed dodge attempts are re-rolled (once)."
     ]
+  },
+  "nimble:BufferingCap": {
+    "NAME": "Buffering Cap",
+    "FLAVOR": "I feel safer already.",
+    "DESCRIPTIONS": [
+      "Gaining buffer no longer reduces agility."
+    ]
   }
 }
