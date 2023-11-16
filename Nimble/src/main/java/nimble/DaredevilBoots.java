@@ -9,7 +9,7 @@ public class DaredevilBoots extends CustomRelic {
     private static final String IMG_PATH = Nimble.IMG_PATH + "daredevil_boots.png";
 
     public DaredevilBoots() {
-        super(ID, new Texture(IMG_PATH), RelicTier.UNCOMMON, LandingSound.FLAT);
+        super(ID, new Texture(IMG_PATH), RelicTier.COMMON, LandingSound.FLAT);
     }
 
     @Override

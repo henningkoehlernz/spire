@@ -138,10 +138,11 @@ public class ShrinkRayGun extends CustomRelic {
     @Override
     public void atTurnStart() {
         AbstractPlayer p = AbstractDungeon.player;
-        if (!p.hasPower(BufferPower.POWER_ID) && AbstractDungeon.miscRng.randomBoolean(getDodgeChance())) {
+        boolean buff = p.hasRelic(BufferingCap.ID);
+        if ((buff || !p.hasPower(BufferPower.POWER_ID)) && AbstractDungeon.miscRng.randomBoolean(getDodgeChance())) {
             flash();
             addToBot(new ApplyPowerAction(p, p, new BufferPower(p, 1), 1));
-            if (!p.hasRelic(BufferingCap.ID))
+            if (!buff)
                 decreaseCurrentAgility(1, true);
         }
     }

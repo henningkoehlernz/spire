@@ -9,7 +9,7 @@ public class BufferingCap extends CustomRelic {
     private static final String IMG_PATH = Nimble.IMG_PATH + "buffering_cap.png";
 
     public BufferingCap() {
-        super(ID, new Texture(IMG_PATH), RelicTier.COMMON, LandingSound.FLAT);
+        super(ID, new Texture(IMG_PATH), RelicTier.UNCOMMON, LandingSound.FLAT);
     }
 
     @Override
