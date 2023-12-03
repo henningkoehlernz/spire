@@ -35,5 +35,12 @@
     "DESCRIPTIONS": [
       "Increases dodge chance against grazes (2 damage or less) by 25%."
     ]
+  },
+  "nimble:EnergyDrink": {
+    "NAME": "Energy Drink",
+    "FLAVOR": "May lead to fatigue after effects wear off.",
+    "DESCRIPTIONS": [
+      "Gain [E] at the start of your turn. Your dodge chance drops by 25% when you have no energy remaining."
+    ]
   }
 }

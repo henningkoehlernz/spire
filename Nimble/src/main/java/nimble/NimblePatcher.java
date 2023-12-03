@@ -17,6 +17,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.BufferPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.screens.CharSelectInfo;
+import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import com.megacrit.cardcrawl.vfx.combat.BlockedWordEffect;
 import com.megacrit.cardcrawl.vfx.combat.HealEffect;
 import com.megacrit.cardcrawl.vfx.combat.StrikeEffect;
@@ -92,10 +93,18 @@ public class NimblePatcher {
             boolean freeDodge = p.hasRelic(SnakeskinBelt.ID);
             if (freeDodge || info.output > p.currentBlock) {
                 float chance = r.getDodgeChance();
+                // energy drink may reduce dodge chance
+                EnergyDrink drink = (EnergyDrink)p.getRelic(EnergyDrink.ID);
+                if (drink != null && EnergyPanel.getCurrentEnergy() == 0) {
+                    chance = Math.max(0, chance - 0.25f);
+                    drink.flash();
+                }
                 // daredevil boots provide minimum dodge chance
                 DaredevilBoots boots = (DaredevilBoots)p.getRelic(DaredevilBoots.ID);
-                if (chance < 0.5f && boots != null)
+                if (chance < 0.5f && boots != null) {
                     chance = 0.5f;
+                    boots.flash();
+                }
                 // synthacardium increases dodge chance against weak attacks
                 Synthacardium heart = (Synthacardium)p.getRelic(Synthacardium.ID);
                 if (heart != null && info.output <= 2) {
@@ -105,7 +114,6 @@ public class NimblePatcher {
                 boolean success = AbstractDungeon.miscRng.randomBoolean(chance);
                 // daredevil boots can provide re-roll of dodge chance
                 if (!success && boots != null && !p.hasPower(BufferPower.POWER_ID)) {
-                    boots.flash();
                     AbstractDungeon.actionManager.addToTop(new RelicAboveCreatureAction(AbstractDungeon.player, boots));
                     success = AbstractDungeon.miscRng.randomBoolean(chance);
                 }

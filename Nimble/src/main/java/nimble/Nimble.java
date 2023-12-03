@@ -41,6 +41,7 @@ public class Nimble implements
         BaseMod.addRelic(new DaredevilBoots(), RelicType.SHARED);
         BaseMod.addRelic(new BufferingCap(), RelicType.SHARED);
         BaseMod.addRelic(new Synthacardium(), RelicType.SHARED);
+        BaseMod.addRelic(new EnergyDrink(), RelicType.SHARED);
     }
 
     private static String languagePath() {
