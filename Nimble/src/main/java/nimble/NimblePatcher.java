@@ -96,6 +96,12 @@ public class NimblePatcher {
                 DaredevilBoots boots = (DaredevilBoots)p.getRelic(DaredevilBoots.ID);
                 if (chance < 0.5f && boots != null)
                     chance = 0.5f;
+                // synthacardium increases dodge chance against weak attacks
+                Synthacardium heart = (Synthacardium)p.getRelic(Synthacardium.ID);
+                if (heart != null && info.output <= 2) {
+                    chance = Math.min(1.0f, chance + 0.25f);
+                    heart.flash();
+                }
                 boolean success = AbstractDungeon.miscRng.randomBoolean(chance);
                 // daredevil boots can provide re-roll of dodge chance
                 if (!success && boots != null && !p.hasPower(BufferPower.POWER_ID)) {

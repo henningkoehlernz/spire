@@ -28,5 +28,12 @@
     "DESCRIPTIONS": [
       "Always attempt to gain buffer. Gaining buffer no longer reduces agility."
     ]
+  },
+  "nimble:Synthacardium": {
+    "NAME": "Synthacardium",
+    "FLAVOR": "Death is only a heartbeat away.",
+    "DESCRIPTIONS": [
+      "Increases dodge chance against grazes (2 damage or less) by 25%."
+    ]
   }
 }
