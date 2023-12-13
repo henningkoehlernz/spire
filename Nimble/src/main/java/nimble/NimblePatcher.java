@@ -111,6 +111,13 @@ public class NimblePatcher {
                     chance = Math.min(1.0f, chance + 0.25f);
                     heart.flash();
                 }
+                // loaded dice increases dodge chance after failed check
+                AbstractRelic dice = p.getRelic(LoadedDice.ID);
+                if (dice != null && !dice.grayscale) {
+                    chance = Math.min(1.0f, chance + 0.25f);
+                    dice.grayscale = true;
+                    dice.flash();
+                }
                 boolean success = AbstractDungeon.miscRng.randomBoolean(chance);
                 // daredevil boots can provide re-roll of dodge chance
                 if (!success && boots != null && !p.hasPower(BufferPower.POWER_ID)) {
@@ -129,6 +136,8 @@ public class NimblePatcher {
                     p.useStaggerAnimation();
                     p.lastDamageTaken = 0;
                     return SpireReturn.Return();
+                } else if (dice != null) {
+                    dice.grayscale = false;
                 }
             }
             return SpireReturn.Continue();

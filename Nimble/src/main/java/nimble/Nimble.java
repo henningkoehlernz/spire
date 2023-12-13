@@ -3,6 +3,7 @@ package nimble;
 import basemod.*;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.localization.CharacterStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 
 import basemod.helpers.RelicType;
@@ -42,6 +43,7 @@ public class Nimble implements
         BaseMod.addRelic(new BufferingCap(), RelicType.SHARED);
         BaseMod.addRelic(new Synthacardium(), RelicType.SHARED);
         BaseMod.addRelic(new EnergyDrink(), RelicType.SHARED);
+        BaseMod.addRelic(new LoadedDice(), RelicType.SHARED);
     }
 
     private static String languagePath() {
@@ -52,6 +54,7 @@ public class Nimble implements
     public void receiveEditStrings() {
         String basePath = languagePath();
         BaseMod.loadCustomStringsFile(RelicStrings.class, basePath + "Nimble-RelicStrings.json");
+        BaseMod.loadCustomStringsFile(CharacterStrings.class, basePath + "Nimble-CharacterStrings.json");
     }
 
     @Override

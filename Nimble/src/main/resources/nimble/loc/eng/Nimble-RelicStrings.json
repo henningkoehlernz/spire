@@ -42,5 +42,12 @@
     "DESCRIPTIONS": [
       "Gain [E] at the start of your turn. Your dodge chance drops by 25% when you have no [E] remaining."
     ]
+  },
+  "nimble:LoadedDice": {
+    "NAME": "Loaded Dice",
+    "FLAVOR": "Sometimes luck needs a little nudge.",
+    "DESCRIPTIONS": [
+      "Whenever you fail an agility check, the next check gains a 25% bonus."
+    ]
   }
 }
