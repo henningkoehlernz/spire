@@ -2,6 +2,7 @@ package nimble;
 
 import basemod.abstracts.CustomRelic;
 import com.badlogic.gdx.graphics.Texture;
+import com.megacrit.cardcrawl.helpers.PowerTip;
 
 public class LoadedDice extends CustomRelic {
 
@@ -20,6 +21,15 @@ public class LoadedDice extends CustomRelic {
     @Override
     public void atBattleStart() {
         grayscale = true;
+    }
+
+    @Override
+    public void onVictory() {
+        usedUp = false;
+        description = getUpdatedDescription();
+        tips.clear();
+        tips.add(new PowerTip(name, description));
+        initializeTips();
     }
 
 }

@@ -114,9 +114,9 @@ public class NimblePatcher {
                 // loaded dice increases dodge chance after failed check
                 AbstractRelic dice = p.getRelic(LoadedDice.ID);
                 if (dice != null && !dice.grayscale) {
-                    chance = Math.min(1.0f, chance + 0.25f);
-                    dice.grayscale = true;
+                    chance = 1.0f;
                     dice.flash();
+                    dice.usedUp();
                 }
                 boolean success = AbstractDungeon.miscRng.randomBoolean(chance);
                 // daredevil boots can provide re-roll of dodge chance
@@ -136,7 +136,7 @@ public class NimblePatcher {
                     p.useStaggerAnimation();
                     p.lastDamageTaken = 0;
                     return SpireReturn.Return();
-                } else if (dice != null) {
+                } else if (dice != null && !dice.usedUp) {
                     dice.grayscale = false;
                 }
             }

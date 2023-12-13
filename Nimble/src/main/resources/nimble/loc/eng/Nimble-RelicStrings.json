@@ -47,7 +47,7 @@
     "NAME": "Loaded Dice",
     "FLAVOR": "Sometimes luck needs a little nudge.",
     "DESCRIPTIONS": [
-      "Whenever you fail an agility check, the next check gains a 25% bonus."
+      "The first time you fail an agility check each combat, the next check automatically succeeds."
     ]
   }
 }
