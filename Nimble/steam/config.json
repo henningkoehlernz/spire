@@ -1,7 +1,7 @@
 {
   "steamPublishedID": "3006132829",
   "title": "Nimble Mod",
-  "description": "[h1]Replaces HP with dodge mechanic.[/h1]\n\nCharacters are shrunk during combat, which converts HP in excess of 1 into agility. Agility provides a dodge chance of X / (X + 25) against unblocked damage, and HP loss is applied to agility instead. Agility also generates buffer at start of turn, allowing calculated gambles without immediate risk of instant death.",
+  "description": "[h1]Replaces HP with dodge mechanic.[/h1]\n\nCharacters are shrunk during combat, which converts HP in excess of 1 into agility. Agility provides a dodge chance of X / (X + 25) against unblocked damage, and HP loss is applied to agility instead. Agility also generates buffer at start of turn, allowing calculated gambles without immediate risk of instant death.\n\nAlso adds several agility-themed relics, including a new Neow reward.",
   "visibility": "public",
   "changeNote": "",
   "tags": [
