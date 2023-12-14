@@ -119,8 +119,12 @@ public class TreasureHunter implements
     public static int getTreasureTotal(AbstractPlayer.PlayerClass pc, int ascension) {
         int[] pTreasure = treasure.getOrDefault(pc.name(), new int[0]);
         int total = 0;
-        for ( int a = Math.max(ascension, 0); a < pTreasure.length; a++ )
-            total += pTreasure[a];
+        for (int a = 0; a <= Math.max(ascension, pTreasure.length); a++) {
+            if (a < pTreasure.length)
+                total += pTreasure[a];
+            if (a < ascension)
+                total /= 2;
+        }
         return total;
     }
 
