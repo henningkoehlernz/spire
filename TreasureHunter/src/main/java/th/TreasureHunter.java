@@ -44,8 +44,10 @@ public class TreasureHunter implements
     // mod config variables
     public static final String MODNAME = "TreasureHunter";
     public static final String IMG_PATH = MODNAME + "/img/";
+    // files in preferences directory are synced automatically
+    private static final String TREASURE_PATH = "preferences/treasure.json";
+    // old config
     private static final String CONFIG_TREASURE = "treasure";
-    private static Properties defaultConfig = new Properties();
     private static TreeMap<String, int[]> treasure = new TreeMap<String, int[]>();
     // treasure cards
     public static ArrayList<AbstractCard> treasures = new ArrayList<AbstractCard>();
@@ -57,53 +59,32 @@ public class TreasureHunter implements
 
     private static void saveConfig() {
         String sTreasure = (new Gson()).toJson(treasure);
-        try {
-            SpireConfig config = new SpireConfig(MODNAME, "config", defaultConfig);
-            config.setString(CONFIG_TREASURE, sTreasure);
-            config.save();
-            logger.info("saved treasure=" + sTreasure);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Gdx.files.local(TREASURE_PATH).writeString(sTreasure, false, String.valueOf(StandardCharsets.UTF_8));
+        logger.info("saved treasure=" + sTreasure);
     }
 
     private static void loadConfig() {
-        try {
-            SpireConfig config = new SpireConfig(MODNAME, "config", defaultConfig);
+        String sTreasure = null;
+        if (Gdx.files.local(TREASURE_PATH).exists()) {
+            sTreasure = Gdx.files.local(TREASURE_PATH).readString(String.valueOf(StandardCharsets.UTF_8));
+        } else try {
+            // legacy config
+            SpireConfig config = new SpireConfig(MODNAME, "config");
             config.load();
-            String sTreasure = config.getString(CONFIG_TREASURE);
-            logger.info("loaded treasure=" + sTreasure);
-            if ( sTreasure.charAt(0) == '[' ) {
-                int[] legacyTreasure =  (new Gson()).fromJson(sTreasure, int[].class);
-                // divide evenly between qualifying characters
-                int[] charactersByLevel = new int[legacyTreasure.length];
-                ArrayList<AbstractPlayer> players = CardCrawlGame.characterManager.getAllCharacters();
-                for ( AbstractPlayer p : players ) {
-                    int maxAscensionLevel = Math.min(getMaxAscensionLevel(p), legacyTreasure.length - 1);
-                    for ( int level = 0; level <= maxAscensionLevel; level++ )
-                        charactersByLevel[level]++;
-                }
-                for ( AbstractPlayer p : players ) {
-                    int maxAscensionLevel = Math.min(getMaxAscensionLevel(p), legacyTreasure.length - 1);
-                    int[] pTreasure = new int[maxAscensionLevel + 1];
-                    for ( int level = 0; level <= maxAscensionLevel; level++ )
-                        pTreasure[level] = legacyTreasure[level] / charactersByLevel[level];
-                    treasure.put(p.chosenClass.name(), pTreasure);
-                }
-                saveConfig();
-            } else {
-                // parsing maps requires Type object to get around type erasure
-                Type mapType = new TypeToken<TreeMap<String, int[]>>(){}.getType();
-                treasure = (new Gson()).fromJson(sTreasure, mapType);
-            }
+            sTreasure = config.getString("treasure");
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        if (sTreasure != null) {
+            logger.info("loaded treasure=" + sTreasure);
+            // parsing maps requires Type object to get around type erasure
+            Type mapType = new TypeToken<TreeMap<String, int[]>>(){}.getType();
+            treasure = (new Gson()).fromJson(sTreasure, mapType);
         }
     }
 
     public TreasureHunter() {
         BaseMod.subscribe(this);
-        defaultConfig.setProperty(CONFIG_TREASURE, "{}");
     }
 
     public static void addTreasure(AbstractPlayer.PlayerClass pc, int ascension, int amount) {
