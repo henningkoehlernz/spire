@@ -153,7 +153,7 @@ public class NimblePatcher {
     public static class PlayerHeal {
         public static SpireReturn<Void> Prefix(AbstractPlayer p, int healAmount) {
             ShrinkRayGun gun = (ShrinkRayGun)p.getRelic(ShrinkRayGun.ID);
-            if (gun == null || !gun.isActive())
+            if (gun == null || !gun.isActive() || p.isDying)
                 return SpireReturn.Continue();
             // trigger relics and powers
             for (AbstractRelic r : p.relics)
@@ -163,6 +163,11 @@ public class NimblePatcher {
             // visual feedback
             AbstractDungeon.topPanel.panelHealEffect();
             AbstractDungeon.effectsQueue.add(new HealEffect(p.hb.cX - p.animX, p.hb.cY, healAmount));
+            // max HP increases during combat or mods can mean healing is still useful
+            if (p.currentHealth < p.maxHealth && healAmount > 0) {
+                p.currentHealth = Math.min(p.currentHealth + healAmount, p.maxHealth);
+                p.healthBarUpdatedEvent();
+            }
             return SpireReturn.Return();
         }
     }
