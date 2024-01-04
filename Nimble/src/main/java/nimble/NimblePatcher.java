@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.ByRef;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
+import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -64,6 +65,9 @@ public class NimblePatcher {
                 pow.wasHPLost(info, damageAmount);
             for (AbstractRelic r : p.relics)
                 r.wasHPLost(damageAmount);
+            GameActionManager.hpLossThisCombat += damageAmount;
+            GameActionManager.damageReceivedThisTurn += damageAmount;
+            GameActionManager.damageReceivedThisCombat += damageAmount;
             Reflection.invoke(p, AbstractPlayer.class, "updateCardsOnDamage");
             ++p.damagedThisCombat;
         }
