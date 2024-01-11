@@ -54,7 +54,8 @@ public class TreasurePatch {
 
     private static int getTreasureScore(int treasures) {
         // cap effective treasures (e.g. infinite spire)
-        treasures = Math.min(treasures, 20);
+        int cap = AbstractDungeon.player.hasRelic(BlackFlag.ID) ? 25 : 20;
+        treasures = Math.min(treasures, cap);
         return treasures * (treasures + 5) / 2;
     }
 

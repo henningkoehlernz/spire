@@ -52,7 +52,7 @@
     "NAME": "Black Flag",
     "FLAVOR": "Take what you can, give nothing back!",
     "DESCRIPTIONS": [
-      "Normal fights have a 50% chance to award treasures."
+      "Normal fights have a 50% chance to award treasures. Raises treasure cap to 25."
     ]
   },
   "TH:CursedGold": {
