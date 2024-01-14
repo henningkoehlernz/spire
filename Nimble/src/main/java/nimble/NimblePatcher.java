@@ -1,5 +1,6 @@
 package nimble;
 
+import basemod.BaseMod;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.ByRef;
@@ -54,6 +55,7 @@ public class NimblePatcher {
 
     // trigger powers/relics/cards that normally trigger on HP loss (mimics AbstractPlayer.damage)
     public static int handleAgilityLoss(AbstractPlayer p, DamageInfo info, int damageAmount) {
+        damageAmount = BaseMod.publishOnPlayerDamaged(damageAmount, info);
         for (AbstractRelic r : p.relics)
             damageAmount = r.onLoseHpLast(damageAmount);
         if (damageAmount > 0) {
@@ -129,6 +131,7 @@ public class NimblePatcher {
                     success = AbstractDungeon.miscRng.randomBoolean(chance);
                 }
                 if (success) {
+                    BaseMod.publishOnPlayerDamaged(0, info);
                     for (AbstractPower pow : p.powers)
                         pow.onAttacked(info, 0);
                     for (AbstractRelic rel : p.relics)
