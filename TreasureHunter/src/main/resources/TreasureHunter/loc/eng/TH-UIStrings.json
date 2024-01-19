@@ -9,5 +9,10 @@
     "TEXT": [
       "Potion"
     ]
+  },
+  "TH:TransformAndUpgradeAction": {
+    "TEXT": [
+      "Transform and Upgrade"
+    ]
   }
 }

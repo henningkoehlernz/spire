@@ -25,12 +25,15 @@ public class PixieDust extends AbstractTreasure {
     @Override
     public void use(AbstractPlayer p, AbstractMonster m) {
         int handSize = p.hand.size() - 1; // don't count pixie dust itself
-        if (handSize > 0) {
+        if (handSize == 0)
+            return;
+        if (upgraded && handSize > 1) {
+            AbstractDungeon.actionManager.addToBottom(new TransformAndUpgradeAction());
+        } else {
             int cardIndex = AbstractDungeon.miscRng.random(handSize - 1);
             //LogManager.getLogger(PixieDust.class.getName()).info("hand size=" + handSize + ", index=" + cardIndex);
             AbstractCard newCard = AbstractDungeon.returnTrulyRandomCardInCombat().makeCopy();
-            if (upgraded)
-                newCard.upgrade();
+            newCard.upgrade();
             AbstractDungeon.actionManager.addToBottom(new TransformCardInHandAction(cardIndex, newCard));
         }
     }

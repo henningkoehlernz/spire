@@ -9,5 +9,10 @@
     "TEXT": [
       "药水"
     ]
+  },
+  "TH:TransformAndUpgradeAction": {
+    "TEXT": [
+      "变化并升级"
+    ]
   }
 }

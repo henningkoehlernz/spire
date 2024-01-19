@@ -34,8 +34,8 @@
   },
   "TH:PixieDust": {
     "NAME": "Pixie Dust",
-    "DESCRIPTION": "Transform a random card. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Transform and upgrade a random card. NL Exhaust."
+    "DESCRIPTION": "Transform and upgrade a random card. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Transform and upgrade a chosen card. NL Exhaust."
   },
   "TH:ElvenBoots": {
     "NAME": "Elven Boots",
