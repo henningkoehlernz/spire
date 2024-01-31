@@ -33,7 +33,7 @@
     "NAME": "Synthacardium",
     "FLAVOR": "Death is only a heartbeat away.",
     "DESCRIPTIONS": [
-      "Increases dodge chance against grazes (2 damage or less) by 25%."
+      "Increases dodge chance against grazes (4 unblocked damage or less) by 25%."
     ]
   },
   "nimble:EnergyDrink": {

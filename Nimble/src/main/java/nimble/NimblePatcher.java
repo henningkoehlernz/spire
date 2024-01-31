@@ -113,7 +113,7 @@ public class NimblePatcher {
                 }
                 // synthacardium increases dodge chance against weak attacks
                 Synthacardium heart = (Synthacardium)p.getRelic(Synthacardium.ID);
-                if (heart != null && info.output <= 2) {
+                if (heart != null && info.output - p.currentBlock < 5) {
                     chance = Math.min(1.0f, chance + 0.25f);
                     heart.flash();
                 }
