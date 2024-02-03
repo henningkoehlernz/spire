@@ -37,6 +37,8 @@ import org.apache.logging.log4j.Logger;
 public class TreasurePatch {
 
     private static final Logger logger = LogManager.getLogger(TreasurePatch.class.getName());
+    // track treasure score; non-null value indicates that reward has already been added
+    private static Integer lastTreasureCount = null;
 
     @SpireEnum
     public static AbstractCard.CardType TREASURE;
@@ -59,21 +61,6 @@ public class TreasurePatch {
         return treasures * (treasures + 5) / 2;
     }
 
-    /*
-    @SpirePatch(
-            clz = AbstractCard.class,
-            method = "canUpgrade",
-            paramtypez = {}
-    )
-    public static class CanUpgrade {
-        public static boolean Postfix(boolean __result, AbstractCard __instance) {
-            if ( __instance.type == TREASURE )
-                return false;
-            return __result;
-        }
-    }
-    */
-
     // update total treasures collected
     @SpirePatch(
             clz = SaveAndContinue.class,
@@ -82,7 +69,10 @@ public class TreasurePatch {
     )
     public static class DeleteSave {
         public static void Prefix(AbstractPlayer p) {
-            TreasureHunter.addTreasure(p.chosenClass, AbstractDungeon.ascensionLevel, getTreasureScore(getTreasureCount()));
+            if (lastTreasureCount == null) {
+                lastTreasureCount = getTreasureCount();
+                TreasureHunter.addTreasure(p.chosenClass, AbstractDungeon.ascensionLevel, getTreasureScore(lastTreasureCount));
+            }
         }
     }
 
@@ -115,6 +105,7 @@ public class TreasurePatch {
     public static class NextRoomTransition {
         public static void Postfix(AbstractDungeon __instance, SaveFile saveFile) {
             if ( AbstractDungeon.floorNum == 1 && (saveFile == null || !saveFile.post_combat) ) {
+                lastTreasureCount = null;
                 int bonusGold = TreasureHunter.getTreasureTotal(AbstractDungeon.player.chosenClass, AbstractDungeon.ascensionLevel);
                 gainGold(bonusGold);
                 AbstractDungeon.effectList.add(new GainGoldTextEffect(bonusGold));
@@ -193,9 +184,13 @@ public class TreasurePatch {
     }
 
     private static GameOverStat getTreasureStat() {
-        int treasures = getTreasureCount();
-        int score = getTreasureScore(treasures);
-        return new GameOverStat(getTreasureText()[1] + " (" + treasures + ")", null, "+" + score + " gold");
+        if (lastTreasureCount != null) {
+            int score = getTreasureScore(lastTreasureCount);
+            return new GameOverStat(getTreasureText()[1] + " (" + lastTreasureCount + ")", null, "+" + score + " gold");
+        } else {
+            logger.error("lastTreasureCount not set");
+            return null;
+        }
     }
 
     private static java.util.ArrayList<GameOverStat> getGameOverStats(GameOverScreen __instance) {

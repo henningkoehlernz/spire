@@ -94,6 +94,7 @@ public class TreasureHunter implements
             treasure.put(pc.name(), pTreasure);
         }
         pTreasure[Math.max(ascension, 0)] += amount;
+        logger.info("added " + amount + " gold for ascension " + ascension);
         saveConfig();
     }
 
