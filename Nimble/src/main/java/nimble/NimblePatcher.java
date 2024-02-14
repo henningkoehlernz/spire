@@ -3,9 +3,7 @@ package nimble;
 import basemod.BaseMod;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.evacipated.cardcrawl.modthespire.lib.ByRef;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
+import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -23,10 +21,18 @@ import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import com.megacrit.cardcrawl.vfx.combat.BlockedWordEffect;
 import com.megacrit.cardcrawl.vfx.combat.HealEffect;
 import com.megacrit.cardcrawl.vfx.combat.StrikeEffect;
+import javassist.CtBehavior;
 
 import java.util.ArrayList;
 
 public class NimblePatcher {
+
+    private static class DecrementBlockLocator extends SpireInsertLocator {
+        public int[] Locate(CtBehavior ctBehavior) throws Exception {
+            Matcher matcher = new Matcher.MethodCallMatcher(AbstractPlayer.class, "decrementBlock");
+            return LineFinder.findInOrder(ctBehavior, matcher);
+        }
+    }
 
     // add ShrinkRayGun to starting relics
     @SpirePatch(
@@ -55,7 +61,7 @@ public class NimblePatcher {
 
     // trigger powers/relics/cards that normally trigger on HP loss (mimics AbstractPlayer.damage)
     public static int handleAgilityLoss(AbstractPlayer p, DamageInfo info, int damageAmount) {
-        damageAmount = BaseMod.publishOnPlayerDamaged(damageAmount, info);
+        //damageAmount = BaseMod.publishOnPlayerDamaged(damageAmount, info);
         for (AbstractRelic r : p.relics)
             damageAmount = r.onLoseHpLast(damageAmount);
         if (damageAmount > 0) {
@@ -83,13 +89,17 @@ public class NimblePatcher {
             paramtypez = {DamageInfo.class}
     )
     public static class AbstractPlayerDamage {
-        public static SpireReturn<Void> Prefix(AbstractPlayer p, DamageInfo info) {
+        @SpireInsertPatch(
+                localvars = {"damageAmount"},
+                locator = DecrementBlockLocator.class
+        )
+        public static SpireReturn<Void> Insert(AbstractPlayer p, DamageInfo info, int damageAmount) {
             ShrinkRayGun r = (ShrinkRayGun)p.getRelic(ShrinkRayGun.ID);
-            if (r == null || !r.isActive() || info.output <= 0)
+            if (r == null || !r.isActive() || damageAmount <= 0)
                 return SpireReturn.Continue();
             // HP loss applies to agility instead
             if (info.type == DamageInfo.DamageType.HP_LOSS) {
-                int agilityLoss = handleAgilityLoss(p, info, info.output);
+                int agilityLoss = handleAgilityLoss(p, info, damageAmount);
                 r.decreaseCurrentAgility(agilityLoss, true);
                 AbstractDungeon.effectList.add(new StrikeEffect(p, p.hb.cX, p.hb.cY, agilityLoss));
                 p.lastDamageTaken = 0;
