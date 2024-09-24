@@ -42,7 +42,7 @@ public class BossedDollysMirror {
     )
     public static class OnPlayCard {
         public static void Postfix(AbstractRelic __instance, AbstractCard c, AbstractMonster m) {
-            if (__instance instanceof DollysMirror && !__instance.grayscale && !BossedRelics.isDisabled(DollysMirror.ID)) {
+            if (__instance instanceof DollysMirror && !__instance.grayscale && !BossedRelics.isDisabled(DollysMirror.ID) && c.cost == 0) {
                 __instance.flash();
                 __instance.grayscale = true;
                 AbstractCard copy = c.makeSameInstanceOf();

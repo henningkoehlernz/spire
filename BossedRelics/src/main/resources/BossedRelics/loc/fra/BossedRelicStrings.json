@@ -225,7 +225,7 @@
     "NAME": "Miroir de Dolly",
     "FLAVOR": "\"Ce miroir me donne l'air bizarre.\"",
     "DESCRIPTIONS": [
-      "La première carte jouée à chaque combat est jouée deux fois.",
+      "La première carte à coût 0 jouée à chaque combat est jouée deux fois.",
       "Choisissez 1 carte à Copier."
     ]
   },

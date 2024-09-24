@@ -224,7 +224,7 @@
     "NAME": "Dolly's Mirror",
     "FLAVOR": "\"I look funny in this.\"",
     "DESCRIPTIONS": [
-      "The first card played each combat is played twice.",
+      "The first 0-cost card played each combat is played twice.",
       "Choose 1 Card to Copy."
     ]
   },
