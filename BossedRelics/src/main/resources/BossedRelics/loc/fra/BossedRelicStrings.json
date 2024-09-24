@@ -96,6 +96,14 @@
       "Fermer"
     ]
   },
+  "Bossed:Busted Crown": {
+    "NAME": "Couronne cassée",
+    "FLAVOR": "La couronne du Champion... ou une vulgaire contrefaçon ?",
+    "DESCRIPTIONS": [
+      " au début de chaque tour. Lorsque vous choisissez une carte comme récompense, vous avez #b1 choix en moins.",
+      "Gagnez [E]"
+    ]
+  },
   "Bossed:MawBank": {
     "NAME": "Tirelire Gueule",
     "FLAVOR": "Étonnamment populaire, malgré que les attaques de Gueules soient fréquentes.",

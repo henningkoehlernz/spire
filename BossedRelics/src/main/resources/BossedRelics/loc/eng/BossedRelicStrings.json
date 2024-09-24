@@ -95,6 +95,14 @@
       "Close"
     ]
   },
+  "Bossed:Busted Crown": {
+    "NAME": "Busted Crown",
+    "FLAVOR": "The Champ's crown... or a pale imitation?",
+    "DESCRIPTIONS": [
+      " at the start of your turn. Future card rewards have #b1 less card to choose from.",
+      "Gain [E]"
+    ]
+  },
   "Bossed:MawBank": {
     "NAME": "Maw Bank",
     "FLAVOR": "Surprisingly popular, despite maw attacks being a regular occurrence.",
