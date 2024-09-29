@@ -23,7 +23,8 @@ public class InfoPatcher {
     )
     public static class CharSelectInfoConstructor {
         public static void Postfix(CharSelectInfo __instance, String name, String flavorText, int currentHp, int maxHp, int maxOrbs, int gold, int cardDraw, AbstractPlayer player, ArrayList<String> relics, ArrayList<String> deck, boolean resumeGame) {
-            __instance.relics.add(Axolotl.ID);
+            if (!__instance.relics.contains(Axolotl.ID))
+                __instance.relics.add(Axolotl.ID);
         }
     }
 
