@@ -1,0 +1,10 @@
+{
+  "steamPublishedID": "",
+  "title": "MultiDamage Fix",
+  "description": "[h1]Fixes a common crash bug that can occur when multi-target attacks are auto-played.[/h1]\nSets isMultiDamage=true in the constructor of cards with ALL_ENEMY target, to ensure multiDamage gets initialized in AbstractCard.applyPowers.\n\nError message associated with the bug fixed:\njava.lang.NullPointerException: null at com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction.update(DamageAllEnemiesAction.java:98)",
+  "visibility": "public",
+  "changeNote": "",
+  "tags": [
+    "Utility"
+  ]
+}

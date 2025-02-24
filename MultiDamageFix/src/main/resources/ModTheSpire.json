@@ -1,0 +1,10 @@
+{
+  "modid": "multidamagefix",
+  "name": "MultiDamage Fix",
+  "author_list": ["hkoehler"],
+  "description": "Fixes a common crash bug that can occur when multi-target attacks are auto-played.",
+  "version": "1.0.0",
+  "sts_version": "12-13-2020",
+  "mts_version": "3.15.0",
+  "dependencies": []
+}
