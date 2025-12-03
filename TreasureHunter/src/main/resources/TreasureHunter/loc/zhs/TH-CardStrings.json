@@ -26,7 +26,7 @@
   },
   "TH:ArmorSpikes": {
     "NAME": "护甲尖刺",
-    "DESCRIPTION": "增益 !M! 荆棘。 NL 消耗。"
+    "DESCRIPTION": "增益 !M! 荆棘和 !B! 堵塞。 NL 消耗。"
   },
   "TH:Mimic": {
     "NAME": "百宝箱",

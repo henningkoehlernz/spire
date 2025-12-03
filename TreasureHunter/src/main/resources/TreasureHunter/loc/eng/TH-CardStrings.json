@@ -5,7 +5,7 @@
   },
   "TH:BikiniMail": {
     "NAME": "Bikini Mail",
-    "DESCRIPTION": "At the end of your turn, gain !M! block. NL Exhaust."
+    "DESCRIPTION": "At the end of your turn, gain !M! Block. NL Exhaust."
   },
   "TH:CursedSword": {
     "NAME": "Cursed Sword",
@@ -26,7 +26,7 @@
   },
   "TH:ArmorSpikes": {
     "NAME": "Armor Spikes",
-    "DESCRIPTION": "Gain !M! Thorns. NL Exhaust."
+    "DESCRIPTION": "Gain !M! Thorns and !B! Block. NL Exhaust."
   },
   "TH:Mimic": {
     "NAME": "Treasure Chest",
