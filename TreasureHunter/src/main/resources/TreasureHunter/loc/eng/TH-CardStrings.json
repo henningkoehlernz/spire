@@ -41,5 +41,9 @@
     "NAME": "Elven Boots",
     "DESCRIPTION": "Gain !M! Dexterity. NL Exhaust. NL NL One size too small.",
     "UPGRADE_DESCRIPTION": "Gain !M! Dexterity. NL Exhaust."
+  },
+  "TH:HealingPotion": {
+    "NAME": "Healing Potion",
+    "DESCRIPTION": "Heal !M! HP. NL Exhaust."
   }
 }

@@ -41,5 +41,9 @@
     "NAME": "精灵靴子",
     "DESCRIPTION": "增益 !M! 灵巧。 NL 消耗。 NL NL 一种尺寸太小。",
     "UPGRADE_DESCRIPTION": "增益 !M! 灵巧。 NL 消耗。"
+  },
+  "TH:HealingPotion": {
+    "NAME": "治疗药水",
+    "DESCRIPTION": "恢复 !M! 点生命值。 NL 消耗。"
   }
 }

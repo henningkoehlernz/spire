@@ -126,6 +126,7 @@ public class TreasureHunter implements
         treasures.add(new Mimic());
         treasures.add(new PixieDust());
         treasures.add(new ElvenBoots());
+        treasures.add(new HealingPotion());
         for ( AbstractCard card : treasures )
             BaseMod.addCard(card);
     }

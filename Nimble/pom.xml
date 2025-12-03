@@ -31,6 +31,13 @@
             <scope>system</scope>
             <systemPath>${basedir}/../lib/ModTheSpire.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>downfall</groupId>
+            <artifactId>downfall</artifactId>
+            <version>5.1.2</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/../lib/Downfall.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>
